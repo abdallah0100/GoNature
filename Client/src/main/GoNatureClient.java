@@ -56,6 +56,7 @@ public class GoNatureClient extends AbstractClient{
 	    catch(IOException e)
 	    {
 	    	System.out.println("[GoNatureClient] - Error sending message to server");
+			ClientController.connectedToServer = false;
 	    //	e.printStackTrace();
 	    	quit();
 	    }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.ClientFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.ClientFrameController">
    <children>
       <Label layoutX="164.0" layoutY="54.0" text="Order number:" />
       <Label layoutX="236.0" layoutY="14.0" text="GoNature Client - Demo" />
@@ -25,6 +25,7 @@
             <TextField fx:id="numOfVisitorsField" disable="true" layoutX="157.0" layoutY="91.0" prefHeight="25.0" prefWidth="129.0" />
             <TextField fx:id="telephoneField" layoutX="157.0" layoutY="128.0" prefHeight="25.0" prefWidth="129.0" />
             <Button layoutX="128.0" layoutY="209.0" mnemonicParsing="false" onAction="#updateData" text="Update" />
+            <Label fx:id="msgLabel" layoutX="90.0" layoutY="248.0" text="Succesfully updated data." visible="false" />
          </children>
       </Pane>
       <Label fx:id="errorLabel" alignment="CENTER" layoutX="257.0" layoutY="118.0" text="errorLabel" textFill="#d11a2a" visible="false">
