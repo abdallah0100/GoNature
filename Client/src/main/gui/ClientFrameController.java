@@ -42,6 +42,8 @@ public class ClientFrameController extends Application implements Initializable{
 	private TextField telephoneField;
 	@FXML
 	private Label errorLabel;
+	@FXML
+	private Label msgLabel;
 	
 	
 	private void updateOrderBox()
@@ -122,6 +124,16 @@ public class ClientFrameController extends Application implements Initializable{
 		update.add(RequestType.REQUEST_DATA.getRequestId() + "");
 		ClientUI.clientController.accept(update);
 		updateOrderBox();
+		
+		if (ClientController.connectedToServer) {
+			msgLabel.setText("Succesfully updated data.");
+			msgLabel.setLayoutX(90);
+			
+		}else {
+			msgLabel.setText("Error updating data.");
+			msgLabel.setLayoutX(105);
+		}
+		msgLabel.setVisible(true);
 	}
 	
 	
