@@ -72,7 +72,10 @@ public class ServerPortFrameController extends Application{
 		if (radioDefault.isSelected()) {
 			MainServer.dbPassword = "Aa123456";
 		}else {
-			if (dbPassField.getText().length() > 0)
+			//checking if the password IS visible and its' textbox has a password, or the
+			// password field is selected and it has a password
+			if ((!showPassword.isSelected() && dbPassField.getText().length() > 0) 
+					|| (showPassword.isSelected() && visPass.getText().length() > 0))
 			{
 				if(showPassword.isSelected())
 					MainServer.dbPassword = visPass.getText();

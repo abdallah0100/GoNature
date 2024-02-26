@@ -1,5 +1,6 @@
 package main.gui;
 
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,6 +26,8 @@ public class MainServerFrameController extends Application implements Initializa
 	
 	@FXML
 	private Label serverStatusLabel;	
+	@FXML
+	private Label serverIPLabel;
 	@FXML
 	private Label serverPortLabel;
 	@FXML
@@ -65,6 +68,7 @@ public class MainServerFrameController extends Application implements Initializa
 		try {
 			serverStatusLabel.setVisible(true);
 			serverPortLabel.setText(MainServer.PORT);
+			serverIPLabel.setText(InetAddress.getLocalHost().getHostAddress());
 			if (MainServer.dbConnection != null) {
 				DBStatusLabel.setText("Connected");
 			}else {

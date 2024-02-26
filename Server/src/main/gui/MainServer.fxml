@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
    <children>
       <Label layoutX="234.0" layoutY="21.0" text="GoNature Server">
          <font>
@@ -21,11 +21,13 @@
          <children>
             <Label layoutX="21.0" layoutY="24.0" text="Server Status:" />
             <Label fx:id="serverStatusLabel" layoutX="100.0" layoutY="25.0" prefHeight="17.0" prefWidth="42.0" text="online" textFill="#29d016" />
-            <Label layoutX="21.0" layoutY="50.0" text="Server Port: " />
-            <Label fx:id="serverPortLabel" layoutX="100.0" layoutY="50.0" text="Label" />
-            <Label layoutX="21.0" layoutY="73.0" text="DB Status: " />
-            <Label fx:id="DBStatusLabel" layoutX="100.0" layoutY="73.0" text="Label" textFill="#29d016" />
+            <Label layoutX="21.0" layoutY="73.0" text="Server Port: " />
+            <Label fx:id="serverPortLabel" layoutX="100.0" layoutY="73.0" text="Label" />
+            <Label layoutX="21.0" layoutY="96.0" text="DB Status: " />
+            <Label fx:id="DBStatusLabel" layoutX="100.0" layoutY="96.0" text="Label" textFill="#29d016" />
             <Button fx:id="exitBtn" layoutX="65.0" layoutY="252.0" mnemonicParsing="false" onAction="#exitServer" style="-fx-background-color: D11A2A; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-radius: 7;" text="Exit" />
+            <Label layoutX="21.0" layoutY="50.0" text="Server IP" />
+            <Label fx:id="serverIPLabel" layoutX="100.0" layoutY="50.0" text="Label" />
          </children>
       </Pane>
       <Label layoutX="366.0" layoutY="61.0" text="Connections:">
