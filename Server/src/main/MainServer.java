@@ -20,7 +20,6 @@ public class MainServer extends AbstractServer{
 
 	public MainServer(int port) {
 		super(port);
-
 	}
 
 	@Override
