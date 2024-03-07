@@ -24,7 +24,7 @@ public class GoNatureClient extends AbstractClient{
 		if (msg instanceof ArrayList) {
 			orders = (ArrayList<String[]>) msg;
 			ClientController.fetchedData = true;
-			System.out.println("[GoNatureClient] - Received order data");
+			System.out.println("[GoNatureClient] - Received order data121");
 		}else {
 			System.out.println("[GoNatureClient] - Received msg: " + msg);
 		}
