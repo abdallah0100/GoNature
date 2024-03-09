@@ -36,7 +36,7 @@ public class RegisterInstructorFrameController extends Application{
 			root = FXMLLoader.load(getClass().getResource("RegisterInstructorFrame.fxml"));
 		}
 		catch(Exception e) {
-			System.out.println("[RegisterInstructorFrameController] - loading fxml");
+			System.out.println("[RegisterInstructorFrameController] -  loading fxml");
 			e.printStackTrace();
 			System.exit(1);
 		}
