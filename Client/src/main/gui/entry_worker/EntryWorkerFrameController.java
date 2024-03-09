@@ -39,6 +39,7 @@ public class EntryWorkerFrameController extends Application{
 		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("GoNature Client");
 		primaryStage.show();
 	}
 	
