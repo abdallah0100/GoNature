@@ -15,7 +15,7 @@ public class UserReservationFrameController extends Application {
 	
 	@FXML
 	private Pane visitorPane;
-	
+	//
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
