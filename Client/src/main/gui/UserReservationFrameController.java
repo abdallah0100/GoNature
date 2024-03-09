@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.client_requests.RequestHandler;
 
-public class userReservationFrameController extends Application {
+public class UserReservationFrameController extends Application {
 	
 	@FXML
 	private Pane visitorPane;
@@ -37,18 +37,24 @@ public class userReservationFrameController extends Application {
 	//function to makeReservation
 	public void makeReservation(ActionEvent e) {
 		//TODO
+		System.out.println("makeReservation");
 	}
 	//function to showReservation
 	public void showReservation(ActionEvent e) {
 		//TODO
+		System.out.println("showReservation");
 	}
 	//function to updateReservation
 	public void updateReservation(ActionEvent e) {
 		//TODO
+		System.out.println("updateReservation");
 	}
 	//function to backToValidation
 	public void backToValidation(ActionEvent e) {
 		//TODO
+		System.out.println("backToValidation");
 	}
-	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

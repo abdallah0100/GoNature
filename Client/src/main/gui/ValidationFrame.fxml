@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -20,8 +21,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="157.0" layoutY="171.0" text="EnterID" />
-      <TextField fx:id="IdTxt" layoutX="236.0" layoutY="167.0" />
-      <Button layoutX="274.0" layoutY="272.0" mnemonicParsing="false" onAction="#Enter" text="Enter" />
+      <Label layoutX="161.0" layoutY="183.0" text="EnterID" />
+      <TextField fx:id="IdTxt" layoutX="237.0" layoutY="179.0" />
+      <VBox layoutX="532.0" layoutY="19.0" />
+      <Button layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#Exit" style="-fx-background-color: red;" styleClass="background" text="X" />
+      <Button layoutX="274.0" layoutY="280.0" mnemonicParsing="false" onAction="#Enter" text="LogIn" />
    </children>
 </Pane>

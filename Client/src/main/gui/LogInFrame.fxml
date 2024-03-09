@@ -16,7 +16,7 @@
       </Label>
       <Line endX="441.0" layoutX="159.0" layoutY="64.0" startX="-159.0" />
       <Label layoutX="151.0" layoutY="219.0" text="password" />
-      <Label fx:id="userNameTxt" layoutX="149.0" layoutY="161.0" text="userName" />
+      <Label layoutX="149.0" layoutY="161.0" text="userName" />
       <TextField fx:id="userNameTxt" layoutX="226.0" layoutY="157.0" />
       <TextField fx:id="passwordTxt" layoutX="226.0" layoutY="215.0" />
       <Label layoutX="273.0" layoutY="106.0" text="LogIn">

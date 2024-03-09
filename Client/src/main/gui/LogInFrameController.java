@@ -46,9 +46,12 @@ public class LogInFrameController extends Application implements Initializable {
 	}
 	
 	//function for userLogIn
-		public void userLogIn(ActionEvent e) {
-			//TODO
-		}
-
+	public void userLogIn(ActionEvent e) {
+		//TODO
+		System.out.println("userLogIn");
+	}
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 }

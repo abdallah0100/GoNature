@@ -1,6 +1,6 @@
 package main.gui;
 
-import java.awt.Button;
+
 import java.awt.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class ValidationFrameController extends Application implements Initializable {
 	@FXML
-	private TextField IdTxt;
+	private TextField idTxt;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -42,6 +42,15 @@ public class ValidationFrameController extends Application implements Initializa
 	//function to Enter the user 
 	public void Enter(ActionEvent e) {
 		//TODO
+		System.out.println("Enter");
 	}
 	
+	public void Exit(ActionEvent e) {
+		//TODO
+		System.out.println("exit");
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
