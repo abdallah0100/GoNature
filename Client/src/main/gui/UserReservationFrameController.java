@@ -31,7 +31,7 @@ public class UserReservationFrameController extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
+		//
 	}
 	
 	//function to makeReservation
