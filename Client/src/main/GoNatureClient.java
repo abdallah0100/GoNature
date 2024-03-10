@@ -19,13 +19,24 @@ public class GoNatureClient extends AbstractClient{
 	}
 
 	@Override
-	protected void handleMessageFromServer(Object msg) {
+	protected void handleMessageFromServer(Object incomingMsg) {
 		awaitResponse = false;
-		if (!(msg instanceof Message)) {
+		if (!(incomingMsg instanceof Message)) {
 			System.out.println("[GoNatureClient] - the message we received from the server is not of type Message");
 			return;
 		}
-		System.out.println("Recieved message: " + msg.toString());
+		Message msg = (Message)incomingMsg;
+		switch(msg.getRequestEnumType()) {
+		case REQUEST_ERROR:
+			System.out.println("[GoNatureClient] - Server responded with an error: " + msg.getRequestData());
+			break;
+			default:
+				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
+				if (msg.getRequestData() != null)
+					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
+				break;
+		}
+		System.out.println("[GoNatureClient] - Recieved message: " + msg.toString());
 	}
 	
 	  /**

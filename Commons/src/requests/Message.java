@@ -18,6 +18,10 @@ public class Message implements Serializable{
 		return RequestType.getTypeById(requestType);
 	}
 	
+	public Object getRequestData() {
+		return requestData;
+	}
+	
 	@Override
 	public String toString() {
 		if (requestData != null)
