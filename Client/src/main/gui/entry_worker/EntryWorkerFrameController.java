@@ -32,13 +32,14 @@ public class EntryWorkerFrameController extends Application{
 			root = FXMLLoader.load(getClass().getResource("EntryWorkerFrame.fxml"));
 		}
 		catch(Exception e) {
-			System.out.println("[EntryWorkerFrameController] - loading fxml");
+			System.out.println("[EntryWorkerFrameController] -  loading fxml");
 			e.printStackTrace();
 			System.exit(1);
 		}
 		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("GoNature Client");
 		primaryStage.show();
 	}
 	
