@@ -1,4 +1,4 @@
-package visitor;
+package main.gui.visitor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,29 +11,33 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.client_requests.RequestHandler;
 
-public class ShowReservationFrameController extends Application implements Initializable{
-	@SuppressWarnings("rawtypes")
-	@FXML
-	private TableColumn siteColumn;
-	@SuppressWarnings("rawtypes")
-	@FXML
-	private TableColumn dateColumn;
-	@SuppressWarnings("rawtypes")
-	@FXML
-	private TableColumn timeColumn;
-	@SuppressWarnings("rawtypes")
-	@FXML
-	private TableColumn typeColumn;
-	@SuppressWarnings("rawtypes")
-	@FXML
-	private TableColumn visitorNumberColumn;
-	@FXML
-	private Button updateBtn;
+public class MakeReservationFrameController extends Application implements Initializable{
 
+	@FXML
+	private ComboBox<String> orderType;
+	@FXML
+	private TextField numOfVisitorsField;
+	@FXML
+	private DatePicker dateField;
+	@FXML
+	private ComboBox<String> timeField;
+	@FXML
+	private ComboBox<String> parkNameField;
+	@FXML
+	private TextField phoneField;
+	@FXML
+	private TextField emailField;
+	@FXML
+	private Button bookBtn;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -44,22 +48,24 @@ public class ShowReservationFrameController extends Application implements Initi
 		// TODO Auto-generated method stub
 		Parent root = new Pane();
 		try {//trying to load the first gui (makeReservation.fxml)
-			root = FXMLLoader.load(getClass().getResource("ShowReservation.fxml"));
+			root = FXMLLoader.load(getClass().getResource("MakeReservationFrame.fxml"));
 		}catch(Exception e) {
-			System.out.println("[ShowReservationFrameController] - Error loading ShowReservation.fxml");
+			System.out.println("[MakeReservationFrameController] - Error loading MakeReservationFrame.fxml");
 			e.printStackTrace();
 			System.exit(1);
 		}
 		//setting the root to the loaded fxml file and showing the gui
 		Scene scene = new Scene(root);
-		arg0.setTitle("GoNature Visitor Show Reservation");
+		arg0.setTitle("GoNature Visitor Make Reservation");
 		arg0.setScene(scene);
 		arg0.show();
 	}
-	//function shows reservations 
-	public void showReservation(ActionEvent e) throws Exception{
-			
+	
+	//function makes reservation 
+	public void makeReservation(ActionEvent e) throws Exception{
+		
 	}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

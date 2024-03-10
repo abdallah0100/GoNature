@@ -1,4 +1,4 @@
-package visitor;
+package main.gui.visitor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,14 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.client_requests.RequestHandler;
 
-public class MakeReservationFrameController extends Application implements Initializable{
-
+public class UpdateReservationFrameController extends Application implements Initializable{
 	@FXML
 	private ComboBox<String> orderType;
 	@FXML
@@ -36,33 +33,32 @@ public class MakeReservationFrameController extends Application implements Initi
 	@FXML
 	private TextField emailField;
 	@FXML
-	private Button bookBtn;
+	private Button updateBtn;
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
 
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub
 		Parent root = new Pane();
 		try {//trying to load the first gui (makeReservation.fxml)
-			root = FXMLLoader.load(getClass().getResource("MakeReservation.fxml"));
+			root = FXMLLoader.load(getClass().getResource("UpdateReservationFrame.fxml"));
 		}catch(Exception e) {
-			System.out.println("[MakeReservationFrameController] - Error loading MakeReservation.fxml");
+			System.out.println("[UpdateReservationFrameController] - Error loading UpdateReservationFrame.fxml");
 			e.printStackTrace();
 			System.exit(1);
 		}
 		//setting the root to the loaded fxml file and showing the gui
 		Scene scene = new Scene(root);
-		arg0.setTitle("GoNature Visitor Make Reservation");
+		arg0.setTitle("GoNature Visitor Update Reservation");
 		arg0.setScene(scene);
 		arg0.show();
 	}
 	
-	//function makes reservation 
-	public void makeReservation(ActionEvent e) throws Exception{
+	//function updates reservation 
+	public void updateReservation(ActionEvent e) throws Exception{
 		
 	}
 
@@ -72,5 +68,7 @@ public class MakeReservationFrameController extends Application implements Initi
 		// TODO Auto-generated method stub
 		
 	}
+	
+
 
 }
