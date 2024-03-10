@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerChangeRequistTableFrameController">
+   <children>
+      <SplitPane layoutX="205.0" layoutY="49.333333333333336" orientation="VERTICAL" prefHeight="351.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="139.0" prefWidth="597.0">
+               <children>
+                  <TableView layoutX="144.0" layoutY="74.0" prefHeight="200.0" prefWidth="310.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="144.66666666666663">
+                    <columns>
+                      <TableColumn fx:id="table_view" prefWidth="198.0000228881836" text="Options" />
+                      <TableColumn minWidth="0.0" prefWidth="53.3333740234375" text="X" />
+                        <TableColumn prefWidth="60.6666259765625" text="V" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <Text layoutX="3.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department Manager" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Text layoutX="273.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Go Nature" />
+      <Text layoutX="242.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Requist Table" />
+   </children>
+</AnchorPane>
