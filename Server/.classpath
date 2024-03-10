@@ -12,5 +12,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/OCSF_Server"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Commons"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

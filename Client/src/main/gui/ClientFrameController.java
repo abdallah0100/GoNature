@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import entities.Order;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +22,7 @@ import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
 import main.client_requests.RequestHandler;
-import main.commons.Order;
-import main.commons.requests.RequestType;
+import requests.RequestType;
 
 public class ClientFrameController extends Application implements Initializable{
 	

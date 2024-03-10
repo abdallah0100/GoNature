@@ -3,7 +3,7 @@ package main.client_requests;
 import java.util.ArrayList;
 
 import main.ClientUI;
-import main.commons.requests.RequestType;
+import requests.RequestType;
 
 public class RequestHandler {
 	
