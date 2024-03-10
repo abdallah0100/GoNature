@@ -2,12 +2,12 @@ package main.gui.entryworker;
 
 public class AvailablePlaceCurrent {
 
-	private String parkname;
+	private String parkName; // define for 3 columns
 	private String date;
 	private String time;
 
 public AvailablePlaceCurrent(String name,String time,String date) {
-	this.parkname=parkname;
+	this.parkName=parkName;
 	this.time=time;
 	this.date=date;
 
@@ -16,7 +16,7 @@ public AvailablePlaceCurrent(String name,String time,String date) {
 
 
 public String getnamePark() {
-	return parkname;
+	return parkName;
 }
 
 public String gettime() {

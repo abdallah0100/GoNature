@@ -34,14 +34,14 @@ import javafx.geometry.Insets;
 
 public class AvailablePlaces  extends Application  {
     
-    @FXML
+    @FXML  //define columns
     private TableView<AvailablePlaceCurrent> table ;
 	@FXML
     private TableColumn<AvailablePlaceCurrent,String> time;   
     @FXML
     private TableColumn<AvailablePlaceCurrent,String> date;
     @FXML
-    private TableColumn<AvailablePlaceCurrent,String> parkname;
+    private TableColumn<AvailablePlaceCurrent,String> parkName;
     
     ObservableList<AvailablePlaceCurrent> list =  FXCollections.observableArrayList(
     		new AvailablePlaceCurrent("Park K","10:30","05,08,2024")

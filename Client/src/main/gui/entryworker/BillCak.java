@@ -31,15 +31,15 @@ import javafx.geometry.Insets;
 
 public class BillCak   extends Application {
 	@FXML
-	private TextField visitorid;
+	private TextField visitorId;
 	
 	@FXML
-	private Button viewbill;
+	private Button viewBill;//b
 	
 
 	public static void main(String[] args) {
 		launch(args);
-	}
+	} 
 	
 	
 	
