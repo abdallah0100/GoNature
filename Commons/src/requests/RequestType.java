@@ -1,4 +1,4 @@
-package main.commons.requests;
+package requests;
 
 public enum RequestType {
 	REQUEST_DATA(1),

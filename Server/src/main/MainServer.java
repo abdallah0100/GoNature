@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import main.commons.requests.RequestType;
 import main.controllers.ServerController;
 import main.databse.DatabaseController;
 import ocsf.server.src.AbstractServer;
 import ocsf.server.src.ConnectionToClient;
+import requests.RequestType;
 
 
 
