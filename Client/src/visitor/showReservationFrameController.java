@@ -1,0 +1,64 @@
+package visitor;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+public class showReservationFrameController extends Application{
+	@SuppressWarnings("rawtypes")
+	@FXML
+	private TableColumn siteColumn;
+	@SuppressWarnings("rawtypes")
+	@FXML
+	private TableColumn dateColumn;
+	@SuppressWarnings("rawtypes")
+	@FXML
+	private TableColumn timeColumn;
+	@SuppressWarnings("rawtypes")
+	@FXML
+	private TableColumn typeColumn;
+	@SuppressWarnings("rawtypes")
+	@FXML
+	private TableColumn visitorNumberColumn;
+	@FXML
+	private Button updateBtn;
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		Parent root = new Pane();
+		try {//trying to load the first gui (makeReservation.fxml)
+			root = FXMLLoader.load(getClass().getResource("showReservation.fxml"));
+		}catch(Exception e) {
+			System.out.println("[showReservationFrameController] - Error loading showReservation.fxml");
+			e.printStackTrace();
+			System.exit(1);
+		}
+		//setting the root to the loaded fxml file and showing the gui
+		Scene scene = new Scene(root);
+		arg0.setTitle("GoNature Client Show Reservation - demo");
+		arg0.setScene(scene);
+		arg0.show();
+	}
+	//function shows reservations 
+	public void showReservation(ActionEvent e) throws Exception{
+			
+	}
+	//function updates the selected reservation from table (go to update interface)
+	public void updateReservationAction(ActionEvent e) throws Exception{
+	
+	}
+
+}
