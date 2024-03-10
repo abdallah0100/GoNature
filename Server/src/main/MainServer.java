@@ -2,12 +2,10 @@ package main;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
 
-import main.controllers.ServerController;
-import main.databse.DatabaseController;
 import ocsf.server.src.AbstractServer;
 import ocsf.server.src.ConnectionToClient;
+import requests.Message;
 import requests.RequestType;
 
 
@@ -23,60 +21,32 @@ public class MainServer extends AbstractServer{
 	}
 
 	@Override
-	protected void handleMessageFromClient(Object msg, ConnectionToClient client) 
+	protected void handleMessageFromClient(Object incomingMsg, ConnectionToClient client) 
 	{
-		ArrayList<String> request = (ArrayList<String>) msg;
-		int msgType = Integer.parseInt(request.get(0));
-		
-		//if the database connection failed, respond to the client with an appropriate message and stop
-		if (dbConnection == null) {
-			try {
-				client.sendToClient("Error connecting to Databse");
-				System.out.println("[MainServer] - No connection to the database");
-			} catch (IOException e) {
-				System.out.println("[MainServer] - Error responding to client");
-				e.printStackTrace();
-			}
-			//check if it's client startUp and no DB add to connect client 
-			if(msgType == RequestType.REQUEST_DATA.getRequestId())
-				ServerController.getInstance().addClient(client);
+		if (!(incomingMsg instanceof Message)){
+			System.out.println("[MainServer] - received invalid message type from client " + client.getName());
+			respondToClient(client, new Message(RequestType.REQUEST_ERROR, "Invalid request data type; required is: Message"));
 			return;
 		}
+		Message msg = (Message)incomingMsg;
 		
-		ArrayList<String[]> data = null;
-		RequestType type = RequestType.getTypeById(msgType);
-		boolean updated = false;
-		switch(type) {
-		case REQUEST_DATA:
-			data = DatabaseController.getAllOrders();
-			ServerController.getInstance().addClient(client);
-			break;
-		case UPDATE:
-			if (DatabaseController.updateOrder(request)) {
-				updated = true;
-				System.out.println("[MainServer] - Order has been updated successfully");
-					
-			}
-			else {
-				System.out.println("[MainServer] - Update failed");
-			}
-			
+		switch(msg.getRequestEnumType()) {
+		case GENERAL_RESPOND:
 			break;
 		default:
+			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;
-		}
-		
-		try {
-			if (type == RequestType.UPDATE)
-				client.sendToClient(updated);
-			else
-				client.sendToClient(data);
-		} catch (IOException e) {
-			System.out.println("[MainServer] - Error responding to client: " + client.toString());
-			e.printStackTrace();
 		}
 		
 	}
 	
+	public void respondToClient(ConnectionToClient client, Message msg) {
+		try {
+			client.sendToClient(msg);
+		} catch (IOException e) {
+			System.out.println("[MainServer] - Error responding to client");
+			e.printStackTrace();
+		}
+	}
 
 }

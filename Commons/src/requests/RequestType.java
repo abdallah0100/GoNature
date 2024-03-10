@@ -1,8 +1,9 @@
 package requests;
 
 public enum RequestType {
-	REQUEST_DATA(1),
-	UPDATE(2);
+	REQUEST_ERROR(1),
+	GENERAL_RESPOND(2),
+	UNIMPLEMENTED_RESPOND(3);
 	
 	private int requestId;
 	

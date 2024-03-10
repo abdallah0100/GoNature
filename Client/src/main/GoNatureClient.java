@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import ocsf.client.AbstractClient;
+import requests.Message;
 
 
 public class GoNatureClient extends AbstractClient{
@@ -18,16 +19,24 @@ public class GoNatureClient extends AbstractClient{
 	}
 
 	@Override
-	protected void handleMessageFromServer(Object msg) {
+	protected void handleMessageFromServer(Object incomingMsg) {
 		awaitResponse = false;
-		
-		if (msg instanceof ArrayList) {
-			orders = (ArrayList<String[]>) msg;
-			ClientController.fetchedData = true;
-			System.out.println("[GoNatureClient] - Received order data121");
-		}else {
-			System.out.println("[GoNatureClient] - Received msg: " + msg);
+		if (!(incomingMsg instanceof Message)) {
+			System.out.println("[GoNatureClient] - the message we received from the server is not of type Message");
+			return;
 		}
+		Message msg = (Message)incomingMsg;
+		switch(msg.getRequestEnumType()) {
+		case REQUEST_ERROR:
+			System.out.println("[GoNatureClient] - Server responded with an error: " + msg.getRequestData());
+			break;
+			default:
+				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
+				if (msg.getRequestData() != null)
+					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
+				break;
+		}
+		System.out.println("[GoNatureClient] - Recieved message: " + msg.toString());
 	}
 	
 	  /**
@@ -36,7 +45,7 @@ public class GoNatureClient extends AbstractClient{
 	   * @param message The message from the UI.    
 	   */
 	  
-	  public void handleMessageFromClientUI(ArrayList<String> message)  
+	  public void handleMessageFromClientUI(Message message)  
 	  {
 	    try
 	    {
