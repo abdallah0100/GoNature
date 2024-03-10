@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entryworker.AvailablePlaces">
+   <children>
+      <Label layoutX="68.0" layoutY="56.0" prefHeight="51.0" prefWidth="400.0" text="              Available   Places" textFill="#25a159">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TreeTableView layoutX="158.0" layoutY="123.0" prefHeight="206.0" prefWidth="289.0">
+        <columns>
+          <TreeTableColumn prefWidth="96.0" text="Park Name" />
+          <TreeTableColumn prefWidth="92.0" text="Time" />
+            <TreeTableColumn prefWidth="100.5" text="Date" />
+        </columns>
+      </TreeTableView>
+   </children>
+</Pane>
