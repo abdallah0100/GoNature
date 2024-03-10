@@ -1,9 +1,13 @@
 package visitor;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class showReservationFrameController extends Application{
+public class showReservationFrameController extends Application implements Initializable{
 	@SuppressWarnings("rawtypes")
 	@FXML
 	private TableColumn siteColumn;
@@ -59,6 +63,13 @@ public class showReservationFrameController extends Application{
 	//function updates the selected reservation from table (go to update interface)
 	public void updateReservationAction(ActionEvent e) throws Exception{
 	
+	}
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

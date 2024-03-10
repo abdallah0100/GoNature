@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.client_requests.RequestHandler;
 
-public class makeReservationFrameController extends Application {
+public class makeReservationFrameController extends Application implements Initializable{
 
 	@FXML
 	private ComboBox<String> orderType;
@@ -63,6 +63,13 @@ public class makeReservationFrameController extends Application {
 	
 	//function makes reservation 
 	public void makeReservation(ActionEvent e) throws Exception{
+		
+	}
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
 		
 	}
 	
