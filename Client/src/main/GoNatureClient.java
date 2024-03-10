@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import ocsf.client.AbstractClient;
+import requests.Message;
 
 
 public class GoNatureClient extends AbstractClient{
@@ -20,14 +21,11 @@ public class GoNatureClient extends AbstractClient{
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		awaitResponse = false;
-		
-		if (msg instanceof ArrayList) {
-			orders = (ArrayList<String[]>) msg;
-			ClientController.fetchedData = true;
-			System.out.println("[GoNatureClient] - Received order data121");
-		}else {
-			System.out.println("[GoNatureClient] - Received msg: " + msg);
+		if (!(msg instanceof Message)) {
+			System.out.println("[GoNatureClient] - the message we received from the server is not of type Message");
+			return;
 		}
+		System.out.println("Recieved message: " + msg.toString());
 	}
 	
 	  /**
@@ -36,7 +34,7 @@ public class GoNatureClient extends AbstractClient{
 	   * @param message The message from the UI.    
 	   */
 	  
-	  public void handleMessageFromClientUI(ArrayList<String> message)  
+	  public void handleMessageFromClientUI(Message message)  
 	  {
 	    try
 	    {

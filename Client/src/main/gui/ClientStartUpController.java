@@ -76,11 +76,11 @@ public class ClientStartUpController extends Application implements Initializabl
 		//setting up a connection with the server
 		ClientUI.clientController = new ClientController(ip, port);
 		((Node)event.getSource()).getScene().getWindow().hide(); //hide port selection window
-		ClientFrameController c = new ClientFrameController();
+		ValidationFrameController validation = new ValidationFrameController();
 		try {
-			c.start(new Stage());
+			validation.start(new Stage());
 		} catch (Exception e) {
-			System.out.println("[ClientStartUpController] - Error starting main client");
+			System.out.println("[ClientStartUpController] - Error starting validation client");
 			e.printStackTrace();
 		}
 		

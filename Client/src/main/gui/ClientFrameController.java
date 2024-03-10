@@ -118,11 +118,11 @@ public class ClientFrameController extends Application implements Initializable{
 		Order o = new Order(parkNameField.getText(), ordersBox.getValue(), timeField.getText(),
 				numOfVisitorsField.getText(), telephoneField.getText(), emailField.getText());
 		ArrayList<String> data = o.getArray();
-		data.add(0, RequestType.UPDATE.getRequestId() + "");
-		ClientUI.clientController.accept(data);
+		//data.add(0, RequestType.UPDATE.getRequestId() + "");
+		//ClientUI.clientController.accept(data);
 		ArrayList<String> update = new ArrayList<>();
-		update.add(RequestType.REQUEST_DATA.getRequestId() + "");
-		ClientUI.clientController.accept(update);
+		//update.add(RequestType.REQUEST_DATA.getRequestId() + "");
+		//ClientUI.clientController.accept(update);
 		updateOrderBox();
 		
 		if (ClientController.connectedToServer) {

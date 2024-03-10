@@ -1,7 +1,8 @@
 package main;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
+import requests.Message;
 
 public class ClientController {
 
@@ -26,7 +27,7 @@ public class ClientController {
 	   * This method waits for input from the console.  Once it is 
 	   * received, it sends it to the client's message handler.
 	   */
-	  public void accept(ArrayList<String> str) 
+	  public void accept(Message str) 
 	  {
 		  client.handleMessageFromClientUI(str);
 	  }
