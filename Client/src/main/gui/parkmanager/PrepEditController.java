@@ -52,7 +52,7 @@ public class PrepEditController extends Application {
 		//setting the root to the loaded fxml file and showing the gui
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		
+		///////amni
 		primaryStage.show();
 		
 	}
