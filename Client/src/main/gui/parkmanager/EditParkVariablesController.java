@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.parkmanager;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
@@ -32,7 +32,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class EditParkVariables  extends Application {
+public class EditParkVariablesController  extends Application {
 	 	@FXML
 	    private Button EditEstimatedTime;
 
@@ -70,5 +70,24 @@ public class EditParkVariables  extends Application {
 			
 			primaryStage.show();
 		}
+	    
+	    public void editEstimatedTime(ActionEvent e)
+	    {
+	    	
+	    }
+	    
+	    public void editGap(ActionEvent e )
+	    {
+	    	
+	    }
 
+	    public void edit(ActionEvent e )
+	    {
+	    	
+	    }
+	    
+	    public void editVisitor(ActionEvent e)
+	    {
+	    	
+	    }
 }

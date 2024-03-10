@@ -7,20 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.parkmanager.EditParkVariablesController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Button fx:id="EditEstimatedTime" layoutX="84.0" layoutY="175.0" mnemonicParsing="false" text="edit estimated time" />
-            <Button fx:id="EditVisitor" layoutX="92.0" layoutY="255.0" mnemonicParsing="false" text="edit visitor limit " />
+            <Button fx:id="EditEstimatedTime" layoutX="84.0" layoutY="175.0" mnemonicParsing="false" onAction="#editEstimatedTime" text="edit estimated time" />
+            <Button fx:id="EditVisitor" layoutX="92.0" layoutY="255.0" mnemonicParsing="false" onAction="#editVisitor" text="edit visitor limit " />
             <SplitPane layoutX="298.0" layoutY="-1.0" prefHeight="400.0" prefWidth="301.0">
                <items>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <AnchorPane prefHeight="399.0" prefWidth="301.0">
                            <children>
-                              <Button fx:id="edit" layoutX="124.0" layoutY="326.0" mnemonicParsing="false" text="edit" />
+                              <Button fx:id="edit" layoutX="124.0" layoutY="326.0" mnemonicParsing="false" onAction="#edit" text="edit" />
                               <TextField fx:id="oldValue" layoutX="113.0" layoutY="102.0" />
                               <TextField fx:id="newValue" layoutX="113.0" layoutY="156.0" />
                               <Label layoutX="14.0" layoutY="106.0" prefHeight="17.0" prefWidth="92.0" text="old value :" />
@@ -31,7 +30,7 @@
                   </AnchorPane>
                </items>
             </SplitPane>
-            <Button fx:id="editGap" layoutX="114.0" layoutY="97.0" mnemonicParsing="false" text="editGap" />
+            <Button fx:id="editGap" layoutX="114.0" layoutY="97.0" mnemonicParsing="false" onAction="#editGap" text="editGap" />
          </children>
       </AnchorPane>
    </children>

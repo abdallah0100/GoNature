@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.parkmanager;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
@@ -28,7 +28,7 @@ import main.commons.requests.RequestType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.geometry.Insets;
-public class PrepEdit extends Application {
+public class PrepEditController extends Application {
 
 	@FXML
 	private Button preparereport;
@@ -54,6 +54,16 @@ public class PrepEdit extends Application {
 		primaryStage.setScene(scene);
 		
 		primaryStage.show();
+		
+	}
+	
+	public void preparereport()
+	{
+		
+	}
+	
+	public void editparkvarible()
+	{
 		
 	}
 }
