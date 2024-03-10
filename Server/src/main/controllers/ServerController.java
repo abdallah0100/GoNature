@@ -2,7 +2,7 @@ package main.controllers;
 
 import java.util.ArrayList;
 
-import OCSF.src.ocsf.server.ConnectionToClient;
+import ocsf.server.src.ConnectionToClient;
 
 public class ServerController {
 	

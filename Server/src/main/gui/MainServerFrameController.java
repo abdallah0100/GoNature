@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import OCSF.src.ocsf.server.ConnectionToClient;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.MainServer;
 import main.controllers.ServerController;
+import ocsf.server.src.ConnectionToClient;
 
 public class MainServerFrameController extends Application implements Initializable{
 	
