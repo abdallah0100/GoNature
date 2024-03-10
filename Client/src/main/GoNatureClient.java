@@ -3,7 +3,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ocsf.client.AbstractClient;
+import OCSF.src.ocsf.client.AbstractClient;
 
 
 public class GoNatureClient extends AbstractClient{
