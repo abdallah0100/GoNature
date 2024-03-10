@@ -38,9 +38,9 @@ public class PrepareReportFrameController extends Application implements Initial
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = new Pane();
 		try {//trying to load the first gui (startUpGui)
-			root = FXMLLoader.load(getClass().getResource("prepareReportFrame.fxml"));
+			root = FXMLLoader.load(getClass().getResource("PrepareReportFrame.fxml"));
 		}catch(Exception e) {
-			System.out.println("[prepareReportFrameController] - Error loading prepareReportFrame.fxml");
+			System.out.println("[PrepareReportFrameController] - Error loading PrepareReportFrame.fxml");
 			e.printStackTrace();
 			System.exit(1);
 		}

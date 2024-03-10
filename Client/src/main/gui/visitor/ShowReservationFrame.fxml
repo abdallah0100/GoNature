@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ShowReservationFrameController">
+   <children>
+      <Label layoutX="256.0" layoutY="49.0" prefHeight="25.0" prefWidth="94.0" text="Reservations " textAlignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TableView layoutX="51.0" layoutY="78.0" prefHeight="272.0" prefWidth="504.0">
+        <columns>
+          <TableColumn fx:id="siteColumn" prefWidth="106.66665267944336" text="Site" />
+          <TableColumn fx:id="dateColumn" prefWidth="104.00004577636719" text="Date" />
+            <TableColumn fx:id="timeColumn" prefWidth="96.66668701171875" text="Time" />
+            <TableColumn fx:id="typeColumn" prefWidth="84.0" text="Type" />
+            <TableColumn fx:id="visitorNumberColumn" prefWidth="113.33331298828125" text="Visitors Number" />
+        </columns>
+      </TableView>
+      <Button fx:id="updateBtn" layoutX="525.0" layoutY="355.0" mnemonicParsing="false" text="Update " />
+      <Separator layoutX="-3.0" layoutY="31.0" prefHeight="18.0" prefWidth="606.0" />
+      <Label layoutX="272.0" layoutY="14.0" text="GoNature" />
+   </children>
+</Pane>
