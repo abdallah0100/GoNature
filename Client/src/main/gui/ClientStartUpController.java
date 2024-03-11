@@ -7,13 +7,10 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
-import requests.Message;
-import requests.RequestType;
 import utilities.SceneController;
 
 public class ClientStartUpController extends Application implements Initializable{
@@ -70,17 +67,11 @@ public class ClientStartUpController extends Application implements Initializabl
 		ClientController.PORT = port;
 		
 		//setting up a connection with the server
-		ClientController.getController().accept(new Message(RequestType.CONNECT_TO_SERVER));
-		
-		((Node)event.getSource()).getScene().getWindow().hide(); //hide port selection window
 		ValidationFrameController validation = new ValidationFrameController();
-		try {
-			validation.start(new Stage());
-		} catch (Exception e) {
-			System.out.println("[ClientStartUpController] - Error starting validation client");
-			e.printStackTrace();
-		}
-		
+		SceneController.switchFrame("GoNature", event, validation);	
+	}
+	public static void main(String[] args) {
+		launch(args);
 	}
 
 }
