@@ -29,13 +29,11 @@ public class PrepEditController extends Application {
 	}
 		
 		
-	public void preparereport()
-	{
+	public void preparereport() {	
 		
 	}
 	
-	public void editparkvarible()
-	{
+	public void editparkvarible() {
 		
 	}
 }

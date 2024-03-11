@@ -17,8 +17,6 @@ public class ClientUI extends Application{
 		//load the client startup frame
 		ClientStartUpController startupC = new ClientStartUpController();
 		startupC.start(primaryStage);
-
-		
 	}
 
 }

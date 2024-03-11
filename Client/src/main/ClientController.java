@@ -7,7 +7,7 @@ import requests.Message;
 public class ClientController {
 
 	private GoNatureClient client;
-	
+	//
 	/*
 	 * variables to determine whether connected to the server/database or not
 	 * */

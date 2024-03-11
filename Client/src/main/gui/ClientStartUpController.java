@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -66,15 +65,12 @@ public class ClientStartUpController extends Application implements Initializabl
 		}
 		//setting up a connection with the server
 		ClientUI.clientController = new ClientController(ip, port);
-		((Node)event.getSource()).getScene().getWindow().hide(); //hide port selection window
+		String s="ClientStartUpController";
 		ValidationFrameController validation = new ValidationFrameController();
-		try {
-			validation.start(new Stage());
-		} catch (Exception e) {
-			System.out.println("[ClientStartUpController] - Error starting validation client");
-			e.printStackTrace();
-		}
-		
+		SceneController.switchFrame(s, event, validation);	
+	}
+	public static void main(String[] args) {
+		launch(args);
 	}
 
 }
