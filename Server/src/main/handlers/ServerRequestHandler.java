@@ -12,8 +12,12 @@ public class ServerRequestHandler {
 		String generalRespondMsg = "responded with no message.";
 		switch(msg.getRequestEnumType()) {
 		case CONNECT_TO_SERVER:
-			ClientConnectionHandler.addNewConnection(client);
+			ClientConnectionHandler.handleConnectRequest(client, true);
 			generalRespondMsg = "New Connection has been added successfully";
+			break;
+		case DISCONNECT_FROM_SERVER:
+			ClientConnectionHandler.handleConnectRequest(client, false);
+			generalRespondMsg = "Client has succesfully disconnected from the server";
 			break;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

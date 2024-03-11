@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import main.ClientController;
 import utilities.SceneController;
 
 public class ValidationFrameController extends Application implements Initializable {
@@ -35,7 +36,8 @@ public class ValidationFrameController extends Application implements Initializa
 	}
 	
 	public void Exit(ActionEvent e) {
-		//TODO
+		ClientController.getController().getClient().quit();
+		System.exit(0);
 	}
 	
 	public static void main(String[] args) {

@@ -1,7 +1,5 @@
 package main.entities;
 
-import java.util.Objects;
-
 import ocsf.server.src.ConnectionToClient;
 
 public class ClientConnection {
@@ -17,7 +15,7 @@ public class ClientConnection {
 	public ClientConnection(String string, String string2) {
 		clientIp = string;
 		hostName = string2;
-		connectionStatus = "sss";
+		connectionStatus = "Connected";
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import main.client_requests.RequestHandler;
 import ocsf.client.AbstractClient;
 import requests.Message;
+import requests.RequestType;
 
 
 public class GoNatureClient extends AbstractClient{
@@ -69,7 +70,8 @@ public class GoNatureClient extends AbstractClient{
 	  {
 	    try
 	    {
-	      closeConnection();
+	    	handleMessageFromClientUI(new Message(RequestType.DISCONNECT_FROM_SERVER));
+	    	closeConnection();
 	    }
 	    catch(IOException e) {
 	    	System.out.println("[GoNatureClient] - Error closing connection");
