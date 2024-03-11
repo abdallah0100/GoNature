@@ -6,18 +6,13 @@ import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.client_requests.RequestHandler;
+import utilities.SceneController;
 
 public class MakeReservationFrameController extends Application implements Initializable{
 
@@ -43,23 +38,17 @@ public class MakeReservationFrameController extends Application implements Initi
 	}
 	
 
+	/**
+	* @param primaryStage the primary stage for the application
+	* @throws Exception if an error occurs during initialization
+	*/
 	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		Parent root = new Pane();
-		try {//trying to load the first gui (makeReservation.fxml)
-			root = FXMLLoader.load(getClass().getResource("MakeReservationFrame.fxml"));
-		}catch(Exception e) {
-			System.out.println("[MakeReservationFrameController] - Error loading MakeReservationFrame.fxml");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		//setting the root to the loaded fxml file and showing the gui
-		Scene scene = new Scene(root);
-		arg0.setTitle("GoNature Visitor Make Reservation");
-		arg0.setScene(scene);
-		arg0.show();
+	public void start(Stage primaryStage) throws Exception {
+		SceneController sceneController = new SceneController();
+		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
+									"/main/gui/visitor/MakeReservationFrame.fxml");
 	}
+	
 	
 	//function makes reservation 
 	public void makeReservation(ActionEvent e) throws Exception{

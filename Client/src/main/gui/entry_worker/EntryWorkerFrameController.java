@@ -3,13 +3,10 @@ package main.gui.entry_worker;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.SceneController;
 
 /**
  * This class serves as the controller for the EntryWorkerFrame.fxml file.
@@ -36,21 +33,9 @@ public class EntryWorkerFrameController extends Application{
     */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = new Pane();
-		
-		try {
-			root = FXMLLoader.load(getClass().getResource("EntryWorkerFrame.fxml"));
-		}
-		catch(Exception e) {
-			System.out.println("[EntryWorkerFrameController] -  loading  EntryWorkerFrame.fxml");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("GoNature Client");
-		primaryStage.show();
+		SceneController sceneController = new SceneController();
+		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
+							"/main/gui/entry_worker/EntryWorkerFrame.fxml");
 	}
 	
 	

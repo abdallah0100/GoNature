@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.SceneController;
 
 public class LogInFrameController extends Application implements Initializable {
 	
@@ -21,22 +22,16 @@ public class LogInFrameController extends Application implements Initializable {
 	@FXML
 	private TextField passwordTxt;
 	
+
+	/**
+	* @param primaryStage the primary stage for the application
+	* @throws Exception if an error occurs during initialization
+	*/
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		Parent root = new Pane();
-		try {//trying to load the first gui (startUpGui)
-			root = FXMLLoader.load(getClass().getResource("LogInFrame.fxml"));
-		}catch(Exception e) {
-			System.out.println("[LogInFrameController] - Error loading LogInFrame.fxml");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		//setting the root to the loaded fxml file and showing the gui
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
+		SceneController sceneController = new SceneController();
+		sceneController.changeScene("GoNature - User", primaryStage,
+									   "/main/gui/LogInFrame.fxml");
 	}
 	
 	@Override
@@ -48,7 +43,6 @@ public class LogInFrameController extends Application implements Initializable {
 	//function for userLogIn
 	public void userLogIn(ActionEvent e) {
 		//TODO
-		System.out.println("userLogIn");
 	}
 	public static void main(String[] args) {
 		launch(args);
