@@ -1,12 +1,9 @@
 package main;
 
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import main.databse.DatabaseConnector;
 import main.gui.MainServerFrameController;
-import main.gui.ServerPortFrameController;
 
 public class ServerUI extends Application{
 	
@@ -15,9 +12,9 @@ public class ServerUI extends Application{
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws IOException {
-		ServerPortFrameController c = new ServerPortFrameController();
-		c.start(primaryStage);
+	public void start(Stage primaryStage) throws Exception {
+		MainServerFrameController frame = new MainServerFrameController();
+		frame.start(primaryStage);
 		
 	}
 	

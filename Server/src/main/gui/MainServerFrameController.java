@@ -2,25 +2,19 @@ package main.gui;
 
 import java.net.InetAddress;
 import java.net.URL;
-import java.util.ArrayList;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.MainServer;
-import main.controllers.ServerController;
-import ocsf.server.src.ConnectionToClient;
+import main.Constants;
+import utilities.SceneController;
 
 public class MainServerFrameController extends Application implements Initializable{
 	
@@ -29,57 +23,39 @@ public class MainServerFrameController extends Application implements Initializa
 	@FXML
 	private Label serverIPLabel;
 	@FXML
-	private Label serverPortLabel;
-	@FXML
 	private Label DBStatusLabel;
 	@FXML
-	private Button exitBtn;
+	private TextField serverPortField;
 	@FXML
-	private Button showConnectionsBtn;
+	private TextField dbNameField;
 	@FXML
-	private Pane connectionsPane;
+	private TextField dbUserField;
 	@FXML
-	private ListView<String> connectionsList;
+	private TextField dbPassField;
+	@FXML
+	private Label msgLabel;
+	@FXML
+	private Button stopServerBtn;
 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = new Pane();
-		try {//trying to load the main gui (startUpGui)
-			root = FXMLLoader.load(getClass().getResource("MainServer.fxml"));
-		}catch(Exception e) {
-			System.out.println("[MainServerFrameController] - Error loading MainServer.fxml");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		
-		//setting the root to the loaded fxml file and showing the gui
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("GoNature Server");
-		primaryStage.setScene(scene);
-		
-		primaryStage.show();
-		
+		SceneController scene = new SceneController();
+		scene.changeScene("GoNature - Server", primaryStage, "/main/gui/MainServer.fxml");
 	}
 	/*
 	 * a function to set up the labels of the server data
 	 */
 	public void setUpUI() {
 		try {
-			serverStatusLabel.setVisible(true);
-			serverPortLabel.setText(MainServer.PORT);
 			serverIPLabel.setText(InetAddress.getLocalHost().getHostAddress());
-			if (MainServer.dbConnection != null) {
-				DBStatusLabel.setText("Connected");
-			}else {
-				DBStatusLabel.setText("Failed");
-				DBStatusLabel.setTextFill(Color.valueOf("red"));
-			}
-			
-		}catch(Exception e) {
-			System.out.println("[MainServerFrameController.setUpUI] - error setting up the UI");
+		} catch (UnknownHostException e) {
+			System.out.println("[MainServerFrameController] - error getting local host address");
 			e.printStackTrace();
 		}
+		serverPortField.setText(Constants.DEFAULT_PORT);
+		dbNameField.setText(Constants.DB_NAME);
+		dbUserField.setText(Constants.DB_USERNAME);
 	}
 	
 	public void exitServer(ActionEvent e) {
@@ -94,32 +70,12 @@ public class MainServerFrameController extends Application implements Initializa
 		setUpUI();
 	}
 	
-	public void loadClients() {
-		if (ServerController.getInstance().getClients().size() == 0) {
-			connectionsList.getItems().setAll("None");
-		}else {
-			ArrayList<ConnectionToClient> clients = ServerController.getInstance().getClients();
-			ArrayList<String> clientNames = new ArrayList<>();
-			for (int i = 0; i < clients.size(); i++)
-				clientNames.add(clients.get(i).toString());
-			connectionsList.getItems().setAll(clientNames);
-
-		}
+	public void startServer(ActionEvent event) {
+		
 	}
 	
-	public void showConnectionsClick(ActionEvent event) {
-		loadClients();
-		connectionsPane.setVisible(true);
-		showConnectionsBtn.setVisible(false);
-	}
-	
-	public void refreshConnectionClick(ActionEvent event) {
-		loadClients();
-	}
-	
-	public void closeConnectionPaneClick(ActionEvent event) {
-		connectionsPane.setVisible(false);
-		showConnectionsBtn.setVisible(true);
+	public void stopServer(ActionEvent event) {
+		
 	}
 
 }
