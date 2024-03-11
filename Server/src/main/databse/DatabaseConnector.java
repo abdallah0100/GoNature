@@ -22,10 +22,10 @@ public class DatabaseConnector {
 	}
 	//a function to return a connection to the database, in case of failure returns null
 	//private because the use of this function depends on the success of loadDriver
-	private Connection makeConnection() {
+	private Connection makeConnection(String dbName, String user, String pass) {
         try 
         {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/gonature?serverTimezone=IST","root", MainServer.dbPassword);
+            Connection conn = DriverManager.getConnection(dbName, user, pass);
             System.out.println("SQL connection succeed");
             return conn;
      	} catch (SQLException ex) 
@@ -39,9 +39,9 @@ public class DatabaseConnector {
 	}
 	
 	//a function that returns a database connection
-	public Connection getConnection() {
+	public Connection getConnection(String dbName, String user, String pass) {
 		if (loadDriver())//if succeded to connect to the driver
-			return makeConnection();//return a Connection
+			return makeConnection(dbName, user, pass);//return a Connection
 		return null;
 	}
 	
