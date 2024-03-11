@@ -14,6 +14,11 @@ public class Message implements Serializable{
 		this.requestData = requestData;
 	}
 	
+	public Message(RequestType requestType) {
+		this.requestType = requestType.getRequestId();
+		this.requestData = "Request has no data";
+	}
+	
 	public RequestType getRequestEnumType() {
 		return RequestType.getTypeById(requestType);
 	}

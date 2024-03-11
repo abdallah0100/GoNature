@@ -1,6 +1,5 @@
 package utilities;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
@@ -23,11 +22,6 @@ public class SceneController {
 		stage.setTitle(title);
 		stage.setScene(scene);		
 		stage.show();
-	}
-	
-	public void listAllFiles(File fil) {
-		for (File f : fil.listFiles())
-			System.out.print(f.getName() + " ");
 	}
 	
 }

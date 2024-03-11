@@ -11,11 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Constants;
 import main.MainServer;
+import main.entities.ClientConnection;
 import utilities.SceneController;
 
 public class MainServerFrameController extends Application implements Initializable{
@@ -40,6 +44,15 @@ public class MainServerFrameController extends Application implements Initializa
 	private Button stopServerBtn;
 	@FXML
 	private Button startServerBtn;
+	@FXML
+	private TableView<ClientConnection> connectionTable;
+	@FXML
+	private TableColumn<ClientConnection, String> ipCol;
+	@FXML
+	private TableColumn<ClientConnection, String> hostCol;
+	@FXML
+	private TableColumn<ClientConnection, String> statusCol;
+	
 
 
 	@Override
@@ -72,26 +85,37 @@ public class MainServerFrameController extends Application implements Initializa
 	public void initialize(URL location, ResourceBundle resources) {
 		//we add the setup here, because the labels are not initiliazed yet untill this function is called
 		setUpUI();
+		connectionTable.setItems(MainServer.getInstance().getConnections());
+		ipCol.setCellFactory(new PropertyValueFactory("clientIp"));
+		hostCol.setCellFactory(new PropertyValueFactory("hostName"));
+		statusCol.setCellFactory(new PropertyValueFactory("connectionStatus"));
 	}
 	
 	public void startServer(ActionEvent event) {
 		if (!(serverPortField.getText().length() > 0 || dbNameField.getText().length() > 0 ||
 			dbUserField.getText().length() > 0 || dbPassField.getText().trim().length() > 0)) {
-			msgLabel.setText("Please fill all fields to start the server.");
-			msgLabel.setLayoutX(195);
-			msgLabel.setTextFill(Color.valueOf("red"));
-			msgLabel.setVisible(true);
+			displayErrorMsg("Please fill all fields to start the server.", 195);
 			return;
 		}
 		try {
-			Integer.parseInt(serverPortField.getText());
+			Constants.SERVER_PORT = Integer.parseInt(serverPortField.getText());
 		}catch(Exception ex) {
 			System.out.println("[MainServerFrameController] - inputted port is not an integer");
 			return;
 		}
 		
 		MainServer.startServer(serverPortField.getText(), dbNameField.getText(), dbUserField.getText(), dbPassField.getText());
-		lockFieldsAfterStart();
+		if (MainServer.serverStarted)
+			lockFieldsAfterStart();
+		else
+			displayErrorMsg("Server failed to start.", -1);
+	}
+	public void displayErrorMsg(String msg, int x) {
+		msgLabel.setText(msg);
+		msgLabel.setTextFill(Color.valueOf("red"));
+		if (x != -1)
+			msgLabel.setLayoutX(x);
+		msgLabel.setVisible(true);
 	}
 	
 	public void lockFieldsAfterStart() {
@@ -117,10 +141,7 @@ public class MainServerFrameController extends Application implements Initializa
 	
 	public void stopServer(ActionEvent event) {
 		if (!MainServer.serverStarted) {
-			msgLabel.setText("You can not stop the server when it is offline");
-			msgLabel.setTextFill(Color.valueOf("red"));
-			msgLabel.setLayoutX(175);
-			msgLabel.setVisible(true);
+			displayErrorMsg("You can not stop the server when it is offline", 175);
 			return;
 		}
 		serverPortField.setDisable(false);

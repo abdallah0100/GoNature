@@ -3,6 +3,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import main.client_requests.RequestHandler;
 import ocsf.client.AbstractClient;
 import requests.Message;
 
@@ -26,17 +27,7 @@ public class GoNatureClient extends AbstractClient{
 			return;
 		}
 		Message msg = (Message)incomingMsg;
-		switch(msg.getRequestEnumType()) {
-		case REQUEST_ERROR:
-			System.out.println("[GoNatureClient] - Server responded with an error: " + msg.getRequestData());
-			break;
-			default:
-				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
-				if (msg.getRequestData() != null)
-					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
-				break;
-		}
-		System.out.println("[GoNatureClient] - Recieved message: " + msg.toString());
+		RequestHandler.handleIncomingRequests(msg);
 	}
 	
 	  /**

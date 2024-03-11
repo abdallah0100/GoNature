@@ -6,8 +6,6 @@ import main.gui.ClientStartUpController;
 
 public class ClientUI extends Application{
 	
-	public static ClientController clientController;
-	
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -12,7 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
-import main.ClientUI;
+import requests.Message;
+import requests.RequestType;
 import utilities.SceneController;
 
 public class ClientStartUpController extends Application implements Initializable{
@@ -64,8 +65,13 @@ public class ClientStartUpController extends Application implements Initializabl
 			System.out.println("[ClientStartUpController] - entered port was not a number");
 			return;
 		}
+		
+		ClientController.HOST = ip;
+		ClientController.PORT = port;
+		
 		//setting up a connection with the server
-		ClientUI.clientController = new ClientController(ip, port);
+		ClientController.getController().accept(new Message(RequestType.CONNECT_TO_SERVER));
+		
 		((Node)event.getSource()).getScene().getWindow().hide(); //hide port selection window
 		ValidationFrameController validation = new ValidationFrameController();
 		try {
