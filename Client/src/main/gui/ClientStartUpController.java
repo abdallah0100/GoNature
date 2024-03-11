@@ -7,14 +7,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
 import utilities.SceneController;
-import utilities.SwitchFrame;
 
 public class ClientStartUpController extends Application implements Initializable{
 	
@@ -69,7 +67,7 @@ public class ClientStartUpController extends Application implements Initializabl
 		ClientUI.clientController = new ClientController(ip, port);
 		String s="ClientStartUpController";
 		ValidationFrameController validation = new ValidationFrameController();
-		SwitchFrame.switchFrame(s, event, validation);	
+		SceneController.switchFrame(s, event, validation);	
 	}
 	public static void main(String[] args) {
 		launch(args);

@@ -3,12 +3,9 @@ package main.gui.entry_worker;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import main.gui.LogInFrameController;
 import utilities.SceneController;
-import utilities.SwitchFrame;
 
 /**
  * This class serves as the controller for the EntryWorkerFrame.fxml file.
@@ -50,11 +47,11 @@ public class EntryWorkerFrameController extends Application{
 	 * @param event
 	 */
 
-		public void checkAvailablePlaces(ActionEvent event) {
-			String s="availablePlaceFrameController";
-			AvailablePlacesFrameController availablePlaceFrame = new AvailablePlacesFrameController();
-			SwitchFrame.switchFrame(s, event, availablePlaceFrame);
-		}
+	public void checkAvailablePlaces(ActionEvent event) {
+		String s="availablePlaceFrameController";
+		AvailablePlacesFrameController availablePlaceFrame = new AvailablePlacesFrameController();
+		SceneController.switchFrame(s, event, availablePlaceFrame);
+	}
 		
 	/***
 	 * This method responsible for hiding EntryWorker window
@@ -66,7 +63,7 @@ public class EntryWorkerFrameController extends Application{
 	public void viewBill(ActionEvent event) {
 		String s="availablePlaceFrameController";
 		BillCakFrameController BillCakFrame = new BillCakFrameController();
-		SwitchFrame.switchFrame(s, event, BillCakFrame);
+		SceneController.switchFrame(s, event, BillCakFrame);
 	}
 
 }

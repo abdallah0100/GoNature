@@ -20,14 +20,14 @@ public class BillCakFrameController   extends Application {
 	
 	
 	/**
-	    * @param primaryStage the primary stage for the application
-		* @throws Exception if an error occurs during initialization
-	    */
-		@Override
-		public void start(Stage primaryStage) throws Exception {
-			SceneController sceneController = new SceneController();
-			sceneController.changeScene("GoNature - Entry Worker", primaryStage,
-								    "/main/gui/entry_worker/BillCakFrame.fxml");
-		}
+	* @param primaryStage the primary stage for the application
+	* @throws Exception if an error occurs during initialization
+	*/
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		SceneController sceneController = new SceneController();
+		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
+									    "/main/gui/entry_worker/BillCakFrame.fxml");
+	}
 	
 }
