@@ -12,11 +12,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="638.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
    <children>
-      <TableView layoutX="333.0" layoutY="132.0" prefHeight="243.0" prefWidth="291.0" style="-fx-border-color: black;">
+      <TableView fx:id="connectionTable" layoutX="333.0" layoutY="132.0" prefHeight="243.0" prefWidth="291.0" style="-fx-border-color: black;">
         <columns>
-          <TableColumn prefWidth="96.0" text="Client IP" />
-          <TableColumn prefWidth="96.0" text="Host" />
-            <TableColumn prefWidth="96.0" text="Status" />
+          <TableColumn fx:id="ipCol" prefWidth="96.0" text="Client IP" />
+          <TableColumn fx:id="hostCol" prefWidth="96.0" text="Host" />
+            <TableColumn fx:id="statusCol" prefWidth="96.0" text="Status" />
         </columns>
       </TableView>
       <Label layoutX="50.0" layoutY="98.0" text="Server Connections">

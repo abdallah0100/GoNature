@@ -1,6 +1,5 @@
 package utilities;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -28,13 +27,8 @@ public class SceneController {
 		stage.show();
 	}
 	
-	public void listAllFiles(File fil) {
-		for (File f : fil.listFiles())
-			System.out.print(f.getName() + " ");
-	}
 	
-	
-	public static void switchFrame(String title,ActionEvent e , Application o) {
+	public static void switchFrame(String title, ActionEvent e, Application o) {
 		((Node)e.getSource()).getScene().getWindow().hide(); 
 		try {
 			o.start(new Stage());;
