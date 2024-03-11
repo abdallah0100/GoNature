@@ -13,7 +13,6 @@ import requests.RequestType;
 
 public class MainServer extends AbstractServer{
 	
-	public static String dbPassword;
 	public static Connection dbConnection;
 	
 	private static int port;

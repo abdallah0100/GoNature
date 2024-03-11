@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import main.MainServer;
-
 public class DatabaseConnector {	
+
 
 	private boolean loadDriver() {
 		try 
