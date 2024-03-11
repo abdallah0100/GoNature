@@ -1,14 +1,11 @@
-package main.gui.instructor;
+package main.gui.service_agent;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.SceneController;
 
 
 public class RegisterInstructorFrameController extends Application{
@@ -28,26 +25,17 @@ public class RegisterInstructorFrameController extends Application{
 		 launch(args);
 	 }
 	
+	
+	/**
+	* @param primaryStage the primary stage for the application
+	* @throws Exception if an error occurs during initialization
+    */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = new Pane();
-		
-		try {
-			root = FXMLLoader.load(getClass().getResource("RegisterInstructorFrame.fxml"));
-		}
-		catch(Exception e) {
-			System.out.println("[RegisterInstructorFrameController] -  loading RegisterInstructorFrame.fxml");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("GoNature Client");
-		primaryStage.show();
+		SceneController sceneController = new SceneController();
+		sceneController.changeScene("GoNature - Service Agent", primaryStage,
+					    "/main/gui/service_agent/RegisterInstructorFrame.fxml");
 	}
-	
-	
 	
 	public void register(ActionEvent e) {
 		//TODO

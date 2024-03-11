@@ -3,13 +3,15 @@ package main.gui.entry_worker;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.SceneController;
 
+/**
+ * This class serves as the controller for the EntryWorkerFrame.fxml file.
+ * It manages the actions and events related to the Entry Worker's interface.
+*/
 
 public class EntryWorkerFrameController extends Application{
 	
@@ -24,33 +26,58 @@ public class EntryWorkerFrameController extends Application{
 		 launch(args);
 	 }
 	 
+	 
+	/**
+    * @param primaryStage the primary stage for the application
+	* @throws Exception if an error occurs during initialization
+    */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = new Pane();
-		
+		SceneController sceneController = new SceneController();
+		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
+							"/main/gui/entry_worker/EntryWorkerFrame.fxml");
+	}
+	
+	
+	
+	/***
+	 * This method responsible for hiding EntryWorker window
+	 * after clicking on checkAvailablePlaces button and
+	 * new window is opened for the Available Places that the 
+	 * EntryWorker can check.
+	 * @param event
+	 */
+	public void checkAvailablePlaces(ActionEvent event) {
+		((Node)event.getSource()).getScene().getWindow().hide(); //hide EntryWorker window
+		AvailablePlacesFrameController availablePlaceFrame = new AvailablePlacesFrameController();
 		try {
-			root = FXMLLoader.load(getClass().getResource("EntryWorkerFrame.fxml"));
+			availablePlaceFrame.start(new Stage());;
 		}
-		catch(Exception e) {
-			System.out.println("[EntryWorkerFrameController] -  loading  EntryWorkerFrame.fxml");
-			e.printStackTrace();
-			System.exit(1);
+		catch (Exception ex) {
+		System.out.println("[availablePlaceFrameController] - Error starting availablePlaceFrame");
+		ex.printStackTrace();
 		}
+	}
+	
+	
+	/***
+	 * This method responsible for hiding EntryWorker window
+	 * after clicking on View Bill button and
+	 * new window is opened to check the Bill of the visitor 
+	 * that the EntryWorker can check.
+	 * @param event
+	 */
+	public void viewBill(ActionEvent event) {
 		
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("GoNature Client");
-		primaryStage.show();
-	}
-	
-	
-	
-	public void checkAvailablePlaces(ActionEvent e) {
-		//TODO
-	}
-	
-	public void viewBill(ActionEvent e) {
-		//TODO
+		((Node)event.getSource()).getScene().getWindow().hide(); //hide EntryWorker window
+		BillCakFrameController BillCakFrame = new BillCakFrameController();
+		try {
+			BillCakFrame.start(new Stage());
+		}
+		catch (Exception ex) {
+		System.out.println("[BillCakFrameController] - Error starting BillCakFrame");
+		ex.printStackTrace();
+		}
 	}
 
 }
