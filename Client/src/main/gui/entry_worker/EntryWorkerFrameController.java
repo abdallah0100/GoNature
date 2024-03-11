@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import main.gui.LogInFrameController;
 import utilities.SceneController;
+import utilities.SwitchFrame;
 
 /**
  * This class serves as the controller for the EntryWorkerFrame.fxml file.
@@ -47,19 +49,13 @@ public class EntryWorkerFrameController extends Application{
 	 * EntryWorker can check.
 	 * @param event
 	 */
-	public void checkAvailablePlaces(ActionEvent event) {
-		((Node)event.getSource()).getScene().getWindow().hide(); //hide EntryWorker window
-		AvailablePlacesFrameController availablePlaceFrame = new AvailablePlacesFrameController();
-		try {
-			availablePlaceFrame.start(new Stage());;
+
+		public void checkAvailablePlaces(ActionEvent event) {
+			String s="availablePlaceFrameController";
+			AvailablePlacesFrameController availablePlaceFrame = new AvailablePlacesFrameController();
+			SwitchFrame.switchFrame(s, event, availablePlaceFrame);
 		}
-		catch (Exception ex) {
-		System.out.println("[availablePlaceFrameController] - Error starting availablePlaceFrame");
-		ex.printStackTrace();
-		}
-	}
-	
-	
+		
 	/***
 	 * This method responsible for hiding EntryWorker window
 	 * after clicking on View Bill button and
@@ -68,16 +64,9 @@ public class EntryWorkerFrameController extends Application{
 	 * @param event
 	 */
 	public void viewBill(ActionEvent event) {
-		
-		((Node)event.getSource()).getScene().getWindow().hide(); //hide EntryWorker window
+		String s="availablePlaceFrameController";
 		BillCakFrameController BillCakFrame = new BillCakFrameController();
-		try {
-			BillCakFrame.start(new Stage());
-		}
-		catch (Exception ex) {
-		System.out.println("[BillCakFrameController] - Error starting BillCakFrame");
-		ex.printStackTrace();
-		}
+		SwitchFrame.switchFrame(s, event, BillCakFrame);
 	}
 
 }

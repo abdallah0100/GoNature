@@ -9,6 +9,7 @@ import main.ClientController;
 import main.ClientUI;
 import main.gui.entry_worker.AvailablePlacesFrameController;
 import utilities.SceneController;
+import utilities.SwitchFrame;
 
 public class GoNatureMainFrameController extends Application {
 
@@ -21,28 +22,15 @@ public class GoNatureMainFrameController extends Application {
 	}
 	
 	public void userLogin(ActionEvent e) {
-		((Node)e.getSource()).getScene().getWindow().hide(); //hide EntryWorker window
+		String s="LogInFrameController";
 		LogInFrameController LogInFrame = new LogInFrameController();
-		try {
-			LogInFrame.start(new Stage());;
-		}
-		catch (Exception ex) {
-		System.out.println("[LogInFrameController] - Error starting LogInFrame");
-		ex.printStackTrace();
-		}
+		SwitchFrame.switchFrame(s, e, LogInFrame);
 	}
 	
 	public void visitorLogin(ActionEvent e) {
-		//ValidationFrame
-		((Node)e.getSource()).getScene().getWindow().hide(); //hide EntryWorker window
+		String s="ValidationFrameController";
 		ValidationFrameController ValidationFrame = new ValidationFrameController();
-		try {
-			ValidationFrame.start(new Stage());;
-		}
-		catch (Exception ex) {
-		System.out.println("[ValidationFrameController] - Error starting ValidationFrame");
-		ex.printStackTrace();
-		}
+		SwitchFrame.switchFrame(s, e, ValidationFrame);
 	}
 	
 	

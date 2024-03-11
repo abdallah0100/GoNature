@@ -133,6 +133,9 @@ public class ClientFrameController extends Application implements Initializable{
 		System.exit(0);
 	}
 	
+	public static void main(String[] args) {
+		launch(args);
+	}
 	
 	
 	
