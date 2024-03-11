@@ -1,16 +1,13 @@
-package main.gui.entry_worker;
+package entities;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-public class AvailablePlaceCurrent  {
+public class AvailablePlace  {
 
 	private String parkname;
 	private String date;
 	private String time;
 	
 
-	public AvailablePlaceCurrent(String parkname,String time,String date) {
+	public AvailablePlace(String parkname,String time,String date) {
 		this.parkname=parkname;
 		this.time=time;
 		this.date=date;

@@ -28,6 +28,8 @@ public class RegisterInstructorFrameController extends Application{
 		 launch(args);
 	 }
 	
+	 
+	 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = new Pane();

@@ -1,4 +1,5 @@
 package main.gui.entry_worker;
+import entities.AvailablePlace;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,16 +15,16 @@ import javafx.stage.Stage;
 public class AvailablePlacesFrameController  extends Application  {
     
     @FXML
-    private TableView<AvailablePlaceCurrent> table ;
+    private TableView<AvailablePlace> table ;
 	@FXML
-    private TableColumn<AvailablePlaceCurrent,String> time;   
+    private TableColumn<AvailablePlace,String> time;   
     @FXML
-    private TableColumn<AvailablePlaceCurrent,String> date;
+    private TableColumn<AvailablePlace,String> date;
     @FXML
-    private TableColumn<AvailablePlaceCurrent,String> parkname;
+    private TableColumn<AvailablePlace,String> parkname;
     
-    ObservableList<AvailablePlaceCurrent> list =  FXCollections.observableArrayList(
-    		new AvailablePlaceCurrent("Park K","10:30","05,08,2024")
+    ObservableList<AvailablePlace> list =  FXCollections.observableArrayList(
+    		new AvailablePlace("Park K","10:30","05,08,2024")
     		);
 
 	public static void main(String[] args) {
