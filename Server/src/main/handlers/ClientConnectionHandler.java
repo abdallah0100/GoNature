@@ -9,7 +9,7 @@ public class ClientConnectionHandler {
 
 	public static void addNewConnection(ConnectionToClient client) {
 		ClientConnection newCon = new ClientConnection(client);
-		ObservableList<ClientConnection> list = MainServer.getInstance().getConnections();
+		ObservableList<ClientConnection> list = MainServer.getConnections();
 
 		//checking to prevent duplicates
 		for (ClientConnection c : list) {
@@ -20,7 +20,12 @@ public class ClientConnectionHandler {
 		}
 
 		list.add(newCon);
-		MainServer.getInstance().setClientConnections(list);
+		MainServer.setClientConnections(list);
+		dumb();
+	}
+	public static void dumb() {
+		for (ClientConnection c : MainServer.getConnections())
+			System.out.println(c.toString());
 	}
 	
 }

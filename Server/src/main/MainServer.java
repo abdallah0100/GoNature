@@ -24,7 +24,7 @@ public class MainServer extends AbstractServer{
 	private static MainServer server;
 	public static boolean serverStarted = false;
 	
-	private ObservableList<ClientConnection> connections = FXCollections.observableArrayList();;
+	private static ObservableList<ClientConnection> connections = FXCollections.observableArrayList();;
 
 	private MainServer(int port) {
 		super(port);
@@ -99,11 +99,11 @@ public class MainServer extends AbstractServer{
 		server = null;
 	}
 	
-	public ObservableList<ClientConnection> getConnections(){
+	public static ObservableList<ClientConnection> getConnections(){
 		return connections;
 	}
-	public void setClientConnections(ObservableList<ClientConnection> conns) {
-		this.connections = conns;
+	public static void setClientConnections(ObservableList<ClientConnection> conns) {
+		connections = conns;
 	}
 
 }

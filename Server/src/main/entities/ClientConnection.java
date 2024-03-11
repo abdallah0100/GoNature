@@ -1,5 +1,7 @@
 package main.entities;
 
+import java.util.Objects;
+
 import ocsf.server.src.ConnectionToClient;
 
 public class ClientConnection {
@@ -11,6 +13,13 @@ public class ClientConnection {
 		this.hostName = client.getInetAddress().getHostName();
 		connectionStatus = "Connected";
 	}
+
+	public ClientConnection(String string, String string2) {
+		clientIp = string;
+		hostName = string2;
+		connectionStatus = "sss";
+	}
+
 
 	public String getClientIp() {
 		return clientIp;
@@ -42,6 +51,11 @@ public class ClientConnection {
 		ClientConnection otherCon = (ClientConnection) other;
 		
 		return otherCon.getClientIp().equals(clientIp) && otherCon.getHostName().equals(hostName);
+	}
+	
+	@Override
+	public String toString() {
+		return "[Host] " + this.hostName + ", [IP] " + this.clientIp + ", [Status] " + this.connectionStatus;
 	}
 
 }

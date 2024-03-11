@@ -85,10 +85,7 @@ public class MainServerFrameController extends Application implements Initializa
 	public void initialize(URL location, ResourceBundle resources) {
 		//we add the setup here, because the labels are not initiliazed yet untill this function is called
 		setUpUI();
-		connectionTable.setItems(MainServer.getInstance().getConnections());
-		ipCol.setCellFactory(new PropertyValueFactory("clientIp"));
-		hostCol.setCellFactory(new PropertyValueFactory("hostName"));
-		statusCol.setCellFactory(new PropertyValueFactory("connectionStatus"));
+		
 	}
 	
 	public void startServer(ActionEvent event) {
@@ -105,8 +102,14 @@ public class MainServerFrameController extends Application implements Initializa
 		}
 		
 		MainServer.startServer(serverPortField.getText(), dbNameField.getText(), dbUserField.getText(), dbPassField.getText());
-		if (MainServer.serverStarted)
+		if (MainServer.serverStarted) {
 			lockFieldsAfterStart();
+			connectionTable.setItems(MainServer.getConnections());
+			
+			ipCol.setCellValueFactory(new PropertyValueFactory<>("clientIp"));
+			hostCol.setCellValueFactory(new PropertyValueFactory<>("hostName"));
+			statusCol.setCellValueFactory(new PropertyValueFactory<>("connectionStatus"));	
+		}
 		else
 			displayErrorMsg("Server failed to start.", -1);
 	}
