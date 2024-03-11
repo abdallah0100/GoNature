@@ -89,7 +89,7 @@ public class ServerPortFrameController extends Application{
 			return;
 		}else {
 			((Node)event.getSource()).getScene().getWindow().hide(); //hide port selection window
-			ServerUI.startServer(port);
+			//ServerUI.startServer(port);
 		}
 	}
 	

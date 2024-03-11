@@ -12,8 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.Constants;
+import main.MainServer;
 import utilities.SceneController;
 
 public class MainServerFrameController extends Application implements Initializable{
@@ -36,6 +38,8 @@ public class MainServerFrameController extends Application implements Initializa
 	private Label msgLabel;
 	@FXML
 	private Button stopServerBtn;
+	@FXML
+	private Button startServerBtn;
 
 
 	@Override
@@ -71,11 +75,65 @@ public class MainServerFrameController extends Application implements Initializa
 	}
 	
 	public void startServer(ActionEvent event) {
+		if (!(serverPortField.getText().length() > 0 || dbNameField.getText().length() > 0 ||
+			dbUserField.getText().length() > 0 || dbPassField.getText().trim().length() > 0)) {
+			msgLabel.setText("Please fill all fields to start the server.");
+			msgLabel.setLayoutX(195);
+			msgLabel.setTextFill(Color.valueOf("red"));
+			msgLabel.setVisible(true);
+			return;
+		}
+		try {
+			Integer.parseInt(serverPortField.getText());
+		}catch(Exception ex) {
+			System.out.println("[MainServerFrameController] - inputted port is not an integer");
+			return;
+		}
 		
+		MainServer.startServer(serverPortField.getText(), dbNameField.getText(), dbUserField.getText(), dbPassField.getText());
+		lockFieldsAfterStart();
+	}
+	
+	public void lockFieldsAfterStart() {
+		if (MainServer.serverStarted) {
+			serverPortField.setDisable(true);
+			dbNameField.setDisable(true);
+			dbUserField.setDisable(true);
+			dbPassField.setDisable(true);
+			
+			serverStatusLabel.setText("Online");
+			serverStatusLabel.setTextFill(Color.valueOf("green"));
+			if (MainServer.dbConnection != null) {
+				DBStatusLabel.setText("Connected");
+				DBStatusLabel.setTextFill(Color.valueOf("green"));
+			}else
+				DBStatusLabel.setTextFill(Color.valueOf("red"));
+			
+			startServerBtn.setDisable(true);
+			msgLabel.setVisible(false);
+			
+		}
 	}
 	
 	public void stopServer(ActionEvent event) {
+		if (!MainServer.serverStarted) {
+			msgLabel.setText("You can not stop the server when it is offline");
+			msgLabel.setTextFill(Color.valueOf("red"));
+			msgLabel.setLayoutX(175);
+			msgLabel.setVisible(true);
+			return;
+		}
+		serverPortField.setDisable(false);
+		dbNameField.setDisable(false);
+		dbUserField.setDisable(false);
+		dbPassField.setDisable(false);
+		serverStatusLabel.setText("Offline");
+		serverStatusLabel.setTextFill(Color.valueOf("red"));
+		DBStatusLabel.setText("Offline");
+		DBStatusLabel.setTextFill(Color.valueOf("red"));
+		MainServer.getInstance().closeConnection();
 		
+		startServerBtn.setDisable(false);
 	}
 
 }

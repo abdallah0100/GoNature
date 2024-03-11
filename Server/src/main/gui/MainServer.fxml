@@ -66,12 +66,12 @@
                   <Font name="Century" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="serverStatusLabel" layoutX="134.0" layoutY="15.0" text="Offline">
+            <Label fx:id="serverStatusLabel" layoutX="134.0" layoutY="15.0" text="Offline" textFill="RED">
                <font>
                   <Font name="Century" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="DBStatusLabel" layoutX="134.0" layoutY="42.0" text="Offline">
+            <Label fx:id="DBStatusLabel" layoutX="134.0" layoutY="42.0" text="Offline" textFill="#f50000">
                <font>
                   <Font name="Century" size="14.0" />
                </font>
@@ -92,21 +92,21 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="stopServerBtn" layoutX="332.0" layoutY="392.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Stop Server">
+      <Button fx:id="stopServerBtn" layoutX="332.0" layoutY="392.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Stop Server">
          <font>
             <Font name="Century" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="176.0" layoutY="392.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Start Server">
+      <Button fx:id="startServerBtn" layoutX="176.0" layoutY="392.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Start Server">
          <font>
             <Font name="Century" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="msgLabel" layoutX="305.0" layoutY="435.0" text="Label" visible="false">
+      <Line endX="344.0" endY="-10.0" layoutX="294.0" layoutY="63.0" startX="-294.0" startY="-10.0" />
+      <Label fx:id="msgLabel" layoutX="195.0" layoutY="434.0" text="label" visible="false">
          <font>
             <Font name="Century" size="14.0" />
          </font>
       </Label>
-      <Line endX="344.0" endY="-10.0" layoutX="294.0" layoutY="63.0" startX="-294.0" startY="-10.0" />
    </children>
 </Pane>
