@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import utilities.SceneController;
@@ -17,6 +18,9 @@ public class DepManagerGenerateReportFrameController extends Application{
 
 	@FXML
 	private Button btn_show_report_data;
+	
+	@FXML
+	private Button generateBtn;
 
 	@FXML
 	private Button btn_visitor_report;
@@ -38,6 +42,12 @@ public class DepManagerGenerateReportFrameController extends Application{
 
 	@FXML
 	private Text text_park;
+	
+	@FXML
+	private AnchorPane leftPane;
+	
+	@FXML
+	private AnchorPane rightPane;
 
 	@FXML
 	void field_name(ActionEvent event) {
