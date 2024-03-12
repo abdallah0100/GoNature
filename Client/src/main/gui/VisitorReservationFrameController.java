@@ -21,7 +21,7 @@ public class VisitorReservationFrameController extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
-							               "/main/gui/userReservationFrame.fxml");
+							               "/main/gui/VisitorReservationFrame.fxml");
 	}
 	
 	//function to makeReservation
