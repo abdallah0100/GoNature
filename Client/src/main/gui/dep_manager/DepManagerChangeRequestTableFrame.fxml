@@ -1,28 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerChangeRequestTableFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@DepManagerChangeRequestTableFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerChangeRequestTableFrameController">
    <children>
       <SplitPane layoutX="205.0" layoutY="49.333333333333336" orientation="VERTICAL" prefHeight="351.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="139.0" prefWidth="597.0">
+          <AnchorPane fx:id="sp" minHeight="0.0" minWidth="0.0" prefHeight="139.0" prefWidth="597.0">
                <children>
-                  <TableView layoutX="144.0" layoutY="74.0" prefHeight="200.0" prefWidth="310.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="144.66666666666663">
+                  <TableView fx:id="ap" layoutX="118.0" layoutY="73.0" prefHeight="218.0" prefWidth="329.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="151.0">
                     <columns>
-                      <TableColumn fx:id="table_view" prefWidth="198.0000228881836" text="Options" />
-                      <TableColumn minWidth="0.0" prefWidth="53.3333740234375" text="X" />
-                        <TableColumn prefWidth="60.6666259765625" text="V" />
+                      <TableColumn id="c1text" fx:id="c1" prefWidth="202.0" text="Options" />
+                      <TableColumn minWidth="0.0" prefWidth="65.0" text="X" />
+                        <TableColumn prefWidth="60.0" text="V" />
                     </columns>
                   </TableView>
+                  <Separator layoutY="-1.0" prefHeight="2.0" prefWidth="600.0">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Separator>
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
-      <Text layoutX="242.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Table" />
+      <Text fill="WHITE" layoutX="179.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Table">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect></Text>
    </children>
 </AnchorPane>

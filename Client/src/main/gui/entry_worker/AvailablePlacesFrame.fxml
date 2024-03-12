@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.AvailablePlacesFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@AvailablePlacesFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.AvailablePlacesFrameController">
    <children>
-      <Label layoutX="68.0" layoutY="56.0" prefHeight="51.0" prefWidth="400.0" text="              Available   Places" textFill="#25a159">
+      <Label layoutX="63.0" layoutY="6.0" prefHeight="51.0" prefWidth="400.0" text="              Available  Places" textFill="WHITE">
          <font>
-            <Font size="29.0" />
+            <Font name="Arial Bold" size="29.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
-      <TreeTableView layoutX="158.0" layoutY="123.0" prefHeight="206.0" prefWidth="289.0">
+      <TreeTableView layoutX="103.0" layoutY="95.0" prefHeight="234.0" prefWidth="384.0">
         <columns>
-          <TreeTableColumn prefWidth="96.0" text="Park Name" />
-          <TreeTableColumn prefWidth="92.0" text="Time" />
-            <TreeTableColumn prefWidth="100.5" text="Date" />
+          <TreeTableColumn prefWidth="126.0" text="Park Name" />
+          <TreeTableColumn prefWidth="135.0" text="Time" />
+            <TreeTableColumn prefWidth="122.0" text="Date" />
         </columns>
       </TreeTableView>
+      <Separator layoutX="-6.0" layoutY="52.0" prefHeight="9.0" prefWidth="607.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>
