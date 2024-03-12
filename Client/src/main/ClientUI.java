@@ -9,6 +9,7 @@ public class ClientUI extends Application{
 	
 	public static Pane contentPane;
 	public static Pane leftNavPane;
+	public static Pane headerPane;
 	
 	public static void main(String[] args) {
 		launch(args);

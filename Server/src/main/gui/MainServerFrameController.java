@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,8 +16,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.Constants;
 import main.MainServer;
 import main.entities.ClientConnection;
@@ -52,11 +56,19 @@ public class MainServerFrameController extends Application implements Initializa
 	private TableColumn<ClientConnection, String> hostCol;
 	@FXML
 	private TableColumn<ClientConnection, String> statusCol;
+	@FXML
+	private Pane headerPane;
 	
+	//Saving offsets and the stage to apply drag functionality on the header
+	private static double xOffset = 0;
+    private static double yOffset = 0;
+    private static Stage stage;
 
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		stage = primaryStage;
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		SceneController scene = new SceneController();
 		scene.changeScene("GoNature - Server", primaryStage, "/main/gui/MainServer.fxml");
 	}
@@ -85,6 +97,25 @@ public class MainServerFrameController extends Application implements Initializa
 	public void initialize(URL location, ResourceBundle resources) {
 		//we add the setup here, because the labels are not initiliazed yet untill this function is called
 		setUpUI();
+		
+		// making the client dragable from the header
+		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() + xOffset);
+                stage.setY(event.getScreenY() + yOffset);			
+			}
+			
+		});
+		
+		headerPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = stage.getX() - event.getScreenX();
+                yOffset = stage.getY() - event.getScreenY();
+            }
+        });
 		
 	}
 	
@@ -158,6 +189,12 @@ public class MainServerFrameController extends Application implements Initializa
 		MainServer.getInstance().closeConnection();
 		
 		startServerBtn.setDisable(false);
+	}
+	
+	public void exitButton(MouseEvent event) {
+		if (MainServer.serverStarted)
+			MainServer.getInstance().closeConnection();
+		System.exit(0);
 	}
 
 }
