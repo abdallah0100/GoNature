@@ -1,24 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerViewReportFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="647.0" stylesheets="@DepManagerViewReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerViewReportFrameController">
    <children>
-      <MenuButton fx:id="btn_date" layoutX="147.0" layoutY="99.0" mnemonicParsing="false" text="Date" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0">
+      <MenuButton fx:id="btn_date" layoutX="144.0" layoutY="171.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="111.0" text="Date" textFill="WHITE" AnchorPane.leftAnchor="144.0" AnchorPane.topAnchor="171.0">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </MenuButton>
-      <MenuButton fx:id="btn_type" layoutX="449.0" layoutY="99.0" mnemonicParsing="false" text="Type" AnchorPane.leftAnchor="439.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0">
+      <MenuButton fx:id="btn_type" layoutX="366.0" layoutY="171.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="111.0" text="Type" textFill="WHITE" AnchorPane.leftAnchor="366.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="171.0">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </MenuButton>
-      <Button fx:id="btn_view" layoutX="275.0" layoutY="271.0" mnemonicParsing="false" text="View" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="200.0" />
+      <Button fx:id="btn_view" layoutX="255.0" layoutY="313.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="111.0" text="View" textFill="WHITE" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="313.0">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Label layoutX="16.0" layoutY="91.0" prefHeight="33.0" prefWidth="453.0" text="Select Date and Type To View Report :" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
    </children>
 </AnchorPane>
