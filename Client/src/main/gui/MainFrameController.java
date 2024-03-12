@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientController;
+import main.ClientUI;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -37,7 +38,7 @@ public class MainFrameController extends Application implements Initializable{
 	
 	@FXML
 	public void logout(ActionEvent event) {
-		ClientController.getController().getClient().quit();
+		ClientController.connectedVisitor = null;
 		LoginOptionController landingFrame = new LoginOptionController();
 		SceneController.switchFrame("GoNature", event, landingFrame);
 	}
@@ -50,11 +51,13 @@ public class MainFrameController extends Application implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		ClientUI.contentPane = contentPane;
+		ClientUI.leftNavPane = leftNavPane;
 		SceneController scene = new SceneController();
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
 		}
-		
+			
 	}
 
 }

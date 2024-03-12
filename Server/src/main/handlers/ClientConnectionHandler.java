@@ -17,5 +17,4 @@ public class ClientConnectionHandler {
 			list.add(newCon);
 		MainServer.setClientConnections(list);
 	}
-	
 }

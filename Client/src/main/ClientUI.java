@@ -8,7 +8,7 @@ import main.gui.ClientStartUpController;
 public class ClientUI extends Application{
 	
 	public static Pane contentPane;
-	public static Pane leftNavBar;
+	public static Pane leftNavPane;
 	
 	public static void main(String[] args) {
 		launch(args);
