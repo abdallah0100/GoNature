@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.visitor;
 
 import java.awt.TextField;
 import java.net.URL;
@@ -23,7 +23,7 @@ public class ValidationFrameController extends Application implements Initializa
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Validation", primaryStage,
-										"/main/gui/ValidationFrame.fxml");
+										"/main/gui/visitor/ValidationFrame.fxml");
 	}
 	
 	@Override
