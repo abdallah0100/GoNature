@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.ClientUI;
+import main.ClientController;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -19,7 +19,7 @@ public class MainFrameController extends Application implements Initializable{
 	@FXML
 	private Pane contentPane;
 	@FXML
-	private Pane leftNavBar;
+	private Pane leftNavPane;
 	@FXML
 	private ImageView closeIcon;
 	
@@ -33,26 +33,26 @@ public class MainFrameController extends Application implements Initializable{
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
 							               "/main/gui/MainFrame.fxml");
-		
 	}
 	
 	@FXML
 	public void logout(ActionEvent event) {
-		System.out.println("Logging out...");
+		ClientController.getController().getClient().quit();
+		LoginOptionController landingFrame = new LoginOptionController();
+		SceneController.switchFrame("GoNature", event, landingFrame);
 	}
 	
 	@FXML
 	public void closeApp(MouseEvent event) {
-		System.out.println("Closing app..");
+		ClientController.getController().getClient().quit();
+		System.exit(0);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if (contentPane != null && leftNavBar != null) {
-			ClientUI.contentPane = contentPane;
-			ClientUI.leftNavBar = leftNavBar;
-		}else {
-			System.out.println("[MainFrameController] - error setting up panes");
+		SceneController scene = new SceneController();
+		if (ClientController.connectedVisitor != null) {
+			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
 		}
 		
 	}

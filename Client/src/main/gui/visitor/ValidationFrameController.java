@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.controllers.VisitorRequestController;
+import main.gui.MainFrameController;
 import utilities.SceneController;
 
 public class ValidationFrameController extends Application implements Initializable {
@@ -48,7 +49,7 @@ public class ValidationFrameController extends Application implements Initializa
 		}
 		VisitorRequestController.sendVisitorValidation(idField.getText());
 		if (VisitorRequestController.finishedValidating) {
-			SceneController.switchFrame("GoNature", e, new MakeReservationFrameController());
+			SceneController.switchFrame("GoNature", e, new MainFrameController());
 		}else {
 			System.out.println("[ValidationFrameController] - did not finished validating");
 		}

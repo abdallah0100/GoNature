@@ -34,7 +34,7 @@
          </opaqueInsets>
          <children>
             <Button layoutX="52.0" layoutY="378.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
-            <Pane fx:id="leftNavBar" layoutX="2.0" layoutY="1.0" prefHeight="360.0" prefWidth="155.0">
+            <Pane fx:id="leftNavPane" layoutX="2.0" layoutY="1.0" prefHeight="360.0" prefWidth="155.0">
                <children>
                   <Label layoutX="42.0" layoutY="41.0" text="Label" />
                </children>
