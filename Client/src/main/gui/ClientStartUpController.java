@@ -59,6 +59,7 @@ public class ClientStartUpController extends Application{
 		ClientController.HOST = ip;
 		ClientController.PORT = port;
 		
+		//getController() automatically creates a connection to the server
 		ClientController.getController().accept(new Message(RequestType.CONNECT_TO_SERVER));
 		
 		//setting up a connection with the server
