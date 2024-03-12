@@ -25,9 +25,11 @@ public class VisitorRequestHandler {
 		Visitor v;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE 'ID'='"+id+"'");
-			if (!rs.next())
+			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE ID='"+id+"'");
+			if (!rs.next()) {
+				System.out.println("[VisitorRequestHandler] - result set was empty");
 				return null;
+			}
 			v = new Visitor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4).equals("1"));;
 			rs.close();
 		}catch(Exception ex) {
