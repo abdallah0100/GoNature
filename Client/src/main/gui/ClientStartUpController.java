@@ -62,15 +62,17 @@ public class ClientStartUpController extends Application{
 			return;
 		}
 		
-		ClientController.HOST = ip;
-		ClientController.PORT = port;
-		
-		//getController() automatically creates a connection to the server
+		//getController() automatically creates a connection to the server, and then sending a connect request to notify the server
+		ClientController.createInstance(ip, port);
 		ClientController.getController().accept(new Message(RequestType.CONNECT_TO_SERVER));
 		
-		//setting up a connection with the server
-		LoginOptionController landingFrame = new LoginOptionController();
-		SceneController.switchFrame("GoNature", event, landingFrame);	
+		if (ClientController.connectedToServer) {
+			LoginOptionController landingFrame = new LoginOptionController();
+			SceneController.switchFrame("GoNature", event, landingFrame);	
+		}else {
+			errorMsg.setText("Failed to connect to the server.");
+			errorMsg.setVisible(true);
+		}
 	}
 	public static void main(String[] args) {
 		launch(args);

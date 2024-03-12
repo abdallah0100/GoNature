@@ -10,8 +10,6 @@ public class ClientController {
 	private static ClientController clientController;
 	
 	private GoNatureClient client;
-	public static String HOST = "localhost";
-	public static int PORT = 5555;
 	
 	
 	/*
@@ -42,11 +40,16 @@ public class ClientController {
 	  public GoNatureClient getClient() {
 		  return client;
 	  }
+	  
+	  public static void createInstance(String host, int port) {
+		  if (connectedToServer) {
+			 System.out.println("[ClientController] - a controller instance already exist");
+			 return;
+		  }
+		  clientController = new ClientController(host, port);
+	  }
 		public static ClientController getController() {
-			if (clientController == null)
-				clientController = new ClientController(ClientController.HOST, ClientController.PORT);
-			return clientController;
-				
+			return clientController;			
 		}
 
 }
