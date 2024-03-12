@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utilities.SceneController;
@@ -17,6 +18,8 @@ public class LogInFrameController extends Application implements Initializable {
 	private TextField userNameTxt;
 	@FXML
 	private TextField passwordTxt;
+	@FXML
+	private Button loginBtn;
 	
 
 	/**

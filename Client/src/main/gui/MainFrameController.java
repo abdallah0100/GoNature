@@ -28,6 +28,8 @@ public class MainFrameController extends Application implements Initializable{
 	@FXML
 	private ImageView closeIcon;
 	
+	
+	//
 	//Saving offsets and the stage to apply drag functionality on the header
 	private static double xOffset = 0;
     private static double yOffset = 0;

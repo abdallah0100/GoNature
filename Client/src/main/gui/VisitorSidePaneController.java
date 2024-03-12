@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.ClientController;
@@ -19,6 +20,13 @@ public class VisitorSidePaneController extends Application implements Initializa
 	private Label visitorIdLabel;
 	@FXML
 	private Label existingVisitor;
+	@FXML
+	private Button makeReservation;
+	@FXML
+	private Button showReservation;
+	@FXML
+	private Button updateReservation;
+	
 	
 	/**
 	* @param primaryStage the primary stage for the application

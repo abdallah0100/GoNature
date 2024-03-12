@@ -2,22 +2,91 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="463.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.ClientStartUpController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="463.0" stylesheets="@ClientStartUpCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.ClientStartUpController">
    <children>
-      <Label layoutX="98.0" layoutY="85.0" text="Server IP " />
-      <TextField fx:id="serverIpTxt" layoutX="184.0" layoutY="81.0" />
-      <TextField fx:id="portTxt" layoutX="184.0" layoutY="130.0" />
-      <Label layoutX="112.0" layoutY="134.0" text="Port" />
-      <Button layoutX="183.0" layoutY="183.0" mnemonicParsing="false" onAction="#startClient" prefHeight="25.0" prefWidth="149.0" text="start" />
-      <Label layoutX="195.0" layoutY="23.0" text="Client Startup">
+      <Label layoutX="75.0" layoutY="83.0" text="Server IP : " textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font></Label>
-      <Label fx:id="errorMsg" layoutX="195.0" layoutY="218.0" prefHeight="17.0" prefWidth="149.0" text="Invalid port was entered." textFill="#d11a2a" visible="false" />
-      <Button fx:id="exitButt" layoutX="401.0" layoutY="214.0" mnemonicParsing="false" onAction="#exitClient" text="Exit" textFill="#d11a2a" />
+      <TextField fx:id="serverIpTxt" layoutX="184.0" layoutY="81.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></TextField>
+      <TextField fx:id="portTxt" layoutX="184.0" layoutY="130.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></TextField>
+      <Label layoutX="94.0" layoutY="132.0" prefHeight="21.0" prefWidth="57.0" text="Port :" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Label>
+      <Button fx:id="startBtn" layoutX="184.0" layoutY="178.0" mnemonicParsing="false" onAction="#startClient" prefHeight="25.0" prefWidth="149.0" text="Start" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Button>
+      <Label layoutX="162.0" layoutY="7.0" text="Client Startup" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect></Label>
+      <Label fx:id="errorMsg" layoutX="155.0" layoutY="218.0" prefHeight="25.0" prefWidth="227.0" text="Invalid port was entered." textFill="#d11a2a" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="0.5555555820465088" blue="0.5555555820465088" />
+               </color>
+            </DropShadow>
+         </effect></Label>
+      <Button fx:id="exitBtn" layoutX="388.0" layoutY="216.0" mnemonicParsing="false" onAction="#exitClient" prefHeight="30.0" prefWidth="69.0" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Separator layoutY="34.0" prefHeight="17.0" prefWidth="463.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>

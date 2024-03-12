@@ -3,6 +3,7 @@ package main.gui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,6 +21,11 @@ public class ClientStartUpController extends Application{
 	@FXML
 	private Label errorMsg;
 
+	@FXML
+	private Button startBtn;
+	
+	@FXML
+	private Button exitBtn;
 	
 	/**
 	* @param primaryStage the primary stage for the application
@@ -43,14 +49,14 @@ public class ClientStartUpController extends Application{
 		String portString = portTxt.getText();
 		int port;
 		if (ip == null || portString == null || ip.length() == 0 || portString.length() == 0) {
-			errorMsg.setText("Fill all fields to continue.");
+			errorMsg.setText("Fill all fields");
 			errorMsg.setVisible(true);
 			return;
 		}
 		try {
 			port = Integer.parseInt(portString);
 		}catch(Exception ex) {
-			errorMsg.setText("Invalid port was entered.");
+			errorMsg.setText("Invalid port was entered");
 			errorMsg.setVisible(true);
 			System.out.println("[ClientStartUpController] - entered port was not a number");
 			return;
