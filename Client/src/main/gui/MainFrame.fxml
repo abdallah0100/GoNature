@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainFrameController">
    <top>
-      <Pane fx:id="headerText" prefHeight="73.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 2 2 0 2;" stylesheets="@MainFrameCss.css" BorderPane.alignment="CENTER">
+      <Pane fx:id="headerPane" prefHeight="73.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 2 2 0 2;" stylesheets="@MainFrameCss.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="305.0" layoutY="16.0" prefHeight="42.0" prefWidth="190.0" text="GoNature" textFill="WHITE">
                <font>
