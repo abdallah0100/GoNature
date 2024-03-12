@@ -2,7 +2,6 @@ package main;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,13 +76,6 @@ public class MainServer extends AbstractServer{
 	}
 	
 	public void closeConnection() {
-		try {
-			if (MainServer.dbConnection != null)
-				MainServer.dbConnection.close();
-		} catch (SQLException e) {
-			System.out.println("[MainServer] - Error closing database connection");
-			e.printStackTrace();
-		}
 		try {
 			close();
 		} catch (IOException e) {

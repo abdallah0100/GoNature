@@ -14,7 +14,12 @@ public class VisitorRequestHandler {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
 		}
-		return visitorExists(id);
+		Visitor v = visitorExists(id);
+		if (v == null)
+			v = new Visitor(id);
+		else
+			v.setFoundInDB(true);
+		return v;
 	}
 	
 	public static Visitor visitorExists(String id){

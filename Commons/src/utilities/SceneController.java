@@ -39,4 +39,15 @@ public class SceneController {
 		}
 	}
 	
+	public void setPane(Pane pane, String fxmlPath) {
+		try {
+			Parent visitorSidePane = FXMLLoader.load(getClass().getResource(fxmlPath));
+			pane.getChildren().removeAll();
+			pane.getChildren().setAll(visitorSidePane);
+		}catch(Exception ex) {
+			System.out.println("[SceneController] - failed to update pane");
+			return;
+		}
+	}
+	
 }
