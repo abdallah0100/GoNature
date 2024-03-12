@@ -2,30 +2,60 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="752.0" stylesheets="@BillCakFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="86.0" layoutY="75.0" prefHeight="48.0" prefWidth="519.0" text="                      Bill  Cak" textFill="#1f7238">
+      <Label layoutY="56.0" prefHeight="48.0" prefWidth="519.0" text="                      Bill  Cak" textFill="WHITE">
          <font>
-            <Font name="System Bold Italic" size="34.0" />
+            <Font name="Arial Bold" size="48.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="178.0" layoutY="171.0" text="Visitor ID :" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="27.0" />
          </font>
       </Label>
-      <Label layoutX="178.0" layoutY="171.0" text="visitor id " textFill="#3ba86e">
+      <TextField fx:id="visitorid" layoutX="347.0" layoutY="173.0" prefHeight="29.0" prefWidth="200.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></TextField>
+      <Button fx:id="viewbill" layoutX="172.0" layoutY="259.0" mnemonicParsing="false" text="View  Bill" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="27.0" />
+            <Font name="Arial Bold" size="22.0" />
          </font>
-      </Label>
-      <TextField fx:id="visitorid" layoutX="389.0" layoutY="179.0" prefHeight="29.0" prefWidth="163.0" />
-      <Button fx:id="viewbill" layoutX="172.0" layoutY="259.0" mnemonicParsing="false" text="view  bill" textFill="#26a452">
-         <font>
-            <Font name="System Bold" size="22.0" />
-         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
+      <Separator layoutY="107.0" prefHeight="8.0" prefWidth="752.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>
