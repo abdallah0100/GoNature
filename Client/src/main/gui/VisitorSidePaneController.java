@@ -17,6 +17,8 @@ public class VisitorSidePaneController extends Application implements Initializa
 	
 	@FXML
 	private Label visitorIdLabel;
+	@FXML
+	private Label existingVisitor;
 	
 	/**
 	* @param primaryStage the primary stage for the application
@@ -30,8 +32,10 @@ public class VisitorSidePaneController extends Application implements Initializa
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if (ClientController.connectedVisitor != null)
+		if (ClientController.connectedVisitor != null) {
 			visitorIdLabel.setText(ClientController.connectedVisitor.getId());
+			existingVisitor.setText(ClientController.connectedVisitor.isFoundInDB() + "");
+		}
 		
 	}
 	
