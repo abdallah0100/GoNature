@@ -8,10 +8,16 @@ public class Message implements Serializable{
 
 	private int requestType;
 	private Object requestData;
+	private String responseMsg;
 	
 	public Message(RequestType requestType, Object requestData) {
 		this.requestType = requestType.getRequestId();
 		this.requestData = requestData;
+	}
+	public Message(RequestType requestType, Object requestData, String responseMsg) {
+		this.requestType = requestType.getRequestId();
+		this.requestData = requestData;
+		this.responseMsg = responseMsg;
 	}
 	
 	public Message(RequestType requestType) {
@@ -26,11 +32,22 @@ public class Message implements Serializable{
 	public Object getRequestData() {
 		return requestData;
 	}
+	public void setRequestData(Object data) {
+		this.requestData = data;
+	}
 	
 	@Override
 	public String toString() {
 		if (requestData != null)
 			return "requestType: " + requestType + " requestData: " + requestData.toString();
 		return "requestType: " + requestType ;
+	}
+
+	public String getResponseMsg() {
+		return responseMsg;
+	}
+
+	public void setResponseMsg(String responseMsg) {
+		this.responseMsg = responseMsg;
 	}
 }

@@ -2,6 +2,7 @@ package main.handlers;
 
 import java.io.IOException;
 
+import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
 import requests.Message;
 import requests.RequestType;
@@ -19,6 +20,15 @@ public class ServerRequestHandler {
 			ClientConnectionHandler.handleConnectRequest(client, false);
 			generalRespondMsg = "Client has succesfully disconnected from the server";
 			break;
+		case VALIDATE_VISITOR:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
+			}
+			Visitor v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
+			respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
+			return;
+
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
