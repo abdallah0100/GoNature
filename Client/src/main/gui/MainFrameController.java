@@ -31,7 +31,7 @@ public class MainFrameController extends Application implements Initializable{
 	//Saving offsets and the stage to apply drag functionality on the header
 	private static double xOffset = 0;
     private static double yOffset = 0;
-    public static Stage stage;
+    private static Stage stage;
 
 	public static void main(String[] args) {
 		launch(args);
