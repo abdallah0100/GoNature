@@ -1,12 +1,8 @@
 package main.gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -15,7 +11,7 @@ import requests.Message;
 import requests.RequestType;
 import utilities.SceneController;
 
-public class ClientStartUpController extends Application implements Initializable{
+public class ClientStartUpController extends Application{
 	
 	@FXML
 	private TextField serverIpTxt;
@@ -23,11 +19,6 @@ public class ClientStartUpController extends Application implements Initializabl
 	private TextField portTxt;
 	@FXML
 	private Label errorMsg;
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-	}
 
 	
 	/**
