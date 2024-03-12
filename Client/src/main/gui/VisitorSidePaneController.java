@@ -1,17 +1,24 @@
 package main.gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.Pane;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import main.ClientController;
 import utilities.SceneController;
 
 
-public class VisitorReservationFrameController extends Application {
+public class VisitorSidePaneController extends Application implements Initializable{
 	
 	@FXML
-	private Pane visitorPane;
+	private Label visitorIdLabel;
+	@FXML
+	private Label existingVisitor;
 	
 	/**
 	* @param primaryStage the primary stage for the application
@@ -21,7 +28,15 @@ public class VisitorReservationFrameController extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
-							               "/main/gui/VisitorReservationFrame.fxml");
+							               "/main/gui/VisitorSidePane.fxml");
+	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if (ClientController.connectedVisitor != null) {
+			visitorIdLabel.setText(ClientController.connectedVisitor.getId());
+			existingVisitor.setText(ClientController.connectedVisitor.isFoundInDB() + "");
+		}
+		
 	}
 	
 	//function to makeReservation
@@ -36,11 +51,6 @@ public class VisitorReservationFrameController extends Application {
 	}
 	//function to updateReservation
 	public void updateReservation(ActionEvent e) {
-		//TODO
-	
-	}
-	//function to backToValidation
-	public void backToValidation(ActionEvent e) {
 		//TODO
 	
 	}

@@ -7,14 +7,14 @@ import javafx.stage.Stage;
 import main.gui.visitor.ValidationFrameController;
 import utilities.SceneController;
 
-public class GoNatureMainFrameController extends Application {
+public class LoginOptionController extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNatureMain - demo", primaryStage,
-							               "/main/gui/GoNatureMainFrame.fxml");
+							               "/main/gui/LoginOptionFrame.fxml");
 	}
 	
 	public void userLogin(ActionEvent e) {
