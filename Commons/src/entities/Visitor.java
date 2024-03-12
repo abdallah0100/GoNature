@@ -12,11 +12,18 @@ public class Visitor implements Serializable{
 	private String phone;
 	private boolean isInstructor;
 	
+	private boolean foundInDB;
+	
 	public Visitor(String id, String email, String phone, boolean instructor) {
 		this.setId(id);
 		this.setEmail(email);
 		this.setPhone(phone);
 		this.setInstructor(instructor);
+	}
+	
+	public Visitor (String id) {
+		this.id = id;
+		this.foundInDB = false;
 	}
 
 	public String getId() {
@@ -49,5 +56,13 @@ public class Visitor implements Serializable{
 
 	public void setInstructor(boolean isInstructor) {
 		this.isInstructor = isInstructor;
+	}
+
+	public boolean isFoundInDB() {
+		return foundInDB;
+	}
+
+	public void setFoundInDB(boolean foundInDB) {
+		this.foundInDB = foundInDB;
 	}
 }

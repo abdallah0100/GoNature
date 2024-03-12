@@ -23,8 +23,11 @@ public class RequestHandler {
 			case VALIDATE_VISITOR:
 				if (msg.getRequestData() instanceof Visitor)
 					ClientController.connectedVisitor = (Visitor) msg.getRequestData();
-				else
-					System.out.println("[RequestHandler] - visitor was not found");
+				else {
+					System.out.println("[RequestHandler] - invalid VALIDATE_VISITOR response");
+					return;
+				}
+				
 				VisitorRequestController.finishedValidating = true;
 				break;
 		}
