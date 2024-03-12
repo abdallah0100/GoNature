@@ -2,10 +2,27 @@ package main.gui.dep_manager;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import utilities.SceneController;
 
 public class DepManagerMainFrameController extends Application{
+	
+	
+	@FXML
+	 private Button viewReportsBtn;
+	
+	
+	@FXML
+	 private Button confirmChangeRequestBtn;
+	
+	
+	@FXML
+	 private Button generateReportBtn;
+	
+	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
