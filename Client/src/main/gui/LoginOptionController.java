@@ -3,11 +3,20 @@ package main.gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import main.gui.visitor.ValidationFrameController;
 import utilities.SceneController;
 
 public class LoginOptionController extends Application {
+	
+	
+	@FXML
+	private Button userBtn;
+	
+	@FXML
+	private Button visitorInstructorBtn;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

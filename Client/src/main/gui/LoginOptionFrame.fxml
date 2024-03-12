@@ -2,12 +2,60 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.LoginOptionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@LoginOptionFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.LoginOptionController">
    <children>
-      <Label layoutX="241.0" layoutY="44.0" text="Welcome to GoNature" />
-      <Button layoutX="128.0" layoutY="188.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="25.0" prefWidth="70.0" text="User" />
-      <Button layoutX="334.0" layoutY="188.0" mnemonicParsing="false" onAction="#visitorLogin" text="Visitor/Instructor" />
+      <Label layoutX="188.0" layoutY="30.0" prefHeight="27.0" prefWidth="260.0" text="Welcome to GoNature" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect></Label>
+      <Button fx:id="userBtn" layoutX="180.0" layoutY="184.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="25.0" prefWidth="106.0" text="User" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Button>
+      <Button fx:id="visitorInstructorBtn" layoutX="334.0" layoutY="184.0" mnemonicParsing="false" onAction="#visitorLogin" prefHeight="33.0" prefWidth="178.0" text="Visitor/Instructor" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Button>
+      <Label layoutX="24.0" layoutY="187.0" prefHeight="27.0" prefWidth="128.0" text="Enter As : " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutY="57.0" prefHeight="6.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>

@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,6 +24,9 @@ public class MainFrameController extends Application implements Initializable{
 	private Pane leftNavPane;
 	@FXML
 	private ImageView closeIcon;
+	
+	@FXML
+	private Button logoutBtn;
 	
 
 	public static void main(String[] args) {
