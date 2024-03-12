@@ -1,5 +1,8 @@
 package main.client_requests;
 
+import entities.Visitor;
+import main.ClientController;
+import main.controllers.VisitorRequestController;
 import requests.Message;
 
 public class RequestHandler {
@@ -16,6 +19,13 @@ public class RequestHandler {
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
 					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
+				break;
+			case VALIDATE_VISITOR:
+				if (msg.getRequestData() instanceof Visitor)
+					ClientController.connectedVisitor = (Visitor) msg.getRequestData();
+				else
+					System.out.println("[RequestHandler] - visitor was not found");
+				VisitorRequestController.finishedValidating = true;
 				break;
 		}
 	}

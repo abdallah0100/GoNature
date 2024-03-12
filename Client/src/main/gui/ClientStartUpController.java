@@ -71,8 +71,8 @@ public class ClientStartUpController extends Application implements Initializabl
 		ClientController.getController().accept(new Message(RequestType.CONNECT_TO_SERVER));
 		
 		//setting up a connection with the server
-		ValidationFrameController validation = new ValidationFrameController();
-		SceneController.switchFrame("GoNature", event, validation);	
+		GoNatureMainFrameController landingFrame = new GoNatureMainFrameController();
+		SceneController.switchFrame("GoNature", event, landingFrame);	
 	}
 	public static void main(String[] args) {
 		launch(args);

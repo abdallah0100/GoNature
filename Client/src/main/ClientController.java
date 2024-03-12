@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 
+import entities.Visitor;
 import requests.Message;
 
 public class ClientController {
@@ -12,11 +13,13 @@ public class ClientController {
 	public static String HOST = "localhost";
 	public static int PORT = 5555;
 	
+	
 	/*
 	 * variables to determine whether connected to the server/database or not
 	 * */
 	public static boolean connectedToServer = false;
 	public static boolean fetchedData = false;
+	public static Visitor connectedVisitor;
 	
 	private ClientController(String host, int port) {
 		try {

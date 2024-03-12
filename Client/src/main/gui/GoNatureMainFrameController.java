@@ -4,6 +4,7 @@ package main.gui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import main.gui.visitor.ValidationFrameController;
 import utilities.SceneController;
 
 public class GoNatureMainFrameController extends Application {
