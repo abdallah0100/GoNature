@@ -1,0 +1,84 @@
+.root {
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+}
+
+
+#rightPane{
+
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+
+}
+
+#editGap{
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#editGap:hover {
+	-fx-background-color: #808080;
+}
+
+
+#EditEstimatedTime {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#EditEstimatedTime:hover {
+	-fx-background-color: #808080;
+}
+
+
+#EditVisitor {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#EditVisitor:hover {
+	-fx-background-color: #808080;
+}
+
+
+#edit {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#edit:hover {
+	-fx-background-color: #808080;
+}
+
+
+#oldValue{
+-fx-background-radius: 40px;
+
+}
+
+
+#newValue{
+-fx-background-radius: 40px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
