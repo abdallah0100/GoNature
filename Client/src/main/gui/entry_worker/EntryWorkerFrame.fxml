@@ -2,17 +2,76 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.EntryWorkerFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@EntryWorkerFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.EntryWorkerFrameController">
    <children>
-      <Label layoutX="-3.0" layoutY="-17.0" prefHeight="62.0" prefWidth="607.0" text="                                     GONATURE                                    " textAlignment="JUSTIFY" underline="true">
+      <Label layoutX="-4.0" prefHeight="62.0" prefWidth="609.0" text="                     GONATURE                   " textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="Arial" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Button fx:id="checkAvailablePlacesBtn" layoutX="113.0" layoutY="227.0" mnemonicParsing="false" onAction="#checkAvailablePlaces" prefHeight="35.0" prefWidth="182.0" stylesheets="@EntryWorkerFrameCss.css" text="Check Available Places" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Button fx:id="viewBillBtn" layoutX="381.0" layoutY="227.0" mnemonicParsing="false" onAction="#viewBill" prefHeight="35.0" prefWidth="113.0" stylesheets="@EntryWorkerFrameCss.css" text="View Bill" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Button>
+      <ImageView fitHeight="88.0" fitWidth="83.0" layoutX="23.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Desktop/user-128.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" contrast="-1.0" hue="1.0" saturation="1.0" />
+         </effect>
+      </ImageView>
+      <Label layoutX="8.0" layoutY="145.0" prefHeight="21.0" prefWidth="148.0" text="Welcome back," textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="8.0" layoutY="166.0" text="Entry Worker" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="105.0" layoutY="182.0" mnemonicParsing="false" onAction="#checkAvailablePlaces" prefHeight="35.0" prefWidth="148.0" text="Check Available Places" />
-      <Button layoutX="381.0" layoutY="183.0" mnemonicParsing="false" onAction="#viewBill" prefHeight="35.0" prefWidth="97.0" text="View Bill" />
+      <Separator layoutY="41.0" prefHeight="21.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>
