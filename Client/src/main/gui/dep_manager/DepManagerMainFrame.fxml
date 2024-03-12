@@ -2,35 +2,91 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@DepManagerMainFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
    <children>
-      <Pane prefHeight="41.0" prefWidth="600.0" style="-fx-border-color: black;">
-         <children>
-            <Label layoutX="266.0" layoutY="10.0" text="GoNature">
-               <font>
-                  <Font name="Century" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Button layoutX="231.0" layoutY="93.0" mnemonicParsing="false" onAction="#confirmChange" text="Confirm Change Request">
+      <Button fx:id="confirmChangeRequestBtn" layoutX="193.0" layoutY="210.0" mnemonicParsing="false" onAction="#confirmChange" text="Confirm Change Request" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
-      <Button layoutX="463.0" layoutY="93.0" mnemonicParsing="false" onAction="#generateReport" text="Generate Report">
+      <Button fx:id="generateReportBtn" layoutX="438.0" layoutY="210.0" mnemonicParsing="false" onAction="#generateReport" text="Generate Report" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
-      <Button layoutX="73.0" layoutY="93.0" mnemonicParsing="false" onAction="#viewReports" text="View Reports">
+      <Button fx:id="viewReportsBtn" layoutX="28.0" layoutY="210.0" mnemonicParsing="false" onAction="#viewReports" text="View Reports" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
+      <Label layoutX="240.0" prefHeight="42.0" prefWidth="236.0" text="GONATURE" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Separator layoutY="31.0" prefHeight="11.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
+      <ImageView fitHeight="91.0" fitWidth="89.0" layoutX="25.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Desktop/user-128.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" contrast="-1.0" hue="1.0" saturation="1.0" />
+         </effect>
+      </ImageView>
+      <Label layoutX="25.0" layoutY="138.0" text="Welcome back," textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="159.0" text="Department Manager" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

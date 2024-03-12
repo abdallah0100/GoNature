@@ -1,0 +1,35 @@
+.root {
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+}
+
+
+#viewReportsBtn {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#viewReportsBtn:hover {
+	-fx-background-color: #808080;
+}
+
+#confirmChangeRequestBtn {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#confirmChangeRequestBtn:hover {
+	-fx-background-color: #808080;
+}
+
+
+#generateReportBtn {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#generateReportBtn:hover {
+	-fx-background-color: #808080;
+}
