@@ -106,9 +106,9 @@ public class MainServerFrameController extends Application implements Initializa
 			lockFieldsAfterStart();
 			connectionTable.setItems(MainServer.getConnections());
 			
-			ipCol.setCellValueFactory(new PropertyValueFactory<>("clientIp"));
-			hostCol.setCellValueFactory(new PropertyValueFactory<>("hostName"));
-			statusCol.setCellValueFactory(new PropertyValueFactory<>("connectionStatus"));	
+			ipCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("clientIp"));
+			hostCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("hostName"));
+			statusCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("connectionStatus"));	
 		}
 		else
 			displayErrorMsg("Server failed to start.", -1);
