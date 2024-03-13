@@ -8,7 +8,8 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="615.0" stylesheets="@RegisterInstructorFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@RegisterInstructorFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
    <children>
       <Label layoutX="29.0" layoutY="103.0" text="Name:" textFill="WHITE">
          <font>
@@ -54,7 +55,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <TextField fx:id="instructorTelephone" layoutX="129.0" layoutY="285.0">
+      <TextField fx:id="instructorTelephone" layoutX="129.0" layoutY="285.0" prefHeight="25.0" prefWidth="149.0">
          <effect>
             <DropShadow>
                <color>
@@ -62,7 +63,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Button fx:id="registerBtn" layoutX="357.0" layoutY="337.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="114.0" text="Register" textFill="WHITE">
+      <Button fx:id="registerBtn" layoutX="357.0" layoutY="337.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="125.0" text="Register" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -74,10 +75,17 @@
             </DropShadow>
          </effect>
       </Button>
-      <Label layoutX="56.0" layoutY="56.0" prefHeight="23.0" prefWidth="185.0" text="Register Instructor" textFill="WHITE" underline="true">
+      <Label layoutX="29.0" layoutY="47.0" text="Register Instructor" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
    </children>
 </Pane>
