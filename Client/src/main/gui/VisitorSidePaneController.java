@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.ClientController;
+import main.ClientUI;
 import utilities.SceneController;
 
 
@@ -46,22 +47,25 @@ public class VisitorSidePaneController extends Application implements Initializa
 		}
 		
 	}
-	
 	//function to makeReservation
-	public void makeReservation(ActionEvent e) {
-		//TODO
+		public void makeReservation(ActionEvent e) {
+			SceneController scene = new SceneController();
+			scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+			
 
-	}
-	//function to showReservation
-	public void showReservation(ActionEvent e) {
-		//TODO
-	
-	}
-	//function to updateReservation
-	public void updateReservation(ActionEvent e) {
-		//TODO
-	
-	}
+		}
+		//function to showReservation
+		public void showReservation(ActionEvent e) {
+			SceneController scene = new SceneController();
+			scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
+		
+		}
+		//function to updateReservation
+		public void updateReservation(ActionEvent e) {
+			SceneController scene = new SceneController();
+			scene.setPane(ClientUI.contentPane, "/main/gui/visitor/UpdateReservationFrame.fxml");
+		
+		}
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -1,9 +1,12 @@
 package main.gui.visitor;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +26,9 @@ public class MakeReservationFrameController extends Application implements Initi
 	@FXML
 	private DatePicker dateField;
 	@FXML
-	private ComboBox<String> timeField;
+	private TextField hourField;
+	@FXML
+	private TextField minuteField;
 	@FXML
 	private ComboBox<String> parkNameField;
 	@FXML
@@ -55,11 +60,34 @@ public class MakeReservationFrameController extends Application implements Initi
 		
 	}
 
+	private void setOrderTypeComboBox() {
+		ArrayList<String> al = new ArrayList<String>();	
+		al.add("Small Group");
+		al.add("Individual");
+		al.add("Orgnized Group");
 
+		ObservableList<String> list = FXCollections.observableArrayList(al);
+		orderType.setItems(list);
+	}
+
+
+	private void setParkNameFieldComboBox() {
+		ArrayList<String> al = new ArrayList<String>();	
+		al.add("Park 1");
+		al.add("Park 2");
+		al.add("Park 3");
+
+		ObservableList<String> list = FXCollections.observableArrayList(al);
+		parkNameField.setItems(list);
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		setOrderTypeComboBox();
+
+		setParkNameFieldComboBox();
 		
 	}
+	
 
 }
