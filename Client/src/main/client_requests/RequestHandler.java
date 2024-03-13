@@ -27,14 +27,15 @@ public class RequestHandler {
 				VisitorRequestController.finishedValidating = true;
 				break;
 			case LOGIN_USER:
-				if (msg.getRequestData() instanceof User)
+				if (msg.getRequestData() instanceof User) {
 					ClientController.connectedUser = (User) msg.getRequestData();
+					UserRequestController.LogedIn = true;
+					return;
+				}
 				else {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
-				UserRequestController.LogedIn = true;
-				break;
 			default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

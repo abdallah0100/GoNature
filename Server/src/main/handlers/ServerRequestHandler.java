@@ -31,11 +31,11 @@ public class ServerRequestHandler {
 			return;
 			
 		case LOGIN_USER:
-			if (!(msg.getRequestData() instanceof String)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+			if (!(msg.getRequestData() instanceof User)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
 				return;
 			}
-			User u = UserRequestHandler.handleLogInRequest((String) msg.getRequestData());
+			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
 			

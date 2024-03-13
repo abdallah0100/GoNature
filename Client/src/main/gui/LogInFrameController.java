@@ -63,22 +63,11 @@ public class LogInFrameController extends Application implements Initializable {
 		}
 		UserRequestController.sendUserLogIn(userNameTxt.getText(),passwordTxt.getText());
 		if (UserRequestController.LogedIn) {
-			 switch (ClientController.connectedUser.getRole()) {
-	            case "depManager":
-	            	SceneController.switchFrame("GoNature",e,new DepManagerMainFrameController());
-	                break;
-	            case "entryManager":
-	            	SceneController.switchFrame("GoNature",e,new EntryWorkerFrameController());
-	                break;
-	            case "parkManager":
-	            	SceneController.switchFrame("GoNature",e,new PrepEditController());
-	                break;
-	            default:
-	            	SceneController.switchFrame("GoNature",e,new RegisterInstructorFrameController());
-	                break;		
-		}
-			 }else {
-			System.out.println("[LogInFrameController] - did not finished LogIn");
+			SceneController.switchFrame("GoNature",e,new MainFrameController());
+			}
+			 else {
+				System.out.println("[LogInFrameController] - did not finished LogIn");
+				displayError("User Not Found");
 		}
 	}
 	

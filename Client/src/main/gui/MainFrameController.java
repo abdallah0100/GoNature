@@ -15,6 +15,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
+import main.gui.dep_manager.DepManagerMainFrameController;
+import main.gui.entry_worker.EntryWorkerFrameController;
+import main.gui.park_manager.PrepEditController;
+import main.gui.service_agent.RegisterInstructorFrameController;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -71,6 +75,21 @@ public class MainFrameController extends Application implements Initializable{
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
 		}
+		else {
+			 switch (ClientController.connectedUser.getRole()) {
+	            case "depManager":
+	            	scene.setPane(leftNavPane, "/main/gui/dep_manager/DepManagerMainFrame.fxml");
+	                break;
+	            case "entryManager":     	
+	            	scene.setPane(leftNavPane, "/main/gui/entry_worker/EntryWorkerFrame.fxml");	     
+	            	break;
+	            case "parkManager":
+	            	scene.setPane(leftNavPane,"/main/gui/park_manager/PrepEdit.fxml");	
+	                break;
+	            default:
+	            	scene.setPane(leftNavPane,"/main/gui/service_agent/RegisterInstructorFrame.fxml");	
+	                break;		
+		}
 		
 		// making the client dragable from the header
 		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -92,5 +111,5 @@ public class MainFrameController extends Application implements Initializable{
         });
 			
 	}
-
+	}
 }

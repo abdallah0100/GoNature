@@ -118,7 +118,6 @@ public class User implements Serializable{
 	public User (String userName,String password) {
 		this.username=userName;
 		this.password=password;
-		this.foundInDB = false;
 	}
 	 
 }
