@@ -8,14 +8,14 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@PrepEditControllerCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.PrepEditController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@PrepEditControllerCss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.PrepEditController">
    <children>
-      <Button fx:id="editparkvarible" layoutX="301.0" layoutY="149.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="289.0" text="Edit Park Varible " textFill="#f8f8f8">
+      <Button fx:id="editparkvarible" layoutX="301.0" layoutY="149.0" mnemonicParsing="false" onAction="#editparkvarible" prefHeight="63.0" prefWidth="289.0" text="Edit Park Varible " textFill="#f8f8f8">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Button>
-      <Button fx:id="preparereport" layoutY="149.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="289.0" text="prepare report" textFill="WHITE">
+      <Button fx:id="preparereport" layoutY="149.0" mnemonicParsing="false" onAction="#preparereport" prefHeight="63.0" prefWidth="289.0" text="prepare report" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
@@ -24,7 +24,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                  <Color blue="0.2980392277240753" green="0.7686274647712708" red="0.2980392277240753" />
                </color>
             </DropShadow>
          </effect>
@@ -36,7 +36,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                  <Color blue="0.2980392277240753" green="0.7686274647712708" red="0.2980392277240753" />
                </color>
             </DropShadow>
          </effect>

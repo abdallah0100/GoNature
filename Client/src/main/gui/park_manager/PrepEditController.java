@@ -1,9 +1,20 @@
 package main.gui.park_manager;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import utilities.SceneController;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import utilities.SceneController;
+import javafx.event.ActionEvent; // Import the ActionEvent class
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 public class PrepEditController extends Application {
 
 	@FXML
@@ -29,11 +40,32 @@ public class PrepEditController extends Application {
 	}
 		
 		
-	public void preparereport() {	
+	public void preparereport() 
+	{	
 		
 	}
 	
-	public void editparkvarible() {
+	public  void editparkvarible(ActionEvent e) throws Exception {
+		{
+			System.out.println("entered the code ");
+			try {
+		        // Load the FXML file for EditParkVariables interface
+		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/gui/park_manager/EditParkVariables.fxml"));
+		        Parent root = loader.load();
+		        System.out.println("FXML loaded successfully!"); // Check if FXML is loaded successfully
+
+		        // Create a scene and set it to the stage
+		        Stage editStage = new Stage();
+		        Scene scene = new Scene(root);
+		        editStage.setScene(scene);
+
+		        // Show the stage
+		        editStage.show();
+	        } catch (Exception ex) {
+	        	 System.err.println("Error loading FXML: " + ex.getMessage());
+	            ex.printStackTrace(); // Handle the exception appropriately
+	        }
 		
+	}
 	}
 }
