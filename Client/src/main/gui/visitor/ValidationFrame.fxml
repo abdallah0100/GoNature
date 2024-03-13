@@ -2,30 +2,50 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ValidationFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ValidationFrameCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ValidationFrameController">
    <children>
-      <Line endX="441.0" layoutX="159.0" layoutY="64.0" startX="-159.0" />
-      <Label layoutX="252.0" layoutY="34.0" text="GoNature">
+      <Label layoutX="254.0" layoutY="23.0" text="GoNature" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="255.0" layoutY="116.0" text="Validation" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="255.0" layoutY="116.0" text="Validation">
+      <Label layoutX="154.0" layoutY="182.0" text="EnterID" textFill="WHITE">
          <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="161.0" layoutY="183.0" text="EnterID" />
+            <Font name="Arial Bold" size="17.0" />
+         </font></Label>
       <TextField fx:id="idField" layoutX="237.0" layoutY="179.0" />
       <VBox layoutX="532.0" layoutY="19.0" />
       <Button layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#Exit" style="-fx-background-color: red;" styleClass="background" text="X" />
-      <Button layoutX="277.0" layoutY="231.0" mnemonicParsing="false" onAction="#validate" text="LogIn" />
+      <Button fx:id="loginBtn" layoutX="281.0" layoutY="231.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="60.0" text="LogIn" />
       <Label fx:id="msgLabel" layoutX="281.0" layoutY="281.0" text="Label" visible="false" />
+      <Separator layoutY="53.0" prefHeight="8.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>

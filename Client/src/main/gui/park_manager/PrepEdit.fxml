@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.PrepEditController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@PrepEditControllerCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.PrepEditController">
    <children>
-      <Button fx:id="editparkvarible" layoutX="321.0" layoutY="155.0" mnemonicParsing="false" text="Edit Park Varible " textFill="#152fae">
+      <Button fx:id="editparkvarible" layoutX="301.0" layoutY="149.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="289.0" text="Edit Park Varible " textFill="#f8f8f8">
          <font>
-            <Font name="System Bold" size="29.0" />
+            <Font name="Arial Bold" size="29.0" />
          </font>
       </Button>
-      <Button fx:id="preparereport1" layoutX="35.0" layoutY="155.0" mnemonicParsing="false" text="prepare report" textFill="#152fae">
+      <Button fx:id="preparereport" layoutY="149.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="289.0" text="prepare report" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="29.0" />
+            <Font name="Arial Bold" size="29.0" />
          </font>
       </Button>
+      <Label layoutX="259.0" layoutY="14.0" prefHeight="27.0" prefWidth="82.0" text="GoNature" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutY="37.0" prefHeight="8.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>

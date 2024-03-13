@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,6 +21,8 @@ public class ValidationFrameController extends Application implements Initializa
 	private TextField idField;
 	@FXML
 	private Label msgLabel;
+	 @FXML
+	 private Button loginBtn;
 	/**
 	* @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization

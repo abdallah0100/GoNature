@@ -3,6 +3,7 @@ package main.gui.service_agent;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utilities.SceneController;
@@ -20,6 +21,8 @@ public class RegisterInstructorFrameController extends Application{
 
 	 @FXML
 	 private TextField TelephoneField;
+	 @FXML
+	 private Button registerBtn;
 	 
 	 public static void main(String args[]) {
 		 launch(args);
