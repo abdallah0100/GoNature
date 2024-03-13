@@ -1,7 +1,9 @@
 package main.client_requests;
 
+import entities.User;
 import entities.Visitor;
 import main.ClientController;
+import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import requests.Message;
 
@@ -30,6 +32,16 @@ public class RequestHandler {
 				
 				VisitorRequestController.finishedValidating = true;
 				break;
+			case LOGIN_USER:
+				if (msg.getRequestData() instanceof User)
+					ClientController.connectedUser = (User) msg.getRequestData();
+				else {
+					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
+					return;
+				}
+				UserRequestController.LogedIn = true;
+				break;
+				
 		}
 	}
 

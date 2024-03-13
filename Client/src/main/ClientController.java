@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 
+import entities.User;
 import entities.Visitor;
 import requests.Message;
 
@@ -20,6 +21,7 @@ public class ClientController {
 	public static boolean connectedToServer = false;
 	public static boolean fetchedData = false;
 	public static Visitor connectedVisitor;
+	public static User connectedUser;
 	
 	private ClientController(String host, int port) {
 		try {
