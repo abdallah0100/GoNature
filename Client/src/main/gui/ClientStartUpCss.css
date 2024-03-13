@@ -19,8 +19,16 @@
 	-fx-cursor:hand;
 }
 
+#startBtn:hover {
+	-fx-background-color: #808080;
+}
+
 #exitBtn {
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
+}
+
+#exitBtn:hover {
+	-fx-background-color: #808080;
 }

@@ -57,16 +57,12 @@
                </color>
             </DropShadow>
          </effect></Label>
-      <Label fx:id="errorMsg" layoutX="155.0" layoutY="218.0" prefHeight="25.0" prefWidth="227.0" text="Invalid port was entered." textFill="#d11a2a" visible="false">
+      <Label fx:id="errorMsg" layoutX="78.0" layoutY="218.0" prefHeight="25.0" prefWidth="304.0" text="Invalid port was entered." textFill="#ff453f" visible="false">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
          <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" green="0.5555555820465088" blue="0.5555555820465088" />
-               </color>
-            </DropShadow>
+            <DropShadow />
          </effect></Label>
       <Button fx:id="exitBtn" layoutX="388.0" layoutY="216.0" mnemonicParsing="false" onAction="#exitClient" prefHeight="30.0" prefWidth="69.0" text="Exit" textFill="WHITE">
          <font>

@@ -21,7 +21,7 @@
                </color>
             </DropShadow>
          </effect></Label>
-      <Button fx:id="userBtn" layoutX="180.0" layoutY="184.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="25.0" prefWidth="106.0" text="User" textFill="WHITE">
+      <Button fx:id="userBtn" layoutX="172.0" layoutY="184.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="33.0" prefWidth="119.0" text="User" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
