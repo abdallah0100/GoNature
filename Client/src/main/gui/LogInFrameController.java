@@ -57,7 +57,7 @@ public class LogInFrameController extends Application implements Initializable {
 			displayError("Please enter password");
 			return;
 		}
-		UserRequestController.sendUserLogIn(userNameTxt.getText(),passwordTxt.getText());
+		UserRequestController.sendUserLogIn(userNameTxt.getText(), passwordTxt.getText());
 		if (UserRequestController.LogedIn) {
 			SceneController.switchFrame("GoNature",e,new MainFrameController());
 			}

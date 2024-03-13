@@ -15,10 +15,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
-import main.gui.dep_manager.DepManagerMainFrameController;
-import main.gui.entry_worker.EntryWorkerFrameController;
-import main.gui.park_manager.PrepEditController;
-import main.gui.service_agent.RegisterInstructorFrameController;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -71,6 +67,7 @@ public class MainFrameController extends Application implements Initializable{
 		ClientUI.contentPane = contentPane;
 		ClientUI.leftNavPane = leftNavPane;
 		ClientUI.headerPane = headerPane;
+		setUpHeaderDrag();
 		SceneController scene = new SceneController();
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
@@ -92,8 +89,11 @@ public class MainFrameController extends Application implements Initializable{
 	            default:
 	            	System.out.println("something wrong");
 	                break;		
+			 }		
 		}
-		
+	}
+	
+	public void setUpHeaderDrag() {
 		// making the client dragable from the header
 		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
@@ -112,7 +112,5 @@ public class MainFrameController extends Application implements Initializable{
                 yOffset = stage.getY() - event.getScreenY();
             }
         });
-			
-	}
 	}
 }

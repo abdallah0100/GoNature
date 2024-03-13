@@ -31,7 +31,11 @@ public class User implements Serializable{
 		this.setParkWork(parkWork);
 	}
 		 
-	 
+	public User (String userName,String password) {
+		this.username = userName;
+		this.password = password;
+	}
+	
 	 public String getFirstName() {
 		return firstName;
 	}
@@ -77,7 +81,7 @@ public class User implements Serializable{
 	}
 
 	public void setEmail(String email) {
-		email = email;
+		this.email = email;
 	}
 
 	public void setRole(String role) {
@@ -114,10 +118,6 @@ public class User implements Serializable{
 
 	public void setFoundInDB(boolean foundInDB) {
 		this.foundInDB = foundInDB;
-	}
-	public User (String userName,String password) {
-		this.username=userName;
-		this.password=password;
 	}
 	 
 }
