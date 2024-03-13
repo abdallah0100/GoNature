@@ -72,7 +72,7 @@ public class MainFrameController extends Application implements Initializable{
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
 		}
-		else {
+		else if(ClientController.connectedUser != null) {
 			 switch (ClientController.connectedUser.getRole()) {
 	            case "depManager":
 	            	scene.setPane(leftNavPane, "/main/gui/dep_manager/DepManagerMainFrame.fxml");
@@ -87,7 +87,7 @@ public class MainFrameController extends Application implements Initializable{
 	            	scene.setPane(leftNavPane,"/main/gui/service_agent/RegisterInstructorFrame.fxml");		
 	                break;
 	            default:
-	            	System.out.println("something wrong");
+	            	System.out.println("connectedUser.getRole wrong");
 	                break;		
 			 }		
 		}
