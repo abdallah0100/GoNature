@@ -70,7 +70,7 @@ public class ClientStartUpController extends Application{
 			LoginOptionController landingFrame = new LoginOptionController();
 			SceneController.switchFrame("GoNature", event, landingFrame);	
 		}else {
-			errorMsg.setText("Failed to connect to the server.");
+			errorMsg.setText("Failed to connect to the server");
 			errorMsg.setVisible(true);
 		}
 	}
