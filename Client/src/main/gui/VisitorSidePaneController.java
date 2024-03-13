@@ -29,6 +29,7 @@ public class VisitorSidePaneController extends Application implements Initializa
 	private Button updateReservation;
 	
 	
+	
 	/**
 	* @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization
@@ -48,24 +49,24 @@ public class VisitorSidePaneController extends Application implements Initializa
 		
 	}
 	//function to makeReservation
-		public void makeReservation(ActionEvent e) {
-			SceneController scene = new SceneController();
-			scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
-			
+	public void makeReservation(ActionEvent e) {
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+		
 
-		}
-		//function to showReservation
-		public void showReservation(ActionEvent e) {
-			SceneController scene = new SceneController();
-			scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
-		
-		}
-		//function to updateReservation
-		public void updateReservation(ActionEvent e) {
-			SceneController scene = new SceneController();
-			scene.setPane(ClientUI.contentPane, "/main/gui/visitor/UpdateReservationFrame.fxml");
-		
-		}
+	}
+	//function to showReservation
+	public void showReservation(ActionEvent e) {
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
+	
+	}
+	//function to updateReservation
+	public void updateReservation(ActionEvent e) {
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/UpdateReservationFrame.fxml");
+	
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

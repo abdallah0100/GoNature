@@ -14,7 +14,7 @@
    <children>
       <Button fx:id="bookBtn" layoutX="463.0" layoutY="339.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="82.0" text="Book" textFill="WHITE">
          <font>
-            <Font name="Arial Black" size="18.0" />
+            <Font name="Arial Black" size="18.0" /> 
          </font>
          <effect>
             <DropShadow>
