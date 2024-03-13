@@ -1,0 +1,40 @@
+.root {
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+
+}
+
+
+
+#registerBtn {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+
+#registerBtn:hover {
+	-fx-background-color: #808080;
+}
+
+#instructorName {
+	
+		-fx-background-radius: 40px;	
+}
+
+
+
+#instructorID{
+			-fx-background-radius: 40px;	
+	
+}
+
+#instructorEmail {
+			-fx-background-radius: 40px;	
+	
+}
+
+#instructorTelephone {
+			-fx-background-radius: 40px;	
+	
+	
+}
