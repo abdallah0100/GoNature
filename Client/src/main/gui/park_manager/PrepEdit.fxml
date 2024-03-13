@@ -19,6 +19,7 @@
                </color>
             </DropShadow>
          </effect>
+     
       </Button>
       <Button fx:id="preparereport" layoutX="41.0" layoutY="179.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="218.0" text="prepare report" textFill="WHITE">
          <font>
@@ -31,6 +32,7 @@
                </color>
             </DropShadow>
          </effect>
+      
       </Button>
    </children>
 </Pane>

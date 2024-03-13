@@ -8,26 +8,27 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@RegisterInstructorFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
    <children>
       <Label layoutX="29.0" layoutY="103.0" text="Name:" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="20.0" />
+            <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
       <Label layoutX="41.0" layoutY="159.0" prefHeight="30.0" prefWidth="30.0" text="ID:" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="20.0" />
+            <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
       <Label layoutX="40.0" layoutY="223.0" text="Email:" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="20.0" />
+            <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
       <Label layoutX="29.0" layoutY="286.0" text="Telphone:" textFill="#fcfcfc">
          <font>
-            <Font name="Arial Bold" size="20.0" />
+            <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
       <TextField fx:id="instructorName" layoutX="129.0" layoutY="102.0">
@@ -38,7 +39,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <TextField fx:id="instructorID" layoutX="129.0" layoutY="161.0">
+      <TextField fx:id="instructorID" layoutX="129.0" layoutY="222.0">
          <effect>
             <DropShadow>
                <color>
@@ -46,7 +47,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <TextField fx:id="instructorEmail" layoutX="129.0" layoutY="222.0">
+      <TextField fx:id="instructorEmail" layoutX="129.0" layoutY="161.0">
          <effect>
             <DropShadow>
                <color>
@@ -76,7 +77,7 @@
       </Button>
       <Label layoutX="29.0" layoutY="47.0" text="Register Instructor" textFill="WHITE" underline="true">
          <font>
-            <Font name="Arial Bold" size="20.0" />
+            <Font name="Arial Bold" size="15.0" />
          </font>
          <effect>
             <DropShadow>
