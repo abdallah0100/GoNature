@@ -6,24 +6,40 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@MainServerCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
    <children>
-      <Pane fx:id="headerPane" layoutY="-2.0" prefHeight="55.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 0 0 2;">
+      <Pane fx:id="headerPane" layoutY="-2.0" prefHeight="55.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 0 0 2;" stylesheets="@MainServerCss.css">
          <children>
-            <Label layoutX="237.0" layoutY="18.0" text="GoNature Server">
+            <Label layoutX="214.0" layoutY="12.0" text="GoNature Server" textFill="WHITE">
                <font>
-                  <Font name="Century" size="18.0" />
+                  <Font name="Arial Bold" size="28.0" />
                </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </Label>
-            <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="592.0" layoutY="16.0" onMouseClicked="#exitButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exitBtn" fitHeight="31.0" fitWidth="28.0" layoutX="592.0" layoutY="16.0" onMouseClicked="#exitButton" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/close_icon.png" />
                </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
             </ImageView>
          </children>
       </Pane>
@@ -34,88 +50,116 @@
             <TableColumn fx:id="statusCol" prefWidth="96.0" text="Status" />
         </columns>
       </TableView>
-      <Label layoutX="50.0" layoutY="98.0" text="Server Connections">
+      <Label layoutX="15.0" layoutY="97.0" text="Server Connections" textFill="WHITE">
          <font>
-            <Font name="Century" size="14.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
-      </Label>
-      <Label layoutX="415.0" layoutY="98.0" text="Connected Clients">
-         <font>
-            <Font name="Century" size="14.0" />
-         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
       <Pane layoutX="15.0" layoutY="132.0" prefHeight="243.0" prefWidth="291.0" style="-fx-border-color: black;">
          <children>
-            <Label layoutX="14.0" layoutY="15.0" text="Server Status">
+            <Label layoutX="10.0" layoutY="16.0" text="Server Status :" textFill="WHITE">
                <font>
-                  <Font name="Century" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="69.0" prefHeight="18.0" prefWidth="78.0" text="IP Address">
-               <font>
-                  <Font name="Century" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="99.0" text="Port">
-               <font>
-                  <Font name="Century" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="134.0" text="DB Name">
-               <font>
-                  <Font name="Century" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="169.0" text="DB username">
-               <font>
-                  <Font name="Century" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="204.0" text="DB password">
-               <font>
-                  <Font name="Century" size="14.0" />
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="serverStatusLabel" layoutX="134.0" layoutY="15.0" text="Offline" textFill="RED">
                <font>
-                  <Font name="Century" size="14.0" />
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
             <Label fx:id="DBStatusLabel" layoutX="134.0" layoutY="42.0" text="Offline" textFill="#f50000">
                <font>
-                  <Font name="Century" size="14.0" />
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="serverPortField" layoutX="117.0" layoutY="95.0" prefHeight="25.0" prefWidth="106.0" />
-            <TextField fx:id="dbNameField" layoutX="117.0" layoutY="130.0" prefHeight="25.0" prefWidth="106.0" />
-            <TextField fx:id="dbUserField" layoutX="117.0" layoutY="165.0" prefHeight="25.0" prefWidth="106.0" />
-            <PasswordField fx:id="dbPassField" layoutX="117.0" layoutY="200.0" prefHeight="25.0" prefWidth="106.0" />
-            <Label fx:id="serverIPLabel" layoutX="134.0" layoutY="69.0" text="Label">
+            <TextField fx:id="serverPortField" layoutX="117.0" layoutY="95.0" prefHeight="25.0" prefWidth="124.0" />
+            <TextField fx:id="dbNameField" layoutX="117.0" layoutY="130.0" prefHeight="25.0" prefWidth="124.0" />
+            <TextField fx:id="dbUserField" layoutX="117.0" layoutY="165.0" prefHeight="25.0" prefWidth="124.0" />
+            <PasswordField fx:id="dbPassField" layoutX="117.0" layoutY="200.0" prefHeight="25.0" prefWidth="124.0" />
+            <Label fx:id="serverIPLabel" layoutX="136.0" layoutY="68.0" text="Label" textFill="WHITE">
                <font>
-                  <Font name="Century" size="14.0" />
+                  <Font name="Arial Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="42.0" prefHeight="18.0" prefWidth="78.0" text="DB Status">
+            <Label layoutX="8.0" layoutY="43.0" text="DB Status :" textFill="WHITE">
                <font>
-                  <Font name="Century" size="14.0" />
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="70.0" text="IP Address :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="100.0" text="Port :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="135.0" text="DB Name :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="170.0" text="DB UserName :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="205.0" text="DB Password :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Button fx:id="stopServerBtn" layoutX="332.0" layoutY="392.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Stop Server">
+      <Button fx:id="stopServerBtn" layoutX="324.0" layoutY="392.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Stop Server" textFill="WHITE">
          <font>
-            <Font name="Century" size="12.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
-      <Button fx:id="startServerBtn" layoutX="176.0" layoutY="392.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Start Server">
+      <Button fx:id="startServerBtn" layoutX="177.0" layoutY="392.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Start Server" textFill="WHITE">
          <font>
-            <Font name="Century" size="12.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
-      <Label fx:id="msgLabel" layoutX="195.0" layoutY="434.0" text="label" visible="false">
+      <Label fx:id="msgLabel" layoutX="92.0" layoutY="433.0" prefHeight="25.0" prefWidth="476.0" text="label" textFill="WHITE" visible="false">
          <font>
             <Font name="Century" size="14.0" />
          </font>
+      </Label>
+      <Label layoutX="383.0" layoutY="97.0" text="Connected Clients" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
    </children>
 </Pane>
