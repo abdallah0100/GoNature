@@ -23,6 +23,9 @@ public class ValidationFrameController extends Application implements Initializa
 	private Label msgLabel;
 	 @FXML
 	 private Button loginBtn;
+	 @FXML
+	 private Button  exitbtn;
+	
 	/**
 	* @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization
@@ -41,7 +44,7 @@ public class ValidationFrameController extends Application implements Initializa
 	//function to Enter the user 
 	public void validate(ActionEvent e) {
 		if (idField.getText().length() <= 0) {
-			displayError("Please enter an Id to continue.");
+			displayError("Please enter an Id to continue");
 			return;
 		}
 		try {

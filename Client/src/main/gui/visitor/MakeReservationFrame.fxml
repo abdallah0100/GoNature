@@ -4,23 +4,36 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@MakeReservationFrameCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.MakeReservationFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@MakeReservationFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.MakeReservationFrameController">
    <children>
-      <Button fx:id="bookBtn" layoutX="496.0" layoutY="339.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="63.0" text="Book" textFill="WHITE">
+      <Button fx:id="bookBtn" layoutX="463.0" layoutY="339.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="82.0" text="Book" textFill="WHITE">
          <font>
-            <Font name="Arial Black" size="12.0" />
-         </font></Button>
-      <Label layoutX="254.0" layoutY="51.0" prefHeight="25.0" prefWidth="118.0" text=" Reservation " textAlignment="RIGHT" textFill="WHITE">
+            <Font name="Arial Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Label layoutX="50.0" layoutY="47.0" prefHeight="25.0" prefWidth="149.0" text="Make Reservation" textAlignment="RIGHT" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
       <TextField fx:id="numOfVisitorsField" layoutX="182.0" layoutY="133.0">
          <effect>
@@ -54,7 +67,7 @@
                </color>
             </DropShadow>
          </effect></ComboBox>
-      <TextField fx:id="phoneField" layoutX="183.0" layoutY="290.0">
+      <TextField fx:id="phoneField" layoutX="183.0" layoutY="303.0">
          <effect>
             <DropShadow>
                <color>
@@ -62,7 +75,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <TextField fx:id="emailField" layoutX="183.0" layoutY="334.0">
+      <TextField fx:id="emailField" layoutX="183.0" layoutY="346.0">
          <effect>
             <DropShadow>
                <color>
@@ -70,35 +83,35 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Label layoutX="52.0" layoutY="100.0" prefHeight="18.0" prefWidth="63.0" text="Type:" textFill="#f5f5f5">
+      <Label layoutX="52.0" layoutY="95.0" prefHeight="18.0" prefWidth="63.0" text="Type :" textFill="#f5f5f5">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="136.0" prefHeight="18.0" prefWidth="106.0" text="VisitorsNumber:" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="136.0" prefHeight="18.0" prefWidth="118.0" text="Visitors Number :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="178.0" prefHeight="18.0" prefWidth="63.0" text="Date:" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="178.0" prefHeight="18.0" prefWidth="63.0" text="Date :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="220.0" prefHeight="18.0" prefWidth="63.0" text="Time:" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="220.0" prefHeight="18.0" prefWidth="63.0" text="Time :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="259.0" prefHeight="18.0" prefWidth="63.0" text="Park Site:" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="259.0" prefHeight="18.0" prefWidth="72.0" text="Park Site :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="294.0" prefHeight="18.0" prefWidth="63.0" text="Phone:" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="306.0" prefHeight="18.0" prefWidth="63.0" text="Phone :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="337.0" prefHeight="18.0" prefWidth="63.0" text="e-mail" textFill="WHITE">
+      <Label layoutX="57.0" layoutY="350.0" prefHeight="18.0" prefWidth="63.0" text="Email :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font></Label>
-      <ComboBox fx:id="orderType" layoutX="181.0" layoutY="95.0" prefWidth="150.0">
+      <ComboBox fx:id="orderType" layoutX="182.0" layoutY="92.0" prefWidth="150.0">
          <effect>
             <DropShadow>
                <color>
@@ -106,24 +119,5 @@
                </color>
             </DropShadow>
          </effect></ComboBox>
-      <Separator layoutX="-2.0" layoutY="40.0" prefHeight="11.0" prefWidth="606.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect></Separator>
-      <Label layoutX="254.0" layoutY="7.0" prefHeight="32.0" prefWidth="82.0" text="GONATURE" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect></Label>
    </children>
 </Pane>

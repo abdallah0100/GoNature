@@ -4,16 +4,27 @@
 }
 
 
-#enterBtn:hover {
-	-fx-background-color: #808080;
+#enterBtn{
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
 }
 
-#cancelBtn:hover {
+#enterBtn:hover{
 	-fx-background-color: #808080;
+
+}
+
+
+
+#cancelBtn{
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
+}
+
+
+#cancelBtn:hover{
+	-fx-background-color: #808080;
+
 }
