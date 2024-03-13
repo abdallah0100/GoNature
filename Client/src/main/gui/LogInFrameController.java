@@ -11,12 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.ClientController;
 import main.controllers.UserRequestController;
-import main.gui.dep_manager.DepManagerMainFrameController;
-import main.gui.entry_worker.EntryWorkerFrameController;
-import main.gui.park_manager.PrepEditController;
-import main.gui.service_agent.RegisterInstructorFrameController;
 import utilities.SceneController;
 
 public class LogInFrameController extends Application implements Initializable {
@@ -61,7 +56,7 @@ public class LogInFrameController extends Application implements Initializable {
 			displayError("Please enter password");
 			return;
 		}
-		UserRequestController.sendUserLogIn(userNameTxt.getText(),passwordTxt.getText());
+		UserRequestController.sendUserLogIn(userNameTxt.getText(), passwordTxt.getText());
 		if (UserRequestController.LogedIn) {
 			SceneController.switchFrame("GoNature",e,new MainFrameController());
 			}
