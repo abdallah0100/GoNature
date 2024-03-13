@@ -3,32 +3,46 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.WaitingListFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black;" stylesheets="@WaitingListFrameCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.WaitingListFrameController">
    <children>
-      <Pane prefHeight="41.0" prefWidth="600.0" style="-fx-border-color: black;">
-         <children>
-            <Label layoutX="266.0" layoutY="10.0" text="GoNature">
-               <font>
-                  <Font name="Century" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Label layoutX="264.0" layoutY="44.0" text="Waiting List">
+      <Label layoutX="271.0" layoutY="76.0" prefHeight="21.0" prefWidth="82.0" text="Waiting List" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="enterBtn" layoutX="178.0" layoutY="91.0" mnemonicParsing="false" onAction="#enterWaitingList" text="Enter waiting list">
+      <Button fx:id="enterBtn" layoutX="144.0" layoutY="139.0" mnemonicParsing="false" onAction="#enterWaitingList" prefHeight="41.0" prefWidth="127.0" text="Enter waiting list">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="cancelBtn" layoutX="350.0" layoutY="92.0" mnemonicParsing="false" onAction="#cancelEnteringWaitingList" text="Cancel" />
+      <Button fx:id="cancelBtn" layoutX="352.0" layoutY="136.0" mnemonicParsing="false" onAction="#cancelEnteringWaitingList" prefHeight="41.0" prefWidth="121.0" text="Cancel" />
       <ListView fx:id="userWaitingList" layoutX="200.0" layoutY="139.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <Label layoutX="270.0" layoutY="14.0" prefHeight="27.0" prefWidth="82.0" text="GoNature" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutY="46.0" prefHeight="8.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>

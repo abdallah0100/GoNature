@@ -1,0 +1,26 @@
+.root {
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+}
+
+#preparereport {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+#preparereport:hover {
+	-fx-background-color: #808080;
+}
+
+
+#editparkvarible{ 
+	
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+
+#editparkvarible:hover {
+	-fx-background-color: #808080;
+}
