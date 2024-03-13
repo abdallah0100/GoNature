@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
@@ -24,14 +25,6 @@
          </effect>
       </Label>
       <TextField fx:id="userNameTxt" layoutX="285.0" layoutY="156.0" prefHeight="25.0" prefWidth="156.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect></TextField>
-      <TextField fx:id="passwordTxt" layoutX="285.0" layoutY="215.0" prefHeight="25.0" prefWidth="156.0">
          <effect>
             <DropShadow>
                <color>
@@ -82,5 +75,6 @@
          </font>
       </Label>
       <Label fx:id="msgLabel" layoutX="270.0" layoutY="268.0" text="msgLabel" textFill="RED" visible="false" />
+      <PasswordField fx:id="passwordTxt" layoutX="285.0" layoutY="215.0" prefHeight="25.0" prefWidth="156.0" />
    </children>
 </Pane>
