@@ -8,8 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.ClientController;
+import main.controllers.UserRequestController;
+import main.gui.dep_manager.DepManagerMainFrameController;
+import main.gui.entry_worker.EntryWorkerFrameController;
+import main.gui.park_manager.PrepEditController;
+import main.gui.service_agent.RegisterInstructorFrameController;
 import utilities.SceneController;
 
 public class LogInFrameController extends Application implements Initializable {
@@ -20,7 +27,8 @@ public class LogInFrameController extends Application implements Initializable {
 	private TextField passwordTxt;
 	@FXML
 	private Button loginBtn;
-	
+	@FXML
+	private Label msgLabel;
 
 	/**
 	* @param primaryStage the primary stage for the application
@@ -41,8 +49,33 @@ public class LogInFrameController extends Application implements Initializable {
 	
 	//function for userLogIn
 	public void userLogIn(ActionEvent e) {
-		//TODO
+		if (userNameTxt.getText().length() <= 0 && passwordTxt.getText().length() <= 0){
+			displayError("Please enter your username and password");
+			return;
+		}
+		if (userNameTxt.getText().length() <= 0){
+			displayError("Please enter userName");
+			return;
+		}
+		if (passwordTxt.getText().length() <= 0){
+			displayError("Please enter password");
+			return;
+		}
+		UserRequestController.sendUserLogIn(userNameTxt.getText(),passwordTxt.getText());
+		if (UserRequestController.LogedIn) {
+			SceneController.switchFrame("GoNature",e,new MainFrameController());
+			}
+			 else {
+				System.out.println("[LogInFrameController] - did not finished LogIn");
+				displayError("User Not Found");
+		}
 	}
+	
+	public void displayError(String txt) {
+		msgLabel.setText(txt);
+		msgLabel.setVisible(true);
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

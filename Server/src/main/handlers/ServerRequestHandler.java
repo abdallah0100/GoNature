@@ -2,6 +2,7 @@ package main.handlers;
 
 import java.io.IOException;
 
+import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
 import requests.Message;
@@ -28,7 +29,16 @@ public class ServerRequestHandler {
 			Visitor v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
 			return;
-
+			
+		case LOGIN_USER:
+			if (!(msg.getRequestData() instanceof User)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
+				return;
+			}
+			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
+			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
+			return;
+			
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

@@ -81,5 +81,6 @@
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
+      <Label fx:id="msgLabel" layoutX="270.0" layoutY="268.0" text="msgLabel" textFill="RED" visible="false" />
    </children>
 </Pane>
