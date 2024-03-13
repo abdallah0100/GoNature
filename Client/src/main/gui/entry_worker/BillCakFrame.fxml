@@ -62,7 +62,7 @@
       </Separator>
       <ImageView fitHeight="113.0" fitWidth="127.0" layoutX="179.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Commons/src/images/payment.png" />
+            <Image url="@../images/payment.png" />
          </image>
          <effect>
             <ColorAdjust brightness="1.0" />
