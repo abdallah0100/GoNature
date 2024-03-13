@@ -58,7 +58,7 @@ public class PrepEditController extends Application {
 		        Stage editStage = new Stage();
 		        Scene scene = new Scene(root);
 		        editStage.setScene(scene);
-
+		        ((Node)e.getSource()).getScene().getWindow().hide(); //hiding primary window
 		        // Show the stage
 		        editStage.show();
 	        } catch (Exception ex) {
