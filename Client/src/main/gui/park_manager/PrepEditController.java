@@ -40,9 +40,24 @@ public class PrepEditController extends Application {
 	}
 		
 		
-	public void preparereport() 
+	public void preparereport(ActionEvent e) throws Exception
 	{	
-		
+		System.out.println("entered the code ");
+		try {
+	        // Load the FXML file for PrepareReportFrame interface
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/gui/park_manager/PrepareReportFrame.fxml"));
+	        Parent root = loader.load();
+	        // Create a scene and set it to the stage
+	        Stage editStage = new Stage();
+	        Scene scene = new Scene(root);
+	        editStage.setScene(scene);
+	        ((Node)e.getSource()).getScene().getWindow().hide(); //hiding primary window
+	        // Show the stage
+	        editStage.show();
+        } catch (Exception ex) {
+        	 System.err.println("Error loading FXML: " + ex.getMessage());
+            ex.printStackTrace(); // Handle the exception appropriately
+        }
 	}
 	
 	public  void editparkvarible(ActionEvent e) throws Exception {
@@ -52,8 +67,6 @@ public class PrepEditController extends Application {
 		        // Load the FXML file for EditParkVariables interface
 		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main/gui/park_manager/EditParkVariables.fxml"));
 		        Parent root = loader.load();
-		        System.out.println("FXML loaded successfully!"); // Check if FXML is loaded successfully
-
 		        // Create a scene and set it to the stage
 		        Stage editStage = new Stage();
 		        Scene scene = new Scene(root);
