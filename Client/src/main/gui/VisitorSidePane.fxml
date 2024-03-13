@@ -58,7 +58,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <Label fx:id="visitorIdLabel" layoutX="59.0" layoutY="76.0" prefHeight="15.0" prefWidth="43.0" text="Label" textFill="WHITE">
+      <Label fx:id="visitorIdLabel" layoutX="28.0" layoutY="75.0" prefHeight="15.0" prefWidth="43.0" text="Label" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font></Label>

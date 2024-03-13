@@ -36,7 +36,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Text fill="WHITE" layoutX="179.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Table">
+      <Text fill="WHITE" layoutX="163.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Table">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
