@@ -16,11 +16,11 @@
         <items>
           <AnchorPane fx:id="sp" minHeight="0.0" minWidth="0.0" prefHeight="139.0" prefWidth="597.0">
                <children>
-                  <TableView fx:id="ap" layoutX="118.0" layoutY="73.0" prefHeight="218.0" prefWidth="329.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="151.0">
+                  <TableView layoutX="135.0" layoutY="73.0" prefHeight="218.0" prefWidth="312.0" AnchorPane.leftAnchor="118.0" AnchorPane.rightAnchor="151.0">
                     <columns>
-                      <TableColumn id="c1text" fx:id="c1" prefWidth="202.0" text="Options" />
-                      <TableColumn minWidth="0.0" prefWidth="65.0" text="X" />
-                        <TableColumn prefWidth="60.0" text="V" />
+                      <TableColumn id="c1text" fx:id="col1" prefWidth="205.0" text="Options" />
+                      <TableColumn fx:id="col2" minWidth="0.0" prefWidth="62.0" text="X" />
+                        <TableColumn fx:id="col3" prefWidth="60.0" text="V" />
                     </columns>
                   </TableView>
                   <Separator layoutY="-1.0" prefHeight="2.0" prefWidth="600.0">
@@ -36,7 +36,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Text fill="WHITE" layoutX="163.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Table">
+      <Text fill="WHITE" layoutX="155.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Table">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>

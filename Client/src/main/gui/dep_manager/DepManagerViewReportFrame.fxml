@@ -54,7 +54,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Label layoutX="16.0" layoutY="91.0" prefHeight="33.0" prefWidth="453.0" text="Select Date and Type To View Report :" textFill="WHITE" underline="true">
+      <Label layoutX="14.0" layoutY="66.0" prefHeight="33.0" prefWidth="453.0" text="Select Date and Type To View Report :" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>

@@ -1,35 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerGenerateReportFrameController">
+<AnchorPane fx:id="headerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="626.0" stylesheets="@PrepareReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerGenerateReportFrameController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="479.0" prefWidth="626.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" stylesheets="@PrepareReportFrameCss.css">
                <children>
-                  <Button fx:id="btn_visitor_report" layoutX="13.0" layoutY="70.0" mnemonicParsing="false" text="Number Of Visitors Report" />
-                  <Button fx:id="btn_cancellation_report" layoutX="31.0" layoutY="195.0" mnemonicParsing="false" text="Empty Park Report" />
+                  <Button fx:id="btn_visitor_report" layoutX="8.0" layoutY="167.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="168.0" text="Number Of Visitors" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                           </color>
+                        </DropShadow>
+                     </effect></Button>
+                  <Button fx:id="btn_cancellation_report" layoutX="28.0" layoutY="276.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="Empty Park" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                           </color>
+                        </DropShadow>
+                     </effect></Button>
+                  <ImageView fitHeight="77.0" fitWidth="92.0" layoutX="53.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Downloads/icons8-document-50.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="0.05" hue="-1.0" saturation="-1.0" />
+                     </effect>
+                  </ImageView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="field_date" layoutX="108.0" layoutY="58.0" />
-                  <Text fx:id="text_date" layoutX="30.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :" />
-                  <Text fx:id="text_name" layoutX="30.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" />
-                  <TextField fx:id="feild_name" layoutX="108.0" layoutY="117.0" onAction="#field_name" />
-                  <Text fx:id="text_park" layoutX="30.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Park :" />
-                  <TextField fx:id="field_park" layoutX="108.0" layoutY="196.0" />
-                  <Button fx:id="btn_show_report_data" layoutX="161.0" layoutY="289.0" mnemonicParsing="false" text="Show Report Data" />
-                  <Button layoutX="323.0" layoutY="340.0" mnemonicParsing="false" text="Generate" />
+                  <Text fx:id="text_date" fill="WHITE" layoutX="30.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font></Text>
+                  <TextField fx:id="field_name" layoutX="108.0" layoutY="130.0" />
+                  <TextField fx:id="field_park" layoutX="108.0" layoutY="209.0" />
+                  <Button fx:id="btn_show_report_data" layoutX="137.0" layoutY="268.0" mnemonicParsing="false" text="Show Report Data" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                           </color>
+                        </DropShadow>
+                     </effect></Button>
+                  <Button fx:id="generateBtn" layoutX="311.0" layoutY="338.0" mnemonicParsing="false" text="Generate" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                           </color>
+                        </DropShadow>
+                     </effect></Button>
+                  <Text fx:id="text_date1" fill="WHITE" layoutX="25.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="text_date2" fill="WHITE" layoutX="30.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Park :">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <DatePicker fx:id="dateField" layoutX="108.0" layoutY="57.0" prefHeight="25.0" prefWidth="139.0" />
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
-      <Text layoutX="269.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Report" />
+      <Text fill="WHITE" layoutX="219.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Report" wrappingWidth="211.76953125">
+         <font>
+            <Font name="Arial" size="28.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect></Text>
    </children>
 </AnchorPane>
