@@ -17,12 +17,7 @@ public class RequestHandler {
 		case GENERAL_RESPOND:
 			System.out.println("[GoNatureClient] - ServerResponse: " + msg.getRequestData());
 			break;
-			default:
-				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
-				if (msg.getRequestData() != null)
-					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
-				break;
-			case VALIDATE_VISITOR:
+		case VALIDATE_VISITOR:
 				if (msg.getRequestData() instanceof Visitor)
 					ClientController.connectedVisitor = (Visitor) msg.getRequestData();
 				else {
@@ -39,6 +34,11 @@ public class RequestHandler {
 					return;
 				}
 				UserRequestController.LogedIn = true;
+				break;
+			default:
+				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
+				if (msg.getRequestData() != null)
+					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
 				break;
 				
 		}
