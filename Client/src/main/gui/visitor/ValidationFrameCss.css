@@ -20,3 +20,7 @@
 #loginBtn:hover {
 	-fx-background-color: #808080;
 }
+
+#exitbtn{
+	-fx-cursor:hand;
+}
