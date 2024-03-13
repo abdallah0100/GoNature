@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
+import main.controllers.UserRequestController;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -51,6 +52,8 @@ public class MainFrameController extends Application implements Initializable{
 	@FXML
 	public void logout(ActionEvent event) {
 		ClientController.connectedVisitor = null;
+		ClientController.connectedUser=null;
+		UserRequestController.LogedIn = false;
 		LoginOptionController landingFrame = new LoginOptionController();
 		SceneController.switchFrame("GoNature", event, landingFrame);
 	}
