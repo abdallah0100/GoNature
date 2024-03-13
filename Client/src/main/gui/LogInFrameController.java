@@ -61,25 +61,24 @@ public class LogInFrameController extends Application implements Initializable {
 			displayError("Please enter password");
 			return;
 		}
-		UserRequestController.sendUserLogIn(userNameTxt.getText());
+		UserRequestController.sendUserLogIn(userNameTxt.getText(),passwordTxt.getText());
 		if (UserRequestController.LogedIn) {
 			 switch (ClientController.connectedUser.getRole()) {
 	            case "depManager":
-	            	SceneController.switchFrame("GoNature", e, new DepManagerMainFrameController());
+	            	SceneController.switchFrame("GoNature",e,new DepManagerMainFrameController());
 	                break;
 	            case "entryManager":
-	            	SceneController.switchFrame("GoNature", e, new EntryWorkerFrameController());
+	            	SceneController.switchFrame("GoNature",e,new EntryWorkerFrameController());
 	                break;
 	            case "parkManager":
-	            	SceneController.switchFrame("GoNature", e, new PrepEditController());
+	            	SceneController.switchFrame("GoNature",e,new PrepEditController());
 	                break;
 	            default:
-	            	SceneController.switchFrame("GoNature", e, new RegisterInstructorFrameController());
-	                break;
-			
+	            	SceneController.switchFrame("GoNature",e,new RegisterInstructorFrameController());
+	                break;		
 		}
 			 }else {
-			System.out.println("[LogInFrameController] - did not finished validating");
+			System.out.println("[LogInFrameController] - did not finished LogIn");
 		}
 	}
 	
