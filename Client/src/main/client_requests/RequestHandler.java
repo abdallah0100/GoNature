@@ -42,6 +42,7 @@ public class RequestHandler {
 					return; 
 				}
 				else {
+					ClientController.connectedUser.setRequestedBill(null);
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
 				}

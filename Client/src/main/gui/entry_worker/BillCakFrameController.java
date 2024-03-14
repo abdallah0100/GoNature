@@ -49,7 +49,7 @@ public class BillCakFrameController   extends Application {
 			}
 			 else {
 				System.out.println("[BillCakFrameController] - did no bill");
-				displayMSG("User Not Found");
+				displayMSG("reservation Not Found");
 		}
 		
 	}
