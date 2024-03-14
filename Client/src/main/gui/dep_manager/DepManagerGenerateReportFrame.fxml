@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="626.0" stylesheets="@DepManagerGenerateReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerGenerateReportFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="626.0" stylesheets="@DepManagerGenerateReportFrameCss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerGenerateReportFrameController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="479.0" prefWidth="626.0" stylesheets="@DepManagerGenerateReportFrameCss.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
         <items>
@@ -57,7 +57,7 @@
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font></Text>
-                  <TextField fx:id="feild_name" layoutX="108.0" layoutY="129.0" onAction="#field_name" prefHeight="25.0" prefWidth="188.0">
+                  <TextField fx:id="feild_name" layoutX="108.0" layoutY="129.0" prefHeight="25.0" prefWidth="188.0">
                      <effect>
                         <DropShadow>
                            <color>

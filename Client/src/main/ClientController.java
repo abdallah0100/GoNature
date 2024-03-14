@@ -11,7 +11,7 @@ public class ClientController {
 	private static ClientController clientController;
 	
 	private GoNatureClient client;
-	
+	 
 	
 	/*
 	 * variables to determine whether connected to the server/database or not
@@ -20,6 +20,7 @@ public class ClientController {
 	public static boolean fetchedData = false;
 	public static Visitor connectedVisitor;
 	public static User connectedUser;
+	public static String msg;
 	
 	private ClientController(String host, int port) {
 		try {

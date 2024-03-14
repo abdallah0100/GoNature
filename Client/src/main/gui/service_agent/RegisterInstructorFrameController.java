@@ -1,28 +1,50 @@
+//only missing the check with the database and insertion to database
+//it checks the fields that are not empty 
+//  14/3/2024
 package main.gui.service_agent;
 
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.BorderFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import utilities.SceneController;
 
 
 public class RegisterInstructorFrameController extends Application{
-	
-	 @FXML
-	 private TextField nameField;
-	 
-	 @FXML
-	 private TextField IDField;
-	 @FXML
-	 private TextField EmailField;
+	  @FXML
+	    private Button btnRegister;
 
-	 @FXML
-	 private TextField TelephoneField;
-	 @FXML
-	 private Button registerBtn;
+	    @FXML
+	    private TextField instructorEmail;
+
+	    @FXML
+	    private TextField instructorID;
+
+	    
+
+	    @FXML
+	    private TextField instructorTelephone;
+
+	    @FXML
+	    private Label label;
+	    
+	    ///////////////////define variables////////////////////////////////////////////////////
+     private String instructor_id;//retrieve data from id field
+     private String instructor_email;//retrieve data from email field
+     private String instructor_tel;//retrieve data from telephone field
+     private Connection con;
+     ///////////////////////////////////////////////////////////////////////////
 	 
 	 public static void main(String args[]) {
 		 launch(args);
@@ -38,10 +60,46 @@ public class RegisterInstructorFrameController extends Application{
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Service Agent", primaryStage,
 					    "/main/gui/service_agent/RegisterInstructorFrame.fxml");
+		
 	}
 	
-	public void register(ActionEvent e) {
-		//TODO
+	public void register(ActionEvent e) {//we will check all the fields are not empty and not in database to add
+		
+		
+       try {
+    	  
+		if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()&&!instructorTelephone.getText().isEmpty()) {
+			instructorID.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+			instructorEmail.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+			instructorTelephone.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+			instructor_id=instructorID.getText();
+			instructor_email=instructorEmail.getText();
+			instructor_tel=instructorTelephone.getText();
+
+			label.setText("Registered");
+	   
+		
+		
+		
+		}else {
+			
+			
+			if(instructorID.getText().isEmpty())
+				instructorID.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+			
+			if(instructorEmail.getText().isEmpty())
+				instructorEmail.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+			
+			if(instructorTelephone.getText().isEmpty())
+				instructorTelephone.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+			label.setText("Fill Empty Fields !");
+			}
+				
+		}catch(Exception ex){
+			label.setText("error");
+		}
+
+		
 	}
 
 }

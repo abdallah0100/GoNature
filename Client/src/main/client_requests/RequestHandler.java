@@ -23,7 +23,7 @@ public class RequestHandler {
 				else {
 					System.out.println("[RequestHandler] - invalid VALIDATE_VISITOR response");
 					return;
-				}
+				} 
 				VisitorRequestController.finishedValidating = true;
 				break;
 			case LOGIN_USER:
@@ -36,6 +36,17 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
+			case SHOW_BILL:
+				if (msg.getRequestData() instanceof String) {
+					ClientController.connectedUser.setRequestedBill((String) msg.getRequestData());
+					return; 
+				}
+				else {
+					ClientController.connectedUser.setRequestedBill(null);
+					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
+					return;
+				}
+
 			default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
