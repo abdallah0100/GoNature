@@ -57,20 +57,12 @@
  	 -fx-font-size: 18px;
 }
 
-#ipCol{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
 
-#hostCol{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
-
-#statusCol{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
 
 .table-view .column-header .label{
 	-fx-text-fill:white;
 	-fx-font-size:17px;
 	-fx-font-family:'arial';
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+	
 }

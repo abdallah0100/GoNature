@@ -7,9 +7,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@PrepEditControllerCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.PrepEditController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@ParkManagerSidePaneStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.ParkManagerSidePaneController">
    <children>
-      <Button fx:id="editparkvarible" layoutY="270.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="156.0" text="Edit Park Varible " textFill="#f8f8f8">
+      <Button layoutY="270.0" mnemonicParsing="false" onAction="#showVariableEditWindow" prefHeight="43.0" prefWidth="156.0" text="Edit Park Varible " textFill="#f8f8f8">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -22,9 +22,9 @@
          </effect>
      
       </Button>
-      <Button fx:id="preparereport" layoutY="179.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="156.0" text="prepare report" textFill="WHITE">
+      <Button layoutY="179.0" mnemonicParsing="false" onAction="#showPrepareReportWindow" prefHeight="43.0" prefWidth="156.0" text="Prepare Report" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="19.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
          <effect>
             <DropShadow>
@@ -40,9 +40,14 @@
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="106.0" prefHeight="27.0" prefWidth="89.0" text="Park Manager" textFill="WHITE">
+      <Label layoutX="22.0" layoutY="14.0" prefHeight="21.0" prefWidth="112.0" text="Park Manager" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="14.0" layoutY="98.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
    </children>
