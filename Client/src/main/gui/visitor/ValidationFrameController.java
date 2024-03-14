@@ -17,10 +17,10 @@ import main.gui.MainFrameController;
 import utilities.SceneController;
 
 public class ValidationFrameController extends Application implements Initializable {
-	@FXML
-	private TextField idField;
-	@FXML
-	private Label msgLabel;
+	 @FXML
+	 private TextField idField;
+	 @FXML
+	 private Label msgLabel;
 	 @FXML
 	 private Button loginBtn;
 	 @FXML
@@ -41,7 +41,7 @@ public class ValidationFrameController extends Application implements Initializa
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub	
 	}
-	//function to Enter the user 
+	//function to Enter the visitor/instructor 
 	public void validate(ActionEvent e) {
 		if (idField.getText().length() <= 0) {
 			displayError("Please enter an Id to continue");

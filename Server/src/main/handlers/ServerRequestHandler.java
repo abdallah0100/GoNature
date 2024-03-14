@@ -13,38 +13,38 @@ public class ServerRequestHandler {
 	public static void handleRequest(Message msg, ConnectionToClient client) {
 		String generalRespondMsg = "responded with no message.";
 		switch(msg.getRequestEnumType()) {
-		case CONNECT_TO_SERVER:
-			ClientConnectionHandler.handleConnectRequest(client, true);
-			generalRespondMsg = "New Connection has been added successfully";
-			break;
-		case DISCONNECT_FROM_SERVER:
-			ClientConnectionHandler.handleConnectRequest(client, false);
-			generalRespondMsg = "Client has succesfully disconnected from the server";
-			break;
-		case VALIDATE_VISITOR:
-			if (!(msg.getRequestData() instanceof String)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+			case CONNECT_TO_SERVER:
+				ClientConnectionHandler.handleConnectRequest(client, true);
+				generalRespondMsg = "New Connection has been added successfully";
+				break;
+			case DISCONNECT_FROM_SERVER:
+				ClientConnectionHandler.handleConnectRequest(client, false);
+				generalRespondMsg = "Client has succesfully disconnected from the server";
+				break;
+			case VALIDATE_VISITOR:
+				if (!(msg.getRequestData() instanceof String)) {
+					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+					return;
+				}
+				Visitor v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
+				respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
 				return;
-			}
-			Visitor v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
-			respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
-			return;
-			
-		case LOGIN_USER:
-			if (!(msg.getRequestData() instanceof User)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
+				
+			case LOGIN_USER:
+				if (!(msg.getRequestData() instanceof User)) {
+					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
+					return;
+				}
+				User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
+				respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 				return;
+				
+			default:
+				respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
+				break;			
 			}
-			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
-			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
-			return;
 			
-		default:
-			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
-			break;			
-		}
-		
-		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));
+			respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));
 	}
 	
 	public static void respondToClient(ConnectionToClient client, Message msg) {
