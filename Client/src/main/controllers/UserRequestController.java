@@ -11,5 +11,9 @@ public class UserRequestController {
 	public static void sendUserLogIn(String userName,String password) {
 		ClientController.getController().accept(new Message(RequestType.LOGIN_USER, new User(userName,password)));
 	}
+	
+	public static void sendShowBill(String id) {
+		ClientController.getController().accept(new Message(RequestType.SHOW_BILL,id));
+	}
 
 }
