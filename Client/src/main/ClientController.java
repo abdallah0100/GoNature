@@ -21,6 +21,7 @@ public class ClientController {
 	public static Visitor connectedVisitor;
 	public static User connectedUser;
 	public static String msg;
+	public static int result;
 	
 	private ClientController(String host, int port) {
 		try {

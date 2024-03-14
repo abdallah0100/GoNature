@@ -18,6 +18,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.ClientController;
+import main.controllers.UserRequestController;
+import main.gui.MainFrameController;
 import utilities.SceneController;
 
 
@@ -31,7 +34,8 @@ public class RegisterInstructorFrameController extends Application{
 	    @FXML
 	    private TextField instructorID;
 
-	    
+	    @FXML
+	    private TextField instructorName;
 
 	    @FXML
 	    private TextField instructorTelephone;
@@ -41,9 +45,9 @@ public class RegisterInstructorFrameController extends Application{
 	    
 	    ///////////////////define variables////////////////////////////////////////////////////
      private String instructor_id;//retrieve data from id field
+     private String instructor_name;
      private String instructor_email;//retrieve data from email field
      private String instructor_tel;//retrieve data from telephone field
-     private Connection con;
      ///////////////////////////////////////////////////////////////////////////
 	 
 	 public static void main(String args[]) {
@@ -65,25 +69,26 @@ public class RegisterInstructorFrameController extends Application{
 	
 	public void register(ActionEvent e) {//we will check all the fields are not empty and not in database to add
 		
-		
        try {
     	  
-		if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()&&!instructorTelephone.getText().isEmpty()) {
+		if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()
+				&&!instructorTelephone.getText().isEmpty()&&!instructorName.getText().isEmpty())
+		{
 			instructorID.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
 			instructorEmail.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
 			instructorTelephone.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+			instructor_name=instructorName.getText();
 			instructor_id=instructorID.getText();
 			instructor_email=instructorEmail.getText();
 			instructor_tel=instructorTelephone.getText();
-
-			label.setText("Registered");
-	   
-		
-		
-		
+		  UserRequestController.insertInstructor(instructor_id,instructor_name,instructor_email,instructor_tel);
+		  if (ClientController.result==1) {
+				label.setText("Registered");
+		  }
+		  	else if(ClientController.result==0){
+				label.setText("Allready Registered ");
+			}
 		}else {
-			
-			
 			if(instructorID.getText().isEmpty())
 				instructorID.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
 			
@@ -93,13 +98,11 @@ public class RegisterInstructorFrameController extends Application{
 			if(instructorTelephone.getText().isEmpty())
 				instructorTelephone.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
 			label.setText("Fill Empty Fields !");
-			}
+		 }
 				
 		}catch(Exception ex){
 			label.setText("error");
-		}
-
-		
+		 }	
 	}
 
 }

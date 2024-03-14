@@ -36,7 +36,7 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
-			case SHOW_BILL:
+			case REQUEST_BILL:
 				if (msg.getRequestData() instanceof String) {
 					ClientController.connectedUser.setRequestedBill((String) msg.getRequestData());
 					return; 
@@ -44,6 +44,16 @@ public class RequestHandler {
 				else {
 					ClientController.connectedUser.setRequestedBill(null);
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
+					return;
+				}
+			case INSERT_INSTRUCTOR:
+				if (msg.getRequestData() instanceof Integer) {
+					ClientController.result=((Integer) msg.getRequestData());
+					return; 
+				}
+				else {
+					ClientController.connectedUser.setRequestedBill(null);
+					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
 					return;
 				}
 
