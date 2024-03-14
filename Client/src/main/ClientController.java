@@ -22,6 +22,7 @@ public class ClientController {
 	public static User connectedUser;
 	public static String msg;
 	
+	
 	private ClientController(String host, int port) {
 		try {
 			client = new GoNatureClient(host, port);

@@ -8,7 +8,8 @@ public enum RequestType {
 	DISCONNECT_FROM_SERVER(5),
 	VALIDATE_VISITOR(6),
 	LOGIN_USER(7),
-	SHOW_BILL(8)
+	REQUEST_BILL(8),
+	INSERT_INSTRUCTOR(9)
 	;
 	
 	private int requestId;
