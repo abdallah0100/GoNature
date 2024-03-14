@@ -14,45 +14,25 @@ public class DepManagerGenerateReportFrameController extends Application{
 
 		
 	@FXML
-	private Button btn_cancellation_report;
+    private Button btn_cancellation_report;
 
-	@FXML
-	private Button btn_show_report_data;
-	
-	@FXML
-	private Button generateBtn;
+    @FXML
+    private Button btn_show_report_data;
 
-	@FXML
-	private Button btn_visitor_report;
+    @FXML
+    private Button btn_visitor_report;
 
-	@FXML
-	private TextField feild_name;
+    @FXML
+    private TextField feild_name;
 
-	@FXML
-	private TextField field_date;
+    @FXML
+    private TextField field_date;
 
-	@FXML
-	private TextField field_park;
+    @FXML
+    private TextField field_park;
 
-	@FXML
-	private Text text_date;
-
-	@FXML
-	private Text text_name;
-
-	@FXML
-	private Text text_park;
-	
-	@FXML
-	private AnchorPane leftPane;
-	
-	@FXML
-	private AnchorPane rightPane;
-
-	@FXML
-	void field_name(ActionEvent event) {
-	}
-
+    @FXML
+    private Button generateBtn;
 
 	/**
 	* @param primaryStage the primary stage for the application
