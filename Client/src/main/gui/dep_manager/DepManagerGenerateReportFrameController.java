@@ -12,6 +12,7 @@ import utilities.SceneController;
 
 public class DepManagerGenerateReportFrameController extends Application{
 		
+	
 	@FXML
     private Button btn_cancellation_report;
 
