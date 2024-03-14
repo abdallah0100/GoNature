@@ -26,7 +26,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <Label layoutX="48.0" layoutY="172.0" text="Visitor ID :" textFill="WHITE">
+      <Label layoutX="48.0" layoutY="172.0" text="Bill ID :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="27.0" />
          </font>
@@ -39,7 +39,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Button fx:id="viewbill" layoutX="236.0" layoutY="290.0" mnemonicParsing="false" onAction="#showBill" text="View  Bill" textFill="WHITE">
+      <Button fx:id="viewbill" layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#showBill" text="View  Bill" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="22.0" />
          </font>
@@ -68,6 +68,14 @@
             <ColorAdjust brightness="1.0" />
          </effect>
       </ImageView>
-      <Label fx:id="msgLabel" layoutX="285.0" layoutY="243.0" text="Label" textFill="RED" visible="false" />
+      <Label fx:id="billLabel" layoutX="273.0" layoutY="244.0" prefHeight="16.0" prefWidth="127.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font size="39.0" />
+         </font></Label>
+      <Label fx:id="msgLabel" layoutX="273.0" layoutY="224.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
