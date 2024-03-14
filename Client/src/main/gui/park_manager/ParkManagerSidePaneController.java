@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import main.ClientController;
+import main.ClientUI;
+import utilities.SceneController;
 
 public class ParkManagerSidePaneController implements Initializable{
 	
@@ -16,12 +18,14 @@ public class ParkManagerSidePaneController implements Initializable{
 	
 	@FXML
 	public void showPrepareReportWindow(ActionEvent event) {	
-		
+		SceneController sc = new SceneController();
+		sc.setPane(ClientUI.contentPane, "/main/gui/park_manager/PrepareReportFrame.fxml");
 	}
 	
 	@FXML
 	public void showVariableEditWindow(ActionEvent event) {
-		
+		SceneController sc = new SceneController();
+		sc.setPane(ClientUI.contentPane, "/main/gui/park_manager/EditParkVariables.fxml");
 	}
 
 	@Override

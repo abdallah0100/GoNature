@@ -46,7 +46,7 @@ public class SceneController {
 			pane.getChildren().setAll(visitorSidePane);
 		}catch(Exception ex) {
 			System.out.println("[SceneController] - failed to update pane");
-			return;
+			ex.printStackTrace();
 		}
 	}
 	
