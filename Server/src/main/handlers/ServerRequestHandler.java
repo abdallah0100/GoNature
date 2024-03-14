@@ -38,15 +38,22 @@ public class ServerRequestHandler {
 			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
-		case SHOW_BILL:
+		case REQUEST_BILL:
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (String)"));
 				return;
 			}
 			String b = UserRequestHandler.billExists((String) msg.getRequestData());
-			respondToClient(client, new Message(RequestType.SHOW_BILL, b));
+			respondToClient(client, new Message(RequestType.REQUEST_BILL, b));
 			return;
-			
+		case INSERT_INSTRUCTOR:
+			if(!(msg.getRequestData() instanceof Visitor)) {	
+			respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Visitor)"));
+			return;
+		}
+			int x=UserRequestHandler.instructorExists((Visitor) msg.getRequestData());
+			respondToClient(client, new Message(RequestType.INSERT_INSTRUCTOR, x));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
