@@ -20,12 +20,11 @@ public class ClientStartUpController extends Application{
 	private TextField portTxt;
 	@FXML
 	private Label errorMsg;
-
 	@FXML
 	private Button startBtn;
-	
 	@FXML
 	private Button exitBtn;
+	
 	
 	/**
 	* @param primaryStage the primary stage for the application

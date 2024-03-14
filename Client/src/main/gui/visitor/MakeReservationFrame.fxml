@@ -23,7 +23,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Label layoutX="50.0" layoutY="47.0" prefHeight="25.0" prefWidth="149.0" text="Make Reservation" textAlignment="RIGHT" textFill="WHITE" underline="true">
+      <Label layoutX="40.0" layoutY="47.0" prefHeight="25.0" prefWidth="149.0" text="Make Reservation" textAlignment="RIGHT" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -75,33 +75,33 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Label layoutX="52.0" layoutY="95.0" prefHeight="18.0" prefWidth="63.0" text="Type :" textFill="#f5f5f5">
+      <Label layoutX="38.0" layoutY="95.0" prefHeight="18.0" prefWidth="63.0" text="Type :" textFill="#f5f5f5">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="136.0" prefHeight="18.0" prefWidth="118.0" text="Visitors Number :" textFill="WHITE">
+      <Label layoutX="38.0" layoutY="136.0" prefHeight="20.0" prefWidth="134.0" text="Visitors Number :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="178.0" prefHeight="18.0" prefWidth="63.0" text="Date :" textFill="WHITE">
+      <Label layoutX="38.0" layoutY="177.0" prefHeight="18.0" prefWidth="63.0" text="Date :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="220.0" prefHeight="18.0" prefWidth="63.0" text="Time :" textFill="WHITE">
+      <Label layoutX="38.0" layoutY="220.0" prefHeight="18.0" prefWidth="63.0" text="Time :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="259.0" prefHeight="18.0" prefWidth="72.0" text="Park Site :" textFill="WHITE">
+      <Label layoutX="40.0" layoutY="257.0" prefHeight="20.0" prefWidth="88.0" text="Park Site :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="52.0" layoutY="306.0" prefHeight="18.0" prefWidth="63.0" text="Phone :" textFill="WHITE">
+      <Label layoutX="40.0" layoutY="306.0" prefHeight="18.0" prefWidth="63.0" text="Phone :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
-      <Label layoutX="57.0" layoutY="350.0" prefHeight="18.0" prefWidth="63.0" text="Email :" textFill="WHITE">
+      <Label layoutX="38.0" layoutY="349.0" prefHeight="18.0" prefWidth="63.0" text="Email :" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
       <ComboBox fx:id="orderType" layoutX="182.0" layoutY="92.0" prefWidth="150.0">
          <effect>
