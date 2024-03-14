@@ -41,5 +41,29 @@ public class UserRequestHandler {
 		}
 		return u;
 	}
+	
+	public static String billExists(String id){
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return null;
+		}
+		String bill;
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM bill WHERE ID='"+id+"'");
+			if (!rs.next()) {
+				System.out.println("[UserRequestHandler] - result set was empty");
+				return null;
+			}
+			bill = rs.getString(2);
+			rs.close();
+		}catch(Exception ex) {
+			System.out.println("[UserRequestHandler] - failed to execute query");
+			ex.printStackTrace();
+			return null;
+		}
+		return bill;
+	}
+	
 
 }
