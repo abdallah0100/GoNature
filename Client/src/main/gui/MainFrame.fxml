@@ -17,7 +17,7 @@
    <top>
       <Pane fx:id="headerPane" prefHeight="73.0" prefWidth="600.0" style="-fx-border-color: black; -fx-border-width: 2 2 0 2;" stylesheets="@MainFrameCss.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="305.0" layoutY="16.0" prefHeight="42.0" prefWidth="190.0" text="GoNature" textFill="WHITE">
+            <Label layoutX="311.0" layoutY="16.0" prefHeight="42.0" prefWidth="190.0" text="GoNature" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="36.0" />
                </font>
