@@ -10,6 +10,7 @@ public class Visitor implements Serializable{
 	private String id;
 	private String email;
 	private String phone;
+	private String name;
 	private boolean isInstructor;
 	
 	private boolean foundInDB;
@@ -21,6 +22,20 @@ public class Visitor implements Serializable{
 		this.setInstructor(instructor);
 	}
 	
+	public Visitor(String id, String email, String phone, String name) {
+		this.setId(id);
+		this.setName(name);
+		this.setEmail(email);
+		this.setPhone(phone);
+
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String Name) {
+		this.name = Name;
+	}
+
 	public Visitor (String id) {
 		this.id = id;
 		this.foundInDB = false;

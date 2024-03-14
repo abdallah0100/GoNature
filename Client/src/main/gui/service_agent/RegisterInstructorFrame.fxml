@@ -8,10 +8,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
    <children>
-      <Label layoutX="29.0" layoutY="103.0" text="Name:" textFill="WHITE">
+      <Label layoutX="43.0" layoutY="149.0" prefHeight="14.0" prefWidth="53.0" text="Name:">
          <font>
             <Font name="Arial Bold" size="11.0" />
          </font>
@@ -21,19 +20,19 @@
             <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="157.0" text="Email:">
+      <Label layoutX="42.0" layoutY="208.0" text="Email:">
          <font>
             <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="200.0" text="Telphone:">
+      <Label layoutX="59.0" layoutY="283.0" text="Telphone:">
          <font>
             <Font name="Arial Bold" size="11.0" />
          </font>
       </Label>
-      <TextField fx:id="instructorID" layoutX="116.0" layoutY="111.0" />
-      <TextField fx:id="instructorEmail" layoutX="116.0" layoutY="155.0" />
-      <TextField fx:id="instructorTelephone" layoutX="116.0" layoutY="198.0" />
+      <TextField fx:id="instructorID" layoutX="107.0" layoutY="102.0" />
+      <TextField fx:id="instructorEmail" layoutX="120.0" layoutY="195.0" />
+      <TextField fx:id="instructorTelephone" layoutX="135.0" layoutY="277.0" />
       <Button fx:id="btnRegister" layoutX="390.0" layoutY="247.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="86.0" text="Register">
          <font>
             <Font size="14.0" />
@@ -52,5 +51,6 @@
          </effect>
       </Label>
       <Label fx:id="label" layoutX="400.0" layoutY="106.0" />
+      <TextField fx:id="instructorName" layoutX="107.0" layoutY="131.0" />
    </children>
 </Pane>
