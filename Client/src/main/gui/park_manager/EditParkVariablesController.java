@@ -24,9 +24,6 @@ public class EditParkVariablesController {
     private Button edit;
 
     @FXML
-    private TextField oldValue;
-
-    @FXML
     private TextField newValue;
 
     @FXML
@@ -68,13 +65,12 @@ public class EditParkVariablesController {
     @FXML
     public void edit(ActionEvent event) throws Exception{
         // Save the old and new values to the database
-        String oldVal = oldValue.getText();
         String newVal = newValue.getText();
         try {
-            if (oldVal.isEmpty() || newVal.isEmpty()) {
-                throw new IllegalArgumentException("One or both of the values are empty");
+            if (newVal.isEmpty()) {
+                throw new IllegalArgumentException("the value is empty");
             } else {
-                saveToDatabase(currentEditType, oldVal, newVal);
+                saveToDatabase(currentEditType, newVal);
                 System.out.println("Data saved to database successfully.");
             }
         } catch (Exception e) {
@@ -86,16 +82,14 @@ public class EditParkVariablesController {
     // Method to update the edit type and fields
     private void updateEditType(String editType) {
         editTypeText.setText("Edit Type: " + editType);
-        oldValue.setText(""); // Clear old value field
         newValue.setText(""); // Clear new value field
     }
 
     // Method to save values to the database
-    private void saveToDatabase(int editType, String oldValue, String newValue) {
+    private void saveToDatabase(int editType, String newValue) {
         // Your code to save values to the database goes here
         System.out.println("Saving to database:");
         System.out.println("Edit Type: " + editType);
-        System.out.println("Old Value: " + oldValue);
         System.out.println("New Value: " + newValue);
         // Add database saving logic here
     }

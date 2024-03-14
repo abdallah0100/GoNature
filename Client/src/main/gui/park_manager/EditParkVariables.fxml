@@ -78,7 +78,7 @@
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font></Label>
-                              <Text fx:id="editTypeText" fill="#f8f4f4" fontSmoothingType="LCD" layoutX="118.0" layoutY="67.0" stroke="#e8e2e2" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit type :">
+                              <Text fx:id="editTypeText" fill="#eeeaea" fontSmoothingType="LCD" layoutX="32.0" layoutY="66.0" stroke="#e8e2e2" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit type :">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="18.0" />
                                  </font>
