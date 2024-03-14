@@ -60,7 +60,7 @@ public class EditParkVariablesController {
     public void editGap(ActionEvent event) {
         updateEditType("Gap");
     }
-
+///
     // Method called when edit button is clicked
     @FXML
     public void edit(ActionEvent event) throws Exception{
