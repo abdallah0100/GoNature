@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
@@ -65,13 +66,13 @@
       </Pane>
       <Pane fx:id="rightPane" layoutX="188.0" layoutY="54.0" prefHeight="377.0" prefWidth="427.0" style="-fx-border-color: white; -fx-border-width: 1 0 0 1;">
          <children>
-            <Text fill="WHITE" layoutX="28.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Month:">
+            <Text fill="WHITE" layoutX="30.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Month:">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="parkField" layoutX="109.0" layoutY="70.0" />
-            <Button layoutX="308.0" layoutY="112.0" mnemonicParsing="false" onAction="#fetchData" text="Fetch Data" textFill="WHITE">
+            <TextField fx:id="parkField" layoutX="100.0" layoutY="70.0" prefHeight="25.0" prefWidth="119.0" />
+            <Button fx:id="fetchBtn" layoutX="104.0" layoutY="194.0" mnemonicParsing="false" onAction="#fetchData" text="Fetch Data" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -83,7 +84,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="generateBtn" layoutX="143.0" layoutY="172.0" mnemonicParsing="false" text="Generate" textFill="WHITE" visible="false">
+            <Button fx:id="generateBtn" layoutX="77.0" layoutY="234.0" mnemonicParsing="false" text="Generate Report" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -112,7 +113,7 @@
             </Text>
             <Line endX="28.99993896484375" endY="295.0" layoutX="398.0" layoutY="82.0" startX="29.0" startY="-82.0" strokeWidth="3.0" />
             <Line endX="68.0" endY="145.0" layoutX="359.0" layoutY="232.0" startX="-356.0380859375" startY="145.0" strokeWidth="3.0" />
-            <Button fx:id="cancelBtn" layoutX="305.0" layoutY="314.0" mnemonicParsing="false" onAction="#cancelReportCreation" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancelBtn" layoutX="101.0" layoutY="315.0" mnemonicParsing="false" onAction="#cancelReportCreation" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -134,13 +135,18 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <ComboBox fx:id="monthBox" layoutX="99.0" layoutY="111.0" prefHeight="25.0" prefWidth="60.0" />
-            <ComboBox fx:id="yearBox" layoutX="231.0" layoutY="111.0" prefHeight="25.0" prefWidth="66.0" />
-            <Text fill="WHITE" layoutX="172.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:">
+            <ComboBox fx:id="monthBox" layoutX="100.0" layoutY="111.0" prefHeight="25.0" prefWidth="119.0" />
+            <ComboBox fx:id="yearBox" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="119.0" />
+            <Text fill="WHITE" layoutX="32.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
+            <Label fx:id="msgLabel" layoutX="129.0" layoutY="286.0" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
