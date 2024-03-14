@@ -7,7 +7,7 @@ import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
 import requests.Message;
 import requests.RequestType;
-
+//
 public class ServerRequestHandler {
 
 	public static void handleRequest(Message msg, ConnectionToClient client) {
