@@ -46,19 +46,23 @@ public class EditParkVariablesController  extends Application {
 	}
 		    
 		    
-	public void editEstimatedTime(ActionEvent e){
+	public void editEstimatedTime(ActionEvent e)
+	{
 		
 	}
 		    
-	public void editGap(ActionEvent e ) {   
+	public void editGap(ActionEvent e ) 
+	{   
 		
 	}
 	
-	public void edit(ActionEvent e ) {
+	public void edit(ActionEvent e ) 
+	{
 	    	
 	}
 		    
-	public void editVisitor(ActionEvent e) {
+	public void editVisitor(ActionEvent e) 
+	{
 	    	
 	}
 }

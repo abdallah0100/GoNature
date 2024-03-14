@@ -2,16 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@DepManagerMainFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
    <children>
-      <Button fx:id="confirmChangeRequestBtn" layoutX="3.0" layoutY="213.0" mnemonicParsing="false" onAction="#confirmChange" prefHeight="30.0" prefWidth="147.0" text="Confirm Change Request" textFill="WHITE">
+      <Button fx:id="confirmChangeRequestBtn" layoutX="5.0" layoutY="231.0" mnemonicParsing="false" onAction="#confirmChange" prefHeight="30.0" prefWidth="147.0" text="Confirm Change Request" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="10.0" />
+            <Font name="Arial Bold" size="11.0" />
          </font>
          <effect>
             <DropShadow>
@@ -21,9 +24,9 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="generateReportBtn" layoutX="4.0" layoutY="273.0" mnemonicParsing="false" onAction="#generateReport" text="Generate Report" textFill="WHITE">
+      <Button fx:id="generateReportBtn" layoutX="15.0" layoutY="293.0" mnemonicParsing="false" onAction="#generateReport" prefHeight="30.0" prefWidth="130.0" text="Generate Report" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="16.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font>
          <effect>
             <DropShadow>
@@ -33,9 +36,9 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="viewReportsBtn" layoutX="16.0" layoutY="143.0" mnemonicParsing="false" onAction="#viewReports" text="View Reports" textFill="WHITE">
+      <Button fx:id="viewReportsBtn" layoutX="19.0" layoutY="173.0" mnemonicParsing="false" onAction="#viewReports" prefHeight="30.0" prefWidth="122.0" text="View Reports" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="16.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font>
          <effect>
             <DropShadow>
@@ -45,15 +48,23 @@
             </DropShadow>
          </effect>
       </Button>
-      <Label layoutX="13.0" layoutY="70.0" text="Welcome back," textFill="WHITE">
+      <Label layoutX="6.0" layoutY="102.0" text="Welcome back," textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="106.0" prefHeight="21.0" prefWidth="189.0" text="Department Manager" textFill="WHITE">
+      <Label layoutX="6.0" layoutY="123.0" prefHeight="21.0" prefWidth="147.0" text="Department Manager" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="12.0" />
+            <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
+      <ImageView fitHeight="92.0" fitWidth="122.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+         </effect>
+      </ImageView>
    </children>
 </Pane>
