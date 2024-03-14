@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
+import main.controllers.UserRequestController;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -51,6 +52,8 @@ public class MainFrameController extends Application implements Initializable{
 	@FXML
 	public void logout(ActionEvent event) {
 		ClientController.connectedVisitor = null;
+		ClientController.connectedUser=null;
+		UserRequestController.LogedIn = false;
 		LoginOptionController landingFrame = new LoginOptionController();
 		SceneController.switchFrame("GoNature", event, landingFrame);
 	}
@@ -67,11 +70,33 @@ public class MainFrameController extends Application implements Initializable{
 		ClientUI.contentPane = contentPane;
 		ClientUI.leftNavPane = leftNavPane;
 		ClientUI.headerPane = headerPane;
+		setUpHeaderDrag();
 		SceneController scene = new SceneController();
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
 		}
-		
+		else if(ClientController.connectedUser != null) {
+			 switch (ClientController.connectedUser.getRole()) {
+	            case "depManager":
+	            	scene.setPane(leftNavPane, "/main/gui/dep_manager/DepManagerMainFrame.fxml");
+	                break;
+	            case "entryManager":     	
+	            	scene.setPane(leftNavPane, "/main/gui/entry_worker/EntryWorkerFrame.fxml");	     
+	            	break;
+	            case "parkManager":
+	            	scene.setPane(leftNavPane,"/main/gui/park_manager/parkManagerSidePane.fxml");	
+	                break;     
+	            case "serviceAgent":
+	            	scene.setPane(contentPane,"/main/gui/service_agent/RegisterInstructorFrame.fxml");		
+	                break;
+	            default:
+	            	System.out.println("connectedUser.getRole wrong");
+	                break;		
+			 }		
+		}
+	}
+	
+	public void setUpHeaderDrag() {
 		// making the client dragable from the header
 		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
@@ -90,7 +115,5 @@ public class MainFrameController extends Application implements Initializable{
                 yOffset = stage.getY() - event.getScreenY();
             }
         });
-			
 	}
-
 }

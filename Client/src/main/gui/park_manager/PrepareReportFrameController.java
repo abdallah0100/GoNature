@@ -3,76 +3,76 @@ package main.gui.park_manager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import utilities.SceneController;
+import javafx.scene.text.Text;
 
-public class PrepareReportFrameController extends Application implements Initializable{
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
+public class PrepareReportFrameController implements Initializable{
 	
 	@FXML
-	private Label reportTypeHeader;
-	@FXML
-	private Pane createReportPane;
-	@FXML
-	private Label reportType;
+	private Text reportType;
 	@FXML
 	private DatePicker dateField;
 	@FXML
-	private TextField parkNameField;
-
-
-	/**
-    * @param primaryStage the primary stage for the application
-    * @throws Exception if an error occurs during initialization
-	*/
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Park Manager", primaryStage,
-						  "/main/gui/park_manager/PrepareReportFrame.fxml");
-	}
-	
+	private Pane rightPane;
+	@FXML
+	private TextField nameField;
+	@FXML
+	private TextField parkField;
+	@FXML
+	private Text dataValue;
+	@FXML
+	private Text reportDataTxt;	
+	@FXML
+	private Button generateBtn;
+	@FXML
+	private Button cancelBtn;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		reportTypeHeader.setText("Select report type that\n   you wish to create:");
 		
 	}
 	
-	public void createVisitorNumReport(ActionEvent event) {
+	@FXML
+	public void showReportPane(ActionEvent event) {
 		resetValues();
-		reportType.setText("Type: Visitor Number Report");
-		createReportPane.setVisible(true);
+		Button btn = (Button) event.getSource();
+		reportType.setText(btn.getText());
+		rightPane.setVisible(true);
 	}
-	public void createEmptyParkReport(ActionEvent event) {
-		resetValues();
-		reportType.setText("Type: Empty Park Report");
-		createReportPane.setVisible(true);
-	}
-	public void showReports(ActionEvent event) {
-		
-	}
-	public void confirmReportCreation(ActionEvent event) {
-		
-	}
+	
+	@FXML
 	public void cancelReportCreation(ActionEvent event) {
 		resetValues();
-		createReportPane.setVisible(false);
+		rightPane.setVisible(false);
 	}
+	
+	@FXML
+	public void fetchData(ActionEvent event) {
+		reportDataTxt.setText(reportType.getText());
+		reportDataTxt.setVisible(true);
+		dataValue.setVisible(true);
+		
+		cancelBtn.setLayoutX(216);
+		generateBtn.setVisible(true);
+		
+	}
+	
 	private void resetValues() {
+		cancelBtn.setLayoutX(135);
+		
+		reportDataTxt.setVisible(false);
+		dataValue.setVisible(false);
+		generateBtn.setVisible(false);
+		
+		parkField.setText("");
+		nameField.setText("");
 		dateField.setValue(null);
-		parkNameField.setText("");
 	}
 
 }

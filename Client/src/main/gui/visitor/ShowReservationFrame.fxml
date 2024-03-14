@@ -2,20 +2,28 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ShowReservationFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ShowReservationFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ShowReservationFrameController">
    <children>
-      <Label layoutX="256.0" layoutY="49.0" prefHeight="25.0" prefWidth="94.0" text="Reservations " textAlignment="CENTER">
+      <Label layoutX="236.0" layoutY="23.0" prefHeight="27.0" prefWidth="158.0" text="Reservations " textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="Arial Bold" size="24.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
-      <TableView layoutX="51.0" layoutY="78.0" prefHeight="272.0" prefWidth="504.0">
+      <TableView layoutX="48.0" layoutY="64.0" prefHeight="272.0" prefWidth="504.0">
         <columns>
           <TableColumn fx:id="siteColumn" prefWidth="106.66665267944336" text="Site" />
           <TableColumn fx:id="dateColumn" prefWidth="104.00004577636719" text="Date" />
@@ -24,8 +32,16 @@
             <TableColumn fx:id="visitorNumberColumn" prefWidth="113.33331298828125" text="Visitors Number" />
         </columns>
       </TableView>
-      <Button fx:id="updateBtn" layoutX="525.0" layoutY="355.0" mnemonicParsing="false" text="Update " />
-      <Separator layoutX="-3.0" layoutY="31.0" prefHeight="18.0" prefWidth="606.0" />
-      <Label layoutX="272.0" layoutY="14.0" text="GoNature" />
+      <Button fx:id="updateBtn" layoutX="486.0" layoutY="354.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="95.0" text="Update " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
    </children>
 </Pane>

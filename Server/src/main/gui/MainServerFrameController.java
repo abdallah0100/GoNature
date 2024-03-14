@@ -142,7 +142,7 @@ public class MainServerFrameController extends Application implements Initializa
 			statusCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("connectionStatus"));	
 		}
 		else
-			displayErrorMsg("Server failed to start.", -1);
+			displayErrorMsg("Server failed to start", -1);
 	}
 	public void displayErrorMsg(String msg, int x) {
 		msgLabel.setText(msg);
@@ -160,10 +160,10 @@ public class MainServerFrameController extends Application implements Initializa
 			dbPassField.setDisable(true);
 			
 			serverStatusLabel.setText("Online");
-			serverStatusLabel.setTextFill(Color.valueOf("green"));
+			serverStatusLabel.setTextFill(Color.valueOf("#00ff22"));
 			if (MainServer.dbConnection != null) {
 				DBStatusLabel.setText("Connected");
-				DBStatusLabel.setTextFill(Color.valueOf("green"));
+				DBStatusLabel.setTextFill(Color.valueOf("#00ff22"));
 			}else
 				DBStatusLabel.setTextFill(Color.valueOf("red"));
 			

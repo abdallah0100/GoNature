@@ -2,30 +2,87 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ValidationFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ValidationFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ValidationFrameController">
    <children>
-      <Line endX="441.0" layoutX="159.0" layoutY="64.0" startX="-159.0" />
-      <Label layoutX="252.0" layoutY="34.0" text="GoNature">
+      <Label layoutX="247.0" layoutY="6.0" text="GoNature" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Arial Bold" size="28.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
-      <Label layoutX="255.0" layoutY="116.0" text="Validation">
+      <Label layoutX="261.0" layoutY="111.0" text="Validation" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Arial Bold" size="20.0" />
          </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
       </Label>
-      <Label layoutX="161.0" layoutY="183.0" text="EnterID" />
+      <Label layoutX="146.0" layoutY="182.0" prefHeight="20.0" prefWidth="86.0" text="Enter ID :" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font></Label>
       <TextField fx:id="idField" layoutX="237.0" layoutY="179.0" />
       <VBox layoutX="532.0" layoutY="19.0" />
-      <Button layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#Exit" style="-fx-background-color: red;" styleClass="background" text="X" />
-      <Button layoutX="277.0" layoutY="231.0" mnemonicParsing="false" onAction="#validate" text="LogIn" />
-      <Label fx:id="msgLabel" layoutX="281.0" layoutY="281.0" text="Label" visible="false" />
+      <Button fx:id="exitbtn" layoutX="564.0" layoutY="4.0" mnemonicParsing="false" onAction="#Exit" prefHeight="17.0" prefWidth="28.0" style="-fx-background-color: red;" styleClass="background" text="X">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Button fx:id="loginBtn" layoutX="266.0" layoutY="237.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="86.0" text="LogIn" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Label fx:id="msgLabel" layoutX="176.0" layoutY="281.0" prefHeight="30.0" prefWidth="306.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.18421052396297455" green="0.17653508484363556" blue="0.17653508484363556" />
+               </color>
+            </DropShadow>
+         </effect></Label>
+      <Separator layoutY="34.0" prefHeight="8.0" prefWidth="600.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>
