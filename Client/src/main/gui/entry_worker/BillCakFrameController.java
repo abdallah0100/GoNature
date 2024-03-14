@@ -20,6 +20,9 @@ public class BillCakFrameController   extends Application {
 	
 	@FXML
 	private Label msgLabel;
+	
+	@FXML
+	private Label billLabel;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -42,10 +45,18 @@ public class BillCakFrameController   extends Application {
 			displayMSG("Please enter the  Bill Id");
 			return;
 		}
+		try {
+			Integer.parseInt(visitorid.getText());
+		}catch(Exception ex) {
+			displayMSG("Invalid id was inputted");
+			return;
+		}
 		UserRequestController.sendShowBill(visitorid.getText());
 		msgLabel.setVisible(false);
+		billLabel.setVisible(false);
 		if (ClientController.connectedUser.getRequestedBill()!= null) {
-			displayMSG(ClientController.connectedUser.getRequestedBill());
+			billLabel.setVisible(true);
+			billLabel.setText(ClientController.connectedUser.getRequestedBill());
 			}
 			 else {
 				System.out.println("[BillCakFrameController] - did no bill");
