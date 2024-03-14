@@ -60,10 +60,10 @@ public class LogInFrameController extends Application implements Initializable {
 		UserRequestController.sendUserLogIn(userNameTxt.getText(), passwordTxt.getText());
 		if (UserRequestController.LogedIn) {
 			SceneController.switchFrame("GoNature",e,new MainFrameController());
-			}
-			 else {
-				System.out.println("[LogInFrameController] - did not finished LogIn");
-				displayError("User Not Found");
+		}
+		else {
+			System.out.println("[LogInFrameController] - did not finished LogIn");
+			displayError("User Not Found");
 		}
 	}
 	
