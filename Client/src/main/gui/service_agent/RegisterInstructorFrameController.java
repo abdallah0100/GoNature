@@ -5,41 +5,29 @@ package main.gui.service_agent;
 
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.BorderFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import main.ClientController;
 import main.controllers.UserRequestController;
-import main.gui.MainFrameController;
 import utilities.SceneController;
 
 
 public class RegisterInstructorFrameController extends Application{
-	  @FXML
+	public static int result;
+	  	@FXML
 	    private Button btnRegister;
-
-	    @FXML
+	  	@FXML
+		private TextField instructorName;
+	  	@FXML
 	    private TextField instructorEmail;
-
 	    @FXML
 	    private TextField instructorID;
-
-	    @FXML
-	    private TextField instructorName;
-
 	    @FXML
 	    private TextField instructorTelephone;
-
 	    @FXML
 	    private Label label;
 	    
@@ -70,35 +58,35 @@ public class RegisterInstructorFrameController extends Application{
 	public void register(ActionEvent e) {//we will check all the fields are not empty and not in database to add
 		
        try {
-    	  
-		if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()
-				&&!instructorTelephone.getText().isEmpty()&&!instructorName.getText().isEmpty())
-		{
-			instructorID.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-			instructorEmail.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-			instructorTelephone.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-			instructor_name=instructorName.getText();
-			instructor_id=instructorID.getText();
-			instructor_email=instructorEmail.getText();
-			instructor_tel=instructorTelephone.getText();
-		  UserRequestController.insertInstructor(instructor_id,instructor_name,instructor_email,instructor_tel);
-		  if (ClientController.result==1) {
-				label.setText("Registered");
-		  }
-		  	else if(ClientController.result==0){
-				label.setText("Allready Registered ");
-			}
-		}else {
-			if(instructorID.getText().isEmpty())
-				instructorID.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-			
-			if(instructorEmail.getText().isEmpty())
-				instructorEmail.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-			
-			if(instructorTelephone.getText().isEmpty())
-				instructorTelephone.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-			label.setText("Fill Empty Fields !");
-		 }
+	    	  
+			if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()
+					&&!instructorTelephone.getText().isEmpty()&&!instructorName.getText().isEmpty())
+			{
+				instructorID.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+				instructorEmail.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+				instructorTelephone.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
+				instructor_name=instructorName.getText();
+				instructor_id=instructorID.getText();
+				instructor_email=instructorEmail.getText();
+				instructor_tel=instructorTelephone.getText();
+			  UserRequestController.insertInstructor(instructor_id,instructor_name,instructor_email,instructor_tel);
+			  if (RegisterInstructorFrameController.result==1) {
+					label.setText("Registered");
+			  }
+			  	else if(RegisterInstructorFrameController.result==0){
+					label.setText("Allready Registered ");
+				}
+			}else {
+				if(instructorID.getText().isEmpty())
+					instructorID.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+				
+				if(instructorEmail.getText().isEmpty())
+					instructorEmail.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+				
+				if(instructorTelephone.getText().isEmpty())
+					instructorTelephone.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+				label.setText("Fill Empty Fields !");
+			 }
 				
 		}catch(Exception ex){
 			label.setText("error");
