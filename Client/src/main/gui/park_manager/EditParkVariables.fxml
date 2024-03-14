@@ -9,8 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@EditParkVariablesFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.EditParkVariablesController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@EditParkVariablesFrameCss.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.EditParkVariablesController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="592.0">
          <children>
@@ -18,7 +19,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                        <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
                      </color>
                   </DropShadow>
                </effect>
@@ -29,7 +30,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                        <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
                      </color>
                   </DropShadow>
                </effect>
@@ -49,7 +50,7 @@
                                  <effect>
                                     <DropShadow>
                                        <color>
-                                          <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                                          <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
                                        </color>
                                     </DropShadow>
                                  </effect></Button>
@@ -57,7 +58,7 @@
                                  <effect>
                                     <DropShadow>
                                        <color>
-                                          <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                                          <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
                                        </color>
                                     </DropShadow>
                                  </effect></TextField>
@@ -65,7 +66,7 @@
                                  <effect>
                                     <DropShadow>
                                        <color>
-                                          <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                                          <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
                                        </color>
                                     </DropShadow>
                                  </effect></TextField>
@@ -77,6 +78,11 @@
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />
                                  </font></Label>
+                              <Text fx:id="editTypeText" fill="#f8f4f4" fontSmoothingType="LCD" layoutX="118.0" layoutY="67.0" stroke="#e8e2e2" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit type :">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="18.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </AnchorPane>
                      </children>
@@ -90,7 +96,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                        <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
                      </color>
                   </DropShadow>
                </effect></Button>
@@ -101,7 +107,7 @@
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                        <Color blue="0.2980392277240753" green="0.7686274647712708" red="0.2980392277240753" />
                      </color>
                   </DropShadow>
                </effect></Label>
