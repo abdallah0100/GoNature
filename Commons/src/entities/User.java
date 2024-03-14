@@ -10,7 +10,6 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String firstName;
 	private String lastName;
-	private String username;
 	private String password;
 	private String id;
 	private String workerNumber;
@@ -18,11 +17,11 @@ public class User implements Serializable{
 	private String role;
 	private String parkWork;
 	private boolean foundInDB;
+	private String requestedBill;
 	
-	public User(String firstName, String lastName, String username,String password,String id, String workerNumber,String email,String role,String parkWork) {
+	public User(String firstName, String lastName,String id,String password ,String workerNumber,String email,String role,String parkWork) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
-		this.setUsername(username);
 		this.setPassword(password);
 		this.setID(id);
 		this.setWorkerNumber(workerNumber);
@@ -31,8 +30,8 @@ public class User implements Serializable{
 		this.setParkWork(parkWork);
 	}
 		 
-	public User (String userName,String password) {
-		this.username = userName;
+	public User (String id,String password) {
+		this.id = id;
 		this.password = password;
 	}
 	
@@ -88,21 +87,10 @@ public class User implements Serializable{
 		this.role = role;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-
 	public String getPassword() {
 		return password;
 	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -119,5 +107,11 @@ public class User implements Serializable{
 	public void setFoundInDB(boolean foundInDB) {
 		this.foundInDB = foundInDB;
 	}
-	 
+	
+	public String getRequestedBill () {
+		return requestedBill ;
+	}
+	public void setRequestedBill(String requestedBill) {
+		this.requestedBill = requestedBill;
+	} 
 }
