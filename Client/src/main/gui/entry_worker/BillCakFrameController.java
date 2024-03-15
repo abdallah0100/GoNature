@@ -77,14 +77,16 @@ public class BillCakFrameController  extends Application {
 					//ביקור קבוצתי בהזמנה
 					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
 					numberOfVisitors--;
-					int x =  (int) (numberOfVisitors* 0.75*Park.price);
+					int x =  (int) (numberOfVisitors* Park.price);
+					x=(int)(x*0.75);
 					x=(int) (x*0.88);
 					displayMSG(String.valueOf(x));
 					return;
 				}
 				else {
 					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					int x =  (int) (numberOfVisitors* 0.90*Park.price);
+					int x =  (int) (numberOfVisitors*Park.price);
+					x=(int)(x* 0.90);
 					displayMSG(String.valueOf(x));
 					return;
 				}
@@ -101,5 +103,7 @@ public class BillCakFrameController  extends Application {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
+	
+	
 }
 

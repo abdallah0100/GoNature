@@ -15,8 +15,10 @@ public class Park {
 	
 	}
 	
-	public String getnamePark() {
+	public String getNamePark() {
 		return parkname;
 	}
-	 
+	public int getPrice() {
+		return price;
+	}
 }
