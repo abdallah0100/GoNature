@@ -1,5 +1,5 @@
 package main.gui.entry_worker;
-import entities.Park;
+import entities.Bill;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,42 +56,9 @@ public class BillCakFrameController  extends Application {
 		UserRequestController.sendShowBill(reservatiomId.getText());
 		msgLabel.setVisible(false);
 		billLabel.setVisible(false);
-		if (ClientController.showBill!= null) {
-			//1 מראש  ביקור אישי 
-			if(ClientController.showBill.getType()=="Individual") {
-				///משפחתי – מוזמן
-				if(ClientController.showBill.getinvited()) {
-					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					int x =  (int) (numberOfVisitors* 0.85*Park.price);
-					displayMSG(String.valueOf(x));
-					return;
-				}
-				else {//מזדמן
-					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					displayMSG(String.valueOf(numberOfVisitors*Park.price));
-					}
-			}
-			else {
-				//ביקור קבוצתי 
-				if(ClientController.showBill.getinvited()) {
-					//ביקור קבוצתי בהזמנה
-					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					numberOfVisitors--;
-					int x =  (int) (numberOfVisitors* Park.price);
-					x=(int)(x*0.75);
-					x=(int) (x*0.88);
-					displayMSG(String.valueOf(x));
-					return;
-				}
-				else {
-					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					int x =  (int) (numberOfVisitors*Park.price);
-					x=(int)(x* 0.90);
-					displayMSG(String.valueOf(x));
-					return;
-				}
-				
-			}			
+		if (ClientController.showBill!=null) 
+		{
+			displayMSG(ClientController.showBill.returnPrice()+"");
 		}
 		else {//if null
 				System.out.println("[BillCakFrameController] - did no bill");
@@ -103,7 +70,5 @@ public class BillCakFrameController  extends Application {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
-	
-	
 }
 

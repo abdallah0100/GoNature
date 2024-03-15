@@ -6,8 +6,8 @@ public class Park {
 	public static int maxNumber=120;
 	public static int availableNumber=0 ;
 	public static int estimatedTime=4;
-	public static int price=40;
-
+	public static int price=50;
+ 
 
 
 	public Park(String parkname) {

@@ -53,15 +53,13 @@ public class UserRequestHandler {
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
 			//reservation
-			ResultSet r1 = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"'");
-			if (!r1.next()) {
+			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"'");
+			if (!rs.next()) {
 				System.out.println("[UserRequestHandler] - r1 result set was empty");
 				return null;
 			}
-
-			//r1(2)=numberOfVisitor,r2(4)=check if the instructor,r1(11)=check if invited ,r1(12) if payed
-			b = new Bill(r1.getString(1),r1.getString(2),r1.getString(12).equals("1"),r1.getString(13).equals("1"));
-			r1.close();
+			b = new Bill(rs.getString(1),rs.getString(2),rs.getString(12).equals("1"),rs.getString(13).equals("1"));
+			rs.close();
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to execute query");
 			ex.printStackTrace();

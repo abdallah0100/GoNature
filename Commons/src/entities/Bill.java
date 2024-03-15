@@ -22,6 +22,12 @@ public class Bill implements Serializable {
 		this.invited=invisted;
 		this.payed=payed;
 	}
+	 public void print() {
+		 System.out.println(getType());
+		 System.out.println(getNumberOfVisitor());
+		 System.out.println(getinvited());
+		 System.out.println(getPayed());
+	 }
 	
 	public Bill(String id) {
 		this.id=id;
@@ -47,8 +53,10 @@ public class Bill implements Serializable {
 		return payed;
 	}
 	 public boolean getIsInstructor() {
-		return isInstructor;
+		return isInstructor; 
 	}
+	 
+
 	public void setNumberOfVisitor(String numberOfVisitor) {
 		this.numberOfVisitor = numberOfVisitor;
 	}
@@ -56,6 +64,51 @@ public class Bill implements Serializable {
 	public void setRequestedBill(String requestedBill) {
 		this.requestedBill = requestedBill;
 	} 
+	
+	public double returnPrice() {
+		//1 מראש  ביקור אישי 
+		if(getType().equals("Individual")) 
+		{
+			
+			if(getinvited() &&getPayed()) {
+				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+				double x =  (double) (numberOfVisitors* 0.85*Park.price);
+				return x;
+			}
+			if(getinvited() && !(getPayed())) {
+				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+				return (numberOfVisitors*Park.price);
+				}
+			if(!(getinvited())) {
+				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+				return (numberOfVisitors*Park.price);
+				}
+		}
+		else {
+			
+			if(getinvited() &&getPayed()) {
+				//ביקור קבוצתי בהזמנה
+				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+				numberOfVisitors--;
+				double x =  (double) (numberOfVisitors* 0.75*Park.price);
+				x=(double) (x*0.88);
+				return x;
+			}
+			if(getinvited() && !(getPayed())) {
+				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+				double x =  (double) (numberOfVisitors* 0.75*Park.price);
+				return x;
+			} 
+			
+			if(!(getinvited())) {
+				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+				double x =  (double) (numberOfVisitors* 0.90*Park.price);
+				return x;
+			}
+			
+		}
+		return 0;	
+	}
 
 
 }
