@@ -15,7 +15,7 @@ import utilities.SceneController;
 public class EntryWorkerFrameController extends Application{
 	
 	 @FXML
-	 private Button checkAvailablePlacesBtn;
+	 private Button createReservations;
 	 
 	 @FXML
 	 private Button viewBillBtn;
@@ -38,21 +38,6 @@ public class EntryWorkerFrameController extends Application{
 	}
 	
 	
-	
-	/***
-	 * This method responsible for hiding EntryWorker window
-	 * after clicking on checkAvailablePlaces button and
-	 * new window is opened for the Available Places that the 
-	 * EntryWorker can check.
-	 * @param event
-	 */
-
-	public void checkAvailablePlaces(ActionEvent event) {
-		String s="availablePlaceFrameController";
-		AvailablePlacesFrameController availablePlaceFrame = new AvailablePlacesFrameController();
-		SceneController.switchFrame(s, event, availablePlaceFrame);
-	}
-		
 	/***
 	 * This method responsible for hiding EntryWorker window
 	 * after clicking on View Bill button and

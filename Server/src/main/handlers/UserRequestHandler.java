@@ -3,6 +3,7 @@ package main.handlers;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import entities.Bill;
 import entities.User;
 import entities.Visitor;
 import main.Constants;
@@ -43,27 +44,36 @@ public class UserRequestHandler {
 		return u;
 	}
 	
-	public static String billExists(String id){
+	public static Bill billExists(Bill b1){
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
 		}
-		String bill;
+		Bill b;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM bill WHERE ID='"+id+"'");
-			if (!rs.next()) {
-				System.out.println("[UserRequestHandler] - result set was empty");
+			//reservation
+			ResultSet r1 = st.executeQuery("SELECT * FROM reservations WHERE ReservationsId='"+b1.getId()+"'");
+			if (!r1.next()) {
+				System.out.println("[UserRequestHandler] - r1 result set was empty");
 				return null;
 			}
-			bill = rs.getString(2);
-			rs.close();
+			//visitor (isntructor)
+			ResultSet r2 = st.executeQuery("SELECT * FROM visitors WHERE ID='"+r1.getString(10)+"'");
+			if (!r2.next()) {
+				System.out.println("[UserRequestHandler] - r2 result set was empty");
+				return null;
+			}
+			//r1(2)=numberOfVisitor,r2(4)=check if the instructor,r1(11)=check if invited
+			b = new Bill(r1.getString(2),r2.getString(4).equals(1),r1.getString(11).equals(1),r1.getString(12).equals(1));
+			r1.close();
+			r2.close();
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to execute query");
 			ex.printStackTrace();
 			return null;
 		}
-		return bill;
+		return b;
 	}
 	
 	public static int instructorExists(Visitor v) {

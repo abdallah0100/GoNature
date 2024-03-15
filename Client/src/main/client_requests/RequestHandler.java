@@ -1,5 +1,6 @@
 package main.client_requests;
 
+import entities.Bill;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
@@ -38,8 +39,8 @@ public class RequestHandler {
 					return;
 				}
 		case REQUEST_BILL:
-				if (msg.getRequestData() instanceof String) {
-					ClientController.connectedUser.setRequestedBill((String) msg.getRequestData());
+				if (msg.getRequestData() instanceof Bill) {
+					ClientController.showBill=((Bill) msg.getRequestData());
 					return; 
 				}
 				else {

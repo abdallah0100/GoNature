@@ -1,5 +1,6 @@
 package main.controllers;
 
+import entities.Bill;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
@@ -14,7 +15,7 @@ public class UserRequestController {
 	}
 	
 	public static void sendShowBill(String id) {
-		ClientController.getController().accept(new Message(RequestType.REQUEST_BILL,id));
+		ClientController.getController().accept(new Message(RequestType.REQUEST_BILL,new Bill(id)));
 	}
 	
 	public static void insertInstructor(String instructor_id,String instructorName,String instructor_email,String instructor_tel) {
