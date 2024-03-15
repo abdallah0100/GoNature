@@ -10,6 +10,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import main.ClientController;
+import requests.Message;
+import requests.RequestType;
 
 
 public class EditParkVariablesController {
@@ -46,19 +49,19 @@ public class EditParkVariablesController {
     // Method called when EditEstimatedTime button is clicked
     @FXML
     public void editEstimatedTime(ActionEvent event) {
-        updateEditType("Estimated Time");
+    	currentEditType = 1;
     }
 
     // Method called when EditVisitor button is clicked
     @FXML
     public void editVisitor(ActionEvent event) {
-        updateEditType("Visitor");
+    	currentEditType = 2;
     }
 
     // Method called when editGap button is clicked
     @FXML
     public void editGap(ActionEvent event) {
-        updateEditType("Gap");
+    	currentEditType = 3;
     }
 ///
     // Method called when edit button is clicked
@@ -70,7 +73,7 @@ public class EditParkVariablesController {
             if (newVal.isEmpty()) {
                 throw new IllegalArgumentException("the value is empty");
             } else {
-                saveToDatabase(currentEditType, newVal);
+            	sendEditsToServer(currentEditType, newVal);
                 System.out.println("Data saved to database successfully.");
             }
         } catch (Exception e) {
@@ -79,18 +82,31 @@ public class EditParkVariablesController {
         }
     }
 
-    // Method to update the edit type Text
-    private void updateEditType(String editType) {
-        editTypeText.setText("Edit Type: " + editType);
-        newValue.setText(""); // Clear new value field
-    }
 
     // Method to save values to the database
-    private void saveToDatabase(int editType, String newValue) {
+    private void sendEditsToServer(int editType, String newValue) {
+    	String editName = null;
+    	if (editType ==3)
+    	{
+    		editName="Gap";
+    	}
+    	else if(editType == 1)
+    	{
+    		editName = "Estimated Time";
+    	}
+    	else if(editType == 2)
+    	{
+    		editName = "Visitor";
+    	}
         // Your code to save values to the database goes here
-        System.out.println("Saving to database:");
         System.out.println("Edit Type: " + editType);
         System.out.println("New Value: " + newValue);
         // Add database saving logic here
+        int NewValue = Integer.parseInt(newValue);
+        Object data = new Object[] {editName, NewValue};
+
+     // Create a Message object with the request type and data
+     Message message = new Message(RequestType.INSERT_EDITS, data);
+	//clientController.accept(message);
     }
 }
