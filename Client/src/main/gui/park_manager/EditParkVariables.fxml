@@ -54,14 +54,6 @@
                                        </color>
                                     </DropShadow>
                                  </effect></Button>
-                              <TextField fx:id="oldValue" layoutX="129.0" layoutY="98.0" prefHeight="25.0" prefWidth="170.0">
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color blue="0.3686274588108063" green="0.3960784375667572" red="0.364705890417099" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect></TextField>
                               <TextField fx:id="newValue" layoutX="129.0" layoutY="158.0" prefHeight="25.0" prefWidth="170.0">
                                  <effect>
                                     <DropShadow>
@@ -70,10 +62,6 @@
                                        </color>
                                     </DropShadow>
                                  </effect></TextField>
-                              <Label layoutX="23.0" layoutY="100.0" prefHeight="21.0" prefWidth="106.0" text="Old Value :" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="18.0" />
-                                 </font></Label>
                               <Label layoutX="23.0" layoutY="160.0" prefHeight="21.0" prefWidth="106.0" text="New Value :" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold" size="18.0" />

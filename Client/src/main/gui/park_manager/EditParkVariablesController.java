@@ -64,7 +64,7 @@ public class EditParkVariablesController {
     // Method called when edit button is clicked
     @FXML
     public void edit(ActionEvent event) throws Exception{
-        // Save the old and new values to the database
+        // Save the new values to the database
         String newVal = newValue.getText();
         try {
             if (newVal.isEmpty()) {
@@ -79,7 +79,7 @@ public class EditParkVariablesController {
         }
     }
 
-    // Method to update the edit type and fields
+    // Method to update the edit type Text
     private void updateEditType(String editType) {
         editTypeText.setText("Edit Type: " + editType);
         newValue.setText(""); // Clear new value field
