@@ -62,13 +62,13 @@ public class BillCakFrameController  extends Application {
 				///משפחתי – מוזמן
 				if(ClientController.showBill.getinvited()) {
 					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					int x =  (int) (numberOfVisitors* 0.85);
+					int x =  (int) (numberOfVisitors* 0.85*Park.price);
 					displayMSG(String.valueOf(x));
 					return;
 				}
 				else {//מזדמן
 					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					displayMSG(String.valueOf(numberOfVisitors));
+					displayMSG(String.valueOf(numberOfVisitors*Park.price));
 					}
 			}
 			else {
@@ -77,21 +77,21 @@ public class BillCakFrameController  extends Application {
 					//ביקור קבוצתי בהזמנה
 					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
 					numberOfVisitors--;
-					int x =  (int) (numberOfVisitors* 0.75);
+					int x =  (int) (numberOfVisitors* 0.75*Park.price);
 					x=(int) (x*0.88);
 					displayMSG(String.valueOf(x));
 					return;
 				}
 				else {
 					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
-					int x =  (int) (numberOfVisitors* 0.90);
+					int x =  (int) (numberOfVisitors* 0.90*Park.price);
 					displayMSG(String.valueOf(x));
 					return;
 				}
 				
 			}			
 		}
-			else {//if null
+		else {//if null
 				System.out.println("[BillCakFrameController] - did no bill");
 				displayMSG("reservation Not Found");
 			 }
@@ -101,6 +101,5 @@ public class BillCakFrameController  extends Application {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
-	
-	
 }
+

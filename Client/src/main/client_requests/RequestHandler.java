@@ -46,7 +46,7 @@ public class RequestHandler {
 					return; 
 				}
 				else {
-					ClientController.connectedUser.setRequestedBill(null);
+					ClientController.showBill=null;
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
 				}
@@ -59,7 +59,7 @@ public class RequestHandler {
 					return; 
 				}
 				else {
-					ClientController.connectedUser.setRequestedBill(null);
+					RegisterInstructorFrameController.result=-1;//fail
 					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
 					return;
 				}

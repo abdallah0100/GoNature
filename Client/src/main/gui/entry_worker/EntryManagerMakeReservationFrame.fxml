@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.EntryManagerMakeReservationFrameController">
+   <children>
+      <Label layoutX="39.0" layoutY="41.0" prefHeight="25.0" prefWidth="290.0" text="Entry Manager Make Reservation" textAlignment="RIGHT" underline="true">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="48.0" layoutY="105.0" prefHeight="18.0" prefWidth="63.0" text="Type :">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="146.0" prefHeight="20.0" prefWidth="134.0" text="Visitors Number :">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="209.0" prefHeight="20.0" prefWidth="88.0" text="Park Site :">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="258.0" prefHeight="18.0" prefWidth="63.0" text="Phone :">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="301.0" prefHeight="18.0" prefWidth="63.0" text="Email :">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="orderType" layoutX="192.0" layoutY="103.0" prefWidth="150.0" />
+      <TextField fx:id="numOfVisitorsField" layoutX="192.0" layoutY="143.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <ComboBox fx:id="parkNameField" layoutX="189.0" layoutY="206.0" prefWidth="150.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ComboBox>
+      <TextField fx:id="phoneField" layoutX="190.0" layoutY="255.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <TextField fx:id="emailField" layoutX="190.0" layoutY="298.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TextField>
+      <Button fx:id="bookBtn" layoutX="473.0" layoutY="349.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="82.0" text="Book">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+   </children>
+</Pane>
