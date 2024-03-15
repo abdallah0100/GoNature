@@ -2,6 +2,7 @@ package main.handlers;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import entities.Order;
 
 import entities.Visitor;
 import main.Constants;
@@ -35,7 +36,7 @@ public class VisitorRequestHandler {
 				System.out.println("[VisitorRequestHandler] - result set was empty");
 				return null;
 			}
-			v = new Visitor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4).equals("1"));;
+			v = new Visitor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4).equals("1"));
 			rs.close();
 		}catch(Exception ex) {
 			System.out.println("[VisitorRequestHandler] - failed to execute query");
@@ -44,5 +45,22 @@ public class VisitorRequestHandler {
 		}
 		return v;
 	}
-	
+
+	public static Order handleMakeReservationRequest(Order o) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return null;
+		}
+		try{
+			Statement st = MainServer.dbConnection.createStatement();
+		    int s = st.executeUpdate( "INSERT INTO reservations (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,isConfirmed)" + " VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"',FALSE)");
+		    if(s<=0)return null;
+		}catch(Exception ex) {
+			System.out.println("[VisitorRequestHandler] - failed to execute query");
+			ex.printStackTrace();
+			return null;}
+		return o;
+			
+	}
+
 }

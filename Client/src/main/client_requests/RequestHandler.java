@@ -1,5 +1,6 @@
 package main.client_requests;
 
+import entities.Order;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
@@ -36,6 +37,17 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
+			case MAKE_RESERVATION:
+				if (msg.getRequestData() instanceof Order) {
+					ClientController.reservationMade = (Order) msg.getRequestData();
+					VisitorRequestController.finishedMakingReservation = true;
+					return;
+				}
+				else {
+					System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
+					return;
+				}
+				
 			default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

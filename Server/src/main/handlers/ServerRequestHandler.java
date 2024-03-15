@@ -1,6 +1,6 @@
 package main.handlers;
-
 import java.io.IOException;
+import entities.Order;
 
 import entities.User;
 import entities.Visitor;
@@ -37,6 +37,14 @@ public class ServerRequestHandler {
 			}
 			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
+			return;
+		case MAKE_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
+				return;
+			}
+			Order o = VisitorRequestHandler.handleMakeReservationRequest((Order)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
 			
 		default:
