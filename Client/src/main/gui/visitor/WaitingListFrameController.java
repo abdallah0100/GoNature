@@ -2,6 +2,7 @@ package main.gui.visitor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

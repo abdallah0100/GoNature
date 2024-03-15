@@ -23,7 +23,7 @@ public class ClientController {
 	public static User connectedUser;
 	public static Bill showBill;
 	public static String msg;
-	
+	 
 	
 	private ClientController(String host, int port) {
 		try {

@@ -1,5 +1,4 @@
 package main.gui.entry_worker;
-import entities.Bill;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

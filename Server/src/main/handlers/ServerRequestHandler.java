@@ -3,6 +3,7 @@ package main.handlers;
 import java.io.IOException;
 
 import entities.Bill;
+import entities.Report;
 import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
@@ -13,6 +14,10 @@ public class ServerRequestHandler {
 
 	public static void handleRequest(Message msg, ConnectionToClient client) {
 		String generalRespondMsg = "responded with no message.";
+		Report r;
+		Visitor v;
+		User u;
+		boolean result;
 		switch(msg.getRequestEnumType()) {
 		case CONNECT_TO_SERVER:
 			ClientConnectionHandler.handleConnectRequest(client, true);
@@ -27,7 +32,7 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
 			}
-			Visitor v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
+			v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
 			return;
 			
@@ -36,7 +41,7 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
 				return;
 			}
-			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
+			u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
 			
@@ -58,6 +63,36 @@ public class ServerRequestHandler {
 		}
 			int x=UserRequestHandler.instructorExists((Visitor) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.INSERT_INSTRUCTOR, x));
+			return;
+		case FETCH_RESERVATION_DATA:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> fetching data)"));
+				return;
+			}
+			r = (Report) msg.getRequestData();
+			int individuals = ReportRequestHandler.getReservationCountByType("Individual", r);
+			int group = ReportRequestHandler.getReservationCountByType("Organized Group", r);
+			boolean reportExist = ReportRequestHandler.reportExist(r);
+			r.setReportExist(reportExist);
+			r.setIndividuals(individuals);
+			r.setGroups(group);
+			respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, r));
+		return;
+		case CREATE_REPORT:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> Creation)"));
+				return;
+			}
+			r = (Report) msg.getRequestData();
+			if (r.isReportExist()) {
+				result = ReportRequestHandler.updateReport(r);
+				generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
+			}
+			else {
+				result = ReportRequestHandler.insertNewReport(r);
+				generalRespondMsg = result ? "Successfully created report" : "Error creating report";
+			}
+			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

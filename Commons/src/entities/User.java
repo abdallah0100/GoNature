@@ -42,7 +42,7 @@ public class User implements Serializable{
 		return lastName;
 	}
 
-	public String getID() {
+	public String getUsername() {
 		return userName;
 	}
 

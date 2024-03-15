@@ -9,7 +9,9 @@ public enum RequestType {
 	VALIDATE_VISITOR(6),
 	LOGIN_USER(7),
 	REQUEST_BILL(8),
-	INSERT_INSTRUCTOR(9)
+	INSERT_INSTRUCTOR(9),
+	FETCH_RESERVATION_DATA(10),
+	CREATE_REPORT(11)
 	;
 	
 	private int requestId;
