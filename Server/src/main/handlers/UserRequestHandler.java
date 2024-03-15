@@ -28,7 +28,7 @@ public class UserRequestHandler {
 		User u;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM users WHERE id ='"+id+"'AND password ='"+password+"'");
+			ResultSet rs = st.executeQuery("SELECT * FROM users WHERE username ='"+id+"'AND password ='"+password+"'");
 			if (!rs.next()) {
 				System.out.println("[UserRequestHandler] - result set was empty");
 				return null;
