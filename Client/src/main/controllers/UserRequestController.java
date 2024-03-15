@@ -1,5 +1,6 @@
 package main.controllers;
 
+import entities.Report;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
@@ -20,5 +21,14 @@ public class UserRequestController {
 	public static void insertInstructor(String instructor_id,String instructorName,String instructor_email,String instructor_tel) {
 		ClientController.getController().accept(new Message(RequestType.INSERT_INSTRUCTOR,
 												new Visitor(instructor_id,instructorName,instructor_email,instructor_tel)));
+	}
+	
+	public static void fetchReportData(String parkName, String month, String year) {
+		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername());
+		ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
+	}
+	
+	public static void createReport(Report r) {
+		ClientController.getController().accept(new Message(RequestType.CREATE_REPORT, r));
 	}
 }
