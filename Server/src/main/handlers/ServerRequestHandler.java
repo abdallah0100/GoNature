@@ -13,6 +13,9 @@ public class ServerRequestHandler {
 
 	public static void handleRequest(Message msg, ConnectionToClient client) {
 		String generalRespondMsg = "responded with no message.";
+		Report r;
+		Visitor v;
+		User u;
 		switch(msg.getRequestEnumType()) {
 		case CONNECT_TO_SERVER:
 			ClientConnectionHandler.handleConnectRequest(client, true);
@@ -27,7 +30,7 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
 			}
-			Visitor v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
+			v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
 			return;
 			
@@ -36,7 +39,7 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
 				return;
 			}
-			User u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
+			u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
 		case REQUEST_BILL:
@@ -60,9 +63,9 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> fetching data)"));
 				return;
 			}
-			int individuals = ReportRequestHandler.getReservationCountByType("Individual");
-			int group = ReportRequestHandler.getReservationCountByType("Organized Group");
-			Report r = (Report) msg.getRequestData();
+			r = (Report) msg.getRequestData();
+			int individuals = ReportRequestHandler.getReservationCountByType("Individual", r);
+			int group = ReportRequestHandler.getReservationCountByType("Organized Group", r);
 			r.setIndividuals(individuals);
 			r.setGroups(group);
 			respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, r));
@@ -72,8 +75,8 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> Creation)"));
 				return;
 			}
-			Report r2 = (Report) msg.getRequestData();
-			boolean result = ReportRequestHandler.insertNewReport(r2);
+			r = (Report) msg.getRequestData();
+			boolean result = ReportRequestHandler.insertNewReport(r);
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, result ? "Successfuly created report" : "Error creating report"));
 			return;
 		default:

@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import main.ClientController;
 import main.controllers.UserRequestController;
+import utilities.Utils;
 
 public class PrepareReportFrameController implements Initializable{
 	
@@ -98,8 +99,9 @@ public class PrepareReportFrameController implements Initializable{
 	@FXML
 	public void fetchData(ActionEvent event) {
 		if (validInput()) {
-			UserRequestController.fetchReportData(parkField.getText(), monthBox.getValue(), yearBox.getValue());
+			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+"", yearBox.getValue());
 			if (report_withData != null) {
+				System.out.println(report_withData.getIndividuals() + ", " + report_withData.getGroups());
 				reportDataTxt.setText(reportType.getText());
 				reportDataTxt.setVisible(true);
 				dataValue.setVisible(true);

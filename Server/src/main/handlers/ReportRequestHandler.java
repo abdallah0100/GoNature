@@ -9,14 +9,16 @@ import main.MainServer;
 
 public class ReportRequestHandler {
 
-	public static int getReservationCountByType(String type) {
+	public static int getReservationCountByType(String type, Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return 0;
 		}
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT COUNT (visitorID) FROM reservations WHERE Type='"+type+"'");
+			String str = "SELECT COUNT(visitorID) FROM reservations WHERE Type='"+type+"' AND Park='"+r.getPark()+"' "
+					+ "AND month(ReservationDate)='"+r.getMonth()+"' AND year(ReservationDate)='"+r.getYear()+"'";
+			ResultSet rs = st.executeQuery(str);
 			if (!rs.next()) {
 				System.out.println("[ReportRequestHandler] - singles result set was empty");
 				return 0;
