@@ -16,8 +16,10 @@ public class ReportRequestHandler {
 		}
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
+			
 			String str = "SELECT COUNT(visitorID) FROM reservations WHERE Type='"+type+"' AND Park='"+r.getPark()+"' "
 					+ "AND month(ReservationDate)='"+r.getMonth()+"' AND year(ReservationDate)='"+r.getYear()+"'";
+
 			ResultSet rs = st.executeQuery(str);
 			if (!rs.next()) {
 				System.out.println("[ReportRequestHandler] - singles result set was empty");
@@ -44,7 +46,7 @@ public class ReportRequestHandler {
 		}
 		try{
 			Statement st = MainServer.dbConnection.createStatement();
-			String str = "INSERT INTO numOfVisitorsReports (month, year, groupNumbers, singles, Park, madeBy) "
+			String str = "INSERT INTO numOfVisitorsReports (month, year, groupNumbers, individuals, Park, madeBy) "
 					+ "VALUES('"+r.getMonth()+"','"+r.getYear()+"','"+r.getGroups()+"','"+r.getIndividuals()+"','"+r.getPark()+"','"+r.getMadeBy()+"')";
 			return st.executeUpdate(str) > 0;
 		}catch(Exception ex) {

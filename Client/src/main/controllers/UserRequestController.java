@@ -24,7 +24,7 @@ public class UserRequestController {
 	}
 	
 	public static void fetchReportData(String parkName, String month, String year) {
-		Report r = new Report(parkName, month, year, ClientController.connectedUser.getID());
+		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername());
 		ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
 	}
 	

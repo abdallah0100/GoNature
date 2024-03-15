@@ -30,7 +30,7 @@
       </Text>
       <Pane layoutY="54.0" prefHeight="377.0" prefWidth="188.0" style="-fx-border-color: white; -fx-border-width: 1 1 0 0;">
          <children>
-            <Button layoutX="12.0" layoutY="153.0" mnemonicParsing="false" onAction="#showReportPane" prefHeight="30.0" prefWidth="168.0" text="Number Of Visitors" textFill="WHITE">
+            <Button fx:id="numOfVisitorBtn" layoutX="12.0" layoutY="153.0" mnemonicParsing="false" onAction="#showReportPane" prefHeight="30.0" prefWidth="168.0" text="Number Of Visitors" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>
@@ -64,7 +64,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="rightPane" layoutX="188.0" layoutY="54.0" prefHeight="377.0" prefWidth="427.0" style="-fx-border-color: white; -fx-border-width: 1 0 0 1;">
+      <Pane fx:id="rightPane" layoutX="188.0" layoutY="54.0" prefHeight="377.0" prefWidth="427.0" style="-fx-border-color: white; -fx-border-width: 1 0 0 1;" visible="false">
          <children>
             <Text fill="WHITE" layoutX="30.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Month:">
                <font>
@@ -84,7 +84,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="generateBtn" layoutX="77.0" layoutY="234.0" mnemonicParsing="false" text="Generate Report" textFill="WHITE" visible="false">
+            <Button fx:id="generateBtn" layoutX="72.0" layoutY="263.0" mnemonicParsing="false" onAction="#generateReport" text="Generate Report" textFill="WHITE" visible="false">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -125,12 +125,12 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Text fx:id="reportDataTxt" fill="WHITE" layoutX="25.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="type" visible="false">
+            <Text fx:id="reportDataTxt1" fill="WHITE" layoutX="25.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="type" visible="false">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="dataValue" fill="WHITE" layoutX="218.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="value" visible="false">
+            <Text fx:id="dataValue1" fill="WHITE" layoutX="218.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="value" visible="false">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -142,11 +142,21 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Label fx:id="msgLabel" layoutX="129.0" layoutY="286.0" text="Label" visible="false">
+            <Label fx:id="msgLabel" layoutX="70.0" layoutY="286.0" text="Fill all fields to continue" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <Text fx:id="reportDataTxt2" fill="WHITE" layoutX="25.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="type" visible="false">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="dataValue2" fill="WHITE" layoutX="218.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="value" visible="false">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

@@ -15,7 +15,7 @@ public class UserRequestHandler {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
 		}
-		User u = userExists(k.getID(),k.getPassword());
+		User u = userExists(k.getUsername(),k.getPassword());
 		return u;
 
 	}

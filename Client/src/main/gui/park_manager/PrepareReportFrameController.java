@@ -32,15 +32,21 @@ public class PrepareReportFrameController implements Initializable{
 	@FXML
 	private TextField parkField;
 	@FXML
-	private Text dataValue;
+	private Text dataValue1;
 	@FXML
-	private Text reportDataTxt;	
+	private Text dataValue2;
+	@FXML
+	private Text reportDataTxt1;	
+	@FXML
+	private Text reportDataTxt2;	
 	@FXML
 	private Button generateBtn;
 	@FXML
 	private Button cancelBtn;
 	@FXML
 	private Button fetchBtn;
+	@FXML
+	private Button numOfVisitorBtn;
 	@FXML
 	private ComboBox<String> monthBox;
 	@FXML
@@ -91,41 +97,53 @@ public class PrepareReportFrameController implements Initializable{
 		if (validInput() && report_withData != null) {
 			UserRequestController.createReport(report_withData);
 			msgLabel.setText(report_withData.getCreationStatus());
-			msgLabel.setTextFill(Color.valueOf("green"));
+			msgLabel.setTextFill(Color.valueOf("blue"));
 			msgLabel.setVisible(true);
+			msgLabel.setLayoutX(241);
+			msgLabel.setLayoutY(270);
+		}else {
+			System.out.println("not valid");
 		}
 	}
 	
 	@FXML
 	public void fetchData(ActionEvent event) {
 		if (validInput()) {
-			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+"", yearBox.getValue());
+			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
 			if (report_withData != null) {
-				System.out.println(report_withData.getIndividuals() + ", " + report_withData.getGroups());
-				reportDataTxt.setText(reportType.getText());
-				reportDataTxt.setVisible(true);
-				dataValue.setVisible(true);
+				if (reportType.getText().equals(numOfVisitorBtn.getText())) {
+					reportDataTxt1.setText("Individual Orders:");
+					reportDataTxt2.setText("Group Orders:");
+					dataValue1.setText(report_withData.getIndividuals() + "");
+					dataValue2.setText(report_withData.getGroups() + "");
+					
+					reportDataTxt2.setVisible(true);
+					dataValue2.setVisible(true);
+				}
+				reportDataTxt1.setVisible(true);
+				dataValue1.setVisible(true);
 				
-				cancelBtn.setLayoutX(216);
 				generateBtn.setVisible(true);
 				fetchBtn.setVisible(false);
 				msgLabel.setVisible(false);
 			}else {
-				displayError("Error fetching data");
+				displayError("Error fetching data", 85);
 			}
 		}else {
 			if (!ClientController.connectedUser.getParkWork().equals(parkField.getText()))
-				displayError("You can only create a report for the park you work at.");
+				displayError("You can only create a report for the park you work at.", 19);
 			else
-				displayError("Fill all fields to continue");
+				displayError("Fill all fields to continue", 70);
 		}
 	}
 	
 	private void resetValues() {
 		cancelBtn.setLayoutX(135);
 		
-		reportDataTxt.setVisible(false);
-		dataValue.setVisible(false);
+		reportDataTxt1.setVisible(false);
+		dataValue1.setVisible(false);
+		reportDataTxt2.setVisible(false);
+		dataValue2.setVisible(false);
 		generateBtn.setVisible(false);
 		
 		parkField.setText("");
@@ -133,10 +151,12 @@ public class PrepareReportFrameController implements Initializable{
 		msgLabel.setVisible(false);
 	}
 	
-	public void displayError(String txt) {
+	public void displayError(String txt, int layoutX) {
 		msgLabel.setText(txt);
-		msgLabel.setVisible(true);
+		msgLabel.setLayoutX(layoutX);
 		msgLabel.setTextFill(Color.valueOf("red"));
+		msgLabel.setLayoutY(286);
+		msgLabel.setVisible(true);
 	}
 	
 	public boolean validInput() {
