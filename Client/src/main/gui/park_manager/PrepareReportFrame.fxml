@@ -71,7 +71,7 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="parkField" layoutX="100.0" layoutY="70.0" prefHeight="25.0" prefWidth="119.0" />
+            <TextField fx:id="parkField" layoutX="100.0" layoutY="70.0" onKeyTyped="#newInputTrigger" prefHeight="25.0" prefWidth="119.0" />
             <Button fx:id="fetchBtn" layoutX="104.0" layoutY="194.0" mnemonicParsing="false" onAction="#fetchData" text="Fetch Data" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="12.0" />
@@ -113,7 +113,7 @@
             </Text>
             <Line endX="28.99993896484375" endY="295.0" layoutX="398.0" layoutY="82.0" startX="29.0" startY="-82.0" strokeWidth="3.0" />
             <Line endX="68.0" endY="145.0" layoutX="359.0" layoutY="232.0" startX="-356.0380859375" startY="145.0" strokeWidth="3.0" />
-            <Button fx:id="cancelBtn" layoutX="101.0" layoutY="315.0" mnemonicParsing="false" onAction="#cancelReportCreation" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancelBtn" layoutX="315.0" layoutY="320.0" mnemonicParsing="false" onAction="#cancelReportCreation" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -135,14 +135,14 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <ComboBox fx:id="monthBox" layoutX="100.0" layoutY="111.0" prefHeight="25.0" prefWidth="119.0" />
-            <ComboBox fx:id="yearBox" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="119.0" />
+            <ComboBox fx:id="monthBox" layoutX="100.0" layoutY="111.0" onAction="#newInputTrigger" prefHeight="25.0" prefWidth="119.0" />
+            <ComboBox fx:id="yearBox" layoutX="100.0" layoutY="150.0" onAction="#newInputTrigger" prefHeight="25.0" prefWidth="119.0" />
             <Text fill="WHITE" layoutX="32.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Label fx:id="msgLabel" layoutX="70.0" layoutY="286.0" text="Fill all fields to continue" visible="false">
+            <Label fx:id="msgLabel" layoutX="26.0" layoutY="300.0" text="Report already exists, would you like to update it ?" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
@@ -157,6 +157,18 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
+            <Button fx:id="updateBtn" layoutX="81.0" layoutY="263.0" mnemonicParsing="false" onAction="#generateReport" text="Update Report" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
          </children>
       </Pane>
    </children>

@@ -10,6 +10,7 @@ import entities.Report;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -46,6 +47,8 @@ public class PrepareReportFrameController implements Initializable{
 	@FXML
 	private Button fetchBtn;
 	@FXML
+	private Button updateBtn;
+	@FXML
 	private Button numOfVisitorBtn;
 	@FXML
 	private ComboBox<String> monthBox;
@@ -57,6 +60,7 @@ public class PrepareReportFrameController implements Initializable{
 	private static ArrayList<String> monthsList;
 	private static ArrayList<String> yearsList;
 	public static Report report_withData;
+	private boolean fetched = false;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -97,35 +101,54 @@ public class PrepareReportFrameController implements Initializable{
 		if (validInput() && report_withData != null) {
 			UserRequestController.createReport(report_withData);
 			msgLabel.setText(report_withData.getCreationStatus());
-			msgLabel.setTextFill(Color.valueOf("blue"));
+			msgLabel.setTextFill(Color.valueOf("white"));
 			msgLabel.setVisible(true);
-			msgLabel.setLayoutX(241);
-			msgLabel.setLayoutY(270);
+			msgLabel.setLayoutX(70);
+			msgLabel.setLayoutY(297);
+			generateBtn.setVisible(false);
+			fetched = true;
 		}else {
 			System.out.println("not valid");
 		}
 	}
 	
 	@FXML
+	public void newInputTrigger(Event event) {
+		if (fetched) {
+			fetched = false;
+			cancelBtn.setLayoutX(135);
+			
+			reportDataTxt1.setVisible(false);
+			dataValue1.setVisible(false);
+			reportDataTxt2.setVisible(false);
+			dataValue2.setVisible(false);
+			generateBtn.setVisible(false);
+			
+			fetchBtn.setVisible(true);
+			msgLabel.setVisible(false);
+			updateBtn.setVisible(false);
+		}
+	}
+	
+	@FXML
 	public void fetchData(ActionEvent event) {
 		if (validInput()) {
+			int year = Calendar.getInstance().get(Calendar.YEAR);
+			int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+			int selectedMonth = Utils.getMonthNumberByName(monthBox.getValue());
+			
+			System.out.println("Selected: "+selectedMonth+", current: " + month);
+			if (selectedMonth > month && year == Integer.parseInt(yearBox.getValue())) {
+				displayError("Can't create a report for a month that is yet to come", 19);
+				return;
+			}
+			
 			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
 			if (report_withData != null) {
-				if (reportType.getText().equals(numOfVisitorBtn.getText())) {
-					reportDataTxt1.setText("Individual Orders:");
-					reportDataTxt2.setText("Group Orders:");
-					dataValue1.setText(report_withData.getIndividuals() + "");
-					dataValue2.setText(report_withData.getGroups() + "");
-					
-					reportDataTxt2.setVisible(true);
-					dataValue2.setVisible(true);
-				}
-				reportDataTxt1.setVisible(true);
-				dataValue1.setVisible(true);
+				fetched = true;
+				if (reportType.getText().equals(numOfVisitorBtn.getText()))
+					handleNumOfVisitors();
 				
-				generateBtn.setVisible(true);
-				fetchBtn.setVisible(false);
-				msgLabel.setVisible(false);
 			}else {
 				displayError("Error fetching data", 85);
 			}
@@ -134,6 +157,32 @@ public class PrepareReportFrameController implements Initializable{
 				displayError("You can only create a report for the park you work at.", 19);
 			else
 				displayError("Fill all fields to continue", 70);
+		}
+	}
+	
+	public void handleNumOfVisitors() {
+		reportDataTxt1.setText("Individual Orders:");
+		reportDataTxt2.setText("Group Orders:");
+		dataValue1.setText(report_withData.getIndividuals() + "");
+		dataValue2.setText(report_withData.getGroups() + "");
+		
+		reportDataTxt2.setVisible(true);
+		dataValue2.setVisible(true);
+		
+		reportDataTxt1.setVisible(true);
+		dataValue1.setVisible(true);
+		fetchBtn.setVisible(false);
+		if (report_withData.isReportExist()) {
+			updateBtn.setVisible(true);
+			msgLabel.setText("Report already exists, would you like to update it ?");
+			msgLabel.setLayoutX(26);
+			msgLabel.setLayoutY(300);
+			msgLabel.setTextFill(Color.valueOf("#c2b830"));
+			msgLabel.setVisible(true);
+			
+		}else {
+			generateBtn.setVisible(true);
+			msgLabel.setVisible(false);
 		}
 	}
 	
@@ -149,6 +198,7 @@ public class PrepareReportFrameController implements Initializable{
 		parkField.setText("");
 		fetchBtn.setVisible(true);
 		msgLabel.setVisible(false);
+		updateBtn.setVisible(false);
 	}
 	
 	public void displayError(String txt, int layoutX) {
@@ -166,6 +216,7 @@ public class PrepareReportFrameController implements Initializable{
 			return false;
 		if (monthBox.getValue() == null || yearBox.getValue() == null)
 			return false;
+		
 		return monthsList.contains(monthBox.getValue()) && yearsList.contains(yearBox.getValue());
 	}
 

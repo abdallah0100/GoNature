@@ -1,5 +1,6 @@
 package main.handlers;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -9,6 +10,31 @@ import main.MainServer;
 
 public class ReportRequestHandler {
 
+	public static boolean reportExist(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			String str = "SELECT COUNT(madeBy) FROM numOfVisitorsReports WHERE month='"+r.getMonth()+"' AND year='"+r.getYear()+"' AND madeBy='"+r.getMadeBy()+"'";
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next())
+				return false;
+			try {
+				return Integer.parseInt(rs.getString(1)) > 0;
+			}catch(Exception ex) {
+				System.out.println("[ReportRequestHandler] - result was not an integer");
+				ex.printStackTrace();
+				return false;
+			}
+		}catch(Exception ex) {
+			System.out.println("[ReportRequestHandler] - Error executing query");
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 	public static int getReservationCountByType(String type, Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -49,6 +75,30 @@ public class ReportRequestHandler {
 			String str = "INSERT INTO numOfVisitorsReports (month, year, groupNumbers, individuals, Park, madeBy) "
 					+ "VALUES('"+r.getMonth()+"','"+r.getYear()+"','"+r.getGroups()+"','"+r.getIndividuals()+"','"+r.getPark()+"','"+r.getMadeBy()+"')";
 			return st.executeUpdate(str) > 0;
+		}catch(Exception ex) {
+			System.out.println("[ReportRequestHandler] - failed to insert report");
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean updateReport(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try{
+			String str = "UPDATE numOfVisitorsReports SET groupNumbers=?, individuals=?, Park=? WHERE month=? AND year=? AND madeBy=?;";
+			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);
+			ps.setString(1, r.getGroups() + "");
+			ps.setString(2, r.getIndividuals() + "");
+			ps.setString(3, r.getPark());
+			
+			ps.setString(4, r.getMonth());
+			ps.setString(5, r.getYear());
+			ps.setString(6, r.getMadeBy());
+			
+			return ps.executeUpdate() > 0;
 		}catch(Exception ex) {
 			System.out.println("[ReportRequestHandler] - failed to insert report");
 			ex.printStackTrace();

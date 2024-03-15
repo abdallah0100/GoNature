@@ -18,12 +18,14 @@ public class Report implements Serializable{
 	private int individual;
 	
 	private String creationStatus;
+	private boolean reportExist;
 	
 	public Report(String park, String month, String year, String madeBy) {
 		this.setPark(park);
 		this.setMonth(month);
 		this.setYear(year);
 		this.madeBy = madeBy;
+		this.reportExist = false;
 	}
 
 	public String getMonth() {
@@ -80,6 +82,14 @@ public class Report implements Serializable{
 
 	public void setCreationStatus(String creationStatus) {
 		this.creationStatus = creationStatus;
+	}
+
+	public boolean isReportExist() {
+		return reportExist;
+	}
+
+	public void setReportExist(boolean reportExist) {
+		this.reportExist = reportExist;
 	}
 	
 	

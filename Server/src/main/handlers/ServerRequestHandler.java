@@ -16,6 +16,7 @@ public class ServerRequestHandler {
 		Report r;
 		Visitor v;
 		User u;
+		boolean result;
 		switch(msg.getRequestEnumType()) {
 		case CONNECT_TO_SERVER:
 			ClientConnectionHandler.handleConnectRequest(client, true);
@@ -66,6 +67,8 @@ public class ServerRequestHandler {
 			r = (Report) msg.getRequestData();
 			int individuals = ReportRequestHandler.getReservationCountByType("Individual", r);
 			int group = ReportRequestHandler.getReservationCountByType("Organized Group", r);
+			boolean reportExist = ReportRequestHandler.reportExist(r);
+			r.setReportExist(reportExist);
 			r.setIndividuals(individuals);
 			r.setGroups(group);
 			respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, r));
@@ -76,8 +79,15 @@ public class ServerRequestHandler {
 				return;
 			}
 			r = (Report) msg.getRequestData();
-			boolean result = ReportRequestHandler.insertNewReport(r);
-			respondToClient(client, new Message(RequestType.CREATE_REPORT, result ? "Successfuly created report" : "Error creating report"));
+			if (r.isReportExist()) {
+				result = ReportRequestHandler.updateReport(r);
+				generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
+			}
+			else {
+				result = ReportRequestHandler.insertNewReport(r);
+				generalRespondMsg = result ? "Successfully created report" : "Error creating report";
+			}
+			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

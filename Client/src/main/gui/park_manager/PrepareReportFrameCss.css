@@ -14,6 +14,12 @@ Button{
 	-fx-cursor:hand;
 }
 
+#updateBtn{
+	-fx-background-color: #c2b830;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
 Button:hover{
 	-fx-background-color: #808080;
 }
