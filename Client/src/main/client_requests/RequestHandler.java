@@ -38,9 +38,11 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
+				
+				
 		case REQUEST_BILL:
 				if (msg.getRequestData() instanceof Bill) {
-					ClientController.showBill=((Bill) msg.getRequestData());
+					ClientController.showBill=(Bill) msg.getRequestData();
 					return; 
 				}
 				else {
@@ -48,6 +50,9 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
 				}
+				
+				
+				
 		case INSERT_INSTRUCTOR:
 				if (msg.getRequestData() instanceof Integer) {
 					RegisterInstructorFrameController.result=((Integer) msg.getRequestData());

@@ -42,8 +42,8 @@ public class ServerRequestHandler {
 			
 			
 		case REQUEST_BILL:
-			if (!(msg.getRequestData() instanceof String)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (String)"));
+			if (!(msg.getRequestData() instanceof Bill)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Bill)"));
 				return;
 			}
 			Bill b = UserRequestHandler.billExists((Bill) msg.getRequestData());

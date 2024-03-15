@@ -29,6 +29,6 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="createReservations" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" text="Create Reservations" />
+      <Button fx:id="createReservations" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" onAction="#createReservations" text="Create Reservations" />
    </children>
 </Pane>

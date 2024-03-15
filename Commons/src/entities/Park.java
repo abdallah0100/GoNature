@@ -3,8 +3,8 @@ package entities;
 public class Park {
 
 	private String parkname;
-	public static int maxNumber;
-	public static int availableNumber  ;
+	public static int maxNumber=120;
+	public static int availableNumber=0 ;
 	public static int estimatedTime=4;
 	public static int price=40;
 

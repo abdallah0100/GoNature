@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import main.ClientUI;
 import utilities.SceneController;
 
 /**
@@ -49,6 +50,12 @@ public class EntryWorkerFrameController extends Application{
 		String s="availablePlaceFrameController";
 		BillCakFrameController BillCakFrame = new BillCakFrameController();
 		SceneController.switchFrame(s, event, BillCakFrame);
+	}
+	
+	public void createReservations(ActionEvent event) {
+		SceneController sc = new SceneController();
+		//sc.setPane(ClientUI.contentPane, "/main/gui/park_manager/EditParkVariables.fxml");
+		System.out.println("hello");
 	}
 
 }

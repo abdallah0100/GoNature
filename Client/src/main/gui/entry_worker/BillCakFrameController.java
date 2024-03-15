@@ -11,7 +11,7 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
 
-public class BillCakFrameController   extends Application {
+public class BillCakFrameController  extends Application {
 	@FXML
 	private TextField reservatiomId;
 	
@@ -57,58 +57,41 @@ public class BillCakFrameController   extends Application {
 		msgLabel.setVisible(false);
 		billLabel.setVisible(false);
 		if (ClientController.showBill!= null) {
-			
-			
-			
-			//if not instructor
-			if(!(ClientController.showBill.getIsInstructor())) {
-				//check if it invited
+			//1 מראש  ביקור אישי 
+			if(ClientController.showBill.getType()=="Individual") {
+				///משפחתי – מוזמן
 				if(ClientController.showBill.getinvited()) {
-					int bill=(int) (
-							Integer.valueOf(ClientController.showBill.getNumberOfVisitor())
-							*Park.price*0.85);
-					displayMSG(String.valueOf(bill));
+					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
+					int x =  (int) (numberOfVisitors* 0.85);
+					displayMSG(String.valueOf(x));
+					return;
 				}
-				else{
-					int bill=(int) (
-							Integer.valueOf(ClientController.showBill.getNumberOfVisitor())
-							*Park.price);
-					displayMSG(String.valueOf(bill));
+				else {//מזדמן
+					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
+					displayMSG(String.valueOf(numberOfVisitors));
 					}
 			}
-				//by instructor
 			else {
-					//instructor and invited
-					if(ClientController.showBill.getinvited()) {
-						//payed
-						if(ClientController.showBill.getPayed()) {
-							int x=(int) (
-									Integer.valueOf(ClientController.showBill.getNumberOfVisitor())
-									*Park.price*0.75);
-							int price=(int) (x*0.88);
-							displayMSG(String.valueOf(price));
-						}
-						else {
-							////instructor and invited and not payed
-							int x=(int) (
-									Integer.valueOf(ClientController.showBill.getNumberOfVisitor())
-									*Park.price*0.75);
-							displayMSG(String.valueOf(x));
-						}
-					}
-					else{
-					////instructor and not invited and not payed
-						int x=(int) (
-								(Integer.valueOf(ClientController.showBill.getNumberOfVisitor())+1)
-								*Park.price*0.90);
-						displayMSG(String.valueOf(x));
-						
-					}		
-			}
-					
+				//ביקור קבוצתי 
+				if(ClientController.showBill.getinvited()) {
+					//ביקור קבוצתי בהזמנה
+					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
+					numberOfVisitors--;
+					int x =  (int) (numberOfVisitors* 0.75);
+					x=(int) (x*0.88);
+					displayMSG(String.valueOf(x));
+					return;
 				}
-		
-			 else {//if null
+				else {
+					int numberOfVisitors = Integer.parseInt(ClientController.showBill.getNumberOfVisitor());
+					int x =  (int) (numberOfVisitors* 0.90);
+					displayMSG(String.valueOf(x));
+					return;
+				}
+				
+			}			
+		}
+			else {//if null
 				System.out.println("[BillCakFrameController] - did no bill");
 				displayMSG("reservation Not Found");
 			 }
