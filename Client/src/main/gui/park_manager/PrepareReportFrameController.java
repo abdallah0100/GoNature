@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import entities.Report;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import main.ClientController;
+import main.controllers.UserRequestController;
 
 public class PrepareReportFrameController implements Initializable{
 	
@@ -46,6 +49,8 @@ public class PrepareReportFrameController implements Initializable{
 	
 	private static ArrayList<String> monthsList;
 	private static ArrayList<String> yearsList;
+	public static Report report_withData;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String[] arr1 = {"January", "February", "March", "April",
@@ -81,18 +86,36 @@ public class PrepareReportFrameController implements Initializable{
 	}
 	
 	@FXML
+	public void generateReport(ActionEvent event) {
+		if (validInput() && report_withData != null) {
+			UserRequestController.createReport(report_withData);
+			msgLabel.setText(report_withData.getCreationStatus());
+			msgLabel.setTextFill(Color.valueOf("green"));
+			msgLabel.setVisible(true);
+		}
+	}
+	
+	@FXML
 	public void fetchData(ActionEvent event) {
 		if (validInput()) {
-			reportDataTxt.setText(reportType.getText());
-			reportDataTxt.setVisible(true);
-			dataValue.setVisible(true);
-			
-			cancelBtn.setLayoutX(216);
-			generateBtn.setVisible(true);
-			fetchBtn.setVisible(false);
-			msgLabel.setVisible(false);
+			UserRequestController.fetchReportData(parkField.getText(), monthBox.getValue(), yearBox.getValue());
+			if (report_withData != null) {
+				reportDataTxt.setText(reportType.getText());
+				reportDataTxt.setVisible(true);
+				dataValue.setVisible(true);
+				
+				cancelBtn.setLayoutX(216);
+				generateBtn.setVisible(true);
+				fetchBtn.setVisible(false);
+				msgLabel.setVisible(false);
+			}else {
+				displayError("Error fetching data");
+			}
 		}else {
-			displayError("Fill all fields to continue");
+			if (!ClientController.connectedUser.getParkWork().equals(parkField.getText()))
+				displayError("You can only create a report for the park you work at.");
+			else
+				displayError("Fill all fields to continue");
 		}
 	}
 	
@@ -116,6 +139,8 @@ public class PrepareReportFrameController implements Initializable{
 	
 	public boolean validInput() {
 		if (parkField.getText() == null || parkField.getText().length() == 0)
+			return false;
+		if (!ClientController.connectedUser.getParkWork().equals(parkField.getText())) 
 			return false;
 		if (monthBox.getValue() == null || yearBox.getValue() == null)
 			return false;

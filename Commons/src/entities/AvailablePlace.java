@@ -1,6 +1,6 @@
 package entities;
 
-public class AvailablePlace  {
+public class AvailablePlace{
 
 	private String parkname;
 	private String date;

@@ -2,6 +2,7 @@ package main.handlers;
 
 import java.io.IOException;
 
+import entities.Report;
 import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
@@ -53,6 +54,27 @@ public class ServerRequestHandler {
 		}
 			int x=UserRequestHandler.instructorExists((Visitor) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.INSERT_INSTRUCTOR, x));
+			return;
+		case FETCH_RESERVATION_DATA:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> fetching data)"));
+				return;
+			}
+			int individuals = ReportRequestHandler.getReservationCountByType("Individual");
+			int group = ReportRequestHandler.getReservationCountByType("Organized Group");
+			Report r = (Report) msg.getRequestData();
+			r.setIndividuals(individuals);
+			r.setGroups(group);
+			respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, r));
+		return;
+		case CREATE_REPORT:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> Creation)"));
+				return;
+			}
+			Report r2 = (Report) msg.getRequestData();
+			boolean result = ReportRequestHandler.insertNewReport(r2);
+			respondToClient(client, new Message(RequestType.CREATE_REPORT, result ? "Successfuly created report" : "Error creating report"));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
