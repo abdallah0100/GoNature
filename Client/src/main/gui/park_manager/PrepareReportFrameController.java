@@ -141,17 +141,15 @@ public class PrepareReportFrameController implements Initializable{
 				displayError("Can't create a report for a month that is yet to come", 19);
 				return;
 			}
-			
-			if (reportType.getText().equals(numOfVisitorBtn.getText())) {//Num of Visitors report
-				UserRequestController.fetchNumReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
-				if (report_withData != null) {
-					fetched = true;
-					handleNumOfVisitors();		
-				}else {
-					displayError("Error fetching data", 85);
-				}
-			}else {//Not Full Park report
-				UserRequestController.fetchMonthlyVisitorNum(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
+			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue(), reportType.getText());
+			if (report_withData != null) {
+				fetched = true;
+				if (reportType.getText().equals(numOfVisitorBtn.getText()))
+					handleNumOfVisitors();
+				else
+					handleNotFullPark();
+			}else {
+				displayError("Error fetching data", 85);
 			}
 		}else {
 			if (!ClientController.connectedUser.getParkWork().equals(parkField.getText()))
@@ -160,6 +158,8 @@ public class PrepareReportFrameController implements Initializable{
 				displayError("Fill all fields to continue", 70);
 		}
 	}
+	
+	public void handleNotFullPark() {}
 	
 	public void handleNumOfVisitors() {
 		reportDataTxt1.setText("Individual Orders:");

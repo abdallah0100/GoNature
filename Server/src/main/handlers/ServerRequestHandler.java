@@ -86,6 +86,13 @@ public class ServerRequestHandler {
 			r.setGroups(group);
 			respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, r));
 		return;
+		case FETCH_MONTHLY_VISITOR_NUM:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> fetching monthly visitor num data)"));
+				return;
+			}
+			r = (Report) msg.getRequestData();
+			return;
 		case CREATE_REPORT:
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> Creation)"));

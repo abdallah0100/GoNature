@@ -24,15 +24,14 @@ public class UserRequestController {
 												new Visitor(instructor_id,instructorName,instructor_email,instructor_tel)));
 	}
 	
-	public static void fetchNumReportData(String parkName, String month, String year) {
-		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername());
-		ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
+	public static void fetchReportData(String parkName, String month, String year, String type) {
+		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername(), type);
+		if (type.contains("Number"))
+			ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
+		else
+			ClientController.getController().accept(new Message(RequestType.FETCH_MONTHLY_VISITOR_NUM, r));
 	}
-	
-	public static void fetchMonthlyVisitorNum(String parkName, String month, String year) {
-		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername());
-		ClientController.getController().accept(new Message(RequestType.FETCH_MONTHLY_VISITOR_NUM, r));
-	};
+
 	
 	public static void createReport(Report r) {
 		ClientController.getController().accept(new Message(RequestType.CREATE_REPORT, r));
