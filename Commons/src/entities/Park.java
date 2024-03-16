@@ -8,16 +8,16 @@ public class Park {
 	public static int estimatedTime=4;
 	public static int price=50;
  
- 
+  
 
 	public Park(String parkname) {
 		this.parkname=parkname;
-	
 	}
 	
 	public String getNamePark() {
 		return parkname;
 	}
+	
 	public int getPrice() {
 		return price;
 	}

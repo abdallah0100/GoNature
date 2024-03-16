@@ -31,7 +31,7 @@ public class MakeReservationFrameController extends Application implements Initi
 	private ComboBox<String> orderType;
 	@FXML
 	private TextField numOfVisitorsField;
-	@FXML
+	@FXML 
 	private DatePicker dateField;
 	@FXML
 	private TextField hourField;
