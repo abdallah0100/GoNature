@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@GenerateReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.GenerateReportFrameController">
+   <children>
+      <Button fx:id="visitsReportsBtn" layoutX="100.0" layoutY="185.0" mnemonicParsing="false" onAction="#showvisitsReportWindow" prefHeight="31.0" prefWidth="149.0" text="Visits Report" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="cancellationsReportsBtn" layoutX="309.0" layoutY="185.0" mnemonicParsing="false" onAction="#showcancellationsReportsWindow" prefHeight="33.0" prefWidth="216.0" text="Cancellations Report" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+   </children>
+</Pane>

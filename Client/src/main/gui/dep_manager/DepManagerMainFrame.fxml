@@ -24,7 +24,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="generateReportBtn" layoutX="15.0" layoutY="293.0" mnemonicParsing="false" onAction="#generateReport" prefHeight="30.0" prefWidth="130.0" text="Generate Report" textFill="WHITE">
+      <Button fx:id="generateReportBtn" layoutX="15.0" layoutY="293.0" mnemonicParsing="false" onAction="#showgenerateReportWindow" prefHeight="30.0" prefWidth="130.0" text="Generate Report" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
@@ -36,7 +36,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="viewReportsBtn" layoutX="19.0" layoutY="173.0" mnemonicParsing="false" onAction="#viewReports" prefHeight="30.0" prefWidth="122.0" text="View Reports" textFill="WHITE">
+      <Button fx:id="viewReportsBtn" layoutX="19.0" layoutY="173.0" mnemonicParsing="false" onAction="#showviewReportsWindow" prefHeight="30.0" prefWidth="122.0" text="View Reports" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
