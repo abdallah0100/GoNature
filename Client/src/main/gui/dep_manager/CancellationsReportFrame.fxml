@@ -1,20 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
 <Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@CancellationsReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.CancellationsReportFrameController">
    <children>
-      <TableView layoutX="92.0" layoutY="100.0" prefHeight="200.0" prefWidth="187.0">
+      <TableView layoutX="28.0" layoutY="14.0" prefHeight="200.0" prefWidth="201.0">
         <columns>
-          <TableColumn fx:id="table1" prefWidth="186.20001220703125" text="Cancelled Reservations" />
+          <TableColumn fx:id="table1" prefWidth="200.0" text="Cancelled Reservations" />
         </columns>
       </TableView>
-      <TableView fx:id="table2" layoutX="357.0" layoutY="100.0" prefHeight="200.0" prefWidth="210.0">
+      <TableView fx:id="table2" layoutX="347.0" layoutY="14.0" prefHeight="200.0" prefWidth="210.0">
          <columns>
             <TableColumn prefWidth="221.20001220703125" text="Not Activated Reservations" />
          </columns>
       </TableView>
+      <Label layoutX="6.0" layoutY="257.0" text="Park 1 Average Cancellations :" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="4.0" layoutY="296.0" prefHeight="33.0" prefWidth="65.0" text="Date : " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="67.0" layoutY="296.0" prefHeight="33.0" prefWidth="142.0" text="Label  " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="6.0" layoutY="346.0" prefHeight="33.0" prefWidth="92.0" text="Average : " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="98.0" layoutY="346.0" prefHeight="33.0" prefWidth="142.0" text="Label  " textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <TableView layoutX="362.0" layoutY="248.0" prefHeight="144.0" prefWidth="201.0">
+        <columns>
+          <TableColumn prefWidth="200.20001220703125" text="Cancellations Distribution" />
+        </columns>
+      </TableView>
+      <Separator layoutY="227.0" prefHeight="2.0" prefWidth="592.0">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Separator>
    </children>
 </Pane>

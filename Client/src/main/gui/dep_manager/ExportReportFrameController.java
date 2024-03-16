@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import main.ClientUI;
 import utilities.SceneController;
 
-public class GenerateReportFrameController {
+public class ExportReportFrameController {
 
 	
 	@FXML
