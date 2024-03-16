@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@CancellationsReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.CancellationsReportFrameController">
+   <children>
+      <TableView layoutX="92.0" layoutY="100.0" prefHeight="200.0" prefWidth="187.0">
+        <columns>
+          <TableColumn fx:id="table1" prefWidth="186.20001220703125" text="Cancelled Reservations" />
+        </columns>
+      </TableView>
+      <TableView fx:id="table2" layoutX="357.0" layoutY="100.0" prefHeight="200.0" prefWidth="210.0">
+         <columns>
+            <TableColumn prefWidth="221.20001220703125" text="Not Activated Reservations" />
+         </columns>
+      </TableView>
+   </children>
+</Pane>

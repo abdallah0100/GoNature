@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import main.ClientUI;
 import utilities.SceneController;
 
 public class DepManagerMainFrameController extends Application{
@@ -38,12 +39,37 @@ public class DepManagerMainFrameController extends Application{
 							    "/main/gui/dep_manager/DepManagerMainFrame.fxml");
 	}
 	
-	public void viewReports(ActionEvent event) {
-		
+	
+	/**
+	 * This method is responsible for opening new window after
+	 * clicking on View Reports button
+	* @param event 
+	*/
+	@FXML
+	public void showviewReportsWindow(ActionEvent event) {	
+		SceneController sc = new SceneController();
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/SelectReportFrame.fxml");
 	}
-	public void generateReport(ActionEvent event) {
-		
+	
+	
+	/**
+	 * This method is responsible for opening new window after
+	 * clicking on Generate Report button
+	* @param event 
+	*/
+	@FXML
+	public void showgenerateReportWindow(ActionEvent event) {	
+		SceneController sc = new SceneController();
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/GenerateReportFrame.fxml");
 	}
+	
+	
+	/**
+	 * This method is responsible for opening new window after
+	 * clicking on Confirm Change Request button
+	* @param event 
+	*/
+	@FXML
 	public void confirmChange(ActionEvent event) {
 		
 	}
