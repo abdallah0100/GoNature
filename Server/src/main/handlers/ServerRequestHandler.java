@@ -80,7 +80,7 @@ public class ServerRequestHandler {
 			r = (Report) msg.getRequestData();
 			int individuals = ReportRequestHandler.getReservationCountByType("Private", r);
 			int group = ReportRequestHandler.getReservationCountByType("Organized Group", r);
-			boolean reportExist = ReportRequestHandler.reportExist(r);
+			boolean reportExist = ReportRequestHandler.numReportExist(r);
 			r.setReportExist(reportExist);
 			r.setIndividuals(individuals);
 			r.setGroups(group);
@@ -92,6 +92,8 @@ public class ServerRequestHandler {
 				return;
 			}
 			r = (Report) msg.getRequestData();
+			boolean reportExists = ReportRequestHandler.notFullReportExist(r);
+			r.setReportExist(reportExists);
 			return;
 		case CREATE_REPORT:
 			if (!(msg.getRequestData() instanceof Report)) {
@@ -100,11 +102,11 @@ public class ServerRequestHandler {
 			}
 			r = (Report) msg.getRequestData();
 			if (r.isReportExist()) {
-				result = ReportRequestHandler.updateReport(r);
+				result = ReportRequestHandler.updateNumReport(r);
 				generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
 			}
 			else {
-				result = ReportRequestHandler.insertNewReport(r);
+				result = ReportRequestHandler.insertNewNumReport(r);
 				generalRespondMsg = result ? "Successfully created report" : "Error creating report";
 			}
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));

@@ -27,3 +27,7 @@
 	-fx-background-color: #808080;
 
 }
+
+ImageView{
+	-fx-cursor:hand;
+}

@@ -28,8 +28,11 @@ public class UserRequestController {
 		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername(), type);
 		if (type.contains("Number"))
 			ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
-		else
-			ClientController.getController().accept(new Message(RequestType.FETCH_MONTHLY_VISITOR_NUM, r));
+		else {
+			//ClientController.getController().accept(new Message(RequestType.FETCH_MONTHLY_VISITOR_NUM, r));
+			System.out.println("Fetching monthly visitor data is not implemented yet");
+			return;
+		}
 	}
 
 	

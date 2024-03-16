@@ -11,11 +11,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import main.ClientController;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
 
-public class LogInFrameController extends Application implements Initializable {
+public class LogInFrameController extends Application implements Initializable{
 	
 	@FXML
 	private TextField userNameTxt;
@@ -25,6 +29,8 @@ public class LogInFrameController extends Application implements Initializable {
 	private Button loginBtn;
 	@FXML
 	private Label msgLabel;
+	@FXML
+	private Pane headerPane;
 
 	/**
 	* @param primaryStage the primary stage for the application
@@ -32,15 +38,11 @@ public class LogInFrameController extends Application implements Initializable {
 	*/
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		SceneController.stage = primaryStage;
+		primaryStage.initStyle(StageStyle.UNDECORATED);
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - User", primaryStage,
 									   "/main/gui/LogInFrame.fxml");
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	//function for userLogIn
@@ -74,6 +76,23 @@ public class LogInFrameController extends Application implements Initializable {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	@FXML
+	public void goBack(MouseEvent event) {
+		SceneController.switchFrame("GoNature - Client", event, new LoginOptionController());
+	}
+	@FXML
+	public void closeApp(MouseEvent event) {
+		ClientController.getController().getClient().quit();
+		System.exit(0);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		SceneController.headerPane = headerPane;
+		SceneController.setUpHeaderDrag();
+		
 	}
 
 }
