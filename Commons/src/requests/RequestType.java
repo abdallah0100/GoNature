@@ -11,8 +11,8 @@ public enum RequestType {
 	REQUEST_BILL(8),
 	INSERT_INSTRUCTOR(9),
 	FETCH_RESERVATION_DATA(10),
-	CREATE_REPORT(11)
-	;
+	CREATE_REPORT(11),
+	MAKE_RESERVATION(12);
 	
 	private int requestId;
 	

@@ -1,5 +1,6 @@
 package main.client_requests;
 
+import entities.Order;
 import entities.Bill;
 import entities.Report;
 import entities.User;
@@ -40,6 +41,16 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
+		case MAKE_RESERVATION:
+			if (msg.getRequestData() instanceof Order) {
+				ClientController.reservationMade = (Order) msg.getRequestData();
+				VisitorRequestController.finishedMakingReservation = true;
+				return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
+				return;
+			}
 				
 				
 		case REQUEST_BILL:
