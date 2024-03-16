@@ -5,7 +5,6 @@ public class AvailablePlace{
 	private String parkname;
 	private String date;
 	private String time;
-	
 
 	public AvailablePlace(String parkname,String time,String date) {
 		this.parkname=parkname;
@@ -13,8 +12,7 @@ public class AvailablePlace{
 		this.date=date;
 	
 	}
-	
-	
+		
 	public String getnamePark() {
 		return parkname;
 	}
@@ -26,6 +24,5 @@ public class AvailablePlace{
 	public String getdate() {
 		return date;
 	}
-
 
 }
