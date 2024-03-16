@@ -10,7 +10,7 @@ import requests.RequestType;
 
 
 public class GoNatureClient extends AbstractClient{
-	
+	 
 	  public static boolean awaitResponse = false;
 	  
 	  private ArrayList<String[]> orders;
@@ -58,7 +58,7 @@ public class GoNatureClient extends AbstractClient{
 	    {
 	    	System.out.println("[GoNatureClient] - Error sending message to server");
 			ClientController.connectedToServer = false;
-	    //	e.printStackTrace();
+	    	e.printStackTrace();
 	    	quit();
 	    }
 	  }

@@ -29,8 +29,6 @@ public class MainFrameController extends Application implements Initializable{
 	@FXML
 	private ImageView closeIcon;
 	
-	
-	//
 	//Saving offsets and the stage to apply drag functionality on the header
 	private static double xOffset = 0;
     private static double yOffset = 0;
@@ -84,7 +82,7 @@ public class MainFrameController extends Application implements Initializable{
 	            	scene.setPane(leftNavPane, "/main/gui/entry_worker/EntryWorkerFrame.fxml");	     
 	            	break;
 	            case "parkManager":
-	            	scene.setPane(leftNavPane,"/main/gui/park_manager/PrepEdit.fxml");	
+	            	scene.setPane(leftNavPane,"/main/gui/park_manager/parkManagerSidePane.fxml");	
 	                break;     
 	            case "serviceAgent":
 	            	scene.setPane(contentPane,"/main/gui/service_agent/RegisterInstructorFrame.fxml");		

@@ -1,11 +1,15 @@
 package main.client_requests;
 
 import entities.Order;
+import entities.Bill;
+import entities.Report;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.park_manager.PrepareReportFrameController;
+import main.gui.service_agent.RegisterInstructorFrameController;
 import requests.Message;
 
 public class RequestHandler {
@@ -19,15 +23,15 @@ public class RequestHandler {
 			System.out.println("[GoNatureClient] - ServerResponse: " + msg.getRequestData());
 			break;
 		case VALIDATE_VISITOR:
-				if (msg.getRequestData() instanceof Visitor)
-					ClientController.connectedVisitor = (Visitor) msg.getRequestData();
-				else {
-					System.out.println("[RequestHandler] - invalid VALIDATE_VISITOR response");
-					return;
-				}
-				VisitorRequestController.finishedValidating = true;
-				break;
-			case LOGIN_USER:
+			if (msg.getRequestData() instanceof Visitor)
+				ClientController.connectedVisitor = (Visitor) msg.getRequestData();
+			else {
+				System.out.println("[RequestHandler] - invalid VALIDATE_VISITOR response");
+				return;
+			} 
+			VisitorRequestController.finishedValidating = true;
+			break;
+		case LOGIN_USER:
 				if (msg.getRequestData() instanceof User) {
 					ClientController.connectedUser = (User) msg.getRequestData();
 					UserRequestController.LogedIn = true;
@@ -37,18 +41,56 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
-			case MAKE_RESERVATION:
-				if (msg.getRequestData() instanceof Order) {
-					ClientController.reservationMade = (Order) msg.getRequestData();
-					VisitorRequestController.finishedMakingReservation = true;
-					return;
+		case MAKE_RESERVATION:
+			if (msg.getRequestData() instanceof Order) {
+				ClientController.reservationMade = (Order) msg.getRequestData();
+				VisitorRequestController.finishedMakingReservation = true;
+				return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
+				return;
+			}
+				
+				
+		case REQUEST_BILL:
+				if (msg.getRequestData() instanceof Bill) {
+					ClientController.showBill=(Bill) msg.getRequestData();
+					return; 
 				}
 				else {
-					System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
+					ClientController.showBill=null;
+					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
 				}
 				
-			default:
+				
+				
+		case INSERT_INSTRUCTOR:
+				if (msg.getRequestData() instanceof Integer) {
+					RegisterInstructorFrameController.result=((Integer) msg.getRequestData());
+					return; 
+				}
+				else {
+					RegisterInstructorFrameController.result=-1;//fail
+					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
+					return;
+				}
+		case FETCH_RESERVATION_DATA:
+			if (!(msg.getRequestData() instanceof Report)) {
+				System.out.println("[RequestHandler] - invalid FETCH_RESERVATION_DATA response type");
+				return;
+			}
+			PrepareReportFrameController.report_withData = (Report) msg.getRequestData();
+			break;
+		case CREATE_REPORT:
+			if (!(msg.getRequestData() instanceof String)) {
+				System.out.println("[RequestHandler] - invalid CREATE_REPORT response type");
+				return;
+			}
+			PrepareReportFrameController.report_withData.setCreationStatus((String)msg.getRequestData());
+			break;
+		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
 					System.out.println("[GoNatureClient] - Received data: " + msg.getRequestData());
