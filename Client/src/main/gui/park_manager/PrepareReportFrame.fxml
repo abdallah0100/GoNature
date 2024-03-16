@@ -42,7 +42,7 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button layoutX="32.0" layoutY="262.0" mnemonicParsing="false" onAction="#showReportPane" prefHeight="30.0" prefWidth="128.0" text="Empty Park" textFill="WHITE">
+            <Button layoutX="32.0" layoutY="262.0" mnemonicParsing="false" onAction="#showReportPane" prefHeight="30.0" prefWidth="128.0" text="Not Full Park" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="16.0" />
                </font>

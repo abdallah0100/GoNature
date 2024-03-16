@@ -137,20 +137,21 @@ public class PrepareReportFrameController implements Initializable{
 			int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 			int selectedMonth = Utils.getMonthNumberByName(monthBox.getValue());
 			
-			System.out.println("Selected: "+selectedMonth+", current: " + month);
 			if (selectedMonth > month && year == Integer.parseInt(yearBox.getValue())) {
 				displayError("Can't create a report for a month that is yet to come", 19);
 				return;
 			}
 			
-			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
-			if (report_withData != null) {
-				fetched = true;
-				if (reportType.getText().equals(numOfVisitorBtn.getText()))
-					handleNumOfVisitors();
-				
-			}else {
-				displayError("Error fetching data", 85);
+			if (reportType.getText().equals(numOfVisitorBtn.getText())) {//Num of Visitors report
+				UserRequestController.fetchNumReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
+				if (report_withData != null) {
+					fetched = true;
+					handleNumOfVisitors();		
+				}else {
+					displayError("Error fetching data", 85);
+				}
+			}else {//Not Full Park report
+				UserRequestController.fetchMonthlyVisitorNum(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
 			}
 		}else {
 			if (!ClientController.connectedUser.getParkWork().equals(parkField.getText()))
