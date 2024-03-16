@@ -67,7 +67,7 @@ public class Bill implements Serializable {
 	
 	public double returnPrice() {
 		//1 מראש  ביקור אישי 
-		if(getType().equals("Individual")) 
+		if(getType().equals("Private")) 
 		{
 			
 			if(getinvited() &&getPayed()) {

@@ -78,7 +78,7 @@ public class ServerRequestHandler {
 				return;
 			}
 			r = (Report) msg.getRequestData();
-			int individuals = ReportRequestHandler.getReservationCountByType("Individual", r);
+			int individuals = ReportRequestHandler.getReservationCountByType("Private", r);
 			int group = ReportRequestHandler.getReservationCountByType("Organized Group", r);
 			boolean reportExist = ReportRequestHandler.reportExist(r);
 			r.setReportExist(reportExist);
