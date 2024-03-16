@@ -20,8 +20,7 @@ public class RegisterInstructorFrameController extends Application{
 	public static int result;
 	  	@FXML
 	    private Button btnRegister;
-	  	@FXML
-		private TextField instructorName;
+	  	
 	  	@FXML
 	    private TextField instructorEmail;
 	    @FXML
@@ -33,7 +32,6 @@ public class RegisterInstructorFrameController extends Application{
 	    
 	    ///////////////////define variables////////////////////////////////////////////////////
      private String instructor_id;//retrieve data from id field
-     private String instructor_name;
      private String instructor_email;//retrieve data from email field
      private String instructor_tel;//retrieve data from telephone field
      ///////////////////////////////////////////////////////////////////////////
@@ -60,16 +58,15 @@ public class RegisterInstructorFrameController extends Application{
        try {
 	    	  
 			if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()
-					&&!instructorTelephone.getText().isEmpty()&&!instructorName.getText().isEmpty())
+					&&!instructorTelephone.getText().isEmpty())
 			{
 				instructorID.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
 				instructorEmail.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
 				instructorTelephone.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-				instructor_name=instructorName.getText();
 				instructor_id=instructorID.getText();
 				instructor_email=instructorEmail.getText();
 				instructor_tel=instructorTelephone.getText();
-			  UserRequestController.insertInstructor(instructor_id,instructor_name,instructor_email,instructor_tel);
+			  UserRequestController.insertInstructor(instructor_id,instructor_email,instructor_tel);
 			  if (RegisterInstructorFrameController.result==1) {
 					label.setText("Registered");
 			  }

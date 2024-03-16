@@ -74,18 +74,28 @@ public class UserRequestHandler {
 			return -1;
 		}
 		String id=v.getId();
+		String email=v.getEmail();
+		String tel=v.getPhone();
+		
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM registered_instructors WHERE ID='"+id+"'");
-			if (!rs.next()) {
-				int s=st.executeUpdate( "INSERT INTO registered_instructors (ID, Name, Email, Telephone) " +
-		                  				"VALUES ('159', 'loa', 'loa@email.com', '05494')");
-				if(s>0)
+			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE ID='"+id+"'");
+			if (!rs.next()) {//if its not exist ever
+				int s=st.executeUpdate( "INSERT INTO visitors (ID, Email, Telephone ,isInstructor) " +
+		                  				"VALUES ('"+id+"','"+email+"', '"+tel+"' ,'1')");
+				if(s>0)//if the insertion successful
 					return 1;
 				return -1;
+			}else {//now we want to check if exist and not instructor we update the field
+				int s=rs.getInt("isInstructor");
+				if(s==1) {
+					return 0;
+				}else {
+					st.executeUpdate("UPDATE visitors SET isInstructor = '"+1+"' WHERE ID='"+id+"'");
+					return 1;
+				}
+				
 			}
-			else 
-			{return 0;}
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to instructorExists");
 			ex.printStackTrace();

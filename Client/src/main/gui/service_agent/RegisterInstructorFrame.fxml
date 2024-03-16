@@ -8,13 +8,8 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
    <children>
-      <Label layoutX="43.0" layoutY="149.0" prefHeight="14.0" prefWidth="53.0" text="Name:">
-         <font>
-            <Font name="Arial Bold" size="11.0" />
-         </font>
-      </Label>
       <Label layoutX="49.0" layoutY="104.0" prefHeight="17.0" prefWidth="20.0" text="ID:">
          <font>
             <Font name="Arial Bold" size="11.0" />
@@ -51,6 +46,5 @@
          </effect>
       </Label>
       <Label fx:id="label" layoutX="400.0" layoutY="106.0" />
-      <TextField fx:id="instructorName" layoutX="107.0" layoutY="131.0" />
    </children>
 </Pane>

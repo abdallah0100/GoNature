@@ -22,9 +22,8 @@ public class Visitor implements Serializable{
 		this.setInstructor(instructor);
 	}
 	
-	public Visitor(String id, String email, String phone, String name) {
+	public Visitor(String id, String email, String phone) {
 		this.setId(id);
-		this.setName(name);
 		this.setEmail(email);
 		this.setPhone(phone);
 
