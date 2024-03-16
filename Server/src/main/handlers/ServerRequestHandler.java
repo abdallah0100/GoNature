@@ -1,6 +1,6 @@
 package main.handlers;
-
 import java.io.IOException;
+import entities.Order;
 
 import entities.Bill;
 import entities.Report;
@@ -44,6 +44,14 @@ public class ServerRequestHandler {
 			u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
+		case MAKE_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
+				return;
+			}
+			Order o = VisitorRequestHandler.handleMakeReservationRequest((Order)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
+			return;
 			
 			
 		case REQUEST_BILL:
@@ -70,7 +78,7 @@ public class ServerRequestHandler {
 				return;
 			}
 			r = (Report) msg.getRequestData();
-			int individuals = ReportRequestHandler.getReservationCountByType("Individual", r);
+			int individuals = ReportRequestHandler.getReservationCountByType("Private", r);
 			int group = ReportRequestHandler.getReservationCountByType("Organized Group", r);
 			boolean reportExist = ReportRequestHandler.reportExist(r);
 			r.setReportExist(reportExist);
