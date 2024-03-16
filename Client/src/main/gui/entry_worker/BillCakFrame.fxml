@@ -14,7 +14,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@BillCakFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.BillCakFrameController">
    <children>
-      <Label layoutX="-148.0" layoutY="38.0" prefHeight="48.0" prefWidth="519.0" text="                      Bill  Cak" textFill="WHITE">
+      <Label layoutX="43.0" layoutY="38.0" prefHeight="55.0" prefWidth="328.0" text="Bill  Cak" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="48.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font name="Arial Bold" size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="visitorid" layoutX="200.0" layoutY="174.0" prefHeight="29.0" prefWidth="200.0">
+      <TextField fx:id="reservatiomId" layoutX="200.0" layoutY="174.0" prefHeight="29.0" prefWidth="200.0">
          <effect>
             <DropShadow>
                <color>
