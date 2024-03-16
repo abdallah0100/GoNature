@@ -1,15 +1,19 @@
 package main.client_requests;
 
+import java.util.ArrayList;
+
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
 import requests.Message;
 
 public class RequestHandler {
 	
+	@SuppressWarnings("unchecked")
 	public static void handleIncomingRequests(Message msg) {
 		switch(msg.getRequestEnumType()) {
 		case REQUEST_ERROR:
@@ -57,6 +61,16 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
 					return;
 				}
+		case SHOW_USAGE_REPORT:
+			if (msg.getRequestData() instanceof ArrayList<?>) {
+				UsageReportFrameController.setList((ArrayList<String[]>)msg.getRequestData());
+				return; 
+			}
+			else {
+				UsageReportFrameController.setList(null);
+				System.out.println("[RequestHandler] - invalid SHOW_USAGE_REPORT response");
+				return;
+			}
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

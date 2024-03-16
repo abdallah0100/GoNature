@@ -1,7 +1,7 @@
 package main.handlers;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
@@ -54,6 +54,16 @@ public class ServerRequestHandler {
 			int x=UserRequestHandler.instructorExists((Visitor) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.INSERT_INSTRUCTOR, x));
 			return;
+		case SHOW_USAGE_REPORT:
+			if (!(msg.getRequestData() instanceof  ArrayList<?>)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
+			    return;
+			}
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<?> list = UsageReportHandler.getUsageReports((ArrayList<String[]>) msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT, list));
+			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
