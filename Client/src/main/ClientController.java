@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 
+import entities.Bill;
 import entities.User;
 import entities.Visitor;
 import requests.Message;
@@ -20,8 +21,9 @@ public class ClientController {
 	public static boolean fetchedData = false;
 	public static Visitor connectedVisitor;
 	public static User connectedUser;
+	public static Bill showBill;
 	public static String msg;
-	
+	 
 	
 	private ClientController(String host, int port) {
 		try {

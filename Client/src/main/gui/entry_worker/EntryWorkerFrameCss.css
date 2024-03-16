@@ -5,15 +5,9 @@
 }
 
 
-#checkAvailablePlacesBtn {
-	-fx-background-color: #219a6a;
-	-fx-background-radius: 40px;
-	-fx-cursor:hand;
-}
 
-#checkAvailablePlacesBtn:hover {
-	-fx-background-color: #808080;
-}
+
+
 
 
 #viewBillBtn {

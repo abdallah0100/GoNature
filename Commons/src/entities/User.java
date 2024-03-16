@@ -17,7 +17,6 @@ public class User implements Serializable{
 	private String role;
 	private String parkWork;
 	private boolean foundInDB;
-	private String requestedBill;
 	
 	public User(String firstName, String lastName,String id,String password ,String workerNumber,String email,String role,String parkWork) {
 		this.setFirstName(firstName);
@@ -106,12 +105,5 @@ public class User implements Serializable{
 
 	public void setFoundInDB(boolean foundInDB) {
 		this.foundInDB = foundInDB;
-	}
-	
-	public String getRequestedBill () {
-		return requestedBill ;
-	}
-	public void setRequestedBill(String requestedBill) {
-		this.requestedBill = requestedBill;
-	} 
+	}	
 }

@@ -1,5 +1,6 @@
 package main.client_requests;
 
+import entities.Bill;
 import entities.Report;
 import entities.User;
 import entities.Visitor;
@@ -39,23 +40,28 @@ public class RequestHandler {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");
 					return;
 				}
+				
+				
 		case REQUEST_BILL:
-				if (msg.getRequestData() instanceof String) {
-					ClientController.connectedUser.setRequestedBill((String) msg.getRequestData());
+				if (msg.getRequestData() instanceof Bill) {
+					ClientController.showBill=(Bill) msg.getRequestData();
 					return; 
 				}
 				else {
-					ClientController.connectedUser.setRequestedBill(null);
+					ClientController.showBill=null;
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
 				}
+				
+				
+				
 		case INSERT_INSTRUCTOR:
 				if (msg.getRequestData() instanceof Integer) {
 					RegisterInstructorFrameController.result=((Integer) msg.getRequestData());
 					return; 
 				}
 				else {
-					ClientController.connectedUser.setRequestedBill(null);
+					RegisterInstructorFrameController.result=-1;//fail
 					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
 					return;
 				}

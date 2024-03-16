@@ -10,7 +10,7 @@ import requests.RequestType;
 
 
 public class GoNatureClient extends AbstractClient{
-	
+	 
 	  public static boolean awaitResponse = false;
 	  
 	  private ArrayList<String[]> orders;

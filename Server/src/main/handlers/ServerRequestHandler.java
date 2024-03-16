@@ -2,6 +2,7 @@ package main.handlers;
 
 import java.io.IOException;
 
+import entities.Bill;
 import entities.Report;
 import entities.User;
 import entities.Visitor;
@@ -43,14 +44,18 @@ public class ServerRequestHandler {
 			u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
+			
+			
 		case REQUEST_BILL:
-			if (!(msg.getRequestData() instanceof String)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (String)"));
+			if (!(msg.getRequestData() instanceof Bill)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Bill)"));
 				return;
 			}
-			String b = UserRequestHandler.billExists((String) msg.getRequestData());
+			Bill b = UserRequestHandler.billExists((Bill) msg.getRequestData());
 			respondToClient(client, new Message(RequestType.REQUEST_BILL, b));
 			return;
+			
+			
 		case INSERT_INSTRUCTOR:
 			if(!(msg.getRequestData() instanceof Visitor)) {	
 			respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Visitor)"));

@@ -3,6 +3,7 @@ package main.handlers;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import entities.Bill;
 import entities.User;
 import entities.Visitor;
 import main.Constants;
@@ -43,27 +44,28 @@ public class UserRequestHandler {
 		return u;
 	}
 	
-	public static String billExists(String id){
+	public static Bill billExists(Bill b1){
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
 		}
-		String bill;
+		Bill b;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM bill WHERE ID='"+id+"'");
+			//reservation
+			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"'");
 			if (!rs.next()) {
-				System.out.println("[UserRequestHandler] - result set was empty");
+				System.out.println("[UserRequestHandler] - r1 result set was empty");
 				return null;
 			}
-			bill = rs.getString(2);
+			b = new Bill(rs.getString(1),rs.getString(2),rs.getString(12).equals("1"),rs.getString(13).equals("1"));
 			rs.close();
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to execute query");
 			ex.printStackTrace();
 			return null;
 		}
-		return bill;
+		return b;
 	}
 	
 	public static int instructorExists(Visitor v) {

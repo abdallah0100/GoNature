@@ -2,10 +2,9 @@
 // view report frame controller class
 package main.gui.dep_manager;
 
-import javafx.scene.control.Button;
-
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
 import utilities.SceneController;

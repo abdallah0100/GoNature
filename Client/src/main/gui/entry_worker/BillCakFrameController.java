@@ -8,12 +8,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.controllers.UserRequestController;
-import main.gui.MainFrameController;
 import utilities.SceneController;
 
-public class BillCakFrameController   extends Application {
+public class BillCakFrameController  extends Application {
 	@FXML
-	private TextField visitorid;
+	private TextField reservatiomId;
 	
 	@FXML
 	private Button viewbill;
@@ -41,34 +40,34 @@ public class BillCakFrameController   extends Application {
 	}
 	
 	public void showBill(ActionEvent e){
-		if (visitorid.getText().length() <= 0){
+		if (reservatiomId.getText().length() <= 0){
 			displayMSG("Please enter the  Bill Id");
 			return;
 		}
 		try {
-			Integer.parseInt(visitorid.getText());
+			Integer.parseInt(reservatiomId.getText());
+			displayMSG("reservationId has to be Number");
 		}catch(Exception ex) {
 			displayMSG("Invalid id was inputted");
 			return;
 		}
-		UserRequestController.sendShowBill(visitorid.getText());
+		
+		UserRequestController.sendShowBill(reservatiomId.getText());
 		msgLabel.setVisible(false);
 		billLabel.setVisible(false);
-		if (ClientController.connectedUser.getRequestedBill()!= null) {
-			billLabel.setVisible(true);
-			billLabel.setText(ClientController.connectedUser.getRequestedBill());
-			}
-			 else {
+		if (ClientController.showBill!=null) 
+		{
+			displayMSG(ClientController.showBill.returnPrice()+"");
+		}
+		else {//if null
 				System.out.println("[BillCakFrameController] - did no bill");
 				displayMSG("reservation Not Found");
+			 }
 		}
-		
-	}
 	
 	public void displayMSG(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
-	
-	
 }
+
