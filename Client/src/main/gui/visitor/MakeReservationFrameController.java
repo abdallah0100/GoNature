@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import utilities.SceneController;
 
 public class MakeReservationFrameController extends Application implements Initializable{
-
+ 
 	@FXML
 	private ComboBox<String> orderType;
 	@FXML
