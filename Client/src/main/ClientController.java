@@ -1,12 +1,8 @@
 package main;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import entities.Order;
-=======
-
 import entities.Bill;
->>>>>>> branch 'master' of https://github.com/abdallah0100/GoNature.git
 import entities.User;
 import entities.Visitor;
 import requests.Message;
@@ -25,13 +21,11 @@ public class ClientController {
 	public static boolean fetchedData = false;
 	public static Visitor connectedVisitor;
 	public static User connectedUser;
-<<<<<<< HEAD
 	public static Order reservationMade;
-=======
 	public static Bill showBill;
-	public static String msg;
+
 	 
->>>>>>> branch 'master' of https://github.com/abdallah0100/GoNature.git
+
 	
 	private ClientController(String host, int port) {
 		try {
