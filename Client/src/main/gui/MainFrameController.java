@@ -69,6 +69,10 @@ public class MainFrameController extends Application implements Initializable{
 		SceneController scene = new SceneController();
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
+			if(!(ClientController.connectedVisitor.isFoundInDB()))
+			{
+				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+			}
 		}
 		else if(ClientController.connectedUser != null) {
 			 switch (ClientController.connectedUser.getRole()) {
