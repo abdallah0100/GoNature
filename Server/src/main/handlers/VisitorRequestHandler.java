@@ -1,7 +1,14 @@
 package main.handlers;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import entities.Order;
 
 import entities.Visitor;
@@ -34,7 +41,7 @@ public class VisitorRequestHandler {
 			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE ID='"+id+"'");
 			if (!rs.next()) {
 				System.out.println("[VisitorRequestHandler] - result set was empty");
-				return null;
+				return null; 
 			}
 			v = new Visitor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4).equals("1"));
 			rs.close();
@@ -62,5 +69,34 @@ public class VisitorRequestHandler {
 		return o;
 			
 	}
-
+	public static Order[] handleShowReservationsRequest(String id) {
+		List<Order> orders = new ArrayList<>();
+        ResultSet rs = null;
+        try {			
+            String query =  "SELECT Park, ReservationDate, Hour, Minute, NumberOfVisitors ,Type " +
+                    "FROM reservations " +
+                    "WHERE visitorID = ?";
+            PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String park = rs.getString(1);
+                String date = rs.getString(2); 
+                String hour = rs.getString(3);
+                String minute = rs.getString(4);
+                int numberOfVisitors = rs.getInt(5);
+                String type = rs.getString(6);
+                orders.add(new Order(park, date, hour, minute, numberOfVisitors,type));  
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();         
+         }
+        Order[] ordersArray = new Order[orders.size()];
+        ordersArray = orders.toArray(ordersArray);
+        
+        return ordersArray;
+    }
+		
+	
 }

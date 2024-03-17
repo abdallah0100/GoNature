@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
+import main.controllers.VisitorRequestController;
 import utilities.SceneController;
 
 
@@ -27,7 +28,7 @@ public class VisitorSidePaneController extends Application implements Initializa
 	private Button showReservation;
 	@FXML
 	private Button updateReservation;
-	
+	String id;
 	
 	
 	/**

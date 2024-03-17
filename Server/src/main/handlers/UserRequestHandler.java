@@ -23,7 +23,7 @@ public class UserRequestHandler {
 	
 	public static User userExists(String userName,String password){
 		if (MainServer.dbConnection == null) {
-			System.out.println(Constants.DB_CONNECTION_ERROR);
+			System.out.println(Constants.DB_CONNECTION_ERROR); 
 			return null;
 		}
 		User u;

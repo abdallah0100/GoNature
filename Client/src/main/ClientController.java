@@ -23,9 +23,7 @@ public class ClientController {
 	public static User connectedUser;
 	public static Order reservationMade;
 	public static Bill showBill;
-
-	 
-
+	public static Order[] reservationshowed;
 	
 	private ClientController(String host, int port) {
 		try {
