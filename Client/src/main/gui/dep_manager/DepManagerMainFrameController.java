@@ -58,9 +58,9 @@ public class DepManagerMainFrameController extends Application{
 	* @param event 
 	*/
 	@FXML
-	public void showgenerateReportWindow(ActionEvent event) {	
+	public void showExportReportWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
-		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/GenerateReportFrame.fxml");
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/ExportReportFrame.fxml");
 	}
 	
 	
