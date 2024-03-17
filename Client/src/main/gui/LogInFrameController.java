@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
+import main.controllers.ParkRequestHandler;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
 
@@ -59,6 +60,7 @@ public class LogInFrameController extends Application implements Initializable{
 			displayError("Please enter password");
 			return;
 		}
+		ParkRequestHandler.requestAllParks();
 		UserRequestController.sendUserLogIn(userNameTxt.getText(), passwordTxt.getText());
 		if (UserRequestController.LogedIn) {
 			SceneController.switchFrame("GoNature",e,new MainFrameController());

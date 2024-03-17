@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
-import main.controllers.ParkRequestHandler;
 import requests.Message;
 import requests.RequestType;
 import utilities.SceneController;
@@ -65,7 +64,6 @@ public class ClientStartUpController extends Application{
 		//getController() automatically creates a connection to the server, and then sending a connect request to notify the server
 		ClientController.createInstance(ip, port);
 		ClientController.getController().accept(new Message(RequestType.CONNECT_TO_SERVER));
-		ParkRequestHandler.requestAllParks();
 		
 		if (ClientController.connectedToServer) {
 			LoginOptionController landingFrame = new LoginOptionController();
