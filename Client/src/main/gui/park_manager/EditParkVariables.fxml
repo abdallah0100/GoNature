@@ -2,110 +2,135 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@EditParkVariablesFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.EditParkVariablesController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="615.0" stylesheets="@EditParkVariablesFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.EditParkVariablesController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="592.0">
+      <Label layoutX="31.0" layoutY="31.0" prefHeight="21.0" prefWidth="181.0" text="Update Park Details" textFill="WHITE" underline="true">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Button fx:id="editEstimatedTimeBtn" layoutX="34.0" layoutY="175.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="Estimated Time" textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="editVisitorBtn" layoutX="43.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="Visitor Limit " textFill="WHITE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="editGapBtn" layoutX="49.0" layoutY="105.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="25.0" prefWidth="92.0" text="Gap" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Pane fx:id="rightPane" layoutX="220.0" layoutY="1.0" prefHeight="431.0" prefWidth="395.0" style="-fx-border-color: white; -fx-border-width: 0 0 0 2;" visible="false">
          <children>
-            <Button fx:id="EditEstimatedTime" layoutX="68.0" layoutY="187.0" mnemonicParsing="false" onAction="#editEstimatedTime" text="Edit Estimated Time" textFill="WHITE">
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-                     </color>
-                  </DropShadow>
-               </effect>
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font></Button>
-            <Button fx:id="EditVisitor" layoutX="77.0" layoutY="270.0" mnemonicParsing="false" onAction="#editVisitor" text="Edit Visitor Limit " textFill="WHITE">
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-                     </color>
-                  </DropShadow>
-               </effect>
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font></Button>
-            <SplitPane layoutX="298.0" layoutY="-1.0" prefHeight="400.0" prefWidth="301.0">
-               <items>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane fx:id="rightPane" layoutX="-11.0" prefHeight="399.0" prefWidth="312.0">
-                           <children>
-                              <Button fx:id="edit" layoutX="118.0" layoutY="288.0" mnemonicParsing="false" onAction="#edit" prefHeight="35.0" prefWidth="81.0" text="Edit" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="14.0" />
-                                 </font>
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect></Button>
-                              <TextField fx:id="oldValue" layoutX="129.0" layoutY="98.0" prefHeight="25.0" prefWidth="170.0">
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect></TextField>
-                              <TextField fx:id="newValue" layoutX="129.0" layoutY="158.0" prefHeight="25.0" prefWidth="170.0">
-                                 <effect>
-                                    <DropShadow>
-                                       <color>
-                                          <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-                                       </color>
-                                    </DropShadow>
-                                 </effect></TextField>
-                              <Label layoutX="23.0" layoutY="100.0" prefHeight="21.0" prefWidth="106.0" text="Old Value :" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="18.0" />
-                                 </font></Label>
-                              <Label layoutX="23.0" layoutY="160.0" prefHeight="21.0" prefWidth="106.0" text="New Value :" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial Bold" size="18.0" />
-                                 </font></Label>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
-            <Button fx:id="editGap" layoutX="98.0" layoutY="103.0" mnemonicParsing="false" onAction="#editGap" prefHeight="25.0" prefWidth="92.0" text="Edit Gap" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-                     </color>
-                  </DropShadow>
-               </effect></Button>
-            <Label layoutX="21.0" layoutY="21.0" prefHeight="21.0" prefWidth="184.0" text="Edit Park Details" textFill="WHITE" underline="true">
+            <Label layoutX="25.0" layoutY="120.0" text="Editing:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="205.0" prefHeight="21.0" prefWidth="106.0" text="New Value :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="80.0" prefHeight="21.0" prefWidth="106.0" text="Park:" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="parkName" layoutX="184.0" layoutY="80.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="newValue" layoutX="152.0" layoutY="203.0" prefHeight="25.0" prefWidth="170.0">
                <effect>
                   <DropShadow>
                      <color>
-                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
                      </color>
                   </DropShadow>
-               </effect></Label>
+               </effect>
+            </TextField>
+            <Label layoutX="25.0" layoutY="160.0" prefHeight="21.0" prefWidth="127.0" text="Current Value:" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentValue" layoutX="184.0" layoutY="160.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="98.0" layoutY="268.0" mnemonicParsing="false" onAction="#update" prefHeight="26.0" prefWidth="67.0" text="Update" textFill="WHITE">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="cancel" layoutX="198.0" layoutY="268.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="67.0" text="Cancel" textFill="WHITE">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="editingVariable" layoutX="184.0" layoutY="120.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="msgLabel" layoutX="170.0" layoutY="314.0" text="Label" visible="false" />
          </children>
-      </AnchorPane>
+      </Pane>
    </children>
 </Pane>
