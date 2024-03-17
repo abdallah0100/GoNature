@@ -10,7 +10,7 @@ import main.MainServer;
 
 public class ReportRequestHandler {
 
-	public static boolean reportExist(Report r) {
+	public static boolean numReportExist(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
@@ -18,6 +18,31 @@ public class ReportRequestHandler {
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
 			String str = "SELECT COUNT(madeBy) FROM numOfVisitorsReports WHERE month='"+r.getMonth()+"' AND year='"+r.getYear()+"' AND madeBy='"+r.getMadeBy()+"'";
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next())
+				return false;
+			try {
+				return Integer.parseInt(rs.getString(1)) > 0;
+			}catch(Exception ex) {
+				System.out.println("[ReportRequestHandler] - result was not an integer");
+				ex.printStackTrace();
+				return false;
+			}
+		}catch(Exception ex) {
+			System.out.println("[ReportRequestHandler] - Error executing query");
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean notFullReportExist(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			String str = "SELECT COUNT(madeBy) FROM NotFullReports WHERE month='"+r.getMonth()+"' AND year='"+r.getYear()+"' AND madeBy='"+r.getMadeBy()+"'";
 			ResultSet rs = st.executeQuery(str);
 			if (!rs.next())
 				return false;
@@ -65,7 +90,7 @@ public class ReportRequestHandler {
 		}
 	}
 	
-	public static boolean insertNewReport(Report r) {
+	public static boolean insertNewNumReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
@@ -82,7 +107,7 @@ public class ReportRequestHandler {
 		}
 	}
 	
-	public static boolean updateReport(Report r) {
+	public static boolean updateNumReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
@@ -106,5 +131,31 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	public static int getTotalVisitorsInMonth(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return 0;
+		}
+		try{
+			Statement st = MainServer.dbConnection.createStatement();
+			String str = "SELECT sum(NumberOfVisitors) FROM reservations WHERE month='"+r.getMonth()+"' AND year='"+r.getYear()+"', madeBy='"+r.getMadeBy()+"'";
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next()) {
+				System.out.println("[ReportRequestHandler] - " + r.getPark() + " had no visitors in the selected date");
+				return 0;
+			}
+			try {
+				return Integer.parseInt(rs.getString(1));
+			}catch(Exception ex) {
+				System.out.println("[ReportRequestHandler] - number of visitor result was not an integer");
+			}
+			
+		}catch(Exception ex) {
+			System.out.println("[ReportRequestHandler] - failed to insert report");
+			ex.printStackTrace();
+			return 0;
+		}
+		return 0;
+	}
 	
 }

@@ -1,8 +1,11 @@
 package main;
 
 import java.io.IOException;
-import entities.Order;
+import java.util.HashMap;
+
 import entities.Bill;
+import entities.Order;
+import entities.Park;
 import entities.User;
 import entities.Visitor;
 import requests.Message;
@@ -24,6 +27,8 @@ public class ClientController {
 	public static Order reservationMade;
 	public static Bill showBill;
  
+	private static HashMap<String, Park> parks = new HashMap<>();
+	
 	private ClientController(String host, int port) {
 		try {
 			client = new GoNatureClient(host, port);
@@ -55,6 +60,14 @@ public class ClientController {
 	  }
 		public static ClientController getController() {
 			return clientController;			
+		}
+
+		public static HashMap<String, Park> getParks() {
+			return parks;
+		}
+
+		public static void setParks(HashMap<String, Park> parks) {
+			ClientController.parks = parks;
 		}
 
 }

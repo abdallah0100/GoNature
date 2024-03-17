@@ -15,10 +15,11 @@ public class User implements Serializable{
 	private String workerNumber;
 	private String email;
 	private String role;
-	private String parkWork;
 	private boolean foundInDB;
+	private String parkName;
+	private Park park;
 	
-	public User(String firstName, String lastName,String id,String password ,String workerNumber,String email,String role,String parkWork) {
+	public User(String firstName, String lastName,String id,String password ,String workerNumber,String email,String role, String park) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setPassword(password);
@@ -26,7 +27,7 @@ public class User implements Serializable{
 		this.setWorkerNumber(workerNumber);
 		this.setEmail(email);
 		this.setRole(role);
-		this.setParkWork(parkWork);
+		this.setParkName(park);
 	}
 		 
 	public User (String id,String password) {
@@ -56,10 +57,6 @@ public class User implements Serializable{
 
 	public String getRole() {
 		return role;
-	}
-
-	public String getParkWork() {
-		return parkWork;
 	}
 
 	public void setFirstName(String firstName) {
@@ -93,11 +90,6 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-	public void setParkWork(String parkWork) {
-		this.parkWork = parkWork;
-	}
 	
 	public boolean isFoundInDB() {
 		return foundInDB;
@@ -105,5 +97,21 @@ public class User implements Serializable{
 
 	public void setFoundInDB(boolean foundInDB) {
 		this.foundInDB = foundInDB;
+	}
+
+	public Park getPark() {
+		return park;
+	}
+
+	public void setPark(Park park) {
+		this.park = park;
+	}
+
+	public String getParkName() {
+		return parkName;
+	}
+
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
 	}	
 }
