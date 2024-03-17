@@ -23,7 +23,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <TableView layoutX="48.0" layoutY="64.0" prefHeight="272.0" prefWidth="504.0">
+      <TableView fx:id="tableView" layoutX="48.0" layoutY="64.0" prefHeight="272.0" prefWidth="504.0">
         <columns>
           <TableColumn fx:id="siteColumn" prefWidth="106.66665267944336" text="Site" />
           <TableColumn fx:id="dateColumn" prefWidth="104.00004577636719" text="Date" />
@@ -32,7 +32,7 @@
             <TableColumn fx:id="visitorNumberColumn" prefWidth="113.33331298828125" text="Visitors Number" />
         </columns>
       </TableView>
-      <Button fx:id="updateBtn" layoutX="486.0" layoutY="354.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="95.0" text="Update " textFill="WHITE">
+      <Button fx:id="updateBtn" layoutX="486.0" layoutY="354.0" mnemonicParsing="false" onAction="#showReservation" prefHeight="31.0" prefWidth="95.0" text="Show" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>

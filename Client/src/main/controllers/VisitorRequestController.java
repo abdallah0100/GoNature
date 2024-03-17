@@ -8,6 +8,8 @@ public class VisitorRequestController {
 	
 	public static boolean finishedValidating = false;
 	public static boolean finishedMakingReservation = false;
+	public static boolean finishedShowingReservations = false;
+
 
 	public static void sendVisitorValidation(String id) {
 		ClientController.getController().accept(new Message(RequestType.VALIDATE_VISITOR, id));
@@ -16,6 +18,10 @@ public class VisitorRequestController {
 
 	public static void sendReservation(Order o) {
 		ClientController.getController().accept(new Message(RequestType.MAKE_RESERVATION, o));
+		
+	}
+	public static void showReservations(String id) {
+		ClientController.getController().accept(new Message(RequestType.SHOW_RESERVATIONS, id));
 		
 	}
 }

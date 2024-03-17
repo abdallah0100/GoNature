@@ -26,6 +26,7 @@ public class ClientController {
 	public static User connectedUser;
 	public static Order reservationMade;
 	public static Bill showBill;
+	public static Order[] reservationshowed;
  
 	private static HashMap<String, Park> parks = new HashMap<>();
 	

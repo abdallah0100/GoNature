@@ -101,6 +101,17 @@ public class RequestHandler {
 			}
 			PrepareReportFrameController.report_withData.setCreationStatus((String)msg.getRequestData());
 			break;
+		case SHOW_RESERVATIONS:
+			if (msg.getRequestData() instanceof Order[]) {
+				ClientController.reservationshowed = (Order[]) msg.getRequestData();
+				VisitorRequestController.finishedShowingReservations = true;
+				return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid SHOW_RESERVATIONS response");
+				return;
+			}
+			
 		case FETCH_PARKS:
 			if (!(msg.getRequestData() instanceof Park[])) {
 				System.out.println("[RequestHandler] - received no parks");

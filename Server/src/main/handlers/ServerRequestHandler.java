@@ -114,6 +114,15 @@ public class ServerRequestHandler {
 			}
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
 			return;
+		case SHOW_RESERVATIONS:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
+			}
+			Order[] oa = VisitorRequestHandler.handleShowReservationsRequest((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_RESERVATIONS, oa));
+			return;
+			
 		case FETCH_PARKS:
 			Park[] parks = ParkRequestHandler.getAllParks();
 			if (parks == null || parks.length == 0)
@@ -157,7 +166,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
 		}
-		
+		 
 		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));
 	}
 	

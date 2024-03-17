@@ -15,7 +15,7 @@ public class Order implements Serializable{
 	private String phone;
 	private String email;
 	private String orderID;
-	
+	private String time;
 	public Order() {
     }
 	
@@ -30,7 +30,16 @@ public class Order implements Serializable{
 		this.phone = phone;
 		this.email = email;
 		this.orderID=orderID;
-				
+				 
+	}
+	public Order(String parkName, String date, String hour,String minute,int numOfVisitors,String orderType) {
+		this.parkName =parkName;
+		this.date = date;
+		this.time = hour+":"+minute;
+		this.numOfVisitors =  String.valueOf(numOfVisitors);
+		this.orderType = orderType;
+
+
 	}
 	
     public String getOrderType() {
@@ -59,6 +68,9 @@ public class Order implements Serializable{
 	}
 	public String getOrderID() {
 		return orderID;
+	}
+	public String getTime() {
+		return time;
 	}
 	
 	
