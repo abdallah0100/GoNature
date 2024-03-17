@@ -161,5 +161,6 @@
             </DropShadow>
          </effect>
       </Label>
+      <Button fx:id="importBtn" layoutX="489.0" layoutY="395.0" mnemonicParsing="false" onAction="#importData" text="Import" />
    </children>
 </Pane>
