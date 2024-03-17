@@ -56,11 +56,13 @@ public class UsageReportFrameController  implements Initializable{
 		UsageReportRequestController.sendShowUsageReport(arrayList);
 		
 		 // Loop over the ArrayList and add its data to the ObservableList
-        for (String[] array : arrayList) {
-            	UsageReport report = new UsageReport(array[0], array[1], array[2], array[3], array[4]);
-                list.add(report);
+        if (arrayList != null) {
+	        for (String[] array : arrayList) {
+	            UsageReport report = new UsageReport(array[0], array[1], array[2], array[3], array[4]);
+	            list.add(report);
+	        }
+	        tableView.setItems(list);
         }
-		tableView.setItems(list);
 }
 
 
