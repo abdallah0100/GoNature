@@ -4,24 +4,52 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@LoginOptionFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.LoginOptionController">
    <children>
-      <Label layoutX="188.0" layoutY="30.0" prefHeight="27.0" prefWidth="260.0" text="Welcome to GoNature" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="24.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect></Label>
-      <Button fx:id="userBtn" layoutX="172.0" layoutY="184.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="33.0" prefWidth="119.0" text="User" textFill="WHITE">
+      <Pane fx:id="headerPane" prefHeight="61.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="170.0" layoutY="17.0" prefHeight="27.0" prefWidth="260.0" text="Welcome to GoNature" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <ImageView fx:id="closeIcon" fitHeight="29.0" fitWidth="32.0" layoutX="556.0" layoutY="16.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/close_icon.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <Separator layoutY="58.0" prefHeight="6.0" prefWidth="600.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Separator>
+         </children>
+      </Pane>
+      <Button layoutX="172.0" layoutY="184.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="33.0" prefWidth="119.0" text="User" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -32,7 +60,7 @@
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font></Button>
-      <Button fx:id="visitorInstructorBtn" layoutX="334.0" layoutY="184.0" mnemonicParsing="false" onAction="#visitorLogin" prefHeight="33.0" prefWidth="178.0" text="Visitor/Instructor" textFill="WHITE">
+      <Button layoutX="334.0" layoutY="184.0" mnemonicParsing="false" onAction="#visitorLogin" prefHeight="33.0" prefWidth="178.0" text="Visitor/Instructor" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -48,14 +76,5 @@
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <Separator layoutY="57.0" prefHeight="6.0" prefWidth="600.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Separator>
    </children>
 </Pane>

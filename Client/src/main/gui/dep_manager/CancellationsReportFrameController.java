@@ -3,8 +3,8 @@ package main.gui.dep_manager;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import entities.CancelledReservation;
-import entities.UsageReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,21 +55,26 @@ public class CancellationsReportFrameController implements Initializable{
 		
 		
 	    CancellationsReportRequestController.sendShowCancellationsReport(arrayListLeft,"Yes");
-	    // Loop over the ArrayList and add its data to the ObservableList
-        for (String[] array : arrayListLeft) {
-        	CancelledReservation cancelledReservation1 = new CancelledReservation(array[0], array[1], array[2]);
-        	listLeft.add(cancelledReservation1);
-        }
-        leftTableView.setItems(listLeft);
 	    
+	    if(arrayListLeft != null) {
+		    // Loop over the ArrayList and add its data to the ObservableList
+	        for (String[] array : arrayListLeft) {
+	        	CancelledReservation cancelledReservation1 = new CancelledReservation(array[0], array[1], array[2]);
+	        	listLeft.add(cancelledReservation1);
+	        }
+	        leftTableView.setItems(listLeft);
+        }
 	    
 	    CancellationsReportRequestController.sendShowCancellationsReport(arrayListRight,"No");
-	    // Loop over the ArrayList and add its data to the ObservableList
-        for (String[] array : arrayListRight) {
-        	CancelledReservation cancelledReservation2 = new CancelledReservation(array[0], array[1], array[2]);
-        	listRight.add(cancelledReservation2);
+	    
+	    if (arrayListRight != null) {
+		    // Loop over the ArrayList and add its data to the ObservableList    
+	        for (String[] array : arrayListRight) {
+	        	CancelledReservation cancelledReservation2 = new CancelledReservation(array[0], array[1], array[2]);
+	        	listRight.add(cancelledReservation2);
+	        }
+	        rightTableView.setItems(listRight);	
         }
-        rightTableView.setItems(listRight);	  
 	}
 
 	public static void setArrayListLeft(ArrayList<String[]> arrayListLeft) {

@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
@@ -12,18 +14,55 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ValidationFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.ValidationFrameController">
    <children>
-      <Label layoutX="247.0" layoutY="6.0" text="GoNature" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="28.0" />
-         </font>
+      <Pane fx:id="headerPane" layoutY="2.0" prefHeight="61.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="244.0" layoutY="17.0" prefHeight="27.0" prefWidth="113.0" text="GoNature" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <ImageView fitHeight="29.0" fitWidth="32.0" layoutX="556.0" layoutY="16.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close_icon.png" />
+               </image>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </ImageView>
+            <Separator layoutY="58.0" prefHeight="6.0" prefWidth="600.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Separator>
+         </children>
+      </Pane>
+      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="532.0" layoutY="63.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/go_back.png" />
+         </image>
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                  <Color red="0.2982233464717865" blue="1.0" />
                </color>
             </DropShadow>
          </effect>
-      </Label>
+      </ImageView>
       <Label layoutX="261.0" layoutY="111.0" text="Validation" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -42,17 +81,6 @@
          </font></Label>
       <TextField fx:id="idField" layoutX="237.0" layoutY="179.0" />
       <VBox layoutX="532.0" layoutY="19.0" />
-      <Button fx:id="exitbtn" layoutX="564.0" layoutY="4.0" mnemonicParsing="false" onAction="#Exit" prefHeight="17.0" prefWidth="28.0" style="-fx-background-color: red;" styleClass="background" text="X">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="1.0" />
-               </color>
-            </DropShadow>
-         </effect></Button>
       <Button fx:id="loginBtn" layoutX="266.0" layoutY="237.0" mnemonicParsing="false" onAction="#validate" prefHeight="25.0" prefWidth="86.0" text="LogIn" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
@@ -75,14 +103,5 @@
                </color>
             </DropShadow>
          </effect></Label>
-      <Separator layoutY="34.0" prefHeight="8.0" prefWidth="600.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Separator>
    </children>
 </Pane>

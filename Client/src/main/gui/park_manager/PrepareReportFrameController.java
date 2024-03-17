@@ -137,28 +137,29 @@ public class PrepareReportFrameController implements Initializable{
 			int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 			int selectedMonth = Utils.getMonthNumberByName(monthBox.getValue());
 			
-			System.out.println("Selected: "+selectedMonth+", current: " + month);
 			if (selectedMonth > month && year == Integer.parseInt(yearBox.getValue())) {
 				displayError("Can't create a report for a month that is yet to come", 19);
 				return;
 			}
-			
-			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue());
+			UserRequestController.fetchReportData(parkField.getText(), Utils.getMonthNumberByName(monthBox.getValue())+ "", yearBox.getValue(), reportType.getText());
 			if (report_withData != null) {
 				fetched = true;
 				if (reportType.getText().equals(numOfVisitorBtn.getText()))
 					handleNumOfVisitors();
-				
+				else
+					handleNotFullPark();
 			}else {
 				displayError("Error fetching data", 85);
 			}
 		}else {
-			if (!ClientController.connectedUser.getParkWork().equals(parkField.getText()))
+			if (!ClientController.connectedUser.getPark().getParkName().equals(parkField.getText()))
 				displayError("You can only create a report for the park you work at.", 19);
 			else
 				displayError("Fill all fields to continue", 70);
 		}
 	}
+	
+	public void handleNotFullPark() {}
 	
 	public void handleNumOfVisitors() {
 		reportDataTxt1.setText("Individual Orders:");
@@ -212,7 +213,7 @@ public class PrepareReportFrameController implements Initializable{
 	public boolean validInput() {
 		if (parkField.getText() == null || parkField.getText().length() == 0)
 			return false;
-		if (!ClientController.connectedUser.getParkWork().equals(parkField.getText())) 
+		if (!ClientController.connectedUser.getPark().getParkName().equals(parkField.getText())) 
 			return false;
 		if (monthBox.getValue() == null || yearBox.getValue() == null)
 			return false;
