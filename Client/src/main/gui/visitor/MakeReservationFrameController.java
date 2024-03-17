@@ -20,7 +20,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.controllers.UserRequestController;
+import main.ClientController;
 import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
 import utilities.SceneController;
@@ -75,7 +75,9 @@ public class MakeReservationFrameController extends Application implements Initi
 			loadData();
 			VisitorRequestController.sendReservation(o);
 			if (VisitorRequestController.finishedMakingReservation) {
+				ClientController.connectedVisitor.setFoundInDB(true);
 				SceneController.switchFrame("GoNature",e,new MainFrameController());
+				
 			}
 			else {
 				System.out.println("[MakeReservationFrameController] - did not finished Making Reservation");		
