@@ -4,6 +4,7 @@ import entities.Order;
 import java.util.ArrayList;
 import entities.Bill;
 import entities.Report;
+import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
@@ -107,11 +108,21 @@ public class ServerRequestHandler {
 			if (!(msg.getRequestData() instanceof  ArrayList<?>)) {
 			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
 			    return;
+			}		
+			ArrayList<?> usageData = (ArrayList<?>) msg.getRequestData();
+			ArrayList<?> usageList = UsageReportHandler.getUsageReports(usageData);
+			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT, usageList));
+			return;
+		case SHOW_CANCELLATIONS_REPORTS:
+			if (!(msg.getRequestData() instanceof ArrayList<?>)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
+			    return;
 			}
-			
-			@SuppressWarnings("unchecked")
-			ArrayList<?> list = UsageReportHandler.getUsageReports((ArrayList<String[]>) msg.getRequestData());
-			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT, list));
+
+			ArrayList<?> requestedData = (ArrayList<?>) msg.getRequestData();
+			String condition = (String) msg.getResponseMsg();
+			ArrayList<?> cancellationsList = CancellationsReportHandler.getReservations(requestedData,condition);
+			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,cancellationsList,condition));
 			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

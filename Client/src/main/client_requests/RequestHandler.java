@@ -10,6 +10,7 @@ import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.dep_manager.CancellationsReportFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
@@ -17,7 +18,6 @@ import requests.Message;
 
 public class RequestHandler {
 	
-	@SuppressWarnings("unchecked")
 	public static void handleIncomingRequests(Message msg) {
 		switch(msg.getRequestEnumType()) {
 		case REQUEST_ERROR:
@@ -102,6 +102,26 @@ public class RequestHandler {
 			else {
 				UsageReportFrameController.setList(null);
 				System.out.println("[RequestHandler] - invalid SHOW_USAGE_REPORT response");
+				return;
+			}
+			
+			
+			
+		case SHOW_CANCELLATIONS_REPORTS:
+			if (msg.getRequestData() instanceof ArrayList<?>) {
+				// for left table
+				if("Yes".equals(msg.getResponseMsg())) { 
+					CancellationsReportFrameController.setArrayListLeft((ArrayList<String[]>)msg.getRequestData());
+					return; 
+				}
+				// for right table
+				CancellationsReportFrameController.setArrayListRight((ArrayList<String[]>)msg.getRequestData());
+				return; 
+			}
+			else {
+				CancellationsReportFrameController.setArrayListLeft(null);
+				CancellationsReportFrameController.setArrayListRight(null);
+				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
 				return;
 			}
 		default:

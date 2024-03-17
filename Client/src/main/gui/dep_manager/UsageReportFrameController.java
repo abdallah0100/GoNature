@@ -67,14 +67,5 @@ public class UsageReportFrameController  implements Initializable{
 	public static void setList(ArrayList<String[]> list) {
 		arrayList = list;
 	}
-
-	
-	
-	
-	
-	
-
-
-	
 }
 
