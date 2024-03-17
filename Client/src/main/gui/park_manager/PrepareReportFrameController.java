@@ -152,7 +152,7 @@ public class PrepareReportFrameController implements Initializable{
 				displayError("Error fetching data", 85);
 			}
 		}else {
-			if (!ClientController.connectedUser.getParkWork().equals(parkField.getText()))
+			if (!ClientController.connectedUser.getPark().getParkName().equals(parkField.getText()))
 				displayError("You can only create a report for the park you work at.", 19);
 			else
 				displayError("Fill all fields to continue", 70);
@@ -213,7 +213,7 @@ public class PrepareReportFrameController implements Initializable{
 	public boolean validInput() {
 		if (parkField.getText() == null || parkField.getText().length() == 0)
 			return false;
-		if (!ClientController.connectedUser.getParkWork().equals(parkField.getText())) 
+		if (!ClientController.connectedUser.getPark().getParkName().equals(parkField.getText())) 
 			return false;
 		if (monthBox.getValue() == null || yearBox.getValue() == null)
 			return false;

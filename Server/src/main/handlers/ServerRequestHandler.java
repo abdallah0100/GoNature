@@ -1,8 +1,9 @@
 package main.handlers;
 import java.io.IOException;
-import entities.Order;
 
 import entities.Bill;
+import entities.Order;
+import entities.Park;
 import entities.Report;
 import entities.User;
 import entities.Visitor;
@@ -110,6 +111,12 @@ public class ServerRequestHandler {
 				generalRespondMsg = result ? "Successfully created report" : "Error creating report";
 			}
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
+			return;
+		case FETCH_PARKS:
+			Park[] parks = ParkRequestHandler.getAllParks();
+			if (parks == null || parks.length == 0)
+				System.out.println("[ServerRequestHandler] - found no parks");
+			respondToClient(client, new Message(RequestType.FETCH_PARKS, parks));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

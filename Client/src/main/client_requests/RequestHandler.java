@@ -1,7 +1,10 @@
 package main.client_requests;
 
-import entities.Order;
+import java.util.HashMap;
+
 import entities.Bill;
+import entities.Order;
+import entities.Park;
 import entities.Report;
 import entities.User;
 import entities.Visitor;
@@ -34,6 +37,10 @@ public class RequestHandler {
 		case LOGIN_USER:
 				if (msg.getRequestData() instanceof User) {
 					ClientController.connectedUser = (User) msg.getRequestData();
+					String parkName = ClientController.connectedUser.getParkName();
+					ClientController.connectedUser.setPark(ClientController.getParks().get(parkName));
+					if (ClientController.connectedUser.getPark() == null)
+						System.out.println("[RequestHandler] - invalid park name");
 					UserRequestController.LogedIn = true;
 					return;
 				}
@@ -89,6 +96,17 @@ public class RequestHandler {
 				return;
 			}
 			PrepareReportFrameController.report_withData.setCreationStatus((String)msg.getRequestData());
+			break;
+		case FETCH_PARKS:
+			if (!(msg.getRequestData() instanceof Park[])) {
+				System.out.println("[RequestHandler] - received no parks");
+				return;
+			}
+			Park[] parks = (Park[]) msg.getRequestData();
+			HashMap<String, Park> parkMap = new HashMap<>();
+			for (Park p : parks)
+				parkMap.put(p.getParkName(), p);
+			ClientController.setParks(parkMap);
 			break;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());

@@ -41,6 +41,12 @@ public class EditParkVariablesController implements Initializable{
 	public void selectVariableToEdit(ActionEvent e ) {
 	    Button clickedBtn = (Button)e.getSource();
 	    editingVariable.setText(clickedBtn.getText());
+	    if (parkName.getText().contains("Gap"))
+	    	currentValue.setText(ClientController.connectedUser.getPark().getGap() + "");
+	    else if (parkName.getText().contains("Estimated"))
+	    	currentValue.setText(ClientController.connectedUser.getPark().getEstimatedTime() + "");
+	    else 
+	    	currentValue.setText(ClientController.connectedUser.getPark().getMaxCapacity() + "");
 	    rightPane.setVisible(true);
 	}
 	@FXML
@@ -50,11 +56,11 @@ public class EditParkVariablesController implements Initializable{
 	}
 	@FXML
 	public void update(ActionEvent e ) {
-	    	
+	    
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		parkName.setText(ClientController.connectedUser.getParkWork());
+		parkName.setText(ClientController.connectedUser.getPark().getParkName());
 		
 	}
 		    
