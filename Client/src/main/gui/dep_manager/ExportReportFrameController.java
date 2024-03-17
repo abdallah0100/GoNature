@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import main.ClientUI;
 import utilities.SceneController;
 
-public class GenerateReportFrameController {
+public class ExportReportFrameController {
 
 	
 	@FXML
@@ -26,7 +26,7 @@ public class GenerateReportFrameController {
 	@FXML
 	public void showvisitsReportWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
-		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/UsageReportFrame.fxml");
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/VisitsReportFrame.fxml");
 	}
 
 	/**
