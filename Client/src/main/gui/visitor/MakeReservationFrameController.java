@@ -26,12 +26,12 @@ import main.gui.MainFrameController;
 import utilities.SceneController;
 
 public class MakeReservationFrameController extends Application implements Initializable{
-
+ 
 	@FXML
 	private ComboBox<String> orderType;
 	@FXML
 	private TextField numOfVisitorsField;
-	@FXML
+	@FXML 
 	private DatePicker dateField;
 	@FXML
 	private TextField hourField;

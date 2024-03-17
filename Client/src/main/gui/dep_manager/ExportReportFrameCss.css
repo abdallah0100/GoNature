@@ -3,31 +3,14 @@
 }
 
 
-#userNameTxt{
--fx-background-radius: 40px;
-}
-
-
-#passwordTxt{
-	-fx-background-radius: 40px;
-}
-
-
-
-#loginBtn{
+Button{
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
-
 }
 
-
-#loginBtn:hover{
-	
+Button:hover{
 	-fx-background-color: #808080;
-
 }
 
-ImageView{
-	-fx-cursor:hand;
-}
+

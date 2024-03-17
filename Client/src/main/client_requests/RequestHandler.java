@@ -1,13 +1,20 @@
 package main.client_requests;
 
-import entities.Order;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import entities.Bill;
+import entities.Order;
+import entities.Park;
 import entities.Report;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.UsageReportFrameController;
+import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
 import requests.Message;
@@ -34,6 +41,10 @@ public class RequestHandler {
 		case LOGIN_USER:
 				if (msg.getRequestData() instanceof User) {
 					ClientController.connectedUser = (User) msg.getRequestData();
+					String parkName = ClientController.connectedUser.getParkName();
+					ClientController.connectedUser.setPark(ClientController.getParks().get(parkName));
+					if (ClientController.connectedUser.getPark() == null)
+						System.out.println("[RequestHandler] - invalid park name");
 					UserRequestController.LogedIn = true;
 					return;
 				}
@@ -98,6 +109,65 @@ public class RequestHandler {
 			}
 			else {
 				System.out.println("[RequestHandler] - invalid SHOW_RESERVATIONS response");
+				return;
+			}
+			
+		case FETCH_PARKS:
+			if (!(msg.getRequestData() instanceof Park[])) {
+				System.out.println("[RequestHandler] - received no parks");
+				return;
+			}
+			Park[] parks = (Park[]) msg.getRequestData();
+			HashMap<String, Park> parkMap = new HashMap<>();
+			for (Park p : parks)
+				parkMap.put(p.getParkName(), p);
+			ClientController.setParks(parkMap);
+			break;
+		case UPDATE_PARK_VARIABLE:
+			if (!(msg.getRequestData() instanceof Park) || msg.getResponseMsg() == null) {
+				System.out.println("[RequestHandler] - invalid park variable update response");
+				return;
+			}
+			Park p1 = (Park)msg.getRequestData();
+			EditParkVariablesController.updateResult = msg.getResponseMsg();
+			if (p1.isUpdated()) {
+				if (p1.getVarbToUpdate().equals("gap"))
+					ClientController.getParks().get(p1.getParkName()).setGap(p1.getNewValue());
+				else if (p1.getVarbToUpdate().equals("EstimatedTime"))
+					ClientController.getParks().get(p1.getParkName()).setEstimatedTime(p1.getNewValue());
+				else ClientController.getParks().get(p1.getParkName()).setMaxCapacity(p1.getNewValue());
+				System.out.println("[ClientController] - Successfully updated new varb");
+			}else {
+				System.out.println("[ClientController] - Failed to update varb");
+			}
+			break;
+			
+		case SHOW_USAGE_REPORT:
+			if (msg.getRequestData() instanceof ArrayList<?>) {
+				UsageReportFrameController.setList((ArrayList<String[]>)msg.getRequestData());
+				return; 
+			}
+			else {
+				UsageReportFrameController.setList(null);
+				System.out.println("[RequestHandler] - invalid SHOW_USAGE_REPORT response");
+				return;
+			}
+	
+		case SHOW_CANCELLATIONS_REPORTS:
+			if (msg.getRequestData() instanceof ArrayList<?>) {
+				// for left table
+				if("Yes".equals(msg.getResponseMsg())) { 
+					CancellationsReportFrameController.setArrayListLeft((ArrayList<String[]>)msg.getRequestData());
+					return; 
+				}
+				// for right table
+				CancellationsReportFrameController.setArrayListRight((ArrayList<String[]>)msg.getRequestData());
+				return; 
+			}
+			else {
+				CancellationsReportFrameController.setArrayListLeft(null);
+				CancellationsReportFrameController.setArrayListRight(null);
+				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
 				return;
 			}
 			

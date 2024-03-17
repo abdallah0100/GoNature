@@ -3,11 +3,6 @@
 }
 
 
-#sp{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
-
-
 .table-view .column-header .label{
 	-fx-text-fill:white;
 	-fx-font-size:17px;
