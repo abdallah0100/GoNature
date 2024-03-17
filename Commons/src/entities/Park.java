@@ -20,7 +20,9 @@ public class Park implements Serializable{
 	private int newValue;
 	private boolean updated;
  
- 
+	public Park(String parkname) {
+		this.parkname=parkname;
+	}
 
 	public Park(String parkname, int gap, int estTime, int capacity) {
 		this.parkname = parkname;

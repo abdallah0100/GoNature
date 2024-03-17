@@ -58,11 +58,14 @@ public class MainServerFrameController extends Application implements Initializa
 	private TableColumn<ClientConnection, String> statusCol;
 	@FXML
 	private Pane headerPane;
+	@FXML
+	private Button importBtn;
 	
 	//Saving offsets and the stage to apply drag functionality on the header
 	private static double xOffset = 0;
     private static double yOffset = 0;
     private static Stage stage;
+    public static boolean isImport;
 
 
 	@Override
@@ -189,8 +192,19 @@ public class MainServerFrameController extends Application implements Initializa
 		MainServer.getInstance().closeConnection();
 		
 		startServerBtn.setDisable(false);
+		importBtn.setDisable(false);
+		isImport=false;
 	}
 	
+	
+	public void importData(ActionEvent event) {
+		if (!MainServer.serverStarted) {
+			displayErrorMsg("You can not import data when the server offline", 175);
+			return;
+		}
+		isImport=true;
+		importBtn.setDisable(true);
+	}
 	public void exitButton(MouseEvent event) {
 		if (MainServer.serverStarted)
 			MainServer.getInstance().closeConnection();

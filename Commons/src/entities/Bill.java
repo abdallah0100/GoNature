@@ -21,7 +21,7 @@ public class Bill implements Serializable {
 		this.type1=type1;
 		this.invited=invisted;
 		this.payed=payed;
-	}
+	} 
 	 public void print() {
 		 System.out.println(getType());
 		 System.out.println(getNumberOfVisitor());
