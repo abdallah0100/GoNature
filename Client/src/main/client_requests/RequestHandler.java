@@ -11,6 +11,7 @@ import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
 import requests.Message;
@@ -107,6 +108,24 @@ public class RequestHandler {
 			for (Park p : parks)
 				parkMap.put(p.getParkName(), p);
 			ClientController.setParks(parkMap);
+			break;
+		case UPDATE_PARK_VARIABLE:
+			if (!(msg.getRequestData() instanceof Park) || msg.getResponseMsg() == null) {
+				System.out.println("[RequestHandler] - invalid park variable update response");
+				return;
+			}
+			Park p1 = (Park)msg.getRequestData();
+			EditParkVariablesController.updateResult = msg.getResponseMsg();
+			if (p1.isUpdated()) {
+				if (p1.getVarbToUpdate().equals("gap"))
+					ClientController.getParks().get(p1.getParkName()).setGap(p1.getNewValue());
+				else if (p1.getVarbToUpdate().equals("EstimatedTime"))
+					ClientController.getParks().get(p1.getParkName()).setEstimatedTime(p1.getNewValue());
+				else ClientController.getParks().get(p1.getParkName()).setMaxCapacity(p1.getNewValue());
+				System.out.println("[ClientController] - Successfully updated new varb");
+			}else {
+				System.out.println("[ClientController] - Failed to update varb");
+			}
 			break;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());

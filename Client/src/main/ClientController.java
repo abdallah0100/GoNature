@@ -27,9 +27,6 @@ public class ClientController {
 	public static Order reservationMade;
 	public static Bill showBill;
 	private static HashMap<String, Park> parks = new HashMap<>();
-
-	 
-
 	
 	private ClientController(String host, int port) {
 		try {

@@ -14,7 +14,8 @@ public enum RequestType {
 	CREATE_REPORT(11),
 	MAKE_RESERVATION(12),
 	FETCH_MONTHLY_VISITOR_NUM(13),
-	FETCH_PARKS(14)
+	FETCH_PARKS(14),
+	UPDATE_PARK_VARIABLE(15)
 	;
 	
 	private int requestId;

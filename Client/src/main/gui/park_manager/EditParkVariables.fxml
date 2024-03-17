@@ -8,7 +8,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="615.0" stylesheets="@EditParkVariablesFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.EditParkVariablesController">
    <children>
       <Label layoutX="31.0" layoutY="31.0" prefHeight="21.0" prefWidth="181.0" text="Update Park Details" textFill="WHITE" underline="true">
@@ -112,7 +111,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="cancel" layoutX="198.0" layoutY="268.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="67.0" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancel" layoutX="198.0" layoutY="268.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="67.0" text="Close" textFill="WHITE">
                <effect>
                   <DropShadow>
                      <color>
@@ -129,7 +128,7 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="msgLabel" layoutX="170.0" layoutY="314.0" text="Label" visible="false" />
+            <Label fx:id="msgLabel" layoutX="129.0" layoutY="310.0" text="Enter a valid number" visible="false" />
          </children>
       </Pane>
    </children>

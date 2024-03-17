@@ -1,5 +1,6 @@
 package main.handlers;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -32,6 +33,24 @@ public class ParkRequestHandler {
 			return null;
 		}
 		return (Park[])list.toArray(new Park[list.size()]);
+	}
+	
+	public static boolean updateParkVariable(Park p) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			String str = "UPDATE parks SET "+p.getVarbToUpdate()+"=? WHERE ParkName=?";
+			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);
+			ps.setInt(1, p.getNewValue());
+			ps.setString(2, p.getParkName());
+			return ps.executeUpdate() > 0;
+		}catch(Exception ex) {
+			System.out.println("[ParkRequestHandler] - failed to update park variable");
+			ex.printStackTrace();
+			return false;
+		}
 	}
 	
 }

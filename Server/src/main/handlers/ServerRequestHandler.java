@@ -118,6 +118,18 @@ public class ServerRequestHandler {
 				System.out.println("[ServerRequestHandler] - found no parks");
 			respondToClient(client, new Message(RequestType.FETCH_PARKS, parks));
 			return;
+		case UPDATE_PARK_VARIABLE:
+			if (!(msg.getRequestData() instanceof Park)) {
+				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Expected Park)"));
+				return;
+			}
+			Park p = (Park)msg.getRequestData();
+			p.setUpdated(ParkRequestHandler.updateParkVariable(p));
+			if (p.isUpdated()) 
+				respondToClient(client, new Message(RequestType.UPDATE_PARK_VARIABLE, p, "Successfully update variable"));
+			else
+				respondToClient(client, new Message(RequestType.UPDATE_PARK_VARIABLE, p, "Failed to update variable"));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

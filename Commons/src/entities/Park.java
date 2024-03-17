@@ -15,6 +15,10 @@ public class Park implements Serializable{
 	
 	private int availablePlaces=0 ;
 	public static int DEFAULT_PRICE=50;
+	
+	private String varbToUpdate;
+	private int newValue;
+	private boolean updated;
  
  
 
@@ -59,6 +63,30 @@ public class Park implements Serializable{
 
 	public void setAvailablePlaces(int availablePlaces) {
 		this.availablePlaces = availablePlaces;
+	}
+
+	public String getVarbToUpdate() {
+		return varbToUpdate;
+	}
+
+	public void setVarbToUpdate(String varbToUpdate) {
+		this.varbToUpdate = varbToUpdate;
+	}
+
+	public int getNewValue() {
+		return newValue;
+	}
+
+	public void setNewValue(int newValue) {
+		this.newValue = newValue;
+	}
+
+	public boolean isUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(boolean updated) {
+		this.updated = updated;
 	}
 
 }
