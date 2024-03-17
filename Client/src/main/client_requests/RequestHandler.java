@@ -1,5 +1,7 @@
 package main.client_requests;
 
+import java.util.ArrayList;
+
 import entities.Order;
 import entities.Bill;
 import entities.Report;
@@ -8,6 +10,8 @@ import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
 import requests.Message;
@@ -90,6 +94,36 @@ public class RequestHandler {
 			}
 			PrepareReportFrameController.report_withData.setCreationStatus((String)msg.getRequestData());
 			break;
+		case SHOW_USAGE_REPORT:
+			if (msg.getRequestData() instanceof ArrayList<?>) {
+				UsageReportFrameController.setList((ArrayList<String[]>)msg.getRequestData());
+				return; 
+			}
+			else {
+				UsageReportFrameController.setList(null);
+				System.out.println("[RequestHandler] - invalid SHOW_USAGE_REPORT response");
+				return;
+			}
+			
+			
+			
+		case SHOW_CANCELLATIONS_REPORTS:
+			if (msg.getRequestData() instanceof ArrayList<?>) {
+				// for left table
+				if("Yes".equals(msg.getResponseMsg())) { 
+					CancellationsReportFrameController.setArrayListLeft((ArrayList<String[]>)msg.getRequestData());
+					return; 
+				}
+				// for right table
+				CancellationsReportFrameController.setArrayListRight((ArrayList<String[]>)msg.getRequestData());
+				return; 
+			}
+			else {
+				CancellationsReportFrameController.setArrayListLeft(null);
+				CancellationsReportFrameController.setArrayListRight(null);
+				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
+				return;
+			}
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
