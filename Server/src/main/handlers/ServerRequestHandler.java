@@ -1,8 +1,8 @@
 package main.handlers;
 import java.io.IOException;
 import entities.Order;
-import java.util.ArrayList;
 import entities.Bill;
+import entities.CancelledReservation;
 import entities.Report;
 import entities.UsageReport;
 import entities.User;
@@ -104,26 +104,20 @@ public class ServerRequestHandler {
 			}
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
 			return;
+			
 		case SHOW_USAGE_REPORT:
-			if (!(msg.getRequestData() instanceof  ArrayList<?>)) {
-			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
-			    return;
-			}		
-			ArrayList<?> usageData = (ArrayList<?>) msg.getRequestData();
-			ArrayList<?> usageList = UsageReportHandler.getUsageReports(usageData);
-			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT, usageList));
+			UsageReport[] listToReturn = UsageReportHandler.getUsageReports();
+			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT,listToReturn));
 			return;
+			
 		case SHOW_CANCELLATIONS_REPORTS:
-			if (!(msg.getRequestData() instanceof ArrayList<?>)) {
-			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
-			    return;
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
 			}
-
-			ArrayList<?> requestedData = (ArrayList<?>) msg.getRequestData();
-			String condition = (String) msg.getResponseMsg();
-			ArrayList<?> cancellationsList = CancellationsReportHandler.getReservations(requestedData,condition);
-			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,cancellationsList,condition));
-			return;	
+			CancelledReservation[] listToReturn2 = CancellationsReportHandler.getReservations((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

@@ -14,7 +14,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@BillCakFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.BillCakFrameController">
    <children>
-      <Label layoutX="43.0" layoutY="38.0" prefHeight="55.0" prefWidth="328.0" text="Bill  Cak" textFill="WHITE">
+      <Label layoutX="200.0" layoutY="32.0" prefHeight="55.0" prefWidth="328.0" text="Bill  Cak" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="48.0" />
          </font>
@@ -39,7 +39,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Button fx:id="viewbill" layoutX="112.0" layoutY="252.0" mnemonicParsing="false" onAction="#showBill" text="View  Bill" textFill="WHITE">
+      <Button fx:id="viewbill" layoutX="105.0" layoutY="252.0" mnemonicParsing="false" onAction="#showBill" text="View  Bill" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="22.0" />
          </font>
@@ -51,7 +51,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Separator layoutY="108.0" prefHeight="7.0" prefWidth="500.0">
+      <Separator layoutY="85.0" prefHeight="2.0" prefWidth="600.0">
          <effect>
             <DropShadow>
                <color>
@@ -60,7 +60,7 @@
             </DropShadow>
          </effect>
       </Separator>
-      <ImageView fitHeight="84.0" fitWidth="56.0" layoutX="432.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="84.0" fitWidth="56.0" layoutX="451.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/payment.png" />
          </image>

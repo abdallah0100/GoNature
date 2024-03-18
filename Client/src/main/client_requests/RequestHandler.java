@@ -1,10 +1,11 @@
 package main.client_requests;
 
-import java.util.ArrayList;
 
 import entities.Order;
 import entities.Bill;
+import entities.CancelledReservation;
 import entities.Report;
+import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
@@ -95,8 +96,8 @@ public class RequestHandler {
 			PrepareReportFrameController.report_withData.setCreationStatus((String)msg.getRequestData());
 			break;
 		case SHOW_USAGE_REPORT:
-			if (msg.getRequestData() instanceof ArrayList<?>) {
-				UsageReportFrameController.setList((ArrayList<String[]>)msg.getRequestData());
+			if (msg.getRequestData() instanceof UsageReport[]) {
+				UsageReportFrameController.setList((UsageReport[])msg.getRequestData());
 				return; 
 			}
 			else {
@@ -104,18 +105,15 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid SHOW_USAGE_REPORT response");
 				return;
 			}
-			
-			
-			
 		case SHOW_CANCELLATIONS_REPORTS:
-			if (msg.getRequestData() instanceof ArrayList<?>) {
+			if (msg.getRequestData() instanceof CancelledReservation[]) {
 				// for left table
-				if("Yes".equals(msg.getResponseMsg())) { 
-					CancellationsReportFrameController.setArrayListLeft((ArrayList<String[]>)msg.getRequestData());
+				if("Yes".equals((String)msg.getResponseMsg())) { 
+					CancellationsReportFrameController.setArrayListLeft((CancelledReservation[])msg.getRequestData());
 					return; 
 				}
 				// for right table
-				CancellationsReportFrameController.setArrayListRight((ArrayList<String[]>)msg.getRequestData());
+				CancellationsReportFrameController.setArrayListRight((CancelledReservation[])msg.getRequestData());
 				return; 
 			}
 			else {
