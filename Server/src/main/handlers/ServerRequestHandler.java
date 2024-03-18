@@ -166,13 +166,13 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,ParkRequestHandler.reqToChange(res)));	
 			return;
 			
-		case REQUEST_CHANGE2:
+		case UPDATE_REQUEST_CHANGE:
 			if (!(msg.getRequestData() instanceof String[])) {
-				respondToClient(client, new Message(RequestType.REQUEST_CHANGE2, "invalid request data String[]"));
+				respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE, "invalid request data String[]"));
 				return;
 			}
 			String res1[] = (String[])msg.getRequestData();
-			respondToClient(client, new Message(RequestType.REQUEST_CHANGE2,ParkRequestHandler.reqToChange2(res1)));	
+			respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE,ParkRequestHandler.reqToChange2(res1)));	
 			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

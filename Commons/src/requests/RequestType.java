@@ -20,7 +20,7 @@ public enum RequestType {
 	SHOW_USAGE_REPORT(17),
 	SHOW_CANCELLATIONS_REPORTS(18),
 	REQUEST_CHANGE(19),
-	REQUEST_CHANGE2(20);
+	UPDATE_REQUEST_CHANGE(20);
 	
 	private int requestId;
 	

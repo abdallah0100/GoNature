@@ -180,7 +180,7 @@ public class RequestHandler {
 			EditParkVariablesController.requestResult=(String)(msg.getRequestData());
 			return;
 			
-		case REQUEST_CHANGE2:
+		case UPDATE_REQUEST_CHANGE:
 			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid REQUEST_CHANGE response type (Boolean)");
 				return;

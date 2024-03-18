@@ -4,8 +4,6 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import entities.Park;
-import entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,8 +77,9 @@ public class EditParkVariablesController implements Initializable{
 	}
 	
 	@FXML
-	public void update(ActionEvent e ) {
+	public void update(ActionEvent e ) { //first time send request to update values
 	   if (validInput()) {
+		   // to update the gap
 		   if(editingVariable.getText().contains("Gap") && gap)
 		   {
 			   displayMsg("want to update request?", 129, "red");
@@ -88,6 +87,7 @@ public class EditParkVariablesController implements Initializable{
 			   send.setVisible(false);
 			   return;
 		   }
+		   //to update the Estimated Time
 		   if(editingVariable.getText().contains("Estimated Time") && time)
 		   {
 			   displayMsg("want to update request?", 129, "red");
@@ -95,6 +95,7 @@ public class EditParkVariablesController implements Initializable{
 			   send.setVisible(false);
 			   return;
 		   }
+		   //to update the Visitor Limit
 		    if(editingVariable.getText().contains("Visitor Limit") && limit)
 		   {
 			   displayMsg("want to update request?", 129, "red");
@@ -112,8 +113,9 @@ public class EditParkVariablesController implements Initializable{
 	 	   displayMsg("sent request", 129, "red");
 	 	   System.out.println(requestResult);
 	 	}
-	
 	}
+	
+	//need to update the not the first time //2+
 	public void reSend(ActionEvent e ) {
 		   if (validInput()) {
 			   msgLabel.setVisible(false);
