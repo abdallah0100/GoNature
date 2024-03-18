@@ -8,6 +8,7 @@ import entities.User;
 import entities.Visitor;
 import main.Constants;
 import main.MainServer;
+import main.gui.MainServerFrameController;
 
 public class UserRequestHandler {
 	
@@ -23,11 +24,14 @@ public class UserRequestHandler {
 	
 	public static User userExists(String userName,String password){
 		if (MainServer.dbConnection == null) {
-			System.out.println(Constants.DB_CONNECTION_ERROR);
+			System.out.println(Constants.DB_CONNECTION_ERROR); 
 			return null;
 		}
 		User u;
 		try {
+			if(!(MainServerFrameController.isImport)){
+				return null;
+			}
 			Statement st = MainServer.dbConnection.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM users WHERE username ='"+userName+"'AND password ='"+password+"'");
 			if (!rs.next()) {

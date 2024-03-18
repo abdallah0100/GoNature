@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -28,11 +27,6 @@ public class MainFrameController extends Application implements Initializable{
 	private Pane headerPane;
 	@FXML
 	private ImageView closeIcon;
-	
-	//Saving offsets and the stage to apply drag functionality on the header
-	private static double xOffset = 0;
-    private static double yOffset = 0;
-    private static Stage stage;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -40,7 +34,7 @@ public class MainFrameController extends Application implements Initializable{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		stage = primaryStage;
+		SceneController.stage = primaryStage;
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
@@ -68,10 +62,17 @@ public class MainFrameController extends Application implements Initializable{
 		ClientUI.contentPane = contentPane;
 		ClientUI.leftNavPane = leftNavPane;
 		ClientUI.headerPane = headerPane;
-		setUpHeaderDrag();
+		
+		SceneController.headerPane = headerPane;
+		SceneController.setUpHeaderDrag();
+		
 		SceneController scene = new SceneController();
 		if (ClientController.connectedVisitor != null) {
 			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
+			if(!(ClientController.connectedVisitor.isFoundInDB()))
+			{
+				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+			}
 		}
 		else if(ClientController.connectedUser != null) {
 			 switch (ClientController.connectedUser.getRole()) {
@@ -92,26 +93,5 @@ public class MainFrameController extends Application implements Initializable{
 	                break;		
 			 }		
 		}
-	}
-	
-	public void setUpHeaderDrag() {
-		// making the client dragable from the header
-		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() + xOffset);
-                stage.setY(event.getScreenY() + yOffset);			
-			}
-			
-		});
-		
-		headerPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = stage.getX() - event.getScreenX();
-                yOffset = stage.getY() - event.getScreenY();
-            }
-        });
 	}
 }

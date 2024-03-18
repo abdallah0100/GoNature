@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.controllers.UsageReportRequestController;
 
+
 public class UsageReportFrameController  implements Initializable{
 
 	@FXML

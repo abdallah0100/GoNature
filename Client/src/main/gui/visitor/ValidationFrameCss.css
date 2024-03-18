@@ -24,3 +24,7 @@
 #exitbtn{
 	-fx-cursor:hand;
 }
+
+ImageView{
+	-fx-cursor:hand;
+}

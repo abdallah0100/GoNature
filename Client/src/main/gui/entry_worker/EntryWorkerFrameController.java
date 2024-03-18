@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import main.ClientUI;
 import utilities.SceneController;
 
 /**
@@ -20,7 +21,6 @@ public class EntryWorkerFrameController extends Application{
 	 @FXML
 	 private Button viewBillBtn;
 	 
-	
 	 public static void main(String args[]) {
 		 launch(args);
 	 }
@@ -46,15 +46,13 @@ public class EntryWorkerFrameController extends Application{
 	 * @param event
 	 */
 	public void viewBill(ActionEvent event) {
-		String s="availablePlaceFrameController";
-		BillCakFrameController BillCakFrame = new BillCakFrameController();
-		SceneController.switchFrame(s, event, BillCakFrame);
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/BillCakFrame.fxml");
 	}
 	
 	public void createReservations(ActionEvent event) {
-		SceneController sc = new SceneController();
-		//sc.setPane(ClientUI.contentPane, "/main/gui/park_manager/EditParkVariables.fxml");
-		System.out.println("hello");
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
 	}
 
 }

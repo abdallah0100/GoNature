@@ -21,7 +21,7 @@ public class Bill implements Serializable {
 		this.type1=type1;
 		this.invited=invisted;
 		this.payed=payed;
-	}
+	} 
 	 public void print() {
 		 System.out.println(getType());
 		 System.out.println(getNumberOfVisitor());
@@ -72,16 +72,16 @@ public class Bill implements Serializable {
 			
 			if(getinvited() &&getPayed()) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				double x =  (double) (numberOfVisitors* 0.85*Park.price);
+				double x =  (double) (numberOfVisitors* 0.85*Park.DEFAULT_PRICE);
 				return x;
 			}
 			if(getinvited() && !(getPayed())) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				return (numberOfVisitors*Park.price);
+				return (numberOfVisitors*Park.DEFAULT_PRICE);
 				}
 			if(!(getinvited())) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				return (numberOfVisitors*Park.price);
+				return (numberOfVisitors*Park.DEFAULT_PRICE);
 				}
 		}
 		else {
@@ -90,19 +90,19 @@ public class Bill implements Serializable {
 				//ביקור קבוצתי בהזמנה
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
 				numberOfVisitors--;
-				double x =  (double) (numberOfVisitors* 0.75*Park.price);
+				double x =  (double) (numberOfVisitors* 0.75*Park.DEFAULT_PRICE);
 				x=(double) (x*0.88);
 				return x;
 			}
 			if(getinvited() && !(getPayed())) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				double x =  (double) (numberOfVisitors* 0.75*Park.price);
+				double x =  (double) (numberOfVisitors* 0.75*Park.DEFAULT_PRICE);
 				return x;
 			} 
 			
 			if(!(getinvited())) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				double x =  (double) (numberOfVisitors* 0.90*Park.price);
+				double x =  (double) (numberOfVisitors* 0.90*Park.DEFAULT_PRICE);
 				return x;
 			}
 			

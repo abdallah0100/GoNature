@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utilities.SceneController;
@@ -22,7 +23,9 @@ public class UpdateReservationFrameController extends Application implements Ini
 	@FXML
 	private DatePicker dateField;
 	@FXML
-	private ComboBox<String> timeField;
+	private TextField hourField;
+	@FXML
+	private TextField minuteField;
 	@FXML
 	private ComboBox<String> parkNameField;
 	@FXML
@@ -31,6 +34,8 @@ public class UpdateReservationFrameController extends Application implements Ini
 	private TextField emailField;
 	@FXML
 	private Button updateBtn;
+	@FXML
+	private Label msgLabel;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -50,6 +55,7 @@ public class UpdateReservationFrameController extends Application implements Ini
 	
 	//function updates reservation 
 	public void updateReservation(ActionEvent e) throws Exception{
+		
 		
 	}
 

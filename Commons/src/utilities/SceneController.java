@@ -3,15 +3,22 @@ package utilities;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SceneController {
+	
+	public static Pane headerPane;
+	public static Stage stage;
+	private static double xOffset = 0;
+    private static double yOffset = 0;
 
 	public void changeScene(String title, Stage stage, String fxmlPath) {
 		Parent root = new Pane();
@@ -28,7 +35,7 @@ public class SceneController {
 	}
 	
 	
-	public static void switchFrame(String title, ActionEvent e, Application o) {
+	public static void switchFrame(String title, Event e, Application o) {
 		((Node)e.getSource()).getScene().getWindow().hide(); 
 		try {
 			o.start(new Stage());;
@@ -48,6 +55,27 @@ public class SceneController {
 			System.out.println("[SceneController] - failed to update pane");
 			ex.printStackTrace();
 		}
+	}
+	
+	public static void setUpHeaderDrag() {
+		// making the client dragable from the header
+		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() + xOffset);
+                stage.setY(event.getScreenY() + yOffset);			
+			}
+			
+		});
+		
+		headerPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = stage.getX() - event.getScreenX();
+                yOffset = stage.getY() - event.getScreenY();
+            }
+        });
 	}
 	
 }

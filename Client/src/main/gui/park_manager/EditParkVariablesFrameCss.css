@@ -9,46 +9,18 @@
 
 }
 
-#editGap{
+Button{
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
 }
-
-#editGap:hover {
-	-fx-background-color: #808080;
-}
-
-
-#EditEstimatedTime {
-	-fx-background-color: #219a6a;
+#cancel{
+	-fx-background-color: #ff453f;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
 }
 
-#EditEstimatedTime:hover {
-	-fx-background-color: #808080;
-}
-
-
-#EditVisitor {
-	-fx-background-color: #219a6a;
-	-fx-background-radius: 40px;
-	-fx-cursor:hand;
-}
-
-#EditVisitor:hover {
-	-fx-background-color: #808080;
-}
-
-
-#edit {
-	-fx-background-color: #219a6a;
-	-fx-background-radius: 40px;
-	-fx-cursor:hand;
-}
-
-#edit:hover {
+Button:hover {
 	-fx-background-color: #808080;
 }
 
