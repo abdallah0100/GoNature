@@ -27,17 +27,6 @@ public class NumOfVisitorsReportHandler {
                     "WHERE Park = '" + park + "' AND month = '" + selectedMonth + "' " +
                     "AND year = '" + year + "'");
 
-			
-			if (!rs.next()) {
-				System.out.println("[NumOfVisitorsReportHandler] - result set was empty");
-				listToReturn[0] = null;
-				listToReturn[1] = null;
-				return listToReturn;
-			}
-			// reset cursor to the beginning of the result set
-			 rs.beforeFirst();
-			 
-			 
 			 while(rs.next()) {
 				 sumOfOrganized += Integer.parseInt(rs.getString(3));
 				 sumOfIndivisuals += Integer.parseInt(rs.getString(4));

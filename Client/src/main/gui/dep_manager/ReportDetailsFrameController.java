@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import main.ClientController;
 import main.controllers.NumOfVisitorsController;
 
 public class ReportDetailsFrameController implements Initializable{
@@ -69,9 +70,7 @@ public class ReportDetailsFrameController implements Initializable{
 	public void showNumberOfVisitors(ActionEvent event) {	
 		
 		if(checkInput()) {
-			if (!parkField.getText().equals("park1") && 
-				    !parkField.getText().equals("park2") &&
-				    !parkField.getText().equals("park3")) {
+			if (ClientController.getParks().get(parkField.getText()) == null) {
 					changeVisibility(false);
 				    errorMsgLabel.setVisible(true);
 				    errorMsgLabel.setText("Enter Valid park name");
