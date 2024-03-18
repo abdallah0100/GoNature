@@ -11,30 +11,6 @@
 	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
 }
 
-
-#startServerBtn{
-	-fx-background-color: #219a6a;
-	-fx-background-radius: 40px;
-	-fx-cursor:hand;
-}
-
-
-#startServerBtn:hover{
-	-fx-background-color: #808080;
-}
-
-
-#stopServerBtn{
-	-fx-background-color: #219a6a;
-	-fx-background-radius: 40px;
-	-fx-cursor:hand;
-}
-
-
-#stopServerBtn:hover{
-	-fx-background-color: #808080;
-}
-
 #serverPortField{
 	-fx-background-radius: 40px;
 }
@@ -57,7 +33,15 @@
  	 -fx-font-size: 18px;
 }
 
+Button{
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
 
+Button:hover{
+	-fx-background-color: #808080;
+}
 
 .table-view .column-header .label{
 	-fx-text-fill:white;

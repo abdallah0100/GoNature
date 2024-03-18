@@ -38,3 +38,14 @@
 	
 	
 }
+
+#btnRegister{
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+
+#btnRegister:hover {
+	-fx-background-color: #808080;
+}

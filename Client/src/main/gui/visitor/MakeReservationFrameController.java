@@ -83,8 +83,9 @@ public class MakeReservationFrameController extends Application implements Initi
 			loadData();
 			VisitorRequestController.sendReservation(o);
 			if (VisitorRequestController.finishedMakingReservation) {
+				ClientController.connectedVisitor.setFoundInDB(true);
 				SceneController.switchFrame("GoNature",e,new MainFrameController());
-				//VisitorSidePaneController.updateDisplayedText();
+
 			}
 			else {
 				System.out.println("[MakeReservationFrameController] - did not finished Making Reservation");		
