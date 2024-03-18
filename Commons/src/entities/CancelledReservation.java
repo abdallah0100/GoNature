@@ -1,40 +1,41 @@
 package entities;
 
-import javafx.beans.property.SimpleStringProperty;
+import java.io.Serializable;
 
-public class CancelledReservation {
+public class CancelledReservation implements Serializable {
 	
-	private SimpleStringProperty type;
-	private SimpleStringProperty date;
-	private SimpleStringProperty park;
+	private static final long serialVersionUID = 1L;
+	private String type;
+	private String date;
+	private String park;
 	
 	public CancelledReservation(String type, String date, String park) {
-		this.type = new SimpleStringProperty(type);
-		this.date = new SimpleStringProperty(date);
-		this.park = new SimpleStringProperty(park);
+		this.type = type;
+		this.date = date;
+		this.park = park;
 	}
 
 	public String getType() {
-		return type.get();
+		return type;
 	}
 
 	public void setType(String type) {
-		this.type = new SimpleStringProperty(type);
+		this.type = type;
 	}
 
 	public String getDate() {
-		return date.get();
+		return date;
 	}
 
 	public void setDate(String date) {
-		this.date = new SimpleStringProperty(date);
+		this.date = date;
 	}
 
 	public String getPark() {
-		return park.get();
+		return park;
 	}
 
 	public void setPark(String park) {
-		this.park = new SimpleStringProperty(park);
+		this.park =park;
 	}
 }

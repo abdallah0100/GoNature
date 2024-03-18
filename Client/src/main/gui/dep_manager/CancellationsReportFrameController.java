@@ -1,7 +1,6 @@
 package main.gui.dep_manager;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import entities.CancelledReservation;
@@ -26,7 +25,7 @@ public class CancellationsReportFrameController implements Initializable{
 	@FXML
 	private TableColumn<CancelledReservation,String> colParkLeft;
 	private ObservableList<CancelledReservation> listLeft = FXCollections.observableArrayList();
-	private static ArrayList<String[]> arrayListLeft = new ArrayList<String[]>();
+	private static CancelledReservation[] leftTableArray = null;
 
 	
 	@FXML
@@ -38,7 +37,7 @@ public class CancellationsReportFrameController implements Initializable{
 	@FXML
 	private TableColumn<CancelledReservation,String> colParkRight;
 	private ObservableList<CancelledReservation> listRight = FXCollections.observableArrayList();
-	private static ArrayList<String[]> arrayListRight = new ArrayList<String[]>();
+	private static CancelledReservation[] rightTableArray = null;
 
 	
 	
@@ -53,36 +52,38 @@ public class CancellationsReportFrameController implements Initializable{
 		colDateRight.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		colParkRight.setCellValueFactory(new PropertyValueFactory<>("Park"));
 		
-		
-	    CancellationsReportRequestController.sendShowCancellationsReport(arrayListLeft,"Yes");
-	    
-	    if(arrayListLeft != null) {
-		    // Loop over the ArrayList and add its data to the ObservableList
-	        for (String[] array : arrayListLeft) {
-	        	CancelledReservation cancelledReservation1 = new CancelledReservation(array[0], array[1], array[2]);
-	        	listLeft.add(cancelledReservation1);
+		CancellationsReportRequestController.sendShowCancellationsReport("Yes");
+		if(leftTableArray != null) {
+			 // Loop over the ArrayList and add its data to the ObservableList
+	        for (CancelledReservation element : leftTableArray) {
+	        	 CancelledReservation cancelledReservation = new CancelledReservation(element.getType(),
+	        			 element.getDate(),element.getPark());
+	        	 listLeft.add(cancelledReservation);      	
 	        }
 	        leftTableView.setItems(listLeft);
-        }
-	    
-	    CancellationsReportRequestController.sendShowCancellationsReport(arrayListRight,"No");
-	    
-	    if (arrayListRight != null) {
-		    // Loop over the ArrayList and add its data to the ObservableList    
-	        for (String[] array : arrayListRight) {
-	        	CancelledReservation cancelledReservation2 = new CancelledReservation(array[0], array[1], array[2]);
-	        	listRight.add(cancelledReservation2);
+
+	    }
+		
+		CancellationsReportRequestController.sendShowCancellationsReport("No");
+		if(rightTableArray != null) {
+			 // Loop over the ArrayList and add its data to the ObservableList
+	        for (CancelledReservation element : rightTableArray) {
+	        	CancelledReservation cancelledReservation = new CancelledReservation(element.getType(),
+	        			 element.getDate(),element.getPark());
+	        	listRight.add(cancelledReservation); 
+	            	
 	        }
-	        rightTableView.setItems(listRight);	
-        }
+	        rightTableView.setItems(listRight);
+	    }
 	}
+	
 
-	public static void setArrayListLeft(ArrayList<String[]> arrayListLeft) {
-		CancellationsReportFrameController.arrayListLeft = arrayListLeft;
-	}
-
-	public static void setArrayListRight(ArrayList<String[]> arrayListRight) {
-		CancellationsReportFrameController.arrayListRight = arrayListRight;
+	public static void setArrayListLeft(CancelledReservation[] arrayListLeft) {
+		CancellationsReportFrameController.leftTableArray = arrayListLeft;
+    }
+	    
+	public static void setArrayListRight(CancelledReservation[] arrayListRight) {
+		CancellationsReportFrameController.rightTableArray= arrayListRight;
 	}
 	
 }
