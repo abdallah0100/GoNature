@@ -64,7 +64,6 @@ public class CancellationsReportFrameController implements Initializable{
 
 	    }
 		
-<<<<<<< HEAD
 		CancellationsReportRequestController.sendShowCancellationsReport("No");
 		if(rightTableArray != null) {
 			 // Loop over the ArrayList and add its data to the ObservableList
@@ -81,31 +80,8 @@ public class CancellationsReportFrameController implements Initializable{
 
 	public static void setArrayListLeft(CancelledReservation[] arrayListLeft) {
 		CancellationsReportFrameController.leftTableArray = arrayListLeft;
-=======
-	    CancellationsReportRequestController.sendShowCancellationsReport(arrayListLeft,"Yes");
+    }
 	    
-	    if(arrayListLeft != null) {
-		    // Loop over the ArrayList and add its data to the ObservableList
-	        for (String[] array : arrayListLeft) {
-	        	CancelledReservation cancelledReservation1 = new CancelledReservation(array[0], array[1], array[2]);
-	        	listLeft.add(cancelledReservation1);
-	        }
-	        leftTableView.setItems(listLeft);
-        }
-	    
-	    CancellationsReportRequestController.sendShowCancellationsReport(arrayListRight,"No");
-	    
-	    if (arrayListRight != null) {
-		    // Loop over the ArrayList and add its data to the ObservableList    
-	        for (String[] array : arrayListRight) {
-	        	CancelledReservation cancelledReservation2 = new CancelledReservation(array[0], array[1], array[2]);
-	        	listRight.add(cancelledReservation2);
-	        }
-	        rightTableView.setItems(listRight);	
-        }
->>>>>>> branch 'master' of https://github.com/abdallah0100/GoNature.git
-	}
-
 	public static void setArrayListRight(CancelledReservation[] arrayListRight) {
 		CancellationsReportFrameController.rightTableArray= arrayListRight;
 	}

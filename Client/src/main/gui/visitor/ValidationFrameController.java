@@ -51,6 +51,10 @@ public class ValidationFrameController extends Application implements Initializa
 			displayError("Please enter an Id to continue");
 			return;
 		}
+		else if(idField.getText().length() < 9 ) {
+			displayError("Please enter valid Id with 9 digits");
+			return;
+		}
 		try {
 			Integer.parseInt(idField.getText());
 		}catch(Exception ex) {

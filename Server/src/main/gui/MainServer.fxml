@@ -120,7 +120,7 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="stopServerBtn" layoutX="324.0" layoutY="392.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Stop Server" textFill="WHITE">
+      <Button fx:id="stopServerBtn" layoutX="324.0" layoutY="395.0" mnemonicParsing="false" onAction="#stopServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Stop Server" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -132,7 +132,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="startServerBtn" layoutX="177.0" layoutY="392.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Start Server" textFill="WHITE">
+      <Button fx:id="startServerBtn" layoutX="160.0" layoutY="395.0" mnemonicParsing="false" onAction="#startServer" prefHeight="31.0" prefWidth="118.0" style="-fx-background-radius: 7;" text="Start Server" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -161,6 +161,9 @@
             </DropShadow>
          </effect>
       </Label>
-      <Button fx:id="importBtn" layoutX="489.0" layoutY="395.0" mnemonicParsing="false" onAction="#importData" text="Import" />
+      <Button fx:id="importBtn" layoutX="510.0" layoutY="395.0" mnemonicParsing="false" onAction="#importData" prefHeight="25.0" prefWidth="82.0" text="Import" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
    </children>
 </Pane>
