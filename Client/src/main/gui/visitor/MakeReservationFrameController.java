@@ -15,14 +15,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
+import main.gui.VisitorSidePaneController;
 import utilities.SceneController;
 
 public class MakeReservationFrameController extends Application implements Initializable{
@@ -47,10 +50,15 @@ public class MakeReservationFrameController extends Application implements Initi
 	private Button bookBtn;
 	@FXML
 	private Label msgLabel;
+	@FXML
+	private CheckBox payedCheckBox;
+	@FXML
+	private Label payLabel;
 	Order o;
 	String str;
 	LocalDate date;
 	LocalDate today = LocalDate.now();
+
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -76,6 +84,7 @@ public class MakeReservationFrameController extends Application implements Initi
 			VisitorRequestController.sendReservation(o);
 			if (VisitorRequestController.finishedMakingReservation) {
 				SceneController.switchFrame("GoNature",e,new MainFrameController());
+				//VisitorSidePaneController.updateDisplayedText();
 			}
 			else {
 				System.out.println("[MakeReservationFrameController] - did not finished Making Reservation");		
@@ -89,8 +98,11 @@ public class MakeReservationFrameController extends Application implements Initi
         	displayError("Please enter all fields");
 			return false;}
 		
-		// should add a test to check if the organized group reservation is done by an instructor!!!!!
-		
+		//test to check if the organized group reservation is done by an instructor
+		if("Organized Group".equals(orderType.getValue()) && !(ClientController.connectedVisitor.isInstructor())){
+			displayError("Please enter legal type");
+			return false;
+		}
 		//illegal input
 		try {
 			int numVisitors = Integer.parseInt(numOfVisitorsField.getText());
@@ -133,23 +145,26 @@ public class MakeReservationFrameController extends Application implements Initi
     
 	}
 	private void loadData() {
-		str = orderType.getValue();
-		o.setOrderType(str);
-		str = numOfVisitorsField.getText();
-		o.setNumOfVisitors(str);		 
+		o.setOrderType(orderType.getValue());
+		o.setNumOfVisitors(numOfVisitorsField.getText());		 
 		date = dateField.getValue();
 		str = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		o.setDate(str);
-		str = hourField.getText();
-		o.setHour(str);
-		str = minuteField.getText();
-		o.setMinute(str);
-		str = parkNameField.getValue();
-		o.setParkName(str);
-		str = phoneField.getText();
-		o.setphone(str);
-		str = emailField.getText();
-		o.setEmail(str);
+		o.setHour(hourField.getText());
+		o.setMinute(minuteField.getText());
+		o.setParkName(parkNameField.getValue());
+		o.setphone(phoneField.getText());
+		o.setEmail(emailField.getText());
+		if(orderType.getValue().equals("Organized Group")) o.setIsPayed(payedCheckBox.isSelected());
+		else o.setIsPayed(false);
+		if(ClientController.connectedVisitor == null) {
+			o.setInvitedInAdvance(false);
+		}
+		else {
+			o.setInvitedInAdvance(true);
+			o.setVisitorID(ClientController.connectedVisitor.getId());
+		}//WHAT ABOUT IF THE ENTRY WORKER DID THE RESERVATION WHAT ID SHOULD I ENTER ?? (make another gui to enter id before switching to make reservation)
+		o.setIsConfirmed(false);
 	}
 	private void setParkNameFieldComboBox() {
 		ArrayList<String> al = new ArrayList<String>();	
@@ -174,12 +189,23 @@ public class MakeReservationFrameController extends Application implements Initi
 		setOrderTypeComboBox();
 		setParkNameFieldComboBox();
 		o = new Order();
-		
+		payLabel.setVisible(false);
+	    payedCheckBox.setVisible(false);
+		orderType.setOnAction(event -> {
+		    String selectedType = orderType.getValue();
+		    if (selectedType != null && selectedType.equals("Organized Group")) {
+		        payLabel.setVisible(true);
+		        payedCheckBox.setVisible(true);
+		    } else {
+		        payLabel.setVisible(false);
+		        payedCheckBox.setVisible(false);
+		    }
+		});	
 	}
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
-
+ 
 
 }

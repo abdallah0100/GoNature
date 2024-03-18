@@ -19,9 +19,9 @@ import utilities.SceneController;
 public class VisitorSidePaneController extends Application implements Initializable{
 	
 	@FXML
-	private Label visitorIdLabel;
+	private  Label visitorIdLabel;
 	@FXML
-	private Label existingVisitor;
+	private  Label existingVisitor;
 	@FXML
 	private Button makeReservation;
 	@FXML
@@ -49,6 +49,16 @@ public class VisitorSidePaneController extends Application implements Initializa
 		}
 		
 	}
+	/*public static void updateDisplayedText() {
+		if (ClientController.connectedVisitor != null) {
+			try {
+				visitorIdLabel.setText(ClientController.connectedVisitor.getId());
+				existingVisitor.setText(ClientController.connectedVisitor.isFoundInDB() + "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}*/
 	//function to makeReservation
 	public void makeReservation(ActionEvent e) {
 		SceneController scene = new SceneController();
