@@ -13,4 +13,13 @@ public class ParkRequestHandler {
 	public static void updateVariable(Park p) {
 		ClientController.getController().accept(new Message(RequestType.UPDATE_PARK_VARIABLE, p));
 	}
+	
+	public static void requsetChange(String s[]) {
+		ClientController.getController().accept(new Message(RequestType.REQUEST_CHANGE, s));
+	}
+	
+	//send 2 time or more
+	public static void UpdateData(String s[]) {
+		ClientController.getController().accept(new Message(RequestType.REQUEST_CHANGE2, s));
+	}
 }

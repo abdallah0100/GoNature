@@ -1,6 +1,6 @@
 package main.handlers;
 import java.io.IOException;
-import entities.Order;
+
 import entities.Bill;
 import entities.CancelledReservation;
 import entities.Order;
@@ -156,7 +156,24 @@ public class ServerRequestHandler {
 			CancelledReservation[] listToReturn2 = CancellationsReportHandler.getReservations((String)msg.getRequestData());
 			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
 			return;
-	
+			
+		case REQUEST_CHANGE:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data String[]"));
+				return;
+			}
+			String res[] = (String[])msg.getRequestData();
+			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,ParkRequestHandler.reqToChange(res)));	
+			return;
+			
+		case REQUEST_CHANGE2:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_CHANGE2, "invalid request data String[]"));
+				return;
+			}
+			String res1[] = (String[])msg.getRequestData();
+			respondToClient(client, new Message(RequestType.REQUEST_CHANGE2,ParkRequestHandler.reqToChange2(res1)));	
+			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
@@ -164,6 +181,9 @@ public class ServerRequestHandler {
 		 
 		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));
 	}
+	
+	
+	
 	
 	public static void respondToClient(ConnectionToClient client, Message msg) {
 		try {

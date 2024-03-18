@@ -53,4 +53,54 @@ public class ParkRequestHandler {
 		}
 	}
 	
+	// insert the request change
+	public static String reqToChange(String []s) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return Constants.DB_CONNECTION_ERROR;
+		}
+		//	String result=null;
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM requested_changes WHERE parkName ='"+s[0]+"'AND variableToChange='"+s[2]+"'");
+			if (!rs.next()) {
+				String str = "INSERT INTO requested_changes (parkName, madeBy, variableToChange, newValue, status) VALUES "
+						+ "('"+s[0]+"', '"+s[1]+"','"+ s[2]+"' , '"+s[3]+"','0')";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);
+				if(ps.executeUpdate() > 0)
+					return "inserted";			
+			}
+			else {
+				rs.close();
+				return "exist";
+			}
+			return "fail";
+		}catch(Exception ex) {
+				System.out.println("[ParkRequestHandler] - failed to insert to requested_changes)");
+				ex.printStackTrace();
+				return "fail in catch";
+		}
+	}	
+	
+	public static boolean reqToChange2(String []s) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			String str = "UPDATE requested_changes SET newValue=? WHERE ParkName=? AND variableToChange=? ";
+			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);
+			ps.setString(1, s[3]);
+			ps.setString(2, s[0]);
+			ps.setString(3, s[2]);
+			return ps.executeUpdate() > 0;
+		}catch(Exception ex) {
+			System.out.println("[ParkRequestHandler] - failed to update park variable");
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	
+	
 }

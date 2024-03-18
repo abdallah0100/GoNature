@@ -171,6 +171,20 @@ public class RequestHandler {
 				return;
 			}
 			
+			
+		case REQUEST_CHANGE:
+			if (!(msg.getRequestData() instanceof String)) {
+				System.out.println("[RequestHandler] - invalid REQUEST_CHANGE response type (String)");
+				return;
+			}
+			EditParkVariablesController.requestResult=(String)(msg.getRequestData());
+			return;
+			
+		case REQUEST_CHANGE2:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid REQUEST_CHANGE response type (Boolean)");
+				return;
+			}
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

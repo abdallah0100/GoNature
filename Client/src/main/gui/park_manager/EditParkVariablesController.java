@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import entities.Park;
+import entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +18,10 @@ import main.ClientController;
 import main.controllers.ParkRequestHandler;
 
 public class EditParkVariablesController implements Initializable{
-	 	
+	
+	public static String updateResult;
+	
+	public static String requestResult;
 	@FXML
 	private Button editEstimatedTimeBtn;
 	@FXML
@@ -35,14 +39,18 @@ public class EditParkVariablesController implements Initializable{
 	@FXML
 	private Label currentValue;
 	@FXML
-	private Button update;
+	private Button send;
+	@FXML
+	private Button reSend;
 	@FXML
 	private Button cancel;
-	
 	@FXML
 	private TextField newValue;
-	public static String updateResult;
 	@FXML
+	public static boolean gap;
+	public static boolean time;
+	public static boolean limit;
+	
 	public void selectVariableToEdit(ActionEvent e ) {
 		newValue.setText("");
 		msgLabel.setVisible(false);
@@ -50,6 +58,9 @@ public class EditParkVariablesController implements Initializable{
 	    editingVariable.setText(clickedBtn.getText());   
 	    setValues();
 	    rightPane.setVisible(true);
+		   reSend.setVisible(false);
+		   send.setVisible(true);
+	    
 	}
 	@FXML
 	public void cancel(ActionEvent e ) {
@@ -69,28 +80,50 @@ public class EditParkVariablesController implements Initializable{
 	
 	@FXML
 	public void update(ActionEvent e ) {
-	    if (validInput()) {
-	    	int newVal;
-	    	Park mainPark = ClientController.getParks().get(parkName.getText());
-	    	Park tempPark = new Park(mainPark.getParkName(), mainPark.getGap(), mainPark.getEstimatedTime(), mainPark.getMaxCapacity());
-	    	if (editingVariable.getText().contains("Gap"))
-	    		tempPark.setVarbToUpdate("gap");
-	    	else if (editingVariable.getText().contains("Estimated"))
-	    		tempPark.setVarbToUpdate("EstimatedTime");
-	    	else
-	    		tempPark.setVarbToUpdate("capacity");
-	    	newVal = Integer.parseInt(newValue.getText());
-	    	tempPark.setNewValue(newVal);
-	    	ParkRequestHandler.updateVariable(tempPark);
-	    	
-	    	setValues();
-	    	
-	    	displayMsg(updateResult, 106, "white");
-	    }
-	}
+	   if (validInput()) {
+		   if(editingVariable.getText().contains("Gap") && gap)
+		   {
+			   displayMsg("want to update request?", 129, "red");
+			   reSend.setVisible(true);
+			   send.setVisible(false);
+			   return;
+		   }
+		   if(editingVariable.getText().contains("Estimated Time") && time)
+		   {
+			   displayMsg("want to update request?", 129, "red");
+			   reSend.setVisible(true);
+			   send.setVisible(false);
+			   return;
+		   }
+		    if(editingVariable.getText().contains("Visitor Limit") && limit)
+		   {
+			   displayMsg("want to update request?", 129, "red");
+			   reSend.setVisible(true);
+			   send.setVisible(false);
+			   return;
+		   }
+		   ParkRequestHandler.requsetChange(insertDataChange());
+		   if(editingVariable.getText().contains("Gap"))
+			   gap=true;  
+		   if(editingVariable.getText().contains("Estimated Time"))
+			   time=true;
+		   if(editingVariable.getText().contains("Visitor Limit"))
+			   limit=true;
+	 	   displayMsg("sent request", 129, "red");
+	 	   System.out.println(requestResult);
+	 	}
 	
+	}
+	public void reSend(ActionEvent e ) {
+		   if (validInput()) {
+			   msgLabel.setVisible(false);
+		 	   ParkRequestHandler.UpdateData(insertDataChange());
+		 	   displayMsg("sent request", 129, "red");
+		   }
+	}
+
 	public boolean validInput() {
-		if (newValue.getText() == null || newValue.getText().length() == 0) {
+		if (newValue.getText() == null || newValue.getText().length() == 0 || newValue.getText().equals("0")) {
 			displayMsg("Enter a new value to update", 106, "red");
 			return false;
 		}
@@ -113,6 +146,17 @@ public class EditParkVariablesController implements Initializable{
 		msgLabel.setLayoutX(layoutx);
 		msgLabel.setTextFill(Color.valueOf(color));
 		msgLabel.setVisible(true);
+	}
+	
+	public String[] insertDataChange()
+	{
+		String[] reqSer = new String[4];
+		reqSer[0]=parkName.getText();
+		reqSer[1]=ClientController.connectedUser.getUsername();
+		reqSer[2]=editingVariable.getText();
+		reqSer[3]=newValue.getText();
+		return reqSer;
+			    
 	}
 		    
 
