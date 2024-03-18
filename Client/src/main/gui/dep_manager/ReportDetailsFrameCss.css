@@ -11,3 +11,7 @@ Button{
 Button:hover{
 	-fx-background-color: #808080;
 }
+
+#parkField{
+	-fx-background-radius: 40px;
+}

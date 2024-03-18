@@ -142,7 +142,7 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Text>
-            <Label fx:id="msgLabel" layoutX="26.0" layoutY="300.0" text="Report already exists, would you like to update it ?" visible="false">
+            <Label fx:id="msgLabel" disable="true" layoutX="26.0" layoutY="300.0" text="Report already exists, would you like to update it ?" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
