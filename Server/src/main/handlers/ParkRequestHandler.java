@@ -59,7 +59,6 @@ public class ParkRequestHandler {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return Constants.DB_CONNECTION_ERROR;
 		}
-		//	String result=null;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM requested_changes WHERE parkName ='"+s[0]+"'AND variableToChange='"+s[2]+"'");
@@ -82,6 +81,8 @@ public class ParkRequestHandler {
 		}
 	}	
 	
+	
+	//update 2 time or more park manager ask to update value second time or more 
 	public static boolean reqToChange2(String []s) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);

@@ -30,5 +30,6 @@
          </font>
       </Label>
       <Button fx:id="createReservations" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" onAction="#createReservations" text="Create Reservations" />
+      <Button layoutX="26.0" layoutY="290.0" mnemonicParsing="false" onAction="#monitoring" prefHeight="25.0" prefWidth="104.0" text="Monitoring" />
    </children>
 </Pane>

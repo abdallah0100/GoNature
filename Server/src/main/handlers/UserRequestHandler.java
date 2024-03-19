@@ -1,5 +1,6 @@
 package main.handlers;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -97,5 +98,96 @@ public class UserRequestHandler {
 		}
 		
 	}
+	
+	public static boolean checkExiting(String id) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT NumberOfVisitors,Park FROM reservations WHERE ReservationID='"+id+"'");
+			if (!rs.next()) {
+				return false;
+			}
+			
+			int oldNumber=rs.getInt("NumberOfVisitors");
+			String parkName = rs.getString("Park");
+			
+			ResultSet rs2 = st.executeQuery("SELECT gap FROM parks WHERE ParkName='"+parkName+"'");
+			if (!rs2.next()) {
+				return false;
+			}
+			int total = rs2.getInt("gap");
+			int newGap = total - oldNumber;
+			
+				String str = "UPDATE parks SET gap=? WHERE ParkName=? ";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+		        ps.setInt(1, newGap);
+		        ps.setString(2, parkName);
+		        int rowsAffected = ps.executeUpdate(); // Execute the update query
+		        return rowsAffected > 0; // Return true if the update was successful
+				//return true;
+			}catch(Exception ex) {
+				System.out.println("[UserRequestHandler] - failed to checkEntering");
+				ex.printStackTrace();
+				return false;
+			}
+	}
+	
+	public static boolean checkEntering(String id) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT NumberOfVisitors,Park FROM reservations WHERE ReservationID='"+id+"'");
+			if (!rs.next()) {
+				return false;
+			}
+			int oldNumber=rs.getInt("NumberOfVisitors");
+			String parkName = rs.getString("Park");
+			ResultSet rs2 = st.executeQuery("SELECT gap FROM parks WHERE ParkName='"+parkName+"'");
+			if (!rs2.next()) {
+				return false;
+			}
+			int total = rs2.getInt("gap");
+			int newGap = total + oldNumber;
+				String str = "UPDATE parks SET gap=? WHERE ParkName=? ";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
 
+		        ps.setInt(1, newGap);
+		        ps.setString(2, parkName);
+		        int rowsAffected = ps.executeUpdate(); // Execute the update query
+		        return rowsAffected > 0; // Return true if the update was successful
+
+				//return true;
+			}catch(Exception ex) {
+				System.out.println("[UserRequestHandler] - failed to checkEntering");
+				ex.printStackTrace();
+				return false;
+			}
+		
+	}
+	public static boolean delete(String id) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {    	
+				String str = "DELETE FROM reservations WHERE ReservationID = ?";
+    			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+    			ps.setString(1, id);
+				
+		        int rowsAffected = ps.executeUpdate(); 
+		        return rowsAffected > 0; // Return true if the Delete was successful
+
+				//return true;
+			}catch(Exception ex) {
+				System.out.println("[UserRequestHandler] - failed to checkEntering");
+				ex.printStackTrace();
+				return false;
+			}
+	}
 }

@@ -26,7 +26,7 @@ public class BillCakFrameController  extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+	 
 	
 	/**
 	* @param primaryStage the primary stage for the application

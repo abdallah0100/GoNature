@@ -10,14 +10,14 @@ import requests.RequestType;
 
 public class UserRequestController {
 	public static boolean LogedIn = false;
-
+ 
 	public static void sendUserLogIn(String userName,String password) {
 		ClientController.getController().accept(new Message(RequestType.LOGIN_USER, new User(userName,password)));
-	}
+	} 
 	
 	public static void sendShowBill(String id) {
 		ClientController.getController().accept(new Message(RequestType.REQUEST_BILL,new Bill(id)));
-	}
+	} 
 	
 	public static void insertInstructor(String instructor_id,String instructorName,String instructor_email,String instructor_tel) {
 		ClientController.getController().accept(new Message(RequestType.INSERT_INSTRUCTOR,
@@ -32,11 +32,20 @@ public class UserRequestController {
 			//ClientController.getController().accept(new Message(RequestType.FETCH_MONTHLY_VISITOR_NUM, r));
 			System.out.println("Fetching monthly visitor data is not implemented yet");
 			return;
-		}
-	}
-
+		}  
+	} 
 	
 	public static void createReport(Report r) {
 		ClientController.getController().accept(new Message(RequestType.CREATE_REPORT, r));
 	}
+	
+	public static void exit(String id) {
+		ClientController.getController().accept(new Message(RequestType.EXIT_VISITOR,id));
+	} 
+	public static void enter(String id) {
+		ClientController.getController().accept(new Message(RequestType.ENTER_VISTOR,id));
+	} 
+	public static void delete(String id) {
+		ClientController.getController().accept(new Message(RequestType.DELET_FROM_RESERVATION,id));
+	} 
 }

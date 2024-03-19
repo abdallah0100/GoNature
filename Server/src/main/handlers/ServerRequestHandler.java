@@ -174,6 +174,30 @@ public class ServerRequestHandler {
 			String res1[] = (String[])msg.getRequestData();
 			respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE,ParkRequestHandler.reqToChange2(res1)));	
 			return;	
+		case EXIT_VISITOR:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.EXIT_VISITOR, "invalid request data String"));
+				return;
+			}
+			String s1 = (String)msg.getRequestData();
+			respondToClient(client, new Message(RequestType.EXIT_VISITOR,UserRequestHandler.checkExiting(s1)));	
+			return;	
+		case ENTER_VISTOR:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.ENTER_VISTOR, "invalid request data String"));
+				return;
+			}
+			String s2 = (String)msg.getRequestData();
+			respondToClient(client, new Message(RequestType.ENTER_VISTOR,UserRequestHandler.checkEntering(s2)));	
+			return;	
+		case DELET_FROM_RESERVATION:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION, "invalid request data String"));
+				return;
+			}
+			String s3 = (String)msg.getRequestData();
+			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,UserRequestHandler.delete(s3)));	
+			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

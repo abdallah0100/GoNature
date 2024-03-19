@@ -28,7 +28,7 @@ public class RequestHandler {
 			break;
 		case GENERAL_RESPOND:
 			System.out.println("[GoNatureClient] - ServerResponse: " + msg.getRequestData());
-			break;
+			break; 
 		case VALIDATE_VISITOR:
 			if (msg.getRequestData() instanceof Visitor)
 				ClientController.connectedVisitor = (Visitor) msg.getRequestData();
@@ -37,7 +37,7 @@ public class RequestHandler {
 				return;
 			} 
 			VisitorRequestController.finishedValidating = true;
-			break;
+			break;  
 		case LOGIN_USER:
 				if (msg.getRequestData() instanceof User) {
 					ClientController.connectedUser = (User) msg.getRequestData();
@@ -182,9 +182,27 @@ public class RequestHandler {
 			
 		case UPDATE_REQUEST_CHANGE:
 			if (!(msg.getRequestData() instanceof Boolean)) {
-				System.out.println("[RequestHandler] - invalid REQUEST_CHANGE response type (Boolean)");
+				System.out.println("[RequestHandler] - invalid UPDATE_REQUEST_CHANGE response type (Boolean)");
 				return;
 			}
+		case ENTER_VISTOR:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid ENTER_VISTOR response type (Boolean)");
+				return;
+			}
+			ClientController.monitoring=(Boolean)msg.getRequestData();
+		case EXIT_VISITOR:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid EXIT_VISITOR response type (Boolean)");
+				return;
+			}
+			ClientController.monitoring=(Boolean)msg.getRequestData();
+		case DELET_FROM_RESERVATION:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid DELET_FROM_RESERVATION response type (Boolean)");
+				return;
+			}
+			ClientController.monitoring=(Boolean)msg.getRequestData();
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

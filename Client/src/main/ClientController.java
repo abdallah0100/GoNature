@@ -19,14 +19,15 @@ public class ClientController {
 	
 	/*
 	 * variables to determine whether connected to the server/database or not
-	 * */
+	 * */  
 	public static boolean connectedToServer = false;
 	public static boolean fetchedData = false;
 	public static Visitor connectedVisitor;
-	public static User connectedUser;
+	public static User connectedUser; 
 	public static Order reservationMade;
 	public static Bill showBill;
-	public static Order[] reservationshowed;
+	public static Order[] reservationshowed; 
+	public static boolean monitoring = false;
  
 	private static HashMap<String, Park> parks = new HashMap<>();
 	
