@@ -20,8 +20,8 @@ public class CancellationsReportHandler {
 			ResultSet rs = st.executeQuery("SELECT Type, Date, Park FROM cancellationsReports"
 					+ "					    WHERE ReservationIdCancelled ='"+condition+"'");
 			if (!rs.next()) {
-    				System.out.println("[CancellationsReportHandler] - result set was empty");
-    				return null;
+    			System.out.println("[CancellationsReportHandler] - result set was empty");
+    			return null;
 			}
 			// reset cursor to the beginning of the result set
 			 rs.beforeFirst();

@@ -14,7 +14,6 @@ public class Bill implements Serializable {
 	private boolean isInstructor;
 	private boolean invited;
 	private boolean payed;
-	private	String requestedBill;
 	
 	public Bill(String type1,String numberOfVisitor,boolean invisted,boolean payed) {
 		this.numberOfVisitor=numberOfVisitor;
@@ -59,10 +58,6 @@ public class Bill implements Serializable {
 
 	public void setNumberOfVisitor(String numberOfVisitor) {
 		this.numberOfVisitor = numberOfVisitor;
-	}
-	
-	public void setRequestedBill(String requestedBill) {
-		this.requestedBill = requestedBill;
 	} 
 	
 	public double returnPrice() {

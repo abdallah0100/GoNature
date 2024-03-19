@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.controllers.VisitorRequestController;
-import main.gui.MainFrameController;
 import utilities.SceneController;
 
 public class ShowReservationFrameController extends Application implements Initializable{

@@ -1,7 +1,5 @@
 package main.handlers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Order;
-
 import entities.Visitor;
 import main.Constants;
 import main.MainServer;
@@ -69,34 +66,57 @@ public class VisitorRequestHandler {
 		return o;
 			
 	}
+	
 	public static Order[] handleShowReservationsRequest(String id) {
-		List<Order> orders = new ArrayList<>();
-        ResultSet rs = null;
-        try {			
-            String query =  "SELECT Park, ReservationDate, Hour, Minute, NumberOfVisitors ,Type " +
-                    "FROM reservations " +
-                    "WHERE visitorID = ?";
-            PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                String park = rs.getString(1);
-                String date = rs.getString(2); 
-                String hour = rs.getString(3);
-                String minute = rs.getString(4);
-                int numberOfVisitors = rs.getInt(5);
-                String type = rs.getString(6);
-                orders.add(new Order(park, date, hour, minute, numberOfVisitors,type));  
-            }
-            rs.close();
+		 List<Order> orders = new ArrayList<>();
+		    ResultSet rs = null;
+		    try {           
+		        String query = "SELECT Type, NumberOfVisitors, ReservationDate, Hour, Minute, Park, Telephone, Email, ReservationID, isConfirmed, InvitedInAdvance, payed " +
+		                       "FROM reservations " +
+		                       "WHERE visitorID = ?";
+		        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
+		        ps.setString(1, id);
+		        rs = ps.executeQuery();
+		        while (rs.next()) {
+		            String type = rs.getString(1);
+		            int numberOfVisitors = rs.getInt(2);
+		            String date = rs.getString(3);
+		            String hour = rs.getString(4);
+		            String minute = rs.getString(5);
+		            String park = rs.getString(6);
+		            String telephone = rs.getString(7);
+		            String email = rs.getString(8);
+		            int reservationID = rs.getInt(9);
+		            boolean isConfirmed = rs.getBoolean(10);
+		            boolean invitedInAdvance = rs.getBoolean(11);
+		            boolean payed = rs.getBoolean(12);
+		            orders.add(new Order(type, numberOfVisitors, date, hour, minute, park, telephone, email, reservationID, isConfirmed, invitedInAdvance, payed));  
+		        }
+		        rs.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();         
+		    }
+		    Order[] ordersArray = new Order[orders.size()];
+		    ordersArray = orders.toArray(ordersArray);
+		    
+		    return ordersArray;
+			
+		}
+	
+	public static boolean admitReservation(Order o) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+        try {
+        	Statement st = MainServer.dbConnection.createStatement();
+        	String str = "UPDATE reservations SET isConfirmed='1' WHERE ReservationID='"+o.getOrderID()+"'";
+        	return st.executeUpdate(str) > 0;
         } catch (SQLException e) {
-            e.printStackTrace();         
-         }
-        Order[] ordersArray = new Order[orders.size()];
-        ordersArray = orders.toArray(ordersArray);
-        
-        return ordersArray;
-    }
+            e.printStackTrace();
+            return false;
+         }		
+	}
 		
 	
 }

@@ -1,11 +1,11 @@
 package main.handlers;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import entities.Bill;
 import entities.Order;
 import entities.Park;
 import entities.Report;
-import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
@@ -161,6 +161,17 @@ public class ServerRequestHandler {
 			ArrayList<?> cancellationsList = CancellationsReportHandler.getReservations(requestedData,condition);
 			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,cancellationsList,condition));
 			return;	
+			
+		case CONFIRM_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
+			    return;
+			}
+			o = (Order)msg.getRequestData();
+			boolean confirmed = VisitorRequestHandler.admitReservation(o);
+			o.setIsConfirmed(confirmed);
+			respondToClient(client, new Message(RequestType.CONFIRM_RESERVATION, o));
+			return;
 	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
