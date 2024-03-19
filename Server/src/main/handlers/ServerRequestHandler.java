@@ -191,12 +191,20 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.ENTER_VISTOR,UserRequestHandler.checkEntering(s2)));	
 			return;	
 		case DELET_FROM_RESERVATION:
-			if (!(msg.getRequestData() instanceof String)) {
+			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION, "invalid request data String"));
 				return;
 			}
-			String s3 = (String)msg.getRequestData();
+			String[] s3 = (String[])msg.getRequestData();
 			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,UserRequestHandler.delete(s3)));	
+			return;	
+		case INSERT_TO_TEMP:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.INSERT_TO_TEMP, "invalid request data String[]"));
+				return;
+			}
+			String s4 = (String)msg.getRequestData();
+			respondToClient(client, new Message(RequestType.INSERT_TO_TEMP,UserRequestHandler.insert(s4)));	
 			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

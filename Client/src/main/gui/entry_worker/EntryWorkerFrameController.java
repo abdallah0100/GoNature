@@ -24,8 +24,7 @@ public class EntryWorkerFrameController extends Application{
 	 public static void main(String args[]) {
 		 launch(args);
 	 }
-	 
-	 
+	  
 	/**
     * @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization

@@ -23,7 +23,8 @@ public enum RequestType {
 	UPDATE_REQUEST_CHANGE(20),
 	EXIT_VISITOR(21),
 	ENTER_VISTOR(22),
-	DELET_FROM_RESERVATION(23); 
+	DELET_FROM_RESERVATION(23),
+	INSERT_TO_TEMP(24); 
 	
 	private int requestId;
 	

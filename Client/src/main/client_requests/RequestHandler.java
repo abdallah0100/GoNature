@@ -191,18 +191,28 @@ public class RequestHandler {
 				return;
 			}
 			ClientController.monitoring=(Boolean)msg.getRequestData();
+			return;
 		case EXIT_VISITOR:
 			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid EXIT_VISITOR response type (Boolean)");
 				return;
 			}
 			ClientController.monitoring=(Boolean)msg.getRequestData();
+			return;
 		case DELET_FROM_RESERVATION:
 			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid DELET_FROM_RESERVATION response type (Boolean)");
 				return;
 			}
 			ClientController.monitoring=(Boolean)msg.getRequestData();
+			return;
+		case INSERT_TO_TEMP:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid INSERT_TO_TEMP response type (Boolean)");
+				return;
+			}
+			ClientController.monitoring=(Boolean)msg.getRequestData();
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

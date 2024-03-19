@@ -33,7 +33,7 @@ public class RegisterInstructorFrameController extends Application{
 	    
 	    ///////////////////define variables////////////////////////////////////////////////////
      private String instructor_id;//retrieve data from id field
-     private String instructor_name;
+     private String instructor_name; 
      private String instructor_email;//retrieve data from email field
      private String instructor_tel;//retrieve data from telephone field
      ///////////////////////////////////////////////////////////////////////////
