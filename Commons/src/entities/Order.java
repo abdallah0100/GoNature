@@ -32,6 +32,7 @@ public class Order implements Serializable{
 		this.date = date;
 		this.hour = hour;
 		this.minute = minute;
+		this.time = hour + ":" + minute;
 		this.parkName =parkName;
 		this.phone = phone;
 		this.email = email;

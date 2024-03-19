@@ -18,6 +18,7 @@ import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
+import main.threads.VisitorReminder;
 import requests.Message;
 
 public class RequestHandler {
@@ -171,6 +172,21 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
 				return;
 			}
+		case CONFIRM_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				System.out.println("[RequestHandler] - invalid server response");
+				return;
+			}
+			Order temp = (Order)msg.getRequestData();
+			if (temp.getIsConfirmed()) {
+				for (Order o : ClientController.reservationshowed)
+					if (o.getOrderID().equals(temp.getOrderID())) {
+						o.setIsConfirmed(true);
+						VisitorReminder.updateOrders();
+						break;
+					}
+			}
+		break;
 		case UPDATE_RESERVATION:
 			if (msg.getRequestData() instanceof Order[]) {
 				ClientController.updatedReservation = (Order) msg.getRequestData();
