@@ -170,6 +170,16 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
 				return;
 			}
+		case UPDATE_RESERVATION:
+			if (msg.getRequestData() instanceof Order[]) {
+				ClientController.updatedReservation = (Order) msg.getRequestData();
+				VisitorRequestController.finishedUpdatingReservation = true;
+				return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid UPDATE_RESERVATION response");
+				return;
+			}
 			
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());

@@ -54,17 +54,6 @@ public class VisitorSidePaneController extends Application implements Initializa
 		}
 		
 	}
-	/*public static void updateDisplayedText() {
-		if (ClientController.connectedVisitor != null) {
-			try {
-				visitorIdLabel.setText(ClientController.connectedVisitor.getId());
-				existingVisitor.setText(ClientController.connectedVisitor.isFoundInDB() + "");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}*/
-	
 	
 	//function to makeReservation
 	public void makeReservation(ActionEvent e) {

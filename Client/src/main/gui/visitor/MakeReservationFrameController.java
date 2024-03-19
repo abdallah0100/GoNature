@@ -22,36 +22,34 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
-import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
-import main.gui.VisitorSidePaneController;
 import utilities.SceneController;
 
 public class MakeReservationFrameController extends Application implements Initializable{
  
 	@FXML
-	private ComboBox<String> orderType;
+	private  ComboBox<String> orderType;
 	@FXML
-	private TextField numOfVisitorsField;
+	private  TextField numOfVisitorsField;
 	@FXML 
-	private DatePicker dateField;
+	private  DatePicker dateField;
 	@FXML
-	private TextField hourField;
+	private  TextField hourField;
 	@FXML
-	private TextField minuteField;
+	private  TextField minuteField;
 	@FXML
-	private ComboBox<String> parkNameField;
+	private  ComboBox<String> parkNameField;
 	@FXML
-	private TextField phoneField;
+	private  TextField phoneField;
 	@FXML
-	private TextField emailField;
+	private  TextField emailField;
 	@FXML
 	private Button bookBtn;
 	@FXML
 	private Label msgLabel;
 	@FXML
-	private CheckBox payedCheckBox;
+	private  CheckBox payedCheckBox;
 	@FXML
 	private Label payLabel;
 	Order o;
@@ -59,11 +57,9 @@ public class MakeReservationFrameController extends Application implements Initi
 	LocalDate date;
 	LocalDate today = LocalDate.now();
 
-	
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
 
 	/**
 	* @param primaryStage the primary stage for the application
@@ -76,7 +72,6 @@ public class MakeReservationFrameController extends Application implements Initi
 									"/main/gui/visitor/MakeReservationFrame.fxml");
 	}	
 	
-	
 	//function makes reservation 
 	public void makeReservation(ActionEvent e) throws Exception{
 		if(isValid()){
@@ -85,7 +80,6 @@ public class MakeReservationFrameController extends Application implements Initi
 			if (VisitorRequestController.finishedMakingReservation) {
 				ClientController.connectedVisitor.setFoundInDB(true);
 				SceneController.switchFrame("GoNature",e,new MainFrameController());
-
 			}
 			else {
 				System.out.println("[MakeReservationFrameController] - did not finished Making Reservation");		
@@ -146,6 +140,7 @@ public class MakeReservationFrameController extends Application implements Initi
     
 	}
 	private void loadData() {
+
 		o.setOrderType(orderType.getValue());
 		o.setNumOfVisitors(numOfVisitorsField.getText());		 
 		date = dateField.getValue();
@@ -202,11 +197,10 @@ public class MakeReservationFrameController extends Application implements Initi
 		        payedCheckBox.setVisible(false);
 		    }
 		});	
+		
 	}
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
- 
-
 }

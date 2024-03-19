@@ -25,18 +25,20 @@ public class Order implements Serializable{
 	public Order() {
     }
 	
-	public Order(String orderType, String numOfVisitors, String date, String hour, String minute
-			, String parkName , String phone, String email ,String orderID) {
+	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
+			, String parkName , String phone, String email ,int reservationID,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed) {
 		this.orderType = orderType;
-		this.numOfVisitors = numOfVisitors;
+		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.date = date;
 		this.hour = hour;
 		this.minute = minute;
 		this.parkName =parkName;
 		this.phone = phone;
 		this.email = email;
-		this.orderID=orderID;
-				 
+		this.orderID = String.valueOf(reservationID);
+		this.isConfirmed = isConfirmed;
+		this.invitedInAdvance = invitedInAdvance;
+		this.isPayed = isPayed;
 	}
 	public Order(String parkName, String date, String hour,String minute,int numOfVisitors,String orderType) {
 		this.parkName =parkName;
