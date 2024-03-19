@@ -200,7 +200,7 @@ public class ServerRequestHandler {
 			return;	
 		case INSERT_TO_TEMP:
 			if (!(msg.getRequestData() instanceof String)) {
-				respondToClient(client, new Message(RequestType.INSERT_TO_TEMP, "invalid request data String[]"));
+				respondToClient(client, new Message(RequestType.INSERT_TO_TEMP, "invalid request data String"));
 				return;
 			}
 			String s4 = (String)msg.getRequestData();
