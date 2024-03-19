@@ -56,8 +56,22 @@ public class VisitorRequestHandler {
 			return null;
 		}
 		try{
+			
+			Statement stat = MainServer.dbConnection.createStatement();
+		    String checkVisitorQuery = "SELECT * FROM visitors WHERE ID = '" + o.getVisitorID() + "'";
+		    ResultSet rs = stat.executeQuery(checkVisitorQuery);
+		    boolean visitorExists = rs.next(); 
+		    if (!visitorExists) {
+		         String insertVisitorQuery = "INSERT INTO visitors (ID, Email, Telephone, isInstructor) VALUES ('" +
+		                 o.getVisitorID() + "', '" + o.getEmail() + "', '" + o.getPhone() + "', '0')";
+		         stat.executeUpdate(insertVisitorQuery);
+		    }
+			int isConfirmed = o.getIsConfirmed() ? 1 : 0;
+	        int invitedInAdvance = o.getInvitedInAdvance() ? 1 : 0;
+	        int payed = o.getIsPayed() ? 1 : 0;
 			Statement st = MainServer.dbConnection.createStatement();
-		    int s = st.executeUpdate( "INSERT INTO reservations (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,isConfirmed)" + " VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"',FALSE)");
+		    int s = st.executeUpdate( "INSERT INTO reservations (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed)" + 
+			" VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"','"+o.getVisitorID()+"','"+isConfirmed+"','"+invitedInAdvance+"','"+payed+"')");
 		    if(s<=0)return null;
 		}catch(Exception ex) {
 			System.out.println("[VisitorRequestHandler] - failed to execute query");
@@ -102,6 +116,33 @@ public class VisitorRequestHandler {
 		    return ordersArray;
 			
 		}
+		public static Order handleUpdateReservationRequest(Order o) {
+			 try {
+	        String query = "UPDATE reservations " +
+	                       "SET Type = ?, NumberOfVisitors = ?, ReservationDate = ?, Hour = ?, Minute = ?, Park = ?, Telephone = ?, Email = ?, isConfirmed = ?, InvitedInAdvance = ?, payed = ? " +
+	                       "WHERE ReservationID = ?";
+	        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
+	        ps.setString(1, o.getOrderType());
+	        ps.setInt(2, o.getNumOfVisitors());
+	        ps.setString(3, o.getDate());
+	        ps.setString(4, o.getHour());
+	        ps.setString(5, o.getMinute());
+	        ps.setString(6, o.getParkName());
+	        ps.setString(7, o.getPhone());
+	        ps.setString(8, o.getEmail());
+	        ps.setBoolean(9, o.getIsConfirmed());
+	        ps.setBoolean(10, o.getInvitedInAdvance());
+	        ps.setBoolean(11, o.getIsPayed());
+	        int rowsUpdated = ps.executeUpdate();
+	        if (rowsUpdated == 1) {
+	            return o;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+
+		}
 	
 	public static boolean admitReservation(Order o) {
 		if (MainServer.dbConnection == null) {
@@ -118,5 +159,4 @@ public class VisitorRequestHandler {
          }		
 	}
 		
-	
 }

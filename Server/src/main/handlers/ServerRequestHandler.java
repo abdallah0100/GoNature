@@ -1,11 +1,12 @@
 package main.handlers;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import entities.Bill;
+import entities.CancelledReservation;
 import entities.Order;
 import entities.Park;
 import entities.Report;
+import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
 import ocsf.server.src.ConnectionToClient;
@@ -114,6 +115,7 @@ public class ServerRequestHandler {
 			}
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
 			return;
+			
 		case SHOW_RESERVATIONS:
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
@@ -142,25 +144,18 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.UPDATE_PARK_VARIABLE, p, "Failed to update variable"));
 			return;
 		case SHOW_USAGE_REPORT:
-			if (!(msg.getRequestData() instanceof  ArrayList<?>)) {
-			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
-			    return;
-			}		
-			ArrayList<?> usageData = (ArrayList<?>) msg.getRequestData();
-			ArrayList<?> usageList = UsageReportHandler.getUsageReports(usageData);
-			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT, usageList));
+			UsageReport[] listToReturn = UsageReportHandler.getUsageReports();
+			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT,listToReturn));
 			return;
+			
 		case SHOW_CANCELLATIONS_REPORTS:
-			if (!(msg.getRequestData() instanceof ArrayList<?>)) {
-			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not ArrayList)"));
-			    return;
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
 			}
-
-			ArrayList<?> requestedData = (ArrayList<?>) msg.getRequestData();
-			String condition = (String) msg.getResponseMsg();
-			ArrayList<?> cancellationsList = CancellationsReportHandler.getReservations(requestedData,condition);
-			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,cancellationsList,condition));
-			return;	
+			CancelledReservation[] listToReturn2 = CancellationsReportHandler.getReservations((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
+			return;
 			
 		case CONFIRM_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
@@ -172,6 +167,26 @@ public class ServerRequestHandler {
 			o.setIsConfirmed(confirmed);
 			respondToClient(client, new Message(RequestType.CONFIRM_RESERVATION, o));
 			return;
+			
+		case UPDATE_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
+			}
+			Order uo = VisitorRequestHandler.handleUpdateReservationRequest((Order)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.UPDATE_RESERVATION, uo));
+			return;
+			
+			
+		case SHOW_NUM_OF_VISITORS_REPORT:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Strings list)"));
+				return;
+			}
+			//Number of organizedGroup and individuals
+			String[] listToReturn3 = NumOfVisitorsReportHandler.getNumOfVisitors((String[])msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_NUM_OF_VISITORS_REPORT,listToReturn3));
+		return;
 	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

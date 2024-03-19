@@ -1,18 +1,19 @@
 package main.client_requests;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import entities.Bill;
-import entities.Order;
 import entities.Park;
+import entities.Order;
+import entities.Bill;
+import entities.CancelledReservation;
 import entities.Report;
+import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
@@ -144,8 +145,8 @@ public class RequestHandler {
 			break;
 			
 		case SHOW_USAGE_REPORT:
-			if (msg.getRequestData() instanceof ArrayList<?>) {
-				UsageReportFrameController.setList((ArrayList<String[]>)msg.getRequestData());
+			if (msg.getRequestData() instanceof UsageReport[]) {
+				UsageReportFrameController.setList((UsageReport[])msg.getRequestData());
 				return; 
 			}
 			else {
@@ -153,16 +154,16 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid SHOW_USAGE_REPORT response");
 				return;
 			}
-	
+			
 		case SHOW_CANCELLATIONS_REPORTS:
-			if (msg.getRequestData() instanceof ArrayList<?>) {
+			if (msg.getRequestData() instanceof CancelledReservation[]) {
 				// for left table
-				if("Yes".equals(msg.getResponseMsg())) { 
-					CancellationsReportFrameController.setArrayListLeft((ArrayList<String[]>)msg.getRequestData());
+				if("Yes".equals((String)msg.getResponseMsg())) { 
+					CancellationsReportFrameController.setArrayListLeft((CancelledReservation[])msg.getRequestData());
 					return; 
 				}
 				// for right table
-				CancellationsReportFrameController.setArrayListRight((ArrayList<String[]>)msg.getRequestData());
+				CancellationsReportFrameController.setArrayListRight((CancelledReservation[])msg.getRequestData());
 				return; 
 			}
 			else {
@@ -186,7 +187,26 @@ public class RequestHandler {
 					}
 			}
 		break;
-			
+		case UPDATE_RESERVATION:
+			if (msg.getRequestData() instanceof Order[]) {
+				ClientController.updatedReservation = (Order) msg.getRequestData();
+				VisitorRequestController.finishedUpdatingReservation = true;
+				return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid UPDATE_RESERVATION response");
+				return;
+			}
+		case SHOW_NUM_OF_VISITORS_REPORT:
+			if (msg.getRequestData() instanceof String[]) {
+				ReportDetailsFrameController.setData((String[])msg.getRequestData());
+				return;	
+			}
+			else {
+				ReportDetailsFrameController.setData(null);
+				System.out.println("[RequestHandler] - invalid SHOW_NUM_OF_VISITORS_REPORT response");
+				return;
+			}	
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

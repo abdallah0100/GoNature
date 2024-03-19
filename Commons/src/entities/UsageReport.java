@@ -1,62 +1,63 @@
 package entities;
 
-import javafx.beans.property.SimpleStringProperty;
+import java.io.Serializable;
 
-public class UsageReport {
-	
-	private SimpleStringProperty month;
-	private SimpleStringProperty year;
-	private SimpleStringProperty amount;
-	private SimpleStringProperty park;
-	private SimpleStringProperty madeBy;
-	
-	public UsageReport(String month, String year,String amount, String park, String madeBy) {
-		this.month = new SimpleStringProperty(month);
-		this.year = new SimpleStringProperty(year);
-		this.amount = new SimpleStringProperty(amount);
-		this.park = new SimpleStringProperty(park);
-		this.madeBy = new SimpleStringProperty(madeBy);
-	}
+public class UsageReport implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    private String month;
+    private String year;
+    private String amount;
+    private String park;
+    private String madeBy;
+    
+    public UsageReport(String month, String year, String amount, String park, String madeBy) {
+        this.month = month;
+        this.year = year;
+        this.amount = amount;
+        this.park = park;
+        this.madeBy = madeBy;
+    }
 
-	public String getMonth() {
-		return month.get();
-	}
+    // Getters and setters
 
-	public void setMonth(String month) {
-		this.month = new SimpleStringProperty(month);
-	}
+    public String getMonth() {
+        return month;
+    }
 
-	public String getYear() {
-		return year.get();
-	}
+    public void setMonth(String month) {
+        this.month = month;
+    }
 
-	public void setYear(String year) {
-		this.year =new SimpleStringProperty(year);
-	}
+    public String getYear() {
+        return year;
+    }
 
-	public String getAmount() {
-		return amount.get();
-	}
+    public void setYear(String year) {
+        this.year = year;
+    }
 
-	public void setAmount(String amount) {
-		this.amount = new SimpleStringProperty(amount);
-	}
+    public String getAmount() {
+        return amount;
+    }
 
-	public String getPark() {
-		return park.get();
-	}
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
 
-	public void setPark(String park) {
-		this.park = new SimpleStringProperty(park);
-	}
+    public String getPark() {
+        return park;
+    }
 
-	public String getMadeBy() {
-		return madeBy.get();
-	}
+    public void setPark(String park) {
+        this.park = park;
+    }
 
-	public void setMadeBy(String madeBy) {
-		this.madeBy = new SimpleStringProperty(madeBy);
-	}
-	
+    public String getMadeBy() {
+        return madeBy;
+    }
 
+    public void setMadeBy(String madeBy) {
+        this.madeBy = madeBy;
+    }
 }

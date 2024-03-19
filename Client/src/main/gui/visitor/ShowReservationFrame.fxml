@@ -23,16 +23,20 @@
             </DropShadow>
          </effect>
       </Label>
-      <TableView fx:id="tableView" layoutX="48.0" layoutY="64.0" prefHeight="272.0" prefWidth="504.0">
+      <TableView fx:id="tableView" layoutX="13.0" layoutY="64.0" prefHeight="272.0" prefWidth="572.0">
         <columns>
-          <TableColumn fx:id="siteColumn" prefWidth="106.66665267944336" text="Site" />
-          <TableColumn fx:id="dateColumn" prefWidth="104.00004577636719" text="Date" />
-            <TableColumn fx:id="timeColumn" prefWidth="96.66668701171875" text="Time" />
-            <TableColumn fx:id="typeColumn" prefWidth="84.0" text="Type" />
-            <TableColumn fx:id="visitorNumberColumn" prefWidth="113.33331298828125" text="Visitors Number" />
+          <TableColumn fx:id="siteColumn" prefWidth="48.666656494140625" text="Site" />
+          <TableColumn fx:id="dateColumn" prefWidth="51.999969482421875" text="Date" />
+            <TableColumn fx:id="timeColumn" prefWidth="56.66668701171875" text="Hour" />
+            <TableColumn fx:id="typeColumn" prefWidth="62.00006103515625" text="Type" />
+            <TableColumn fx:id="visitorNumberColumn" prefWidth="114.6666259765625" text="Visitors Number" />
+            <TableColumn fx:id="phoneColumn" prefWidth="53.33331298828125" text="Phone" />
+            <TableColumn fx:id="emailColumn" prefWidth="54.0" text="Email" />
+            <TableColumn fx:id="payedColumn" prefWidth="62.0" text="Payed" />
+            <TableColumn fx:id="minuteColumn" prefWidth="75.0" text="Minute" />
         </columns>
       </TableView>
-      <Button fx:id="updateBtn" layoutX="486.0" layoutY="354.0" mnemonicParsing="false" onAction="#showReservation" prefHeight="31.0" prefWidth="95.0" text="Show" textFill="WHITE">
+      <Button fx:id="updateBtn" layoutX="486.0" layoutY="354.0" mnemonicParsing="false" onAction="#updateReservation" prefHeight="31.0" prefWidth="95.0" text="Update" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
