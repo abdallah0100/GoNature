@@ -13,6 +13,7 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
@@ -170,7 +171,16 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
 				return;
 			}
-			
+		case SHOW_NUM_OF_VISITORS_REPORT:
+			if (msg.getRequestData() instanceof String[]) {
+				ReportDetailsFrameController.setData((String[])msg.getRequestData());
+				return;	
+			}
+			else {
+				ReportDetailsFrameController.setData(null);
+				System.out.println("[RequestHandler] - invalid SHOW_NUM_OF_VISITORS_REPORT response");
+				return;
+			}	
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
