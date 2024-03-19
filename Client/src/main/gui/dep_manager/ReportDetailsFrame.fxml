@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@ReportDetailsFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.ReportDetailsFrameController">
+   <children>
+      <Label layoutX="16.0" layoutY="36.0" text="Choose Park :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Button layoutX="211.0" layoutY="210.0" mnemonicParsing="false" onAction="#showNumberOfVisitors" prefHeight="33.0" prefWidth="107.0" text="Show" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <TextField fx:id="parkField" layoutX="201.0" layoutY="41.0" prefHeight="25.0" prefWidth="153.0" />
+      <Label layoutX="11.0" layoutY="94.0" text="Choose Month :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="14.0" layoutY="155.0" prefHeight="35.0" prefWidth="172.0" text="Choose Year :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <ComboBox fx:id="monthBox" layoutX="204.0" layoutY="99.0" prefWidth="150.0" />
+      <ComboBox fx:id="yearBox" layoutX="200.0" layoutY="160.0" prefWidth="150.0" />
+      <Label fx:id="errorMsgLabel" layoutX="333.0" layoutY="205.0" prefHeight="44.0" prefWidth="245.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.18421052396297455" green="0.17909356951713562" blue="0.17909356951713562" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="reservationTypeLabel" layoutX="14.0" layoutY="261.0" prefHeight="36.0" prefWidth="158.0" text="Reservation Type" textFill="WHITE" underline="true" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="organizedGroupLabel" layoutX="14.0" layoutY="304.0" text="Organized Group :" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="IndivisualsLabel" layoutX="14.0" layoutY="344.0" text="Indivisuals :" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="amountLabel" layoutX="204.0" layoutY="267.0" prefHeight="25.0" prefWidth="71.0" text="Amount" textFill="WHITE" underline="true" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="organizedAmountLabel" layoutX="204.0" layoutY="298.0" prefHeight="34.0" prefWidth="140.0" text="Label" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="indivisualsAmountLabel" layoutX="204.0" layoutY="331.0" prefHeight="44.0" prefWidth="150.0" text="Label" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="366.0" layoutY="160.0" mnemonicParsing="false" onAction="#clearFieldsBtn" text="Clear Fields" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+   </children>
+</Pane>

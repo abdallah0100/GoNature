@@ -35,7 +35,7 @@ public class SelectReportFrameController {
 	@FXML
 	public void showNumOfVisitorsWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
-		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/SelectDateFrame.fxml");
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/ReportDetailsFrame.fxml");
 	}
 
 }

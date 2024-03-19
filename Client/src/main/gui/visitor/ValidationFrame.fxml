@@ -99,7 +99,7 @@
          <effect>
             <DropShadow>
                <color>
-                  <Color red="0.18421052396297455" green="0.17653508484363556" blue="0.17653508484363556" />
+                  <Color red="0.18431372940540314" green="0.1764705926179886" blue="0.1764705926179886" />
                </color>
             </DropShadow>
          </effect></Label>
