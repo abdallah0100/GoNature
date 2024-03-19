@@ -14,23 +14,31 @@ public class Order implements Serializable{
 	private String parkName;
 	private String phone;
 	private String email;
+	private String visitorID;
+	private boolean isConfirmed;
+	private boolean invitedInAdvance;
+	private boolean isPayed;
+	
 	private String orderID;
 	private String time;
+
 	public Order() {
     }
 	
-	public Order(String orderType, String numOfVisitors, String date, String hour, String minute
-			, String parkName , String phone, String email ,String orderID) {
+	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
+			, String parkName , String phone, String email ,int reservationID,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed) {
 		this.orderType = orderType;
-		this.numOfVisitors = numOfVisitors;
+		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.date = date;
 		this.hour = hour;
 		this.minute = minute;
 		this.parkName =parkName;
 		this.phone = phone;
 		this.email = email;
-		this.orderID=orderID;
-				 
+		this.orderID = String.valueOf(reservationID);
+		this.isConfirmed = isConfirmed;
+		this.invitedInAdvance = invitedInAdvance;
+		this.isPayed = isPayed;
 	}
 	public Order(String parkName, String date, String hour,String minute,int numOfVisitors,String orderType) {
 		this.parkName =parkName;
@@ -72,8 +80,18 @@ public class Order implements Serializable{
 	public String getTime() {
 		return time;
 	}
-	
-	
+	public boolean getIsPayed() {
+		return isPayed;
+	}
+	public boolean getInvitedInAdvance() {
+		return invitedInAdvance;
+	}
+	public String getVisitorID() {
+		return visitorID;
+	}	
+	public boolean getIsConfirmed() {
+		return isConfirmed;
+	}
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
@@ -101,7 +119,18 @@ public class Order implements Serializable{
 	public void setOrderID(String orderID) {
 		this.orderID = orderID;
 	}
-	
+	public void setIsPayed(boolean isPayed) {
+		this.isPayed = isPayed;
+	}
+	public void setInvitedInAdvance(boolean invitedInAdvance) {
+		this.invitedInAdvance = invitedInAdvance;
+	}	
+	public void setVisitorID(String visitorID) {
+		this.visitorID = visitorID;
+	}
+	public void setIsConfirmed(boolean isConfirmed) {
+		this.isConfirmed = isConfirmed;
+	}	
 	public ArrayList<String> getArray(){
 		ArrayList<String> list = new ArrayList<>();
 		list.add(orderType);
@@ -114,5 +143,5 @@ public class Order implements Serializable{
 		list.add(email);
 		list.add(orderID);
 		return list;
-	}
+	}	
 }

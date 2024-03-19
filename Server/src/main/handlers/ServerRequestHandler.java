@@ -156,6 +156,16 @@ public class ServerRequestHandler {
 			CancelledReservation[] listToReturn2 = CancellationsReportHandler.getReservations((String)msg.getRequestData());
 			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
 			return;
+		case UPDATE_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
+			}
+			Order uo = VisitorRequestHandler.handleUpdateReservationRequest((Order)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.UPDATE_RESERVATION, uo));
+			return;
+			
+			
 		case SHOW_NUM_OF_VISITORS_REPORT:
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Strings list)"));
