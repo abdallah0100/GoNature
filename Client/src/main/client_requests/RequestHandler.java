@@ -63,9 +63,7 @@ public class RequestHandler {
 			else {
 				System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
 				return;
-			}
-				
-				
+			}	
 		case REQUEST_BILL:
 				if (msg.getRequestData() instanceof Bill) {
 					ClientController.showBill=(Bill) msg.getRequestData();
