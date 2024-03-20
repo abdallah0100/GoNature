@@ -196,7 +196,7 @@ public class ServerRequestHandler {
 				return;
 			}
 			String[] s3 = (String[])msg.getRequestData();
-			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,UserRequestHandler.deleteReservation(s3[0],s3[1])));	
+			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,ReservationRequestHandler.deleteReservation(s3[0],s3[1])));	
 			return;	
 		case INSERT_TO_TEMP:
 			if (!(msg.getRequestData() instanceof String)) {

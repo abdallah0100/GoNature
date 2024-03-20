@@ -226,26 +226,6 @@ public class UserRequestHandler {
 			}
 		
 	}
-
-	//delete reservation 
-	public static boolean deleteReservation(String tableName,String id) {
-		if (MainServer.dbConnection == null) {
-			System.out.println(Constants.DB_CONNECTION_ERROR);
-			return false;
-		}
-		try {    	
-				String str = "DELETE FROM " + tableName + " WHERE ReservationID = ?";
-    			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
-    			ps.setString(1, id);
-		        int rowsAffected = ps.executeUpdate(); 
-		        return rowsAffected > 0; // Return true if the Delete was successful
-				//return true;
-			}catch(Exception ex) {
-				System.out.println("[UserRequestHandler] - failed to checkEntering");
-				ex.printStackTrace();
-				return false;
-			}
-	}
 	
 	//insert reservation(copy from reservations to tempreservation)
 	public static boolean insertrReservation(String id) {
