@@ -73,31 +73,85 @@ public class UserRequestHandler {
 		return b;
 	}
 	
-	public static int instructorExists(Visitor v) {
+	
+	//make the 
+	public static String activated(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
-			return -1;
+			return "fail DB";
 		}
-		String id=v.getId();
+
+		Visitor v;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM registered_instructors WHERE ID='"+id+"'");
-			if (!rs.next()) {
-				int s=st.executeUpdate( "INSERT INTO registered_instructors (ID, Name, Email, Telephone) " +
-		                  				"VALUES ('159', 'loa', 'loa@email.com', '05494')");
-				if(s>0)
-					return 1;
-				return -1;
+			ResultSet rs = st.executeQuery("SELECT * FROM instructor WHERE ID='"+id+"'");//check if instructor in the table
+			if (rs.next()) {
+				String str = "UPDATE instructor SET activated=? WHERE ID=? ";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+		        ps.setString(1, "1");
+		        ps.setString(2, id);
+		        ps.executeUpdate(); // Execute the update statement
+				v=new Visitor(rs.getString(1),rs.getString(2),rs.getString(3),"1");
+				rs.close();
+				if(instructorToUser(v))
+					return "regest";
+				return "Visitor insert";
 			}
-			else 
-			{return 0;}
+			else {
+				return "can not regest";
+			}
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to instructorExists");
 			ex.printStackTrace();
-			return -1;
+			return "fail in catch";
 		}
 		
 	}
+	
+	
+	
+	//insert instructor to visitor table
+	public static boolean instructorToUser(Visitor v) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE ID='"+v.getId()+"'");
+			if (!rs.next()) {//if the instructor not in the table
+				 int s = st.executeUpdate("INSERT INTO visitors (ID, Email, Telephone, isInstructor) " +
+			                    "VALUES ('" + v.getId() + "','" + v.getEmail() + "','" + v.getPhone() + "', 1)");
+				 rs.close();
+				 if (s>0)
+					 return true;
+				 return false;
+			}
+			else {
+				return false;
+			}	
+		}catch(Exception ex) {
+				System.out.println("[UserRequestHandler] - failed to instructorExists");
+				ex.printStackTrace();
+				return false;
+			}
+			
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//exit from the park
 	public static boolean checkExiting(String id) {
@@ -156,7 +210,7 @@ public class UserRequestHandler {
 			}
 			int total = rs2.getInt("gap");
 			int newGap = total + oldNumber;
-				String str = "UPDATE parks SET gap=? WHERE ParkName=? ";
+				String str = "UPDATE parks SET currentAmount=? WHERE ParkName=? ";
 				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
 
 		        ps.setInt(1, newGap);
@@ -172,21 +226,19 @@ public class UserRequestHandler {
 			}
 		
 	}
-	
+
 	//delete reservation 
-	public static boolean delete(String s[]) {
+	public static boolean deleteReservation(String tableName,String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
 		}
 		try {    	
-				String str = "DELETE FROM " + s[1] + " WHERE ReservationID = ?";
+				String str = "DELETE FROM " + tableName + " WHERE ReservationID = ?";
     			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
-    			ps.setString(1, s[0]);
-				
+    			ps.setString(1, id);
 		        int rowsAffected = ps.executeUpdate(); 
 		        return rowsAffected > 0; // Return true if the Delete was successful
-
 				//return true;
 			}catch(Exception ex) {
 				System.out.println("[UserRequestHandler] - failed to checkEntering");
@@ -196,7 +248,7 @@ public class UserRequestHandler {
 	}
 	
 	//insert reservation(copy from reservations to tempreservation)
-	public static boolean insert(String id) {
+	public static boolean insertrReservation(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
@@ -207,24 +259,13 @@ public class UserRequestHandler {
 			if (!rs.next()) {
 				return false;
 			}
-				String str = "INSERT INTO tempreservation (Type, NumberOfVisitors, ReservationDate, Hour, Minute, Park, Telephone, Email, ReservationID, visitorID, isConfirmed, InvitedInAdvance, payed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+				String str = "INSERT INTO tempreservation (NumberOfVisitors,Park,ReservationID) VALUES (?,?,?) ";
     			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
-    			ps.setString(1,rs.getString("Type"));
    		        ps.setString(2,rs.getString("NumberOfVisitors"));
-   		        ps.setString(3,rs.getString("ReservationDate"));
-   		        ps.setString(4,rs.getString("Hour"));
-		   		ps.setString(5,rs.getString("Minute"));
 		   		ps.setString(6,rs.getString("Park"));
-		    	ps.setString(7,rs.getString("Telephone"));
-		   		ps.setString(8,rs.getString("Email"));
 		   		ps.setString(9,rs.getString("ReservationID"));
-		   		ps.setString(10,rs.getString("visitorID"));
-		   		ps.setString(11,rs.getString("isConfirmed"));
-		   		ps.setString(12,rs.getString("InvitedInAdvance"));
-		   		ps.setString(13,rs.getString("payed"));
 		        int rowsAffected = ps.executeUpdate(); 
 		        return rowsAffected > 0; // Return true if the INSERT was successful
-
 				//return true;
 			}catch(Exception ex) {
 				System.out.println("[UserRequestHandler] - failed to checkEntering");

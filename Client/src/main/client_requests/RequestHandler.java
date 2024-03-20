@@ -73,18 +73,14 @@ public class RequestHandler {
 					ClientController.showBill=null;
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
-				}
-				
-				
-				
-		case INSERT_INSTRUCTOR:
-				if (msg.getRequestData() instanceof Integer) {
-					RegisterInstructorFrameController.result=((Integer) msg.getRequestData());
+				}	
+		case REGIST_INSTRUCTOR:
+				if (msg.getRequestData() instanceof String) {
+					RegisterInstructorFrameController.regist=((String) msg.getRequestData());
 					return; 
 				}
 				else {
-					RegisterInstructorFrameController.result=-1;//fail
-					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
+					System.out.println("[RequestHandler] - invalid REGIST_INSTRUCTOR ");
 					return;
 				}
 		case FETCH_RESERVATION_DATA:

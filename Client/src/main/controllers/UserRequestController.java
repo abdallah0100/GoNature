@@ -19,9 +19,15 @@ public class UserRequestController {
 		ClientController.getController().accept(new Message(RequestType.REQUEST_BILL,new Bill(id)));
 	} 
 	
+	/*
 	public static void insertInstructor(String instructor_id,String instructorName,String instructor_email,String instructor_tel) {
 		ClientController.getController().accept(new Message(RequestType.INSERT_INSTRUCTOR,
 												new Visitor(instructor_id,instructorName,instructor_email,instructor_tel)));
+	}*/
+	
+	
+	public static void registInstructor(String id) {
+		ClientController.getController().accept(new Message(RequestType.REGIST_INSTRUCTOR,id));
 	}
 	
 	public static void fetchReportData(String parkName, String month, String year, String type) {

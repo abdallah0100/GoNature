@@ -67,13 +67,13 @@ public class ServerRequestHandler {
 			return;
 			
 			
-		case INSERT_INSTRUCTOR:
-			if(!(msg.getRequestData() instanceof Visitor)) {	
-			respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Visitor)"));
+		case REGIST_INSTRUCTOR:
+			if(!(msg.getRequestData() instanceof String)) {	
+			respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 			return;
 		}
-			int x=UserRequestHandler.instructorExists((Visitor) msg.getRequestData());
-			respondToClient(client, new Message(RequestType.INSERT_INSTRUCTOR, x));
+			String x=UserRequestHandler.activated((String) msg.getRequestData());
+			respondToClient(client, new Message(RequestType.REGIST_INSTRUCTOR, x));
 			return;
 		
 		case FETCH_RESERVATION_DATA:
@@ -196,7 +196,7 @@ public class ServerRequestHandler {
 				return;
 			}
 			String[] s3 = (String[])msg.getRequestData();
-			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,UserRequestHandler.delete(s3)));	
+			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,UserRequestHandler.deleteReservation(s3[0],s3[1])));	
 			return;	
 		case INSERT_TO_TEMP:
 			if (!(msg.getRequestData() instanceof String)) {
@@ -204,7 +204,7 @@ public class ServerRequestHandler {
 				return;
 			}
 			String s4 = (String)msg.getRequestData();
-			respondToClient(client, new Message(RequestType.INSERT_TO_TEMP,UserRequestHandler.insert(s4)));	
+			respondToClient(client, new Message(RequestType.INSERT_TO_TEMP,UserRequestHandler.insertrReservation(s4)));	
 			return;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

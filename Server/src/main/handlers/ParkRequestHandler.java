@@ -53,6 +53,11 @@ public class ParkRequestHandler {
 		}
 	}
 	
+	
+	
+	
+	
+	
 	// insert the request change
 	public static String reqToChange(String []s) {
 		if (MainServer.dbConnection == null) {
@@ -82,6 +87,9 @@ public class ParkRequestHandler {
 	}	
 	
 	
+	
+	
+	
 	//update 2 time or more park manager ask to update value second time or more 
 	public static boolean reqToChange2(String []s) {
 		if (MainServer.dbConnection == null) {
@@ -102,6 +110,12 @@ public class ParkRequestHandler {
 		}
 	}
 	
+	
+	
+	
+	public static boolean updateCurrentAmoun(String parkName,int amount) {
+		return false; //if update the park amount
+	}	
 	
 	
 }
