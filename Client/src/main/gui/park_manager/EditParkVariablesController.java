@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import entities.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,7 +46,7 @@ public class EditParkVariablesController implements Initializable{
 	@FXML
 	private TextField newValue;
 	@FXML
-	public static boolean gap;
+	public static boolean exist=false;
 	public static boolean time;
 	public static boolean limit;
 	
@@ -79,41 +80,22 @@ public class EditParkVariablesController implements Initializable{
 	@FXML
 	public void update(ActionEvent e ) { //first time send request to update values
 	   if (validInput()) {
-		   // to update the gap
-		   if(editingVariable.getText().contains("Gap") && gap)
-		   {
-			   displayMsg("want to update request?", 129, "red");
-			   reSend.setVisible(true);
-			   send.setVisible(false);
-			   return;
-		   }
-		   //to update the Estimated Time
-		   if(editingVariable.getText().contains("Estimated Time") && time)
-		   {
-			   displayMsg("want to update request?", 129, "red");
-			   reSend.setVisible(true);
-			   send.setVisible(false);
-			   return;
-		   }
-		   //to update the Visitor Limit
-		    if(editingVariable.getText().contains("Visitor Limit") && limit)
-		   {
-			   displayMsg("want to update request?", 129, "red");
-			   reSend.setVisible(true);
-			   send.setVisible(false);
-			   return;
-		   }
-		   ParkRequestHandler.requsetChange(insertDataChange());
-		   if(editingVariable.getText().contains("Gap"))
-			   gap=true;  
-		   if(editingVariable.getText().contains("Estimated Time"))
-			   time=true;
-		   if(editingVariable.getText().contains("Visitor Limit"))
-			   limit=true;
-	 	   displayMsg("sent request", 129, "red");
-	 	   System.out.println(requestResult);
-	 	}
-	}
+		 
+		ParkRequestHandler.reportExist(insertDataChange());//if in table
+		if(exist){
+			 send.setVisible(false);
+			 reSend.setVisible(true);
+			 displayMsg("Update request", 129, "red");
+		}
+		else {
+			ParkRequestHandler.requsetChange(insertDataChange());	
+			displayMsg("sent request", 129, "red");
+			System.out.println(requestResult);
+		}
+
+	   }
+}
+	
 	
 	//need to update the not the first time //2+
 	public void reSend(ActionEvent e ) {
@@ -122,10 +104,14 @@ public class EditParkVariablesController implements Initializable{
 		 	   ParkRequestHandler.UpdateData(insertDataChange());
 		 	   displayMsg("sent request", 129, "red");
 		   }
-	}
+	} 
 
 	public boolean validInput() {
-		if (newValue.getText() == null || newValue.getText().length() == 0 || newValue.getText().equals("0")) {
+		if (newValue.getText().equals(currentValue.getText())) {
+			displayMsg("Enter Number Differnt from the Current", 106, "red");
+			return false;
+		}
+		if (newValue.getText() == null || newValue.getText().length() == 0 || newValue.getText().equals("0") || newValue.getText().equals(currentValue.getText())) {
 			displayMsg("Enter a new value to update", 106, "red");
 			return false;
 		}
@@ -150,14 +136,11 @@ public class EditParkVariablesController implements Initializable{
 		msgLabel.setVisible(true);
 	}
 	
-	public String[] insertDataChange()
+	public Report insertDataChange()
 	{
-		String[] reqSer = new String[4];
-		reqSer[0]=parkName.getText();
-		reqSer[1]=ClientController.connectedUser.getUsername();
-		reqSer[2]=editingVariable.getText();
-		reqSer[3]=newValue.getText();
-		return reqSer;
+		Report r=new Report(parkName.getText(),ClientController.connectedUser.getUsername(),
+				editingVariable.getText(),Integer.parseInt(newValue.getText()));
+		return r;
 			    
 	}
 		    

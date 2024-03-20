@@ -167,13 +167,13 @@ public class RequestHandler {
 				return;
 			}
 			
-			
+		case CHECK_IF_REQ_EXIST:		
 		case REQUEST_CHANGE:
-			if (!(msg.getRequestData() instanceof String)) {
+			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid REQUEST_CHANGE response type (String)");
 				return;
 			}
-			EditParkVariablesController.requestResult=(String)(msg.getRequestData());
+			EditParkVariablesController.exist=(Boolean)(msg.getRequestData());
 			return;
 			
 		case UPDATE_REQUEST_CHANGE:
@@ -181,7 +181,7 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid UPDATE_REQUEST_CHANGE response type (Boolean)");
 				return;
 			}
-			
+			return;
 		case ENTER_VISTOR:
 			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid ENTER_VISTOR response type (Boolean)");

@@ -157,23 +157,38 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
 			return; 
 			
-		case REQUEST_CHANGE: 
-			if (!(msg.getRequestData() instanceof String[])) {
-				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data String[]"));
+		
+		case CHECK_IF_REQ_EXIST:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
 				return;
 			}
-			String res[] = (String[])msg.getRequestData();
-			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,ParkRequestHandler.reqToChange(res)));	
+			r = (Report)msg.getRequestData();	
+			respondToClient(client, new Message(RequestType.CHECK_IF_REQ_EXIST,ParkRequestHandler.checkReportRequest(r)));
+			return;
+			
+		case REQUEST_CHANGE: 
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
+				return;
+			}
+			boolean i=false;
+			r = (Report)msg.getRequestData();
+			i=ParkRequestHandler.reqToChange(r);//add it
+			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,i));	
 			return;
 			
 		case UPDATE_REQUEST_CHANGE:
-			if (!(msg.getRequestData() instanceof String[])) {
-				respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE, "invalid request data String[]"));
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE, "invalid request data Report"));
 				return;
 			}
-			String res1[] = (String[])msg.getRequestData();
-			respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE,ParkRequestHandler.reqToChange2(res1)));	
-			return;	
+			r = (Report)msg.getRequestData();
+			r.setReportExist(ParkRequestHandler.reqToChange2(r));
+			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,r.isReportExist()));	
+			return;
+			
+			
 			
 		//exit from park and delete from temp reservatiom	
 		case EXIT_VISITOR:
