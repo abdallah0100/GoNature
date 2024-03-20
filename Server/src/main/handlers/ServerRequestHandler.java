@@ -160,7 +160,7 @@ public class ServerRequestHandler {
 		
 		case CHECK_IF_REQ_EXIST:
 			if (!(msg.getRequestData() instanceof Report)) {
-				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
+				respondToClient(client, new Message(RequestType.CHECK_IF_REQ_EXIST, "invalid request data Report"));
 				return;
 			}
 			r = (Report)msg.getRequestData();	
@@ -185,7 +185,7 @@ public class ServerRequestHandler {
 			}
 			r = (Report)msg.getRequestData();
 			r.setReportExist(ParkRequestHandler.reqToChange2(r));
-			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,r.isReportExist()));	
+			respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE,r.isReportExist()));	
 			return;
 			
 			
