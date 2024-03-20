@@ -9,7 +9,7 @@
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
 }
-#cancelBtn {
+#deleteBtn {
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
@@ -18,7 +18,7 @@
 #updateBtn:hover {
 	-fx-background-color: #808080;
 }
-#cancelBtn:hover {
+#deleteBtn:hover {
 	-fx-background-color: #808080;
 }
 .table-view .column-header .label{

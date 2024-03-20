@@ -51,18 +51,6 @@
             </Separator>
          </children>
       </Pane>
-      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="532.0" layoutY="63.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/go_back.png" />
-         </image>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2982233464717865" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect>
-      </ImageView>
       <Label layoutX="261.0" layoutY="111.0" text="Validation" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -103,5 +91,17 @@
                </color>
             </DropShadow>
          </effect></Label>
+      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="18.0" layoutY="75.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/left-arrow.png" />
+         </image>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="18.08" radius="9.7575" spread="0.76" width="22.95">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ImageView>
    </children>
 </Pane>

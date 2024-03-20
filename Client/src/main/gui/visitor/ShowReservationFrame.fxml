@@ -48,9 +48,10 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button fx:id="cancelBtn" layoutX="482.0" layoutY="354.0" mnemonicParsing="false" onAction="#cancelReservation" prefHeight="31.0" prefWidth="95.0" text="Cancel" textFill="WHITE">
+      <Button fx:id="deleteBtn" layoutX="482.0" layoutY="354.0" mnemonicParsing="false" onAction="#deleteReservation" prefHeight="31.0" prefWidth="95.0" text="Delete" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font></Button>
+      <Label fx:id="msgLabel" layoutX="135.0" layoutY="361.0" prefHeight="17.0" prefWidth="207.0" textFill="#d71717" />
    </children>
 </Pane>

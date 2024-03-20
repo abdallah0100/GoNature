@@ -10,20 +10,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import main.ClientController;
-import main.ClientUI;
 import main.controllers.VisitorRequestController;
 import utilities.SceneController;
-import javafx.util.converter.IntegerStringConverter;
 public class ShowReservationFrameController extends Application implements Initializable{
 	@FXML
 	private TableColumn<Order, String> siteColumn;
@@ -48,7 +47,7 @@ public class ShowReservationFrameController extends Application implements Initi
 	@FXML
 	private Button updateBtn;
 	@FXML
-	private Button cancelBtn;
+	private Button deleteBtn;
 	@FXML
     private TableView<Order> tableView;
 	@FXML
@@ -70,15 +69,20 @@ public class ShowReservationFrameController extends Application implements Initi
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
 									"/main/gui/visitor/ShowReservationFrame.fxml");
 	}
-	//function cancels reservation (removes it from DB) on action to cancelBtn
-	public void cancelReservation(ActionEvent e) throws Exception {
+	//function deletes reservation (removes it from DB) on action to deleteBtn
+	public void deleteReservation(ActionEvent e) throws Exception {
 		
 	}
 	public void updateReservation(ActionEvent e) throws Exception {
 	    if (order != null) {	  
 	    	 VisitorRequestController.updateReservation(order);
+	    	 if (VisitorRequestController.finishedUpdatingReservation) {
+	    		 System.out.println("[UpdateReservationFrameController] - finished Making Reservation");
+				}
+				else {
+					System.out.println("[UpdateReservationFrameController] - did not finished Making Reservation");}
 	    } else {
-	    	displayError("Please select a row");
+	    	displayError("Please select and edit to update a row");
 	    }
 	    tableView.getSelectionModel().clearSelection();
 	}
@@ -121,26 +125,62 @@ public class ShowReservationFrameController extends Application implements Initi
 				System.out.println("[ShowReservationFrameController] - did not finished Showing Reservations");		
 			}	
 		} 
-		editData();
-		
-		 
+		editData();	 
 	}
 	public void editData() {
-		phoneColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
-		phoneColumn.setOnEditCommit(event ->{
-			
+	    phoneColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
+	    phoneColumn.setOnEditCommit(event ->{
+	    	order = event.getTableView().getItems().get(event.getTablePosition().getRow());
+	        String oldValue = order.getPhone();
+	        String newValue = event.getNewValue();
+	        
+	        String phonePattern = "^05\\d{8}$";
+	        if (!newValue.matches(phonePattern)) {
+	            displayError("Please enter a valid phone number");
+	            return;
+	        }
+	        
+	        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+	        confirmationAlert.setHeaderText("Confirm Phone Number Change");
+	        confirmationAlert.setContentText("Do you want to change the phone number from '" + oldValue + "' to '" + newValue + "'?");
+	        confirmationAlert.getDialogPane().setPrefWidth(500);
+	        confirmationAlert.showAndWait().ifPresent(response -> {
+	            if (response == ButtonType.OK) {
+	                order.setphone(newValue);
+	                msgLabel.setVisible(false);
+	            } else {
+	                // Revert changes if canceled
+	                event.getTableView().refresh();
+	            }
+	        });
+	    });
+
+	    emailColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
+	    emailColumn.setOnEditCommit(event ->{
 	        order = event.getTableView().getItems().get(event.getTablePosition().getRow());
-	        order.setphone(event.getNewValue()); 
-	        System.out.println(order.getPhone() + "'s Name was updated to "+ event.getNewValue() +" at row "+ (event.getTablePosition().getRow() + 1));
-	      });
-		emailColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
-		emailColumn.setOnEditCommit(event ->{
-			
-	        order = event.getTableView().getItems().get(event.getTablePosition().getRow());
-	        order.setEmail(event.getNewValue()); 
-	        System.out.println(order.getEmail() + "'s Name was updated to "+ event.getNewValue() +" at row "+ (event.getTablePosition().getRow() + 1));
-	      });
-	
+	        String oldValue = order.getEmail();
+	        String newValue = event.getNewValue();
+
+	        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+	        if (!newValue.matches(emailPattern)) {
+	            displayError("Please enter a valid email address");
+	            return;
+	        }
+	        
+	        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+	        confirmationAlert.setHeaderText("Confirm Email Address Change");
+	        confirmationAlert.setContentText("Do you want to change the email address from '" + oldValue + "' to '" + newValue + "'?");
+	        confirmationAlert.getDialogPane().setPrefWidth(500);
+	        confirmationAlert.showAndWait().ifPresent(response -> {
+	            if (response == ButtonType.OK) {
+	                order.setEmail(newValue);
+	                msgLabel.setVisible(false);
+	            } else {
+	                // Revert changes if canceled
+	                event.getTableView().refresh();
+	            }
+	        });
+	    });
 	}
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
