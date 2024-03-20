@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.MonitoringFrameControlleroring">
+   <children>
+      <Label layoutX="179.0" layoutY="93.0" text="ID:" />
+      <Button layoutX="194.0" layoutY="243.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <Button layoutX="300.0" layoutY="243.0" mnemonicParsing="false" onAction="#enter" text="Enter" />
+      <TextField fx:id="visitorIdTxt" layoutX="211.0" layoutY="89.0" />
+      <Label fx:id="msgLabel" layoutX="246.0" layoutY="192.0" text="Label" visible="false" />
+   </children>
+</Pane>

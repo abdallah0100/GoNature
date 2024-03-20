@@ -2,7 +2,13 @@
 	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
 }
 
+ImageView{
+	-fx-cursor:hand;
+}
 
+#visitorLabel{
+	-fx-cursor:hand;
+}
 
 #makeReservation{
 	-fx-background-color: #219a6a;

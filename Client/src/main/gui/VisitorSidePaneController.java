@@ -1,5 +1,4 @@
 package main.gui;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,22 +11,20 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
-import main.controllers.VisitorRequestController;
 import utilities.SceneController;
+import javafx.scene.input.MouseEvent;
 
 
 public class VisitorSidePaneController extends Application implements Initializable{
 	
 	@FXML
-	private  Label visitorIdLabel;
+	private  Label visitorLabel;
 	@FXML
-	private  Label existingVisitor;
+	private  Label visitorIdLabel;
 	@FXML
 	private Button makeReservation;
 	@FXML
 	private Button showReservation;
-	@FXML
-	private Button updateReservation;
 	String id;
 	
 	
@@ -45,14 +42,12 @@ public class VisitorSidePaneController extends Application implements Initializa
 	public void initialize(URL location, ResourceBundle resources) {
 		if (ClientController.connectedVisitor != null) {
 			visitorIdLabel.setText(ClientController.connectedVisitor.getId());
-			existingVisitor.setText(ClientController.connectedVisitor.isFoundInDB() + "");
 			if(!(ClientController.connectedVisitor.isFoundInDB())) {
-				updateReservation.setDisable(true);
 				showReservation.setDisable(true);
-				makeReservation.setDisable(true);
+				//makeReservation.setDisable(true);
 			}
 		}
-		
+	
 	}
 	
 	//function to makeReservation
@@ -67,14 +62,12 @@ public class VisitorSidePaneController extends Application implements Initializa
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
 	}
 	
-	//function to updateReservation
-	public void updateReservation(ActionEvent e) {
-		SceneController scene = new SceneController();
-		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/UpdateReservationFrame.fxml");
-	
-	}
-	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	@FXML
+	public void homePage(MouseEvent event) {
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/HomePage.fxml");
 	}
 }

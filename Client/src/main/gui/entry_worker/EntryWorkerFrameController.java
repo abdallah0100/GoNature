@@ -24,8 +24,7 @@ public class EntryWorkerFrameController extends Application{
 	 public static void main(String args[]) {
 		 launch(args);
 	 }
-	 
-	 
+	  
 	/**
     * @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization
@@ -37,7 +36,7 @@ public class EntryWorkerFrameController extends Application{
 							"/main/gui/entry_worker/EntryWorkerFrame.fxml");
 	}
 	
-	
+	 
 	/***
 	 * This method responsible for hiding EntryWorker window
 	 * after clicking on View Bill button and
@@ -53,6 +52,11 @@ public class EntryWorkerFrameController extends Application{
 	public void createReservations(ActionEvent event) {
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+	}
+	
+	public void monitoring(ActionEvent event) {
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/MonitoringFrame.fxml");
 	}
 
 }

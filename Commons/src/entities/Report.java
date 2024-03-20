@@ -21,6 +21,10 @@ public class Report implements Serializable{
 	private String reportType;
 	private boolean reportExist;
 	
+	
+	private String variableToChange;
+	private int newValue;
+	
 	public Report(String park, String month, String year, String madeBy, String type) {
 		this.setPark(park);
 		this.setMonth(month);
@@ -28,6 +32,14 @@ public class Report implements Serializable{
 		this.madeBy = madeBy;
 		this.reportExist = false;
 		this.reportType = type;
+	}
+	
+	//change request data
+	public Report(String park, String madeBy, String variableToChange, int newValue) {
+		this.setPark(park);
+		this.madeBy = madeBy;
+		this.newValue = newValue;
+		this.variableToChange=variableToChange;
 	}
 
 	public String getMonth() {
@@ -96,6 +108,22 @@ public class Report implements Serializable{
 
 	public String getReportType() {
 		return reportType;
+	}
+
+	public String getVariableToChange() {
+		return variableToChange;
+	}
+
+	public void setVariableToChange(String variableToChange) {
+		this.variableToChange = variableToChange;
+	}
+
+	public int getNewValue() {
+		return newValue;
+	}
+
+	public void setNewValue(int newValue) {
+		this.newValue = newValue;
 	}
 	
 	

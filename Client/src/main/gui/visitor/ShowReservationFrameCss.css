@@ -9,40 +9,22 @@
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
 }
-
+#deleteBtn {
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
 
 #updateBtn:hover {
 	-fx-background-color: #808080;
 }
-
+#deleteBtn:hover {
+	-fx-background-color: #808080;
+}
 .table-view .column-header .label{
-	-fx-text-fill:white;
+	-fx-text-fill:black;
 	-fx-font-size:13px;
 	-fx-font-family:'arial';
 }
 
-
-#siteColumn{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
-
-
-#dateColumn{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
-
-
-#timeColumn{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
-
-
-#typeColumn{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
-
-
-#visitorNumberColumn{
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-}
 

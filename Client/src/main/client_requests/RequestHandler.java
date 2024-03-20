@@ -33,7 +33,7 @@ public class RequestHandler {
 			break;
 		case GENERAL_RESPOND:
 			System.out.println("[GoNatureClient] - ServerResponse: " + msg.getRequestData());
-			break;
+			break; 
 		case VALIDATE_VISITOR:
 			if (msg.getRequestData() instanceof Visitor)
 				ClientController.connectedVisitor = (Visitor) msg.getRequestData();
@@ -42,7 +42,7 @@ public class RequestHandler {
 				return;
 			} 
 			VisitorRequestController.finishedValidating = true;
-			break;
+			break;  
 		case LOGIN_USER:
 				if (msg.getRequestData() instanceof User) {
 					ClientController.connectedUser = (User) msg.getRequestData();
@@ -66,9 +66,7 @@ public class RequestHandler {
 			else {
 				System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
 				return;
-			}
-				
-				
+			}	
 		case REQUEST_BILL:
 				if (msg.getRequestData() instanceof Bill) {
 					ClientController.showBill=(Bill) msg.getRequestData();
@@ -78,18 +76,14 @@ public class RequestHandler {
 					ClientController.showBill=null;
 					System.out.println("[RequestHandler] - invalid SHOW_BILL response");
 					return;
-				}
-				
-				
-				
-		case INSERT_INSTRUCTOR:
-				if (msg.getRequestData() instanceof Integer) {
-					RegisterInstructorFrameController.result=((Integer) msg.getRequestData());
+				}	
+		case REGIST_INSTRUCTOR:
+				if (msg.getRequestData() instanceof String) {
+					RegisterInstructorFrameController.regist=((String) msg.getRequestData());
 					return; 
 				}
 				else {
-					RegisterInstructorFrameController.result=-1;//fail
-					System.out.println("[RequestHandler] - invalid INSERT_INSTRUCTOR response");
+					System.out.println("[RequestHandler] - invalid REGIST_INSTRUCTOR ");
 					return;
 				}
 		case FETCH_RESERVATION_DATA:
@@ -175,6 +169,37 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid SHOW_CANCELLATIONS_REPORTS response");
 				return;
 			}
+			
+		case CHECK_IF_REQ_EXIST:		
+		case REQUEST_CHANGE:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid REQUEST_CHANGE response type (String)");
+				return;
+			}
+			EditParkVariablesController.exist=(Boolean)(msg.getRequestData());
+			return;
+			
+		case UPDATE_REQUEST_CHANGE:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid UPDATE_REQUEST_CHANGE response type (Boolean)");
+				return;
+			}
+			return;
+		case ENTER_VISTOR:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid ENTER_VISTOR response type (Boolean)");
+				return;
+			}
+			ClientController.monitoring=(Boolean)msg.getRequestData();
+			return;
+		case EXIT_VISITOR:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - invalid EXIT_VISITOR response type (Boolean)");
+				return;
+			}
+			ClientController.monitoring=(Boolean)msg.getRequestData();
+			return;
+			
 		case CONFIRM_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
 				System.out.println("[RequestHandler] - invalid server response");
@@ -207,7 +232,7 @@ public class RequestHandler {
 			break;
 		
 		case UPDATE_RESERVATION:
-			if (msg.getRequestData() instanceof Order[]) {
+			if (msg.getRequestData() instanceof Order) {
 				ClientController.updatedReservation = (Order) msg.getRequestData();
 				VisitorRequestController.finishedUpdatingReservation = true;
 				return;
