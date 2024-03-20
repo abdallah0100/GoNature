@@ -40,8 +40,8 @@ public class ReservationRequestHandler {
 			pr.setString(2, o.getDate());
 			pr.setString(3, o.getParkName());
 			pr.setString(4, o.getOrderID());
-			pr.setString(5, "1");
-			pr.setString(6, "0");
+			pr.setString(5, o.isCancelRequest() ? "1" : "0");
+			pr.setString(6, o.isCancelRequest() ? "0" : "1");
 			
 			return pr.executeUpdate() > 0;
 		}catch(Exception ex) {

@@ -154,6 +154,7 @@ public class VisitorHomePageController implements Initializable{
 		if (orders != null && orders.size() != 0 && orders.get(index) != null) {
 			Order selectedOrder = orders.get(index);
 			if (selectedOrder != null) {
+				selectedOrder.setCancelRequest(true);
 				ReservationController.sendCancelReservation(selectedOrder);
 				
 				for (Order o : ClientController.reservationshowed)
