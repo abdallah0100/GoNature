@@ -187,7 +187,17 @@ public class ServerRequestHandler {
 			String[] listToReturn3 = NumOfVisitorsReportHandler.getNumOfVisitors((String[])msg.getRequestData());
 			respondToClient(client, new Message(RequestType.SHOW_NUM_OF_VISITORS_REPORT,listToReturn3));
 		return;
-	
+		case CANCEL_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
+			    return;
+			}
+			o = (Order) msg.getRequestData();
+			boolean canceled = ReservationRequestHandler.deleteReservation("reservations", o.getOrderID());
+			boolean addedToCanceled = ReservationRequestHandler.addToCanceledReports(o);
+			o.setCanceled(addedToCanceled && canceled);
+			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

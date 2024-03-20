@@ -10,20 +10,16 @@ import main.gui.visitor.VisitorHomePageController;
 
 public class VisitorReminder implements Runnable{
 
-	private Order[] visitorOrders;
+	private static Order[] visitorOrders;
 	private static int messageCnt = 0;
-	private static ArrayList<Order> orders= new ArrayList<>();
 	private static ArrayList<Order> ordersToConfirm;
 	
 	@Override
 	public void run() {
 		VisitorRequestController.showReservations(ClientController.connectedVisitor.getId());
-		visitorOrders = ClientController.reservationshowed;
-		messageCnt = 0;
-		for (Order o : visitorOrders)
-			orders.add(o);
-
-		while(orders.size() > 0) {
+		updateOrders();
+		
+		while(visitorOrders.length > 0) {
 			updateOrders();
 			if (messageCnt > 0)
 				VisitorHomePageController.publicNewMsgPane.setVisible(true);
@@ -61,9 +57,10 @@ public class VisitorReminder implements Runnable{
 		return messageCnt;
 	}
 	public static void updateOrders() {
+		visitorOrders = ClientController.reservationshowed;
 		ordersToConfirm = new ArrayList<>();
 		messageCnt = 0;
-		for (Order o : orders)
+		for (Order o : visitorOrders)
 			if (timeArrived(o) && !o.getIsConfirmed()) {
 				ordersToConfirm.add(o);
 				messageCnt++;

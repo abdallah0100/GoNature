@@ -18,6 +18,7 @@ public class Order implements Serializable{
 	private boolean isConfirmed;
 	private boolean invitedInAdvance;
 	private boolean isPayed;
+	private boolean canceled;
 	
 	private String orderID;
 	private String time;
@@ -144,5 +145,13 @@ public class Order implements Serializable{
 		list.add(email);
 		list.add(orderID);
 		return list;
+	}
+
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
 	}	
 }
