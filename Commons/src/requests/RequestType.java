@@ -26,8 +26,7 @@ public enum RequestType {
 	CONFIRM_RESERVATION(25),
 	UPDATE_RESERVATION(26),
 	SHOW_NUM_OF_VISITORS_REPORT(27),
-	CHECK_IF_REQ_EXIST(28);
-	
+	CHECK_IF_REQ_EXIST(28);	
 	private int requestId;
 	
 	RequestType(int i) {

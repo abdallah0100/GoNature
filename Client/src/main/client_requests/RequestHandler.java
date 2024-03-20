@@ -213,7 +213,7 @@ public class RequestHandler {
 			}
 		break;
 		case UPDATE_RESERVATION:
-			if (msg.getRequestData() instanceof Order[]) {
+			if (msg.getRequestData() instanceof Order) {
 				ClientController.updatedReservation = (Order) msg.getRequestData();
 				VisitorRequestController.finishedUpdatingReservation = true;
 				return;

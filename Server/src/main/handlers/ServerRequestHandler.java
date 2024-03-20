@@ -165,17 +165,17 @@ public class ServerRequestHandler {
 			}
 			r = (Report)msg.getRequestData();	
 			respondToClient(client, new Message(RequestType.CHECK_IF_REQ_EXIST,ParkRequestHandler.checkReportRequest(r)));
-			return;
+			return; 
 			
-		case REQUEST_CHANGE: 
-			if (!(msg.getRequestData() instanceof Report)) {
-				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
-				return;
+		case CONFIRM_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
+			    return;
 			}
-			boolean i=false;
-			r = (Report)msg.getRequestData();
-			i=ParkRequestHandler.reqToChange(r);//add it
-			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,i));	
+			o = (Order)msg.getRequestData();
+			boolean confirmed = VisitorRequestHandler.admitReservation(o);
+			o.setIsConfirmed(confirmed);
+			respondToClient(client, new Message(RequestType.CONFIRM_RESERVATION, o));
 			return;
 			
 		case UPDATE_REQUEST_CHANGE:
@@ -188,6 +188,16 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,r.isReportExist()));	
 			return;
 			
+		case REQUEST_CHANGE: 
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
+				return;
+			}
+			boolean i=false;
+			r = (Report)msg.getRequestData();
+			i=ParkRequestHandler.reqToChange(r);//add it
+			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,i));	
+			return;
 			
 			
 		//exit from park and delete from temp reservatiom	
@@ -241,17 +251,6 @@ public class ServerRequestHandler {
 			else
 				respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
 			return;
-			
-			case CONFIRM_RESERVATION:
-				if (!(msg.getRequestData() instanceof Order)) {
-				    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
-				    return;
-				}
-				o = (Order)msg.getRequestData();
-				boolean confirmed = VisitorRequestHandler.admitReservation(o);
-				o.setIsConfirmed(confirmed);
-				respondToClient(client, new Message(RequestType.CONFIRM_RESERVATION, o));
-				return;
 				
 			case UPDATE_RESERVATION:
 				if (!(msg.getRequestData() instanceof Order)) {

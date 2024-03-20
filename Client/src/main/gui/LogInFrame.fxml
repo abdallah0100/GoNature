@@ -51,14 +51,14 @@
             </Separator>
          </children>
       </Pane>
-      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="532.0" layoutY="69.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="14.0" layoutY="69.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/go_back.png" />
+            <Image url="@images/left-arrow.png" />
          </image>
          <effect>
-            <DropShadow>
+            <DropShadow blurType="GAUSSIAN" spread="0.65">
                <color>
-                  <Color red="0.2982233464717865" blue="1.0" />
+                  <Color red="1.0" green="1.0" blue="1.0" />
                </color>
             </DropShadow>
          </effect>
