@@ -26,8 +26,6 @@ public class VisitorSidePaneController extends Application implements Initializa
 	private Button makeReservation;
 	@FXML
 	private Button showReservation;
-	@FXML
-	private Button updateReservation;
 	String id;
 	
 	
@@ -47,7 +45,6 @@ public class VisitorSidePaneController extends Application implements Initializa
 			visitorIdLabel.setText(ClientController.connectedVisitor.getId());
 			existingVisitor.setText(ClientController.connectedVisitor.isFoundInDB() + "");
 			if(!(ClientController.connectedVisitor.isFoundInDB())) {
-				updateReservation.setDisable(true);
 				showReservation.setDisable(true);
 				makeReservation.setDisable(true);
 			}
@@ -67,14 +64,11 @@ public class VisitorSidePaneController extends Application implements Initializa
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
 	}
 	
-	//function to updateReservation
-	public void updateReservation(ActionEvent e) {
-		SceneController scene = new SceneController();
-		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/UpdateReservationFrame.fxml");
-	
-	}
-	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	public void homePage(ActionEvent e) {
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/HomePage.fxml");
 	}
 }

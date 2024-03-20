@@ -158,7 +158,7 @@ public class ServerRequestHandler {
 			return;
 		case UPDATE_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
 			}
 			Order uo = VisitorRequestHandler.handleUpdateReservationRequest((Order)msg.getRequestData());

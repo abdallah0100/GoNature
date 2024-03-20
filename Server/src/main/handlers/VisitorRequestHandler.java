@@ -135,6 +135,7 @@ public class VisitorRequestHandler {
         ps.setBoolean(9, o.getIsConfirmed());
         ps.setBoolean(10, o.getInvitedInAdvance());
         ps.setBoolean(11, o.getIsPayed());
+        ps.setInt(12, Integer.parseInt(o.getOrderID()));
         int rowsUpdated = ps.executeUpdate();
         if (rowsUpdated == 1) {
             return o;
