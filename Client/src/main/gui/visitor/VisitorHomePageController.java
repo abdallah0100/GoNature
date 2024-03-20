@@ -43,6 +43,7 @@ public class VisitorHomePageController implements Initializable{
 	
 	
 	public static Pane publicNewMsgPane;
+	private boolean select = true;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -68,6 +69,9 @@ public class VisitorHomePageController implements Initializable{
 			confirmationLabel.setText("You have a reservation in "+ordersToConfirm.get(0).getParkName()+" at " + ordersToConfirm.get(0).getTime());
 			confirmationPane.setVisible(true);
 			msgSelector.setVisible(false);
+			admitBtn.setVisible(true);
+			cancelBtn.setVisible(true);
+			confirmResultLabel.setVisible(false);
 		}else {
 			confirmationPane.setVisible(false);
 			msgSelector.setVisible(false);
@@ -81,19 +85,24 @@ public class VisitorHomePageController implements Initializable{
 	}
 	
 	public void selectReservation(ActionEvent event) {
-		ArrayList<Order> orders = VisitorReminder.getOrdersToConfirm();
-		if (orders != null && orders.size() != 0) {
+		if (select) {
+			ArrayList<Order> orders = VisitorReminder.getOrdersToConfirm();
 			int index = msgSelector.getItems().indexOf(msgSelector.getValue());
-			if (index >= 0 && index < orders.size() && orders.get(index) != null) {
-				Order selectedOrder = VisitorReminder.getOrdersToConfirm().get(index);
-				
-				confirmationLabel.setText("You have a reservation in "+selectedOrder.getParkName()+" at " + selectedOrder.getTime());
-				confirmationPane.setVisible(true);
-				admitBtn.setVisible(true);
-				cancelBtn.setVisible(true);
-				confirmResultLabel.setVisible(false);
+			if ((orders != null && orders.size() == 1) || index < 0)
+				index = 0;
+			if (orders != null && orders.size() != 0 && orders.get(index) != null) {
+				Order selectedOrder = orders.get(index);
+					if (selectedOrder != null) {
+						confirmationLabel.setText("You have a reservation in "+selectedOrder.getParkName()+" at " + selectedOrder.getTime());
+						confirmationPane.setVisible(true);
+						admitBtn.setVisible(true);
+						cancelBtn.setVisible(true);
+						confirmResultLabel.setVisible(false);
+					}
 			}
 		}
+		else 
+			select = true;
 	}
 	
 	@FXML
@@ -109,14 +118,19 @@ public class VisitorHomePageController implements Initializable{
 				for (Order o : ClientController.reservationshowed) {
 					if (o.getOrderID().equals(selectedOrder.getOrderID())){
 						if (o.getIsConfirmed()) {
+							if (msgSelector.getItems() != null && msgSelector.getItems().size() != 0) {
+								select = false;
+								msgSelector.getItems().remove(index);
+								select = false;
+								msgSelector.setValue("");
+							}
+							
 							confirmResultLabel.setText("Order has been admitted");
 							confirmResultLabel.setVisible(true);
 							admitBtn.setVisible(false);
 							cancelBtn.setVisible(false);
 							
 							msgAmount.setText(VisitorReminder.getMsgcount() + "");
-							if (msgSelector.getItems() != null)
-								msgSelector.getItems().remove(index);
 		
 							if (VisitorReminder.getMsgcount() == 0)
 								newMsgPane.setVisible(false);
@@ -133,7 +147,39 @@ public class VisitorHomePageController implements Initializable{
 	
 	@FXML
 	public void cancel(ActionEvent event) {
-		
+		ArrayList<Order> orders = VisitorReminder.getOrdersToConfirm();
+		int index = msgSelector.getItems().indexOf(msgSelector.getValue());
+		if (orders != null && orders.size() == 1)
+			index = 0;
+		if (orders != null && orders.size() != 0 && orders.get(index) != null) {
+			Order selectedOrder = orders.get(index);
+			if (selectedOrder != null) {
+				selectedOrder.setCancelRequest(true);
+				ReservationController.sendCancelReservation(selectedOrder);
+				
+				for (Order o : ClientController.reservationshowed)
+					if (o.getOrderID().equals(selectedOrder.getOrderID())) {
+						confirmResultLabel.setText("  Error canceling order");
+						confirmResultLabel.setVisible(true);
+						return;
+					}
+				if (msgSelector.getItems() != null && msgSelector.getItems().size() != 0) {
+					select = false;
+					msgSelector.getItems().remove(index);
+					select = false;
+					msgSelector.setValue("");
+				}
+				confirmResultLabel.setText("Order has been canceled");
+				confirmResultLabel.setVisible(true);
+				admitBtn.setVisible(false);
+				cancelBtn.setVisible(false);
+				
+				msgAmount.setText(VisitorReminder.getMsgcount() + "");
+
+				if (VisitorReminder.getMsgcount() == 0)
+					newMsgPane.setVisible(false);
+			}
+		}
 	}
 	
 }

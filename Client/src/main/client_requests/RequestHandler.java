@@ -1,10 +1,12 @@
 package main.client_requests;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import entities.Park;
-import entities.Order;
+
 import entities.Bill;
 import entities.CancelledReservation;
+import entities.Order;
+import entities.Park;
 import entities.Report;
 import entities.UsageReport;
 import entities.User;
@@ -24,6 +26,7 @@ import requests.Message;
 public class RequestHandler {
 	
 	public static void handleIncomingRequests(Message msg) {
+		Order o;
 		switch(msg.getRequestEnumType()) {
 		case REQUEST_ERROR:
 			System.out.println("[GoNatureClient] - Server responded with an error: " + msg.getRequestData());
@@ -204,14 +207,30 @@ public class RequestHandler {
 			}
 			Order temp = (Order)msg.getRequestData();
 			if (temp.getIsConfirmed()) {
-				for (Order o : ClientController.reservationshowed)
-					if (o.getOrderID().equals(temp.getOrderID())) {
-						o.setIsConfirmed(true);
+				for (Order o1 : ClientController.reservationshowed)
+					if (o1.getOrderID().equals(temp.getOrderID())) {
+						o1.setIsConfirmed(true);
 						VisitorReminder.updateOrders();
 						break;
 					}
 			}
 		break;
+		case CANCEL_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				System.out.println("[RequestHandler] - invalid server response");
+				return;
+			}
+			o = (Order)msg.getRequestData();
+			if (o.isCanceled()) {
+				ArrayList<Order> arr = new ArrayList<>();
+				for (Order o2 : ClientController.reservationshowed)
+					if (!o2.getOrderID().equals(o.getOrderID()))
+						arr.add(o2);
+				ClientController.reservationshowed = arr.toArray(new Order[arr.size()]);
+				VisitorReminder.updateOrders();
+			}			
+			break;
+		
 		case UPDATE_RESERVATION:
 			if (msg.getRequestData() instanceof Order) {
 				ClientController.updatedReservation = (Order) msg.getRequestData();

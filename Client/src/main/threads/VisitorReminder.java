@@ -5,25 +5,22 @@ import java.util.Calendar;
 
 import entities.Order;
 import main.ClientController;
+import main.controllers.ReservationController;
 import main.controllers.VisitorRequestController;
 import main.gui.visitor.VisitorHomePageController;
 
 public class VisitorReminder implements Runnable{
 
-	private Order[] visitorOrders;
+	private static Order[] visitorOrders;
 	private static int messageCnt = 0;
-	private static ArrayList<Order> orders= new ArrayList<>();
 	private static ArrayList<Order> ordersToConfirm;
 	
 	@Override
 	public void run() {
 		VisitorRequestController.showReservations(ClientController.connectedVisitor.getId());
-		visitorOrders = ClientController.reservationshowed;
-		messageCnt = 0;
-		for (Order o : visitorOrders)
-			orders.add(o);
-
-		while(orders.size() > 0) {
+		updateOrders();
+		
+		while(visitorOrders.length > 0) {
 			updateOrders();
 			if (messageCnt > 0)
 				VisitorHomePageController.publicNewMsgPane.setVisible(true);
@@ -61,14 +58,42 @@ public class VisitorReminder implements Runnable{
 		return messageCnt;
 	}
 	public static void updateOrders() {
+		Calendar rightNow = Calendar.getInstance();
+		visitorOrders = ClientController.reservationshowed;
 		ordersToConfirm = new ArrayList<>();
 		messageCnt = 0;
-		for (Order o : orders)
+		for (Order o : visitorOrders)
 			if (timeArrived(o) && !o.getIsConfirmed()) {
-				ordersToConfirm.add(o);
-				messageCnt++;
+				if (!checkForMsgTimeOut(o)) {
+					ordersToConfirm.add(o);
+					messageCnt++;
+					if (!o.isSentMsg()) {
+						o.setSentMsg(true);
+						o.setMsgHour(rightNow.get(Calendar.HOUR_OF_DAY));
+						o.setMsgMinute(rightNow.get(Calendar.MINUTE));
+					}
+				}else {
+					o.setCancelRequest(false);
+					ReservationController.sendCancelReservation(o);
+				}
 			}
 	}
+	
+	public static boolean checkForMsgTimeOut(Order o) {
+		if (!o.isSentMsg())
+			return false;
+		
+		Calendar rightNow = Calendar.getInstance();
+		int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+		int minute = rightNow.get(Calendar.MINUTE);
+		
+		if (hour - o.getMsgHour() > 2)
+			return true;
+		else if (hour - o.getMsgHour() == 2)
+			return minute >= o.getMsgMinute();
+		return false;
+	}
+	
 	public static ArrayList<Order> getOrdersToConfirm(){
 		updateOrders();
 		return ordersToConfirm;
