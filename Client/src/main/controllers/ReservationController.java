@@ -11,4 +11,8 @@ public class ReservationController {
 		ClientController.getController().accept(new Message(RequestType.CONFIRM_RESERVATION, o));
 	}
 	
+	public static void sendCancelReservation(Order o) {
+		ClientController.getController().accept(new Message(RequestType.CANCEL_RESERVATION, o));
+	}
+	
 }

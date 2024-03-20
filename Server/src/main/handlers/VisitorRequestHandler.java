@@ -116,33 +116,31 @@ public class VisitorRequestHandler {
 		    return ordersArray;
 			
 		}
-		public static Order handleUpdateReservationRequest(Order o) {
-			 try {
-	        String query = "UPDATE reservations " +
-	                       "SET Type = ?, NumberOfVisitors = ?, ReservationDate = ?, Hour = ?, Minute = ?, Park = ?, Telephone = ?, Email = ?, isConfirmed = ?, InvitedInAdvance = ?, payed = ? " +
-	                       "WHERE ReservationID = ?";
-	        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
-	        ps.setString(1, o.getOrderType());
-	        ps.setInt(2, o.getNumOfVisitors());
-	        ps.setString(3, o.getDate());
-	        ps.setString(4, o.getHour());
-	        ps.setString(5, o.getMinute());
-	        ps.setString(6, o.getParkName());
-	        ps.setString(7, o.getPhone());
-	        ps.setString(8, o.getEmail());
-	        ps.setBoolean(9, o.getIsConfirmed());
-	        ps.setBoolean(10, o.getInvitedInAdvance());
-	        ps.setBoolean(11, o.getIsPayed());
-	        int rowsUpdated = ps.executeUpdate();
-	        if (rowsUpdated == 1) {
-	            return o;
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	    return null;
-
-		}
+	public static Order handleUpdateReservationRequest(Order o) {
+		 try {
+        String query = "UPDATE reservations " +
+                       "SET Type = ?, NumberOfVisitors = ?, ReservationDate = ?, Hour = ?, Minute = ?, Park = ?, Telephone = ?, Email = ?, isConfirmed = ?, InvitedInAdvance = ?, payed = ? " +
+                       "WHERE ReservationID = ?";
+        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
+        ps.setString(1, o.getOrderType());
+        ps.setInt(2, o.getNumOfVisitors());
+        ps.setString(3, o.getDate());
+        ps.setString(4, o.getHour());
+        ps.setString(5, o.getMinute());
+        ps.setString(6, o.getParkName());
+        ps.setString(7, o.getPhone());
+        ps.setString(8, o.getEmail());
+        ps.setBoolean(9, o.getIsConfirmed());
+        ps.setBoolean(10, o.getInvitedInAdvance());
+        ps.setBoolean(11, o.getIsPayed());
+        ps.setInt(12, Integer.parseInt(o.getOrderID()));
+        int rowsUpdated = ps.executeUpdate();
+        if (rowsUpdated == 1) {
+            return o;}
+		} catch (SQLException e) {
+        e.printStackTrace();} 
+         return null;
+    }
 	
 	public static boolean admitReservation(Order o) {
 		if (MainServer.dbConnection == null) {

@@ -18,6 +18,12 @@ public class Order implements Serializable{
 	private boolean isConfirmed;
 	private boolean invitedInAdvance;
 	private boolean isPayed;
+	private boolean canceled;
+	private boolean cancelRequest;
+	
+	private boolean sentMsg;
+	private int msgHour;
+	private int msgMinute;
 	
 	private String orderID;
 	private String time;
@@ -170,5 +176,45 @@ public class Order implements Serializable{
 		list.add(email);
 		list.add(orderID);
 		return list;
+	}
+
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
+	}
+
+	public int getMsgHour() {
+		return msgHour;
+	}
+
+	public void setMsgHour(int msgHour) {
+		this.msgHour = msgHour;
+	}
+
+	public int getMsgMinute() {
+		return msgMinute;
+	}
+
+	public void setMsgMinute(int msgMinute) {
+		this.msgMinute = msgMinute;
+	}
+
+	public boolean isSentMsg() {
+		return sentMsg;
+	}
+
+	public void setSentMsg(boolean sentMsg) {
+		this.sentMsg = sentMsg;
+	}
+
+	public boolean isCancelRequest() {
+		return cancelRequest;
+	}
+
+	public void setCancelRequest(boolean cancelRequest) {
+		this.cancelRequest = cancelRequest;
 	}	
 }

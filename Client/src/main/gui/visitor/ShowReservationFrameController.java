@@ -10,17 +10,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import main.ClientController;
-import main.ClientUI;
 import main.controllers.VisitorRequestController;
 import utilities.SceneController;
-
 public class ShowReservationFrameController extends Application implements Initializable{
 	@FXML
 	private TableColumn<Order, String> siteColumn;
@@ -41,20 +43,22 @@ public class ShowReservationFrameController extends Application implements Initi
 	@FXML
 	private TableColumn<Order, String> payedColumn;
 	@FXML
+	private TableColumn<Order, String> orderIDColumn;
+	@FXML
 	private Button updateBtn;
 	@FXML
+	private Button deleteBtn;
+	@FXML
     private TableView<Order> tableView;
+	@FXML
+	private Label msgLabel;
 	String id;
-	Order selectedOrder;
-	public static boolean updatedBtn = false;
-
-
+	Order order;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
-
 	/**
 	* @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization
@@ -65,16 +69,20 @@ public class ShowReservationFrameController extends Application implements Initi
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
 									"/main/gui/visitor/ShowReservationFrame.fxml");
 	}
-
+	//function deletes reservation (removes it from DB) on action to deleteBtn
+	public void deleteReservation(ActionEvent e) throws Exception {
+		
+	}
 	public void updateReservation(ActionEvent e) throws Exception {
-		updatedBtn = true;
-	    selectedOrder = tableView.getSelectionModel().getSelectedItem();
-	    if (selectedOrder != null) {	  
-	    	//
-	    	SceneController scene = new SceneController();
-	        scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+	    if (order != null) {	  
+	    	 VisitorRequestController.updateReservation(order);
+	    	 if (VisitorRequestController.finishedUpdatingReservation) {
+	    		 System.out.println("[UpdateReservationFrameController] - finished Making Reservation");
+				}
+				else {
+					System.out.println("[UpdateReservationFrameController] - did not finished Making Reservation");}
 	    } else {
-	        System.out.println("No row selected. Update button should be disabled.");
+	    	displayError("Please select and edit to update a row");
 	    }
 	    tableView.getSelectionModel().clearSelection();
 	}
@@ -85,12 +93,12 @@ public class ShowReservationFrameController extends Application implements Initi
 		dateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("date"));
 		timeColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("hour"));
 		typeColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderType"));
-		visitorNumberColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("numOfVisitors"));
+		visitorNumberColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("numOfVisitors"));		
 		phoneColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("phone"));
 		emailColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("email"));
 		minuteColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("minute"));
 		payedColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("isPayed"));
-	
+		orderIDColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderID"));
 		updateBtn.setDisable(true);
 	    tableView.setRowFactory(tv -> {
 	        TableRow<Order> row = new TableRow<>();
@@ -112,11 +120,71 @@ public class ShowReservationFrameController extends Application implements Initi
 					tableView.getItems().clear();
 				}
 				tableView.getItems().addAll(orderList);
-				//SceneController.switchFrame("GoNature",e,new MainFrameController());
 			}
 			else {
 				System.out.println("[ShowReservationFrameController] - did not finished Showing Reservations");		
-			}
-		}	
-	}	
+			}	
+		} 
+		editData();	 
+	}
+	public void editData() {
+	    phoneColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
+	    phoneColumn.setOnEditCommit(event ->{
+	    	order = event.getTableView().getItems().get(event.getTablePosition().getRow());
+	        String oldValue = order.getPhone();
+	        String newValue = event.getNewValue();
+	        
+	        String phonePattern = "^05\\d{8}$";
+	        if (!newValue.matches(phonePattern)) {
+	            displayError("Please enter a valid phone number");
+	            return;
+	        }
+	        
+	        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+	        confirmationAlert.setHeaderText("Confirm Phone Number Change");
+	        confirmationAlert.setContentText("Do you want to change the phone number from '" + oldValue + "' to '" + newValue + "'?");
+	        confirmationAlert.getDialogPane().setPrefWidth(500);
+	        confirmationAlert.showAndWait().ifPresent(response -> {
+	            if (response == ButtonType.OK) {
+	                order.setphone(newValue);
+	                msgLabel.setVisible(false);
+	            } else {
+	                // Revert changes if canceled
+	                event.getTableView().refresh();
+	            }
+	        });
+	    });
+
+	    emailColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
+	    emailColumn.setOnEditCommit(event ->{
+	        order = event.getTableView().getItems().get(event.getTablePosition().getRow());
+	        String oldValue = order.getEmail();
+	        String newValue = event.getNewValue();
+
+	        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+	        if (!newValue.matches(emailPattern)) {
+	            displayError("Please enter a valid email address");
+	            return;
+	        }
+	        
+	        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+	        confirmationAlert.setHeaderText("Confirm Email Address Change");
+	        confirmationAlert.setContentText("Do you want to change the email address from '" + oldValue + "' to '" + newValue + "'?");
+	        confirmationAlert.getDialogPane().setPrefWidth(500);
+	        confirmationAlert.showAndWait().ifPresent(response -> {
+	            if (response == ButtonType.OK) {
+	                order.setEmail(newValue);
+	                msgLabel.setVisible(false);
+	            } else {
+	                // Revert changes if canceled
+	                event.getTableView().refresh();
+	            }
+	        });
+	    });
+	}
+	public void displayError(String txt) {
+		msgLabel.setText(txt);
+		msgLabel.setVisible(true);
+	}
+
 }
