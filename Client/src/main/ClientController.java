@@ -28,8 +28,9 @@ public class ClientController {
 	public static Bill showBill;
 	public static Order[] reservationshowed; 
 	public static boolean monitoring = false;
+	public static Order updatedReservation;
  
-	private static HashMap<String, Park> parks = new HashMap<>();
+	private static HashMap<String, Park> parks = new HashMap<>();//key is the name of the park
 	
 	private ClientController(String host, int port) {
 		try {

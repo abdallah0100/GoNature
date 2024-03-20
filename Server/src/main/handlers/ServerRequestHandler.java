@@ -155,9 +155,9 @@ public class ServerRequestHandler {
 			}
 			CancelledReservation[] listToReturn2 = CancellationsReportHandler.getReservations((String)msg.getRequestData());
 			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
-			return;
+			return; 
 			
-		case REQUEST_CHANGE:
+		case REQUEST_CHANGE: 
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data String[]"));
 				return;
@@ -206,6 +206,39 @@ public class ServerRequestHandler {
 			String s4 = (String)msg.getRequestData();
 			respondToClient(client, new Message(RequestType.INSERT_TO_TEMP,UserRequestHandler.insertrReservation(s4)));	
 			return;	
+			
+			
+			
+			case CONFIRM_RESERVATION:
+				if (!(msg.getRequestData() instanceof Order)) {
+				    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
+				    return;
+				}
+				o = (Order)msg.getRequestData();
+				boolean confirmed = VisitorRequestHandler.admitReservation(o);
+				o.setIsConfirmed(confirmed);
+				respondToClient(client, new Message(RequestType.CONFIRM_RESERVATION, o));
+				return;
+				
+			case UPDATE_RESERVATION:
+				if (!(msg.getRequestData() instanceof Order)) {
+					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+					return;
+				}
+				Order uo = VisitorRequestHandler.handleUpdateReservationRequest((Order)msg.getRequestData());
+				respondToClient(client, new Message(RequestType.UPDATE_RESERVATION, uo));
+				return;
+				
+				
+			case SHOW_NUM_OF_VISITORS_REPORT:
+				if (!(msg.getRequestData() instanceof String[])) {
+					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Strings list)"));
+					return;
+				}
+				//Number of organizedGroup and individuals
+				String[] listToReturn3 = NumOfVisitorsReportHandler.getNumOfVisitors((String[])msg.getRequestData());
+				respondToClient(client, new Message(RequestType.SHOW_NUM_OF_VISITORS_REPORT,listToReturn3));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
@@ -213,9 +246,6 @@ public class ServerRequestHandler {
 		 
 		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));
 	}
-	
-	
-	
 	
 	public static void respondToClient(ConnectionToClient client, Message msg) {
 		try {

@@ -19,9 +19,9 @@ import utilities.SceneController;
 public class VisitorSidePaneController extends Application implements Initializable{
 	
 	@FXML
-	private Label visitorIdLabel;
+	private  Label visitorIdLabel;
 	@FXML
-	private Label existingVisitor;
+	private  Label existingVisitor;
 	@FXML
 	private Button makeReservation;
 	@FXML

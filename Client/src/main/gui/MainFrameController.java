@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.UserRequestController;
+import main.threads.VisitorReminder;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -72,6 +73,8 @@ public class MainFrameController extends Application implements Initializable{
 			if(!(ClientController.connectedVisitor.isFoundInDB()))
 			{
 				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+			}else {
+				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/HomePage.fxml");
 			}
 		}
 		else if(ClientController.connectedUser != null) {

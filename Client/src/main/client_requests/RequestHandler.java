@@ -13,10 +13,12 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
+import main.threads.VisitorReminder;
 import requests.Message;
 
 public class RequestHandler {
@@ -209,6 +211,41 @@ public class RequestHandler {
 			}
 			ClientController.monitoring=(Boolean)msg.getRequestData();
 			return;
+		case CONFIRM_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+				System.out.println("[RequestHandler] - invalid server response");
+				return;
+			}
+			Order temp = (Order)msg.getRequestData();
+			if (temp.getIsConfirmed()) {
+				for (Order o : ClientController.reservationshowed)
+					if (o.getOrderID().equals(temp.getOrderID())) {
+						o.setIsConfirmed(true);
+						VisitorReminder.updateOrders();
+						break;
+					}
+			}
+		break;
+		case UPDATE_RESERVATION:
+			if (msg.getRequestData() instanceof Order[]) {
+				ClientController.updatedReservation = (Order) msg.getRequestData();
+				VisitorRequestController.finishedUpdatingReservation = true;
+				return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid UPDATE_RESERVATION response");
+				return;
+			}
+		case SHOW_NUM_OF_VISITORS_REPORT:
+			if (msg.getRequestData() instanceof String[]) {
+				ReportDetailsFrameController.setData((String[])msg.getRequestData());
+				return;	
+			}
+			else {
+				ReportDetailsFrameController.setData(null);
+				System.out.println("[RequestHandler] - invalid SHOW_NUM_OF_VISITORS_REPORT response");
+				return;
+			}	
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
