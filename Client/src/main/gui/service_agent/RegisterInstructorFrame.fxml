@@ -10,51 +10,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@RegisterInstructorFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.service_agent.RegisterInstructorFrameController">
    <children>
-      <Label layoutX="39.0" layoutY="109.0" prefHeight="21.0" prefWidth="65.0" text="Name:" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Label>
       <Label layoutX="39.0" layoutY="167.0" prefHeight="21.0" prefWidth="40.0" text="ID:" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="32.0" layoutY="220.0" text="Email:" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="31.0" layoutY="283.0" text="Telephone:" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="instructorID" layoutX="145.0" layoutY="107.0" prefHeight="25.0" prefWidth="142.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect></TextField>
-      <TextField fx:id="instructorEmail" layoutX="152.0" layoutY="218.0" prefHeight="25.0" prefWidth="142.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect></TextField>
-      <TextField fx:id="instructorTelephone" layoutX="157.0" layoutY="281.0" prefHeight="25.0" prefWidth="142.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect></TextField>
-      <Button fx:id="btnRegister" layoutX="400.0" layoutY="304.0" mnemonicParsing="false" onAction="#register" prefHeight="34.0" prefWidth="114.0" text="Register" textFill="WHITE">
+      <Button fx:id="btnRegister" layoutX="357.0" layoutY="161.0" mnemonicParsing="false" onAction="#register" prefHeight="34.0" prefWidth="114.0" text="Register" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
@@ -66,7 +27,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Label layoutX="29.0" layoutY="47.0" text="Register Instructor" textFill="WHITE" underline="true">
+      <Label layoutX="39.0" layoutY="55.0" text="Register Instructor" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
@@ -78,11 +39,11 @@
             </DropShadow>
          </effect>
       </Label>
-      <Label fx:id="label" layoutX="400.0" layoutY="106.0" prefHeight="17.0" prefWidth="54.0" textFill="WHITE">
+      <Label fx:id="label" layoutX="218.0" layoutY="296.0" prefHeight="17.0" prefWidth="54.0" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font></Label>
-      <TextField fx:id="instructorName" layoutX="147.0" layoutY="165.0" prefHeight="25.0" prefWidth="142.0">
+      <TextField fx:id="idTxt" layoutX="147.0" layoutY="165.0" prefHeight="25.0" prefWidth="142.0">
          <effect>
             <DropShadow>
                <color>

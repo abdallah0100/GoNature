@@ -1,5 +1,6 @@
 package main.handlers;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -57,7 +58,7 @@ public class UserRequestHandler {
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
 			//reservation
-			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"'");
+			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"' ");
 			if (!rs.next()) {
 				System.out.println("[UserRequestHandler] - r1 result set was empty");
 				return null;
@@ -72,30 +73,73 @@ public class UserRequestHandler {
 		return b;
 	}
 	
-	public static int instructorExists(Visitor v) {
+	
+	//make the instructor active and insert to visitor table
+	public static String activated(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
-			return -1;
+			return "fail DB";
 		}
-		String id=v.getId();
+
+		Visitor v;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM registered_instructors WHERE ID='"+id+"'");
-			if (!rs.next()) {
-				int s=st.executeUpdate( "INSERT INTO registered_instructors (ID, Name, Email, Telephone) " +
-		                  				"VALUES ('159', 'loa', 'loa@email.com', '05494')");
-				if(s>0)
-					return 1;
-				return -1;
+			ResultSet rs = st.executeQuery("SELECT * FROM instructor WHERE ID='"+id+"' ");//check if instructor in the table
+			if (rs.next()) {
+				String str = "UPDATE instructor SET activated=? WHERE ID=? ";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+		        ps.setString(1, "1");
+		        ps.setString(2, id);
+		        ps.executeUpdate(); // Execute the update statement
+				v=new Visitor(rs.getString(1),rs.getString(2),rs.getString(3),"1");
+				rs.close();
+				if(instructorToUser(v))
+					return "regest";
+				return " error Visitor insert";
 			}
-			else 
-			{return 0;}
+			else {
+				return "can not regest";
+			}
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to instructorExists");
 			ex.printStackTrace();
-			return -1;
+			return "fail in catch";
 		}
 		
 	}
+	
+	
+	
+	//insert instructor to visitor table
+	public static boolean instructorToUser(Visitor v) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE ID='"+v.getId()+"'");
+			if (!rs.next()) {//if the instructor not in the table
+				 int s = st.executeUpdate("INSERT INTO visitors (ID, Email, Telephone, isInstructor) " +
+			                    "VALUES ('" + v.getId() + "','" + v.getEmail() + "','" + v.getPhone() + "', 1)");
+				 rs.close();
+				 if (s>0)
+					 return true;
+				 return false;
+			}
+			else {
+				return false;
+			}	
+		}catch(Exception ex) {
+				System.out.println("[UserRequestHandler] - failed to instructorExists");
+				ex.printStackTrace();
+				return false;
+			}
+			
+	}
+	
+
+	
+
 
 }

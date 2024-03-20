@@ -5,6 +5,9 @@ package main.gui.service_agent;
 
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,27 +20,14 @@ import utilities.SceneController;
 
 
 public class RegisterInstructorFrameController extends Application{
-	public static int result;
+	public static String regist;
 	  	@FXML
 	    private Button btnRegister;
-	  	@FXML
-		private TextField instructorName;
-	  	@FXML
-	    private TextField instructorEmail;
 	    @FXML
-	    private TextField instructorID;
-	    @FXML
-	    private TextField instructorTelephone;
+	    private TextField idTxt;
 	    @FXML
 	    private Label label;
-	    
-	    ///////////////////define variables////////////////////////////////////////////////////
-     private String instructor_id;//retrieve data from id field
-     private String instructor_name;
-     private String instructor_email;//retrieve data from email field
-     private String instructor_tel;//retrieve data from telephone field
-     ///////////////////////////////////////////////////////////////////////////
-	 
+
 	 public static void main(String args[]) {
 		 launch(args);
 	 }
@@ -56,41 +46,35 @@ public class RegisterInstructorFrameController extends Application{
 	}
 	
 	public void register(ActionEvent e) {//we will check all the fields are not empty and not in database to add
-		
-       try {
-	    	  
-			if(!instructorID.getText().isEmpty()&&!instructorEmail.getText().isEmpty()
-					&&!instructorTelephone.getText().isEmpty()&&!instructorName.getText().isEmpty())
-			{
-				instructorID.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-				instructorEmail.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-				instructorTelephone.setStyle("-fx-text-box-border: #008000; -fx-focus-color: #008000;");
-				instructor_name=instructorName.getText();
-				instructor_id=instructorID.getText();
-				instructor_email=instructorEmail.getText();
-				instructor_tel=instructorTelephone.getText();
-			  UserRequestController.insertInstructor(instructor_id,instructor_name,instructor_email,instructor_tel);
-			  if (RegisterInstructorFrameController.result==1) {
-					label.setText("Registered");
-			  }
-			  	else if(RegisterInstructorFrameController.result==0){
-					label.setText("Allready Registered ");
-				}
-			}else {
-				if(instructorID.getText().isEmpty())
-					instructorID.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-				
-				if(instructorEmail.getText().isEmpty())
-					instructorEmail.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-				
-				if(instructorTelephone.getText().isEmpty())
-					instructorTelephone.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-				label.setText("Fill Empty Fields !");
-			 }
-				
-		}catch(Exception ex){
-			label.setText("error");
-		 }	
+		if(validInput()) {
+			UserRequestController.registInstructor(idTxt.getText());
+			if(regist.contentEquals("regest")){
+				displayMsg("regist succesfully");
+				return;
+			}
+			else {
+				displayMsg(regist);
+				return;
+			}
+		}
 	}
-
+	
+	public void displayMsg(String txt) {
+		label.setText(txt);
+		label.setVisible(true);
+	}
+	
+	public boolean validInput() {
+		if (idTxt.getText() == null || idTxt.getText().length() < 9|| idTxt.getText().equals("0")) {
+			displayMsg("Enter a new value to update");
+			return false;
+		}
+		Pattern p = Pattern.compile("[0-9]+");
+		Matcher m = p.matcher(idTxt.getText());
+		if (!m.matches()) {
+			displayMsg("Enter a valid number");
+			return false;
+		}
+		return true;
+	}
 }

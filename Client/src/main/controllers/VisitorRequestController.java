@@ -13,7 +13,7 @@ public class VisitorRequestController {
 
 
 	public static void sendVisitorValidation(String id) {
-		ClientController.getController().accept(new Message(RequestType.VALIDATE_VISITOR, id));	
+		ClientController.getController().accept(new Message(RequestType.VALIDATE_VISITOR, id));
 	}
 	public static void sendReservation(Order o) {
 		ClientController.getController().accept(new Message(RequestType.MAKE_RESERVATION, o));		
@@ -23,6 +23,5 @@ public class VisitorRequestController {
 	}
 	public static void updateReservation(Order o) {
 		ClientController.getController().accept(new Message(RequestType.UPDATE_RESERVATION, o));
-
 	}
 }
