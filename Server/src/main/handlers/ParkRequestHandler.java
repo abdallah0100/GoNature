@@ -113,9 +113,33 @@ public class ParkRequestHandler {
 	
 	
 	
-	public static boolean updateCurrentAmoun(String parkName,int amount) {
-		return false; //if update the park amount
-	}	
+	public static boolean updateCurrentAmoun(String park, int num) {
+			if (MainServer.dbConnection == null) {
+				System.out.println(Constants.DB_CONNECTION_ERROR);
+				return false;
+			}
+			try {
+				Statement st = MainServer.dbConnection.createStatement();
+				ResultSet rs = st.executeQuery("SELECT currentAmount FROM parks WHERE ParkName='"+park+"'");
+				if (!rs.next()) {
+					return false;
+				}
+					int newCurrent;
+					int oldNumber=rs.getInt("currentAmount");
+					newCurrent=oldNumber+num;
+					String str = "UPDATE parks SET currentAmount=? WHERE ParkName=? ";
+					PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+			        ps.setInt(1, newCurrent);
+			        ps.setString(2, park);
+			        int rowsAffected = ps.executeUpdate(); // Execute the update query
+			        return rowsAffected > 0; // Return true if the update was successful
+					//return true;
+				}catch(Exception ex) {
+					System.out.println("[UserRequestHandler] - failed to checkEntering");
+					ex.printStackTrace();
+					return false;
+				}
+		}	
 	
 	
 }

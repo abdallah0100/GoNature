@@ -51,11 +51,6 @@ public class UserRequestController {
 	public static void enter(String id) {
 		ClientController.getController().accept(new Message(RequestType.ENTER_VISTOR,id));
 	} 
-	public static void delete(String s[]) {
-		ClientController.getController().accept(new Message(RequestType.DELET_FROM_RESERVATION,s));
-	} 
-	public static void insert(String id) {
-		ClientController.getController().accept(new Message(RequestType.INSERT_TO_TEMP,id));
-	} 
+
 	
 }

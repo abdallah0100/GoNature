@@ -26,7 +26,7 @@ public class MonitoringFrameControlleroring extends Application{
 		
 	}
 	public void exit(ActionEvent event) {
-		if(checking()) {
+		if(validInput()) {
 			UserRequestController.exit(visitorIdTxt.getText());
 			if(ClientController.monitoring){
 				displayMSG("exit and delete");
@@ -39,7 +39,7 @@ public class MonitoringFrameControlleroring extends Application{
 
 	}
 	public void enter(ActionEvent event) {
-		if(checking()) {
+		if(validInput()) {
 			UserRequestController.enter(visitorIdTxt.getText());
 			if(ClientController.monitoring)
 			{
@@ -47,12 +47,12 @@ public class MonitoringFrameControlleroring extends Application{
 				ClientController.monitoring=false;
 			}
 			else {
-				displayMSG("reservation not found 2");
+				displayMSG("reservation not found ");
 			}
 		}
 	}
 	
-	public boolean checking() {
+	public boolean validInput() {
 		if (visitorIdTxt.getText().length() <= 0){
 			displayMSG("Please enter the  Bill Id");
 			return false;
@@ -66,6 +66,7 @@ public class MonitoringFrameControlleroring extends Application{
 		}
 		return true;
 	}
+	
 	public void displayMSG(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);

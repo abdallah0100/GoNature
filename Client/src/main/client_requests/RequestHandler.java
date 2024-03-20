@@ -197,20 +197,6 @@ public class RequestHandler {
 			ClientController.monitoring=(Boolean)msg.getRequestData();
 			return;
 			
-		case DELET_FROM_RESERVATION:
-			if (!(msg.getRequestData() instanceof Boolean)) {
-				System.out.println("[RequestHandler] - invalid DELET_FROM_RESERVATION response type (Boolean)");
-				return;
-			}
-			ClientController.monitoring=(Boolean)msg.getRequestData();
-			return;
-		case INSERT_TO_TEMP:
-			if (!(msg.getRequestData() instanceof Boolean)) {
-				System.out.println("[RequestHandler] - invalid INSERT_TO_TEMP response type (Boolean)");
-				return;
-			}
-			ClientController.monitoring=(Boolean)msg.getRequestData();
-			return;
 		case CONFIRM_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
 				System.out.println("[RequestHandler] - invalid server response");
