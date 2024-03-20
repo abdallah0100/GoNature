@@ -1,6 +1,6 @@
 package main.handlers;
 import java.io.IOException;
-import entities.Order;
+
 import entities.Bill;
 import entities.CancelledReservation;
 import entities.Order;
@@ -156,6 +156,18 @@ public class ServerRequestHandler {
 			CancelledReservation[] listToReturn2 = CancellationsReportHandler.getReservations((String)msg.getRequestData());
 			respondToClient(client, new Message(RequestType.SHOW_CANCELLATIONS_REPORTS,listToReturn2,(String)msg.getRequestData()));
 			return;
+			
+		case CONFIRM_RESERVATION:
+			if (!(msg.getRequestData() instanceof Order)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
+			    return;
+			}
+			o = (Order)msg.getRequestData();
+			boolean confirmed = VisitorRequestHandler.admitReservation(o);
+			o.setIsConfirmed(confirmed);
+			respondToClient(client, new Message(RequestType.CONFIRM_RESERVATION, o));
+			return;
+			
 		case UPDATE_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
@@ -174,6 +186,8 @@ public class ServerRequestHandler {
 			//Number of organizedGroup and individuals
 			String[] listToReturn3 = NumOfVisitorsReportHandler.getNumOfVisitors((String[])msg.getRequestData());
 			respondToClient(client, new Message(RequestType.SHOW_NUM_OF_VISITORS_REPORT,listToReturn3));
+		return;
+	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
