@@ -74,7 +74,7 @@ public class UserRequestHandler {
 	}
 	
 	
-	//make the 
+	//make the instructor active and insert to visitor table
 	public static String activated(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -95,7 +95,7 @@ public class UserRequestHandler {
 				rs.close();
 				if(instructorToUser(v))
 					return "regest";
-				return "Visitor insert";
+				return " error Visitor insert";
 			}
 			else {
 				return "can not regest";
@@ -138,48 +138,31 @@ public class UserRequestHandler {
 			
 	}
 	
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//exit from the park
-	public static boolean checkExiting(String id) {
+	//exit/enter from the park
+	public static boolean changeCurrent(String park, int num,String s) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
 		}
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT NumberOfVisitors,Park FROM tempreservation WHERE ReservationID='"+id+"'");
+			ResultSet rs = st.executeQuery("SELECT currentAmount FROM parks WHERE ParkName='"+park+"'");
 			if (!rs.next()) {
 				return false;
 			}
-			
-			int oldNumber=rs.getInt("NumberOfVisitors");
-			String parkName = rs.getString("Park");
-			
-			ResultSet rs2 = st.executeQuery("SELECT gap FROM parks WHERE ParkName='"+parkName+"'");
-			if (!rs2.next()) {
-				return false;
-			}
-			int total = rs2.getInt("gap");
-			int newGap = total - oldNumber;
-			
-				String str = "UPDATE parks SET gap=? WHERE ParkName=? ";
+				int newCurrent;
+				int oldNumber=rs.getInt("currentAmount");
+				if(s.contentEquals("+"))
+					newCurrent=oldNumber+num;
+				else if(s.contentEquals("-"))
+					newCurrent=oldNumber-num;
+				else return false;
+				String str = "UPDATE parks SET currentAmount=? WHERE ParkName=? ";
 				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
-		        ps.setInt(1, newGap);
-		        ps.setString(2, parkName);
+		        ps.setInt(1, newCurrent);
+		        ps.setString(2, park);
 		        int rowsAffected = ps.executeUpdate(); // Execute the update query
 		        return rowsAffected > 0; // Return true if the update was successful
 				//return true;
@@ -190,6 +173,8 @@ public class UserRequestHandler {
 			}
 	}
 	
+	
+	/*
 	//entring to the park 
 	public static boolean checkEntering(String id) {
 		if (MainServer.dbConnection == null) {
@@ -225,33 +210,5 @@ public class UserRequestHandler {
 				return false;
 			}
 		
-	}
-	
-	//insert reservation(copy from reservations to tempreservation)
-	public static boolean insertrReservation(String id) {
-		if (MainServer.dbConnection == null) {
-			System.out.println(Constants.DB_CONNECTION_ERROR);
-			return false;
-		}
-		try {    	
-			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+id+"'");
-			if (!rs.next()) {
-				return false;
-			}
-				String str = "INSERT INTO tempreservation (NumberOfVisitors,Park,ReservationID) VALUES (?,?,?) ";
-    			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
-   		        ps.setString(2,rs.getString("NumberOfVisitors"));
-		   		ps.setString(6,rs.getString("Park"));
-		   		ps.setString(9,rs.getString("ReservationID"));
-		        int rowsAffected = ps.executeUpdate(); 
-		        return rowsAffected > 0; // Return true if the INSERT was successful
-				//return true;
-			}catch(Exception ex) {
-				System.out.println("[UserRequestHandler] - failed to checkEntering");
-				ex.printStackTrace();
-				return false;
-			}
-	}
-	
+	}*/
 }

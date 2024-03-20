@@ -181,6 +181,7 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid UPDATE_REQUEST_CHANGE response type (Boolean)");
 				return;
 			}
+			
 		case ENTER_VISTOR:
 			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid ENTER_VISTOR response type (Boolean)");
@@ -195,6 +196,7 @@ public class RequestHandler {
 			}
 			ClientController.monitoring=(Boolean)msg.getRequestData();
 			return;
+			
 		case DELET_FROM_RESERVATION:
 			if (!(msg.getRequestData() instanceof Boolean)) {
 				System.out.println("[RequestHandler] - invalid DELET_FROM_RESERVATION response type (Boolean)");

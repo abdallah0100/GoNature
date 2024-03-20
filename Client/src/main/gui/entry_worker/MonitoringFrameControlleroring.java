@@ -29,9 +29,6 @@ public class MonitoringFrameControlleroring extends Application{
 		if(checking()) {
 			UserRequestController.exit(visitorIdTxt.getText());
 			if(ClientController.monitoring){
-				ClientController.monitoring=false;
-				String[] s = {visitorIdTxt.getText(), "tempreservation"};
-				UserRequestController.delete(s);//after exit remove from reservation table
 				displayMSG("exit and delete");
 				ClientController.monitoring=false;
 			}
@@ -46,13 +43,8 @@ public class MonitoringFrameControlleroring extends Application{
 			UserRequestController.enter(visitorIdTxt.getText());
 			if(ClientController.monitoring)
 			{
-				ClientController.monitoring=false;
-				UserRequestController.insert(visitorIdTxt.getText());
-				ClientController.monitoring=false;
-				String[] s = {visitorIdTxt.getText(), "reservations"};
-				UserRequestController.delete(s);
-				ClientController.monitoring=false;
 				displayMSG("enterd");
+				ClientController.monitoring=false;
 			}
 			else {
 				displayMSG("reservation not found");

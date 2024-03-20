@@ -174,30 +174,55 @@ public class ServerRequestHandler {
 			String res1[] = (String[])msg.getRequestData();
 			respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE,ParkRequestHandler.reqToChange2(res1)));	
 			return;	
+			
+		//exit from park and delete from temp reservatiom	
 		case EXIT_VISITOR:
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.EXIT_VISITOR, "invalid request data String"));
 				return;
 			}
-			String s1 = (String)msg.getRequestData();
-			respondToClient(client, new Message(RequestType.EXIT_VISITOR,UserRequestHandler.checkExiting(s1)));	
-			return;	
+			String s2 = (String)msg.getRequestData();
+			o=ReservationRequestHandler.getReservationById(s2,"tempreservation");
+			if(o!=null)
+				if(ReservationRequestHandler.createTempReservation(o))//add to temp
+				{	//minus to current number and delete from tempreservation
+					if(UserRequestHandler.changeCurrent(o.getParkName(),o.getNumOfVisitors(),"-")) {
+						boolean re =ReservationRequestHandler.deleteReservation("tempreservation",o.getOrderID());
+						respondToClient(client, new Message(RequestType.EXIT_VISITOR,re));
+					}
+					respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
+				}	
+			else
+				respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
+			
+			//entry worker enter the reservation id
 		case ENTER_VISTOR:
 			if (!(msg.getRequestData() instanceof String)) {
-				respondToClient(client, new Message(RequestType.ENTER_VISTOR, "invalid request data String"));
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 				return;
 			}
-			String s2 = (String)msg.getRequestData();
-			respondToClient(client, new Message(RequestType.ENTER_VISTOR,UserRequestHandler.checkEntering(s2)));	
-			return;	
+			String s3 = (String)msg.getRequestData();
+			o=ReservationRequestHandler.getReservationById(s3,"reservations");
+			if(o!=null)
+				if(ReservationRequestHandler.createTempReservation(o))//add to temp
+				{	//add to current number and delete from reservation
+					if(UserRequestHandler.changeCurrent(o.getParkName(),o.getNumOfVisitors(),"+")) {
+						boolean re =ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
+						respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
+					}
+					respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
+				}	
+			else
+				respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
+	/*		
 		case DELET_FROM_RESERVATION:
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION, "invalid request data String"));
 				return;
 			}
 			String[] s3 = (String[])msg.getRequestData();
-			respondToClient(client, new Message(RequestType.DELET_FROM_RESERVATION,ReservationRequestHandler.deleteReservation(s3[0],s3[1])));	
-			return;	
+		return;	*/
+/*
 		case INSERT_TO_TEMP:
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.INSERT_TO_TEMP, "invalid request data String"));
@@ -206,7 +231,7 @@ public class ServerRequestHandler {
 			String s4 = (String)msg.getRequestData();
 			respondToClient(client, new Message(RequestType.INSERT_TO_TEMP,UserRequestHandler.insertrReservation(s4)));	
 			return;	
-			
+			*/
 			
 			
 			case CONFIRM_RESERVATION:

@@ -52,6 +52,31 @@ public class Order implements Serializable{
 
 	}
 	
+	public Order( int numberOfVisitors, String parkName,String orderID) {
+		this.parkName =parkName;
+		this.numOfVisitors = String.valueOf(numberOfVisitors);
+		this.orderID=String.valueOf(orderID);
+	}
+	
+	//new 
+	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
+			, String parkName , String phone, String email ,int reservationID,String visitorID ,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed) {
+		this.orderType = orderType;
+		this.numOfVisitors = String.valueOf(numberOfVisitors);
+		this.date = date;
+		this.hour = hour;
+		this.minute = minute;
+		this.time = hour + ":" + minute;
+		this.parkName =parkName;
+		this.phone = phone;
+		this.email = email;
+		this.orderID = String.valueOf(reservationID);
+		this.isConfirmed = isConfirmed;
+		this.invitedInAdvance = invitedInAdvance;
+		this.isPayed = isPayed;
+		this.visitorID=visitorID;
+	}
+	
     public String getOrderType() {
 		return orderType;
 	}  
