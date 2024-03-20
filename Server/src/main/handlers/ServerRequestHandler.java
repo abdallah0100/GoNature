@@ -202,12 +202,12 @@ public class ServerRequestHandler {
 				return;
 			}
 			String s3 = (String)msg.getRequestData();
-			o=ReservationRequestHandler.getReservationById(s3,"reservations");
-			if(o!=null)
-				if(ReservationRequestHandler.createTempReservation(o))//add to temp
+			Order o1=ReservationRequestHandler.getReservationById(s3,"reservations");
+			if(o1!=null)
+				if(ReservationRequestHandler.createTempReservation(o1))//add to temp
 				{	//add to current number and delete from reservation
-					if(UserRequestHandler.changeCurrent(o.getParkName(),o.getNumOfVisitors(),"+")) {
-						boolean re =ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
+					if(UserRequestHandler.changeCurrent(o1.getParkName(),o1.getNumOfVisitors(),"+")) {
+						boolean re =ReservationRequestHandler.deleteReservation("reservations",o1.getOrderID());
 						respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
 					}
 					respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));

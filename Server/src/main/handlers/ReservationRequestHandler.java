@@ -16,13 +16,15 @@ public class ReservationRequestHandler {
 			return null;
 		}
 		try {    
-			Order o;
-			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM '"+ tableName+"' WHERE ReservationID='"+id+"'");
-			if (!rs.next()) {
-				return null;
-			}
-			if(tableName.contentEquals("reservations"))
+				Order o;
+				String query = "SELECT * FROM " + tableName + " WHERE ReservationID = ?";
+		        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
+		        ps.setString(1, id);
+		        ResultSet rs = ps.executeQuery();
+		        if (!rs.next()) {
+		            return null;
+		        }
+			if(tableName.equals("reservations"))
 			{
 				 o=new Order(rs.getString("Type"),rs.getInt("NumberOfVisitors"),rs.getString("ReservationDate"),rs.getString("Hour"),
 						rs.getString("Minute"),rs.getString("Park"),rs.getString("Telephone"),rs.getString("Email"),
@@ -30,7 +32,7 @@ public class ReservationRequestHandler {
 						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"));
 				return o;//reservation data
 			}
-			if(tableName.contentEquals("tempreservation")) {
+			if(tableName.equals("tempreservation")) {
 				o=new Order(rs.getInt("NumberOfVisitors"),rs.getString("Park"),rs.getString("ReservationID"));
 				return o;
 			}

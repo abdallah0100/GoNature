@@ -58,7 +58,7 @@ public class UserRequestHandler {
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
 			//reservation
-			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"'");
+			ResultSet rs = st.executeQuery("SELECT * FROM reservations WHERE ReservationID='"+b1.getId()+"' ");
 			if (!rs.next()) {
 				System.out.println("[UserRequestHandler] - r1 result set was empty");
 				return null;
@@ -84,7 +84,7 @@ public class UserRequestHandler {
 		Visitor v;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM instructor WHERE ID='"+id+"'");//check if instructor in the table
+			ResultSet rs = st.executeQuery("SELECT * FROM instructor WHERE ID='"+id+"' ");//check if instructor in the table
 			if (rs.next()) {
 				String str = "UPDATE instructor SET activated=? WHERE ID=? ";
 				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
