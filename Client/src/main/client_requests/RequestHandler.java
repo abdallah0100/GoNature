@@ -255,17 +255,21 @@ public class RequestHandler {
 		case SHOW_EDITED_VARIABLES:
 			if (msg.getRequestData() instanceof HashMap<?, ?>) {
 				DecideVarEditFrameController.setReturnedHashMap((HashMap<?,?>)msg.getRequestData());
-				return;	
+				System.out.println("[RequestHandler] - Data edited successfully.");
+	            return;
 			}
 			else {
 				System.out.println("[RequestHandler] - invalid SHOW_EDITED_VARIABLES response");
 				return;
 			}
-		case DELETE_REQUEST_CHANGE:
-			if((boolean)msg.getRequestData() == false) {
+		case DELETE_REQUEST_CHANGE:			
+			if(msg.getRequestData() instanceof Boolean ) {
+				if((Boolean)(msg.getRequestData())){
+		            System.out.println("[RequestHandler] - Data deleted successfully.");
+		            return;
+				}
                 System.out.println("[RequestHandler] - invalid DELETE_REQUEST_CHANGE response");
 			}
-            System.out.println("[RequestHandler] - Data deleted successfully.");
 			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
