@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@DecideVarEditFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DecideVarEditFrameController">
+   <children>
+      <Label layoutX="30.0" layoutY="43.0" text="Choose Park :" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Button fx:id="showBtn" layoutX="387.0" layoutY="42.0" mnemonicParsing="false" onAction="#showEditsDetails" prefHeight="25.0" prefWidth="109.0" text="Show" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <ComboBox fx:id="comboBox" layoutX="187.0" layoutY="42.0" onAction="#comboBoxClicked" prefWidth="150.0" />
+      <Label fx:id="errorMsg" layoutX="180.0" layoutY="77.0" prefHeight="57.0" prefWidth="372.0" text="errorMsg" textFill="RED" visible="false">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2210526317358017" green="0.18666666746139526" blue="0.18666666746139526" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="label1" layoutX="36.0" layoutY="172.0" prefHeight="26.0" prefWidth="150.0" text="Label1" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label4" layoutX="36.0" layoutY="231.0" prefHeight="26.0" prefWidth="83.0" text="Label4" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label7" layoutX="36.0" layoutY="298.0" prefHeight="21.0" prefWidth="90.0" text="Label7" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label8" layoutX="200.0" layoutY="297.0" prefHeight="21.0" prefWidth="109.0" text="Label8" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label5" layoutX="200.0" layoutY="233.0" prefHeight="21.0" prefWidth="99.0" text="Label5" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label2" layoutX="200.0" layoutY="175.0" prefHeight="21.0" prefWidth="99.0" text="Label2" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label3" layoutX="328.0" layoutY="175.0" prefHeight="21.0" prefWidth="83.0" text="Label3" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label6" layoutX="328.0" layoutY="233.0" prefHeight="21.0" prefWidth="90.0" text="Label6" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="label9" layoutX="328.0" layoutY="297.0" prefHeight="21.0" prefWidth="83.0" text="Label9" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="editiedVariable" layoutX="14.0" layoutY="124.0" text="Edited Variables" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="oldValue" layoutX="192.0" layoutY="124.0" text="Old Value" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label fx:id="newValue" layoutX="318.0" layoutY="124.0" text="New Value" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Button fx:id="rejectFirstRow" layoutX="517.0" layoutY="172.0" mnemonicParsing="false" onAction="#deleteRequest" prefHeight="26.0" prefWidth="71.0" text="Reject" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="0.18039216101169586" blue="0.18039216101169586" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="acceptFirstRow" layoutX="425.0" layoutY="172.0" mnemonicParsing="false" onAction="#deleteAndUpdateRequest" prefHeight="26.0" prefWidth="71.0" text="Accept" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.6509804129600525" blue="0.09803921729326248" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="acceptSecondRow" layoutX="425.0" layoutY="231.0" mnemonicParsing="false" onAction="#deleteAndUpdateRequest" prefHeight="26.0" prefWidth="71.0" text="Accept" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.6509804129600525" blue="0.09803921729326248" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="rejectSecondRow" layoutX="517.0" layoutY="231.0" mnemonicParsing="false" onAction="#deleteRequest" prefHeight="26.0" prefWidth="71.0" text="Reject" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="0.18039216101169586" blue="0.18039216101169586" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="acceptThirdRow" layoutX="425.0" layoutY="295.0" mnemonicParsing="false" onAction="#deleteAndUpdateRequest" prefHeight="26.0" prefWidth="71.0" text="Accept" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color green="0.6509804129600525" blue="0.09803921729326248" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="rejectThirdRow" layoutX="517.0" layoutY="295.0" mnemonicParsing="false" onAction="#deleteRequest" prefHeight="26.0" prefWidth="71.0" text="Reject" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="0.18039216101169586" blue="0.18039216101169586" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+   </children>
+</Pane>
