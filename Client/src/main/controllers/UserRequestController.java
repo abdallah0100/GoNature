@@ -3,7 +3,6 @@ package main.controllers;
 import entities.Bill;
 import entities.Report;
 import entities.User;
-import entities.Visitor;
 import main.ClientController;
 import requests.Message;
 import requests.RequestType;
@@ -52,5 +51,8 @@ public class UserRequestController {
 		ClientController.getController().accept(new Message(RequestType.ENTER_VISTOR,id));
 	} 
 
+	public static void sendLogoutRequest(String toLogout) {
+		ClientController.getController().accept(new Message(RequestType.LOGOUT, toLogout));
+	}
 	
 }
