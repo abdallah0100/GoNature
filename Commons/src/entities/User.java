@@ -18,6 +18,7 @@ public class User implements Serializable{
 	private boolean foundInDB;
 	private String parkName;
 	private Park park;
+	private String visitorId;
 	
 	public User(String firstName, String lastName,String id,String password ,String workerNumber,String email,String role, String park) {
 		this.setFirstName(firstName);
@@ -113,5 +114,13 @@ public class User implements Serializable{
 
 	public void setParkName(String parkName) {
 		this.parkName = parkName;
+	}
+
+	public String getVisitorId() {
+		return visitorId;
+	}
+
+	public void setVisitorId(String visitorId) {
+		this.visitorId = visitorId;
 	}	
 }

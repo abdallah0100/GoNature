@@ -45,11 +45,11 @@ public class UserRequestController {
 		ClientController.getController().accept(new Message(RequestType.CREATE_REPORT, r));
 	}
 	
-	public static void exit(String id) {
-		ClientController.getController().accept(new Message(RequestType.EXIT_VISITOR,id));
+	public static void exit(String s[]) {
+		ClientController.getController().accept(new Message(RequestType.EXIT_VISITOR,s));
 	} 
-	public static void enter(String id) {
-		ClientController.getController().accept(new Message(RequestType.ENTER_VISTOR,id));
+	public static void enter(String[]s) {
+		ClientController.getController().accept(new Message(RequestType.ENTER_VISTOR,s));
 	} 
 
 	

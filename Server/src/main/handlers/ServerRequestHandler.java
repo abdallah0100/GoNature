@@ -202,11 +202,12 @@ public class ServerRequestHandler {
 			
 			//exit from park and delete from temp reservatiom	
 			case EXIT_VISITOR:
-				if (!(msg.getRequestData() instanceof String)) {
+				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
 				}
-				String s2 = (String)msg.getRequestData();
+				//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+				String[] s2 = (String[])msg.getRequestData();
 				o=ReservationRequestHandler.getReservationById(s2,"tempreservation");
 				if(o!=null)
 					{	//minus to current number and delete from tempreservation
@@ -224,11 +225,11 @@ public class ServerRequestHandler {
 				
 				//entry worker enter the reservation id
 			case ENTER_VISTOR:
-				if (!(msg.getRequestData() instanceof String)) {
+				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
-				}
-				String s3 = (String)msg.getRequestData();
+				}////s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+				String[] s3 = (String[])msg.getRequestData();
 				Order o1=ReservationRequestHandler.getReservationById(s3,"reservations");
 				if(o1!=null)
 				{

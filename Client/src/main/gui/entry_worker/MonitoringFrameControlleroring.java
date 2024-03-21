@@ -27,7 +27,7 @@ public class MonitoringFrameControlleroring extends Application{
 	}
 	public void exit(ActionEvent event) {
 		if(validInput()) {
-			UserRequestController.exit(visitorIdTxt.getText());
+			UserRequestController.exit(fill());
 			if(ClientController.monitoring){
 				displayMSG("exit and delete");
 				ClientController.monitoring=false;
@@ -40,14 +40,16 @@ public class MonitoringFrameControlleroring extends Application{
 	}
 	public void enter(ActionEvent event) {
 		if(validInput()) {
-			UserRequestController.enter(visitorIdTxt.getText());
+			UserRequestController.enter(fill());
 			if(ClientController.monitoring)
 			{
 				displayMSG("enterd");
 				ClientController.monitoring=false;
+				return;
 			}
 			else {
 				displayMSG("reservation not found ");
+				return;
 			}
 		}
 	}
@@ -70,5 +72,14 @@ public class MonitoringFrameControlleroring extends Application{
 	public void displayMSG(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
+	}
+	
+	//put the park and the reservation id 
+	public String[] fill()
+	{
+		String[] s = new String[2];
+		s[0] = ClientController.connectedUser.getParkName();
+		s[1] = visitorIdTxt.getText();
+		return s;
 	}
 }

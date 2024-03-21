@@ -90,12 +90,15 @@ public class UserRequestHandler {
 				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
 		        ps.setString(1, "1");
 		        ps.setString(2, id);
-		        ps.executeUpdate(); // Execute the update statement
-				v=new Visitor(rs.getString(1),rs.getString(2),rs.getString(3),"1");
-				rs.close();
-				if(instructorToUser(v))
-					return "regest";
+		        int x= ps.executeUpdate(); // Execute the update statement
+				if(x>0)//if updated 
+				{
+					v=new Visitor(rs.getString(1),rs.getString(2),rs.getString(3),"1");
+					rs.close();
+					if(instructorToUser(v))
+						return "regest";
 				return " error Visitor insert";
+				}
 			}
 			else {
 				return "can not regest";
@@ -105,6 +108,7 @@ public class UserRequestHandler {
 			ex.printStackTrace();
 			return "fail in catch";
 		}
+		return  "fail";
 		
 	}
 	
@@ -128,7 +132,15 @@ public class UserRequestHandler {
 				 return false;
 			}
 			else {
-				return false;
+				//update to instructor in visitor table
+				String str = "UPDATE visitors SET isInstructor=? WHERE ID=? ";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+		        ps.setString(1, "1");
+		        ps.setString(2, v.getId());
+		        int x= ps.executeUpdate(); // Execute the update statement
+		        if(x>0)
+		        	return true;
+		        return false;
 			}	
 		}catch(Exception ex) {
 				System.out.println("[UserRequestHandler] - failed to instructorExists");

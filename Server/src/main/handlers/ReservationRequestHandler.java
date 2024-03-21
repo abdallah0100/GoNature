@@ -9,7 +9,7 @@ import main.MainServer;
 
 public class ReservationRequestHandler {
 	
-	public static Order getReservationById(String id,String tableName) {
+	public static Order getReservationById(String []s,String tableName) {//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
@@ -18,7 +18,7 @@ public class ReservationRequestHandler {
 				Order o;
 				String query = "SELECT * FROM " + tableName + " WHERE ReservationID = ?";
 		        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
-		        ps.setString(1, id);
+		        ps.setString(1, s[1]);
 		        ResultSet rs = ps.executeQuery();
 		        if (!rs.next()) {
 		            return null;
@@ -29,11 +29,16 @@ public class ReservationRequestHandler {
 						rs.getString("Minute"),rs.getString("Park"),rs.getString("Telephone"),rs.getString("Email"),
 						rs.getInt("ReservationID"),rs.getString("visitorID"),
 						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"));
-				return o;//reservation data
+				 if(s[0].equals(o.getParkName()))
+					 return o;//reservation data
+				 else 
+					 return null;
 			}
 			if(tableName.equals("tempreservation")) {
 				o=new Order(rs.getInt("NumberOfVisitors"),rs.getString("Park"),rs.getString("ReservationID"));
-				return o;
+				 if(s[0].equals(o.getParkName()))
+					 return o;//reservation data
+				return null;
 			}
 			return null;
 
