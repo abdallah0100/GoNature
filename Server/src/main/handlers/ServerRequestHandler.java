@@ -35,7 +35,12 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
 			}
+			if (ClientConnectionHandler.clientAlreadyConnected((String) msg.getRequestData())) {
+				respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, "already in"));
+				return;
+			}
 			v = VisitorRequestHandler.handleValidateRequest((String) msg.getRequestData());
+			ClientConnectionHandler.handleUserLogin(client, v.getId());
 			respondToClient(client, new Message(RequestType.VALIDATE_VISITOR, v));
 			return;
 			
@@ -44,7 +49,14 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
 				return;
 			}
+			User tempU = (User) msg.getRequestData();
+			if (ClientConnectionHandler.clientAlreadyConnected(tempU.getUsername())) {
+				respondToClient(client, new Message(RequestType.LOGIN_USER, "alreadyIn"));
+				return;
+			}
 			u = UserRequestHandler.handleLogInRequest((User) msg.getRequestData());
+			if (u != null)
+				ClientConnectionHandler.handleUserLogin(client, u.getUsername());
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
 		case MAKE_RESERVATION:
@@ -283,6 +295,14 @@ public class ServerRequestHandler {
 			o.setCanceled(addedToCanceled && canceled);
 			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));
 			return;
+		case LOGOUT:
+			if (!(msg.getRequestData() instanceof String)) {
+			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected String)"));
+			    return;
+			}
+			ClientConnectionHandler.handleLogout((String) msg.getRequestData());
+			generalRespondMsg = "Logout has finished successfully";
+			break;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

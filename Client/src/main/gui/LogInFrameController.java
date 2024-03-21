@@ -33,6 +33,7 @@ public class LogInFrameController extends Application implements Initializable{
 	@FXML
 	private Pane headerPane;
 
+	public static boolean alreadyIn = false;
 	/**
 	* @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization
@@ -62,9 +63,11 @@ public class LogInFrameController extends Application implements Initializable{
 		}
 		ParkRequestHandler.requestAllParks();
 		UserRequestController.sendUserLogIn(userNameTxt.getText(), passwordTxt.getText());
-		if (UserRequestController.LogedIn) {
+		
+		if (alreadyIn)
+			displayError("User already logged in");
+		else if (UserRequestController.LogedIn)
 			SceneController.switchFrame("GoNature",e,new MainFrameController());
-		}
 		else {
 			System.out.println("[LogInFrameController] - did not finished LogIn");
 			displayError("User Not Found");

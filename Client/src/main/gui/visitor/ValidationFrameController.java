@@ -32,6 +32,8 @@ public class ValidationFrameController extends Application implements Initializa
 	 @FXML
 	private Pane headerPane;
 	
+	 public static boolean alreadyIn = false;
+	 
 	/**
 	* @param primaryStage the primary stage for the application
 	* @throws Exception if an error occurs during initialization
@@ -62,6 +64,12 @@ public class ValidationFrameController extends Application implements Initializa
 			return;
 		}
 		VisitorRequestController.sendVisitorValidation(idField.getText());
+		
+		if (alreadyIn) {
+			displayError("This id is already logged in");
+			return;
+		}
+		
 		if (VisitorRequestController.finishedValidating) {
 			SceneController.switchFrame("GoNature", e, new MainFrameController());
 		}else {
