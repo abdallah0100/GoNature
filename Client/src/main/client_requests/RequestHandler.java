@@ -14,6 +14,7 @@ import entities.Visitor;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
+import main.gui.LogInFrameController;
 import main.gui.dep_manager.CancellationsReportFrameController;
 import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
@@ -21,6 +22,7 @@ import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
+import main.gui.visitor.ValidationFrameController;
 import main.threads.VisitorReminder;
 import requests.Message;
 
@@ -28,6 +30,7 @@ public class RequestHandler {
 	
 	public static void handleIncomingRequests(Message msg) {
 		Order o;
+		String response;
 		switch(msg.getRequestEnumType()) {
 		case REQUEST_ERROR:
 			System.out.println("[GoNatureClient] - Server responded with an error: " + msg.getRequestData());
@@ -36,9 +39,18 @@ public class RequestHandler {
 			System.out.println("[GoNatureClient] - ServerResponse: " + msg.getRequestData());
 			break; 
 		case VALIDATE_VISITOR:
-			if (msg.getRequestData() instanceof Visitor)
+			if (msg.getRequestData() instanceof Visitor) {
+				ValidationFrameController.alreadyIn = false;
 				ClientController.connectedVisitor = (Visitor) msg.getRequestData();
-			else {
+			}
+			else if (msg.getRequestData() instanceof String) {
+				response = (String)msg.getRequestData();
+				System.out.println(response);
+				if (response.equals("already in")) {
+					ValidationFrameController.alreadyIn = true;
+					break;
+				}
+			}else {
 				System.out.println("[RequestHandler] - invalid VALIDATE_VISITOR response");
 				return;
 			} 
@@ -51,8 +63,15 @@ public class RequestHandler {
 					ClientController.connectedUser.setPark(ClientController.getParks().get(parkName));
 					if (ClientController.connectedUser.getPark() == null)
 						System.out.println("[RequestHandler] - invalid park name");
+					LogInFrameController.alreadyIn = false;
 					UserRequestController.LogedIn = true;
 					return;
+				}else if (msg.getRequestData() instanceof String) {
+					response = (String)msg.getRequestData();
+					if (response.equals("alreadyIn")) {
+						LogInFrameController.alreadyIn = true;
+						return;
+					}
 				}
 				else {
 					System.out.println("[RequestHandler] - invalid LOGIN_USER response");

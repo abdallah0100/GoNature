@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.HashMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,9 +25,12 @@ public class MainServer extends AbstractServer{
 	public static boolean serverStarted = false;
 	
 	private static ObservableList<ClientConnection> connections = FXCollections.observableArrayList();;
+	//key is the username of user or id of the visitor, used to determine if they are logged in
+	private HashMap<String, ConnectionToClient> connectionMap;
 
 	private MainServer(int port) {
 		super(port);
+		connectionMap = new HashMap<>();
 	}
 
 	@Override
@@ -96,6 +100,10 @@ public class MainServer extends AbstractServer{
 	}
 	public static void setClientConnections(ObservableList<ClientConnection> conns) {
 		connections = conns;
+	}
+
+	public HashMap<String, ConnectionToClient> getConnectionMap() {
+		return connectionMap;
 	}
 
 }
