@@ -64,7 +64,15 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
 			}
-			Order o = VisitorRequestHandler.handleMakeReservationRequest((Order)msg.getRequestData());
+			Order receivedOrder = (Order)msg.getRequestData();
+			
+			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
+				System.out.println("Park has no space!");
+				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, "Park has no place"));
+				return;
+			}
+			
+			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder);
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
 			
