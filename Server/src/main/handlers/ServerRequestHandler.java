@@ -1,5 +1,6 @@
 package main.handlers;
 import java.io.IOException;
+import java.util.HashMap;
 
 import entities.Bill;
 import entities.CancelledReservation;
@@ -282,6 +283,23 @@ public class ServerRequestHandler {
 			o.setCanceled(addedToCanceled && canceled);
 			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));
 			return;
+		case SHOW_EDITED_VARIABLES:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
+			}
+			// key is the variable to edit with the new value
+			HashMap<String, String> hashMapWithEdits = EditedVariablesRequestHandler.getEditedVariables((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_EDITED_VARIABLES,hashMapWithEdits));
+			return;
+		case DELETE_REQUEST_CHANGE:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
+				return;
+			}			
+			respondToClient(client, new Message(RequestType.SHOW_EDITED_VARIABLES,
+			DeletedRequestChangeHandler.deleteData((String[])msg.getRequestData())));
+			return ;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

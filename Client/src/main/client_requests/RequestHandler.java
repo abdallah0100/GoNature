@@ -15,6 +15,7 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
@@ -250,7 +251,22 @@ public class RequestHandler {
 				ReportDetailsFrameController.setData(null);
 				System.out.println("[RequestHandler] - invalid SHOW_NUM_OF_VISITORS_REPORT response");
 				return;
-			}	
+			}
+		case SHOW_EDITED_VARIABLES:
+			if (msg.getRequestData() instanceof HashMap<?, ?>) {
+				DecideVarEditFrameController.setReturnedHashMap((HashMap<?,?>)msg.getRequestData());
+				return;	
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid SHOW_EDITED_VARIABLES response");
+				return;
+			}
+		case DELETE_REQUEST_CHANGE:
+			if((boolean)msg.getRequestData() == false) {
+                System.out.println("[RequestHandler] - invalid DELETE_REQUEST_CHANGE response");
+			}
+            System.out.println("[RequestHandler] - Data deleted successfully.");
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

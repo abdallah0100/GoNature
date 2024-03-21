@@ -71,7 +71,8 @@ public class DepManagerMainFrameController extends Application{
 	*/
 	@FXML
 	public void confirmChange(ActionEvent event) {
-		
+		SceneController sc = new SceneController();
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/DecideVarEditFrame.fxml");
 	}
 
 }
