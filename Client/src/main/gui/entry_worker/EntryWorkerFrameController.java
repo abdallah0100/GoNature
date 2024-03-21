@@ -13,7 +13,7 @@ import utilities.SceneController;
  * It manages the actions and events related to the Entry Worker's interface.
 */
 
-public class EntryWorkerFrameController extends Application{
+public class EntryWorkerFrameController extends Application {
 	
 	 @FXML
 	 private Button createReservations;

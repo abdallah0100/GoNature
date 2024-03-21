@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -26,12 +25,12 @@
             </DropShadow>
          </effect>
       </Label>
-      <Label layoutX="48.0" layoutY="172.0" text="Bill ID :" textFill="WHITE">
+      <Label layoutX="48.0" layoutY="172.0" text="Reservation ID :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="reservatiomId" layoutX="200.0" layoutY="174.0" prefHeight="29.0" prefWidth="200.0">
+      <TextField fx:id="reservatiomId" layoutX="212.0" layoutY="88.0" prefHeight="29.0" prefWidth="200.0">
          <effect>
             <DropShadow>
                <color>
@@ -39,18 +38,6 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Button fx:id="viewbill" layoutX="105.0" layoutY="252.0" mnemonicParsing="false" onAction="#showBill" text="View  Bill" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Button>
       <Separator layoutY="85.0" prefHeight="2.0" prefWidth="600.0">
          <effect>
             <DropShadow>
@@ -75,6 +62,11 @@
       <Label fx:id="msgLabel" layoutX="273.0" layoutY="224.0" text="Label" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="reservationId" layoutX="289.0" layoutY="172.0" prefHeight="34.0" prefWidth="73.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font size="23.0" />
          </font>
       </Label>
    </children>
