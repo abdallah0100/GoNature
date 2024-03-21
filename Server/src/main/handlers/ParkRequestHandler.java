@@ -152,7 +152,29 @@ public class ParkRequestHandler {
 					ex.printStackTrace();
 					return false;
 				}
-		}	
+		}
+	
+	public static Park getParkData(String name) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return null;
+		}
+		try {
+			String str = "SELECT * FROM parks WHERE ParkName='"+name+"'";
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next()) {
+				System.out.println("[ParkRequestHandler] - park " + name + " doesn't exist");
+				return null;
+			}
+			Park p = new Park(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
+			return p;
+		}catch(Exception ex) {
+			System.out.println("[ParkRequestHandler] - failed to update park variable");
+			ex.printStackTrace();
+			return null;
+		}
+	}
 	
 	
 }
