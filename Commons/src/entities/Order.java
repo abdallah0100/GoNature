@@ -28,8 +28,7 @@ public class Order implements Serializable{
 	
 	private String orderID;
 	private String time;
-	
-
+	private String messageTitle;
 	public Order() {
     }
 	
@@ -219,6 +218,15 @@ public class Order implements Serializable{
 	public void setCancelRequest(boolean cancelRequest) {
 		this.cancelRequest = cancelRequest;
 	}
+
+	public String getMessageTitle() {
+		return messageTitle; 
+	}
+ 
+	public void setMessageTitle(String messageTitle) {
+		this.messageTitle = messageTitle;
+	}
+	
 
 	public String isProcessed() {
 		return processed;
