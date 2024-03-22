@@ -74,7 +74,7 @@ public class MainFrameController extends Application implements Initializable{
 			{
 				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
 			}else {
-				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/HomePage.fxml");
+				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/HomePage.fxml");//mayar needs changing
 			}
 		}
 		else if(ClientController.connectedUser != null) {

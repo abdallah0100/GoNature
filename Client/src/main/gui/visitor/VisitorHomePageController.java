@@ -1,16 +1,20 @@
 package main.gui.visitor;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import entities.Order;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -20,7 +24,7 @@ import main.threads.VisitorReminder;
 
 public class VisitorHomePageController implements Initializable{
 
-	@FXML
+	/*@FXML
 	private ImageView inboxImg;
 	@FXML
 	private Pane inboxPane;
@@ -40,7 +44,6 @@ public class VisitorHomePageController implements Initializable{
 	private Button admitBtn;
 	@FXML
 	private Button cancelBtn;
-	
 	
 	public static Pane publicNewMsgPane;
 	private boolean select = true;
@@ -179,6 +182,42 @@ public class VisitorHomePageController implements Initializable{
 				if (VisitorReminder.getMsgcount() == 0)
 					newMsgPane.setVisible(false);
 			}
+		}
+	}*/
+	@FXML
+	private ImageView inboxImg;
+	@FXML
+	private Label msgAmount;
+	@FXML
+	private Label msgAlert;
+	@FXML
+	private Button admitBtn;
+	@FXML
+	private Button cancelBtn;
+	@FXML
+	private TableView<Order> messageTable;
+	@FXML
+	private TableColumn<Order,String> message;
+	@FXML
+	private Pane newMsgPane;
+	public static Pane publicNewMsgPane;
+	public static ObservableList<Order> ordersToConfirm = FXCollections.observableArrayList();
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		publicNewMsgPane = newMsgPane;
+		ordersToConfirm.addAll(VisitorReminder.getOrdersToConfirm());
+		messageTable.setItems(ordersToConfirm);
+		message.setCellValueFactory(new PropertyValueFactory<Order, String>("messageTitle"));
+		Thread visitorReminder = new Thread(new VisitorReminder());
+		visitorReminder.start();
+	}
+	@FXML
+	public void clickInboxIcon(MouseEvent event) {
+		msgAmount.setText(VisitorReminder.getMsgcount() + "");
+		messageTable.setVisible(!messageTable.isVisible());
+        
+		if (VisitorReminder.getMsgcount() > 1) {
+			 messageTable.setItems(ordersToConfirm);
 		}
 	}
 	
