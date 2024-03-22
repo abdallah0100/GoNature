@@ -125,23 +125,6 @@ public class ReservationRequestHandler {
 			}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// if reservation deleted 
 	public static boolean deleteReservation(String tableName,String id) {
 		if (MainServer.dbConnection == null) {
@@ -175,8 +158,8 @@ public class ReservationRequestHandler {
 			pr.setString(2, o.getDate());
 			pr.setString(3, o.getParkName());
 			pr.setString(4, o.getOrderID());
-			pr.setString(5, o.isCancelRequest() ? "1" : "0");
-			pr.setString(6, o.isCancelRequest() ? "0" : "1");
+			pr.setString(5, o.isCancelRequest() ? "Yes" : "No");
+			pr.setString(6, o.isCancelRequest() ? "No" : "Yes");
 			
 			return pr.executeUpdate() > 0;
 		}catch(Exception ex) {
