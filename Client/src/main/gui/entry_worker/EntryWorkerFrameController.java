@@ -46,7 +46,7 @@ public class EntryWorkerFrameController extends Application {
 	
 	public void createReservations(ActionEvent event) {
 		SceneController scene = new SceneController();
-		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/EnterVisitorsFram.fxml");
+		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/EnterVisitorsFrame.fxml");
 	}
 	
 	public void monitoring(ActionEvent event) {

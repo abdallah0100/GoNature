@@ -60,32 +60,32 @@
             </DropShadow>
          </effect>
       </TextField>
-      <Label layoutX="38.0" layoutY="113.0" prefHeight="20.0" prefWidth="134.0" text="Visitors Number :">
+      <Label layoutX="38.0" layoutY="113.0" prefHeight="20.0" prefWidth="134.0" text="Visitors Number :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="154.0" prefHeight="18.0" prefWidth="63.0" text="Date :">
+      <Label layoutX="38.0" layoutY="154.0" prefHeight="18.0" prefWidth="63.0" text="Date :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="200.0" prefHeight="18.0" prefWidth="63.0" text="Time :">
+      <Label layoutX="38.0" layoutY="200.0" prefHeight="18.0" prefWidth="63.0" text="Time :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="245.0" prefHeight="20.0" prefWidth="88.0" text="Park Site :">
+      <Label layoutX="38.0" layoutY="245.0" prefHeight="20.0" prefWidth="88.0" text="Park Site :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="288.0" prefHeight="18.0" prefWidth="63.0" text="Phone :">
+      <Label layoutX="38.0" layoutY="288.0" prefHeight="18.0" prefWidth="63.0" text="Phone :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="329.0" prefHeight="18.0" prefWidth="63.0" text="Email :">
+      <Label layoutX="38.0" layoutY="329.0" prefHeight="18.0" prefWidth="63.0" text="Email :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -103,12 +103,12 @@
       <TextField fx:id="minuteField" layoutX="218.0" layoutY="198.0" prefHeight="25.0" prefWidth="33.0" />
       <Label layoutX="215.0" layoutY="202.0" text=":" />
       <TextField fx:id="InstructoIdField" layoutX="182.0" layoutY="79.0" />
-      <Label fx:id="typeLabel" layoutX="38.0" layoutY="43.0" prefHeight="18.0" prefWidth="63.0" text="Type :">
+      <Label fx:id="typeLabel" layoutX="38.0" layoutY="43.0" prefHeight="18.0" prefWidth="63.0" text="Type :" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="insLabel" layoutX="38.0" layoutY="81.0" prefHeight="20.0" prefWidth="124.0" text="Instructor ID:">
+      <Label fx:id="insLabel" layoutX="38.0" layoutY="81.0" prefHeight="20.0" prefWidth="124.0" text="Instructor ID:" textFill="RED">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
