@@ -9,9 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -21,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.CancellationsReportRequestController;
+import utilities.SceneController;
 
 public class CancellationsReportFrameController implements Initializable{
 	
@@ -111,22 +110,12 @@ public class CancellationsReportFrameController implements Initializable{
 			String month = datePicker.getValue().getMonthValue() + "";
 			String day = datePicker.getValue().getDayOfMonth() + "";
 			String parkName = parkComboBox.getValue();
-			
-			try {
-				//Send data to the GUI that will be opened
-				CancellationsGraphFrameController.setYear(year);	
-				CancellationsGraphFrameController.setMonth(month);	
-				CancellationsGraphFrameController.setDay(day);	
-				CancellationsGraphFrameController.setParkName(parkName);
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("CancellationsGraphFrame.fxml"));
-	            Parent root = loader.load();
-				ClientUI.contentPane.getChildren().removeAll();
-				ClientUI.contentPane.getChildren().setAll(root);
-	            	
-			}catch(Exception ex) {
-				System.out.println("[CancellationsReportFrameController] - failed to update pane");
-				ex.printStackTrace();
-			}
+			CancellationsGraphFrameController.setYear(year);	
+			CancellationsGraphFrameController.setMonth(month);	
+			CancellationsGraphFrameController.setDay(day);	
+			CancellationsGraphFrameController.setParkName(parkName);
+			SceneController sc = new SceneController();
+			sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/CancellationsGraphFrame.fxml");
 		}		
 	}
 	
