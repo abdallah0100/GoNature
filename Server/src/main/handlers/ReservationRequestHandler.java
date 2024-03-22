@@ -2,6 +2,7 @@ package main.handlers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalTime;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import main.MainServer;
 
 public class ReservationRequestHandler {
 	
-	public static Order getReservationById(String id,String tableName) {
+	public static Order getReservationById(String []s,String tableName) {//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
@@ -21,48 +22,100 @@ public class ReservationRequestHandler {
 				Order o;
 				String query = "SELECT * FROM " + tableName + " WHERE ReservationID = ?";
 		        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
-		        ps.setString(1, id);
+		        ps.setString(1, s[1]);
 		        ResultSet rs = ps.executeQuery();
 		        if (!rs.next()) {
 		            return null;
 		        }
-			if(tableName.equals("reservations"))
-			{
 				 o=new Order(rs.getString("Type"),rs.getInt("NumberOfVisitors"),rs.getString("ReservationDate"),rs.getString("Hour"),
 						rs.getString("Minute"),rs.getString("Park"),rs.getString("Telephone"),rs.getString("Email"),
 						rs.getInt("ReservationID"),rs.getString("visitorID"),
-						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"));
-				return o;//reservation data
-			}
-			if(tableName.equals("tempreservation")) {
-				o=new Order(rs.getInt("NumberOfVisitors"),rs.getString("Park"),rs.getString("ReservationID"));
-				return o;
-			}
-			return null;
-
+						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"),rs.getString("processed"));
+				 if(s[0].equals(o.getParkName()))
+					 return o;//reservation data
+				 else 
+					 return null;
 		}catch(Exception ex) {
 			System.out.println("[UserRequestHandler] - failed to checkEntering");
 			ex.printStackTrace();
 			return null;
 		}
 	}
+
 	
 	
-	//insert copy to temp reservation
-	//3 data order and insert to tmp table
-	public static boolean createTempReservation(Order o) {
+	//insert copy to processedres reservation
+	public static boolean enterProcessed(Order o) {
+			if (MainServer.dbConnection == null) {
+				System.out.println(Constants.DB_CONNECTION_ERROR);
+				return false;
+			}
+			try {  	
+					String str = "INSERT INTO processedRes (NumberOfVisitors,Park,ReservationID,enterHour,enterMin,exitHour,exitMin,date,reservationType)"
+							+ " VALUES (?,?,?,?,?,?,?,?,?) ";
+					PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+	    		ps.setInt(1,o.getNumOfVisitors());//NumberOfVisitors
+			   	ps.setString(2,o.getParkName());//Park
+			   	ps.setString(3,o.getOrderID());//ReservationID
+			   		
+			    ps.setInt(4,LocalTime.now().getHour());//enterHour
+			   	ps.setInt(5,LocalTime.now().getMinute());//enterMin
+			   		
+			   	ps.setInt(6,0);//exitHour
+			    ps.setInt(7,0);//exitMin
+			        
+			   	ps.setString(8,o.getDate());//date
+			   	ps.setString(9,o.getOrderType());//reservationType
+			      int rowsAffected = ps.executeUpdate(); 
+			       return rowsAffected > 0; // Return true if the INSERT was successful
+					//return true;
+				}catch(Exception ex) {
+					System.out.println("[UserRequestHandler] - failed to checkEntering");
+					ex.printStackTrace();
+					return false;
+				}
+		}
+
+	
+	
+	// change  processed in reservation table to 0/1 (know if the reservation )
+		public static boolean updateStatus(String tableName,String id ,int n) {
+			if (MainServer.dbConnection == null) {
+				System.out.println(Constants.DB_CONNECTION_ERROR);
+				return false;
+			}
+			try {    	
+					String str = "UPDATE "+tableName+" SET processed=? WHERE ReservationID = ?";
+	    			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+	    			ps.setInt(1, n);
+	    			ps.setString(2, id);
+			        int rowsAffected = ps.executeUpdate(); 
+			        return rowsAffected > 0; // Return true if the update was successful
+					//return true;
+				}catch(Exception ex) {
+					System.out.println("[UserRequestHandler] - failed to checkEntering");
+					ex.printStackTrace();
+					return false;
+				}
+		}
+		
+
+	
+	//change
+	public static boolean exitProcessed(String id)
+	{
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
 		}
-		try {  	
-				String str = "INSERT INTO tempreservation (NumberOfVisitors,Park,ReservationID) VALUES (?,?,?) ";
+		try {    	
+				String str = "UPDATE processedres SET exitHour=?, exitMin=? WHERE ReservationID = ?";
     			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
-   		        ps.setInt(1,o.getNumOfVisitors());
-		   		ps.setString(2,o.getParkName());
-		   		ps.setString(3,o.getOrderID());
+			    ps.setInt(1,LocalTime.now().getHour());//exitHour
+			   	ps.setInt(2,LocalTime.now().getMinute());//exitMin
+    			ps.setString(3, id);
 		        int rowsAffected = ps.executeUpdate(); 
-		        return rowsAffected > 0; // Return true if the INSERT was successful
+		        return rowsAffected > 0; // Return true if the update was successful
 				//return true;
 			}catch(Exception ex) {
 				System.out.println("[UserRequestHandler] - failed to checkEntering");
@@ -70,6 +123,22 @@ public class ReservationRequestHandler {
 				return false;
 			}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// if reservation deleted 
@@ -130,7 +199,7 @@ public class ReservationRequestHandler {
 			while(rs.next()) {
 				Order o = new Order(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10),
-						rs.getString(11).equals("1"), rs.getString(12).equals("1"), rs.getString(13).equals("1"));
+						rs.getString(11).equals("1"), rs.getString(12).equals("1"), rs.getString(13).equals("1"),rs.getString(14));
 				orders.add(o);
 			}
 		}catch(Exception ex) {

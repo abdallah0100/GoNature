@@ -15,6 +15,7 @@ import requests.RequestType;
 
 public class ServerRequestHandler {
 
+	@SuppressWarnings("null")
 	public static void handleRequest(Message msg, ConnectionToClient client) {
 		String generalRespondMsg = "responded with no message.";
 		Report r;
@@ -220,58 +221,74 @@ public class ServerRequestHandler {
 			return;
 			
 			
-			//exit from park and delete from temp reservatiom	
-			case EXIT_VISITOR:
-				if (!(msg.getRequestData() instanceof String)) {
+			//exit from park 	
+			case EXIT_VISITOR://for visitor with reservation
+				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
 				}
-				String s2 = (String)msg.getRequestData();
-				o=ReservationRequestHandler.getReservationById(s2,"tempreservation");
-				if(o!=null)
-					{	//minus to current number and delete from tempreservation
-						if(ParkRequestHandler.updateCurrentAmoun(o.getParkName(),((-1)*o.getNumOfVisitors()))) {
-							boolean re =ReservationRequestHandler.deleteReservation("tempreservation",o.getOrderID());
-							respondToClient(client, new Message(RequestType.EXIT_VISITOR,re));
-							return;
+				//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+				String[] s2 = (String[])msg.getRequestData();
+				o=ReservationRequestHandler.getReservationById(s2,"reservations");
+				if(o!=null){	
+					//minus to current number 
+					//update data in processedres table
+					if(o.isProcessed().equals("0"))
+					{
+						if(ParkRequestHandler.updateCurrentAmoun(o,(-1)*(o.getNumOfVisitors()))) {
+							//ParkRequestHandler.updateCurrentAmoun(o.getParkName(),((-1)*o.getNumOfVisitors()))
+							if(ReservationRequestHandler.exitProcessed(o.getOrderID())) {
+								boolean re =ReservationRequestHandler.updateStatus("reservations",o.getOrderID(),1);//change the processed to 1
+								respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
+								return;
 						}
 						respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
 						return;
-					}	
-				else
-					respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
-					return;
-				
+						}
+					}
+					else
+					{
+						respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
+						return;
+					}			
+				}
+				respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
+				return;
 				//entry worker enter the reservation id
-			case ENTER_VISTOR:
-				if (!(msg.getRequestData() instanceof String)) {
+			case ENTER_VISTOR://for visitor with reservation
+				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
-				}
-				String s3 = (String)msg.getRequestData();
+				}////s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+				String[] s3 = (String[])msg.getRequestData();
 				Order o1=ReservationRequestHandler.getReservationById(s3,"reservations");
 				if(o1!=null)
-				{
-					Order o2=ReservationRequestHandler.getReservationById(s3,"tempreservation");
-					if(o2!=null) {
-						respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
-						return;
-					}
-						if(ReservationRequestHandler.createTempReservation(o1))//add to temp
-						{	//add to current number and delete from reservation
-							if(ParkRequestHandler.updateCurrentAmoun(o1.getParkName(),o1.getNumOfVisitors())) {
-								boolean re =ReservationRequestHandler.deleteReservation("reservations",o1.getOrderID());
+				{//-1 not used 0 in the park 1 exit
+					if(o1.isProcessed().equals("-1")) {//to be sure that no entered before
+						Order o2=ReservationRequestHandler.getReservationById(s3,"processedres");
+						if(o2!=null) {//if the reservation allready entered
+							respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
+							return;
+						}
+							if(ReservationRequestHandler.enterProcessed(o1))//add to processedres
+							{	//add to current number and delete from reservation
+								if(ParkRequestHandler.updateCurrentAmoun(o1,o1.getNumOfVisitors())) {
+									//(ParkRequestHandler.updateCurrentAmoun(o1.getParkName(),o1.getNumOfVisitors()))
+								boolean re =ReservationRequestHandler.updateStatus("reservations",o1.getOrderID(),0);
 								respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
 								return;
 							}
 							respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
 							return;
 						}	
+					}
+					respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
+					return;
 				}		
 				else
 					respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
 				return;
-					
+	/////////////////////////////				//////////////////////////////////////////////////////////////
 				case UPDATE_RESERVATION:
 					if (!(msg.getRequestData() instanceof Order)) {
 						respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
@@ -297,7 +314,7 @@ public class ServerRequestHandler {
 			    return;
 			}
 			o = (Order) msg.getRequestData();
-			boolean canceled = ReservationRequestHandler.deleteReservation("reservations", o.getOrderID());
+			boolean canceled = ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
 			boolean addedToCanceled = ReservationRequestHandler.addToCanceledReports(o);
 			o.setCanceled(addedToCanceled && canceled);
 			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));

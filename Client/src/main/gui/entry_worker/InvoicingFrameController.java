@@ -1,7 +1,11 @@
 package main.gui.entry_worker;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,18 +14,12 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
 
-public class BillCakFrameController  extends Application {
-	@FXML
-	private TextField reservatiomId;
+public class InvoicingFrameController  extends Application  implements Initializable {
 	
 	@FXML
-	private Button viewbill;
-	
+	private Label reservationId;
 	@FXML
 	private Label msgLabel;
-	
-	@FXML
-	private Label billLabel;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -39,6 +37,22 @@ public class BillCakFrameController  extends Application {
 									    "/main/gui/entry_worker/BillCakFrame.fxml");
 	}
 	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		reservationId.setText(MonitoringFrameControlleroring.id);
+		reservationId.setVisible(true);
+		UserRequestController.sendShowBill(reservationId.getText());
+		if (ClientController.showBill!=null) 
+		{
+			displayMSG(MonitoringFrameControlleroring.price + "");
+		}
+		else {//if null
+				System.out.println("[BillCakFrameController] - did no bill");
+				displayMSG("reservation Not Found");
+			 }
+		}
+	
+	/*
 	public void showBill(ActionEvent e){
 		if (reservatiomId.getText().length() <= 0){
 			displayMSG("Please enter the  Bill Id");
@@ -63,11 +77,14 @@ public class BillCakFrameController  extends Application {
 				System.out.println("[BillCakFrameController] - did no bill");
 				displayMSG("reservation Not Found");
 			 }
-		}
+		}*/
 	
 	public void displayMSG(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
+
+
+
 }
 

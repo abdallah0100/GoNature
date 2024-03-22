@@ -13,13 +13,11 @@ import utilities.SceneController;
  * It manages the actions and events related to the Entry Worker's interface.
 */
 
-public class EntryWorkerFrameController extends Application{
+public class EntryWorkerFrameController extends Application {
 	
 	 @FXML
 	 private Button createReservations;
-	 
-	 @FXML
-	 private Button viewBillBtn;
+
 	 
 	 public static void main(String args[]) {
 		 launch(args);
@@ -44,14 +42,11 @@ public class EntryWorkerFrameController extends Application{
 	 * that the EntryWorker can check.
 	 * @param event
 	 */
-	public void viewBill(ActionEvent event) {
-		SceneController scene = new SceneController();
-		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/BillCakFrame.fxml");
-	}
+
 	
 	public void createReservations(ActionEvent event) {
 		SceneController scene = new SceneController();
-		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
+		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/EnterVisitorsFrame.fxml");
 	}
 	
 	public void monitoring(ActionEvent event) {
