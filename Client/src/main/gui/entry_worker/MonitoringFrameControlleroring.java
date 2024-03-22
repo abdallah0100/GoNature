@@ -46,18 +46,20 @@ public class MonitoringFrameControlleroring extends Application{
 	public void enter(ActionEvent event) {
 		if(validInput()) 
 		{
-			UserRequestController.enter(fill());
+			UserRequestController.enter(fill());	
 			if(ClientController.monitoring)
 			{
+				UserRequestController.sendShowBill(visitorIdTxt.getText());
+				price=ClientController.showBill.returnPrice();
 				displayMSG("enterd");
 				ClientController.monitoring=false;
+				SceneController scene = new SceneController();
+				scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/InvoicingFrame.fxml");
 				return;
 			}
-			else {//if null
-				displayMSG("reservation not found ");
-				return;	
-			 }
 		}
+		displayMSG("reservation not found ");
+		return;	
 	}
 
 	

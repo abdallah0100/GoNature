@@ -14,20 +14,12 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
 
-public class BillCakFrameController  extends Application  implements Initializable {
-	@FXML
-	private TextField reservatiomId;
-	
-	
-	//private Button viewbill;
+public class InvoicingFrameController  extends Application  implements Initializable {
 	
 	@FXML
 	private Label reservationId;
 	@FXML
 	private Label msgLabel;
-	
-	@FXML
-	private Label billLabel;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -49,7 +41,7 @@ public class BillCakFrameController  extends Application  implements Initializab
 	public void initialize(URL location, ResourceBundle resources) {
 		reservationId.setText(MonitoringFrameControlleroring.id);
 		reservationId.setVisible(true);
-	//	UserRequestController.sendShowBill(reservatiomId.getText());
+		UserRequestController.sendShowBill(reservationId.getText());
 		if (ClientController.showBill!=null) 
 		{
 			displayMSG(MonitoringFrameControlleroring.price + "");
