@@ -51,6 +51,16 @@ public class DepManagerMainFrameController extends Application{
 		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/SelectReportFrame.fxml");
 	}
 	
+	/**
+	 * This method is responsible for opening new window after
+	 * clicking on Confirm Change Request button
+	* @param event 
+	*/
+	@FXML
+	public void confirmChange(ActionEvent event) {
+		SceneController sc = new SceneController();
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/DecideVarEditFrame.fxml");
+	}
 	
 	/**
 	 * This method is responsible for opening new window after
@@ -61,18 +71,6 @@ public class DepManagerMainFrameController extends Application{
 	public void showExportReportWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
 		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/ExportReportFrame.fxml");
-	}
-	
-	
-	/**
-	 * This method is responsible for opening new window after
-	 * clicking on Confirm Change Request button
-	* @param event 
-	*/
-	@FXML
-	public void confirmChange(ActionEvent event) {
-		SceneController sc = new SceneController();
-		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/DecideVarEditFrame.fxml");
 	}
 
 }

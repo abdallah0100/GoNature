@@ -1,18 +1,26 @@
 package main.gui.dep_manager;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
-
 import entities.CancelledReservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import main.ClientController;
+import main.ClientUI;
 import main.controllers.CancellationsReportRequestController;
-
 
 public class CancellationsReportFrameController implements Initializable{
 	
@@ -27,7 +35,8 @@ public class CancellationsReportFrameController implements Initializable{
 	private ObservableList<CancelledReservation> listLeft = FXCollections.observableArrayList();
 	private static CancelledReservation[] leftTableArray = null;
 
-	
+	@FXML
+    private Label errorMsg;
 	@FXML
 	private TableView<CancelledReservation> rightTableView;
 	@FXML
@@ -39,6 +48,10 @@ public class CancellationsReportFrameController implements Initializable{
 	private ObservableList<CancelledReservation> listRight = FXCollections.observableArrayList();
 	private static CancelledReservation[] rightTableArray = null;
 
+	@FXML
+	private ComboBox<String> parkComboBox;
+	@FXML
+	private DatePicker datePicker;
 	
 	
 	@Override
@@ -75,9 +88,48 @@ public class CancellationsReportFrameController implements Initializable{
 	        }
 	        rightTableView.setItems(listRight);
 	    }
+		Iterator<String> iterator = ClientController.getParks().keySet().iterator();
+        ArrayList<String> al = new ArrayList<>();
+        while (iterator.hasNext()) {
+            al.add(iterator.next());
+        }
+        ObservableList<String> list = FXCollections.observableArrayList(al);
+        parkComboBox.setItems(list);
+	}
+
+	
+	@FXML
+	public void showGraphWindow(ActionEvent event) {
+		errorMsg.setVisible(false);
+				
+		if (parkComboBox.getValue() == null || datePicker.getValue() == null) {
+		    errorMsg.setText("Fill All Fields");
+		    errorMsg.setVisible(true);		    
+		}
+		else {
+			String year = datePicker.getValue().getYear() + "";
+			String month = datePicker.getValue().getMonthValue() + "";
+			String day = datePicker.getValue().getDayOfMonth() + "";
+			String parkName = parkComboBox.getValue();
+			
+			try {
+				//Send data to the GUI that will be opened
+				CancellationsGraphFrameController.setYear(year);	
+				CancellationsGraphFrameController.setMonth(month);	
+				CancellationsGraphFrameController.setDay(day);	
+				CancellationsGraphFrameController.setParkName(parkName);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("CancellationsGraphFrame.fxml"));
+	            Parent root = loader.load();
+				ClientUI.contentPane.getChildren().removeAll();
+				ClientUI.contentPane.getChildren().setAll(root);
+	            	
+			}catch(Exception ex) {
+				System.out.println("[CancellationsReportFrameController] - failed to update pane");
+				ex.printStackTrace();
+			}
+		}		
 	}
 	
-
 	public static void setArrayListLeft(CancelledReservation[] arrayListLeft) {
 		CancellationsReportFrameController.leftTableArray = arrayListLeft;
     }
@@ -85,5 +137,5 @@ public class CancellationsReportFrameController implements Initializable{
 	public static void setArrayListRight(CancelledReservation[] arrayListRight) {
 		CancellationsReportFrameController.rightTableArray= arrayListRight;
 	}
-	
+
 }

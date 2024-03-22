@@ -15,6 +15,7 @@ import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.LogInFrameController;
+import main.gui.dep_manager.CancellationsGraphFrameController;
 import main.gui.dep_manager.CancellationsReportFrameController;
 import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
@@ -297,6 +298,17 @@ public class RequestHandler {
                 System.out.println("[RequestHandler] - invalid DELETE_REQUEST_CHANGE response");
 			}
 			return;
+		case CANCELLATIONS_GRAPH_DATA:
+			if (msg.getRequestData() instanceof int[]) {
+				int[] received = (int[]) msg.getRequestData();
+				CancellationsGraphFrameController.setValues(received[0],received[1],received[2]);		
+				System.out.println("[RequestHandler] - Data received successfully.");
+	            return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid CANCELLATIONS_GRAPH_DATA response");
+				return;
+			}
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
