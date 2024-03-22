@@ -68,7 +68,6 @@ public class CancellationsGraphDataHandler {
             ex.printStackTrace();
             return null;
         }
-        dataToReturn[2] += dataToReturn[0] + dataToReturn[1];
         return dataToReturn;
     }   
 }
