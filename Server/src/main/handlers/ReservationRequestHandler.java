@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import entities.Order;
 import entities.Park;
@@ -157,6 +158,52 @@ public class ReservationRequestHandler {
 				reserved += o1.getNumOfVisitors();
 		
 		return reserved + o.getNumOfVisitors() <= parkMaxCapacity;
+	}
+	
+	public static ArrayList<String[]> getAvailableTimes(Order o) {
+		ArrayList<String[]> arr = new ArrayList<>();
+		//string = {year/month/day, avbl_hour}
+	
+		Calendar rightNow = Calendar.getInstance();
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		int year = rightNow.get(Calendar.YEAR);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		
+		int numOfSuggestions = 0;
+		int daySuggestions = 0;
+		int hour;
+		Order temp;
+		String date;
+		
+		while (numOfSuggestions < 10) {
+			if (day + 1 > 30) {
+				day = 1;
+				if (month + 1 > 12) {
+					year++;
+					month = 1;
+				}else{
+					month++;
+				}
+			}else
+				day++;
+			if (day == 24)
+				System.out.println(day);
+			hour = 8;
+			daySuggestions = 0;
+			while (daySuggestions < 3 && hour <= 22) {
+				date = year+"-"+month+"-"+day;
+				temp = new Order(o.getParkName(), date, hour+"", "00", o.getNumOfVisitors(), o.getOrderType());
+				if (parkHasSpace(temp)) {
+					arr.add(new String[]{date, hour+""});
+					daySuggestions++;
+					numOfSuggestions++;
+				}
+				hour++;
+				if (hour > 22)
+					break;
+			}
+		}
+		return arr;
 	}
 	
 }
