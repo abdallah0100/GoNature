@@ -20,6 +20,7 @@ public class Order implements Serializable{
 	private boolean isPayed;
 	private boolean canceled;
 	private boolean cancelRequest;
+	private String processed;
 	
 	private boolean sentMsg;
 	private int msgHour;
@@ -58,7 +59,7 @@ public class Order implements Serializable{
 
 	}
 	
-	public Order( int numberOfVisitors, String parkName,String orderID) {
+	public Order(int numberOfVisitors, String parkName,String orderID) {
 		this.parkName =parkName;
 		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.orderID=String.valueOf(orderID);
@@ -66,7 +67,7 @@ public class Order implements Serializable{
 	
 	//new 
 	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
-			, String parkName , String phone, String email ,int reservationID,String visitorID ,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed) {
+			, String parkName , String phone, String email ,int reservationID,String visitorID ,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed,String processed) {
 		this.orderType = orderType;
 		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.date = date;
@@ -81,6 +82,7 @@ public class Order implements Serializable{
 		this.invitedInAdvance = invitedInAdvance;
 		this.isPayed = isPayed;
 		this.visitorID=visitorID;
+		this.processed=processed;
 	}
 	
     public String getOrderType() {
@@ -216,5 +218,13 @@ public class Order implements Serializable{
 
 	public void setCancelRequest(boolean cancelRequest) {
 		this.cancelRequest = cancelRequest;
+	}
+
+	public String isProcessed() {
+		return processed;
+	}
+
+	public void setProcessed(String processed) {
+		this.processed = processed;
 	}	
 }

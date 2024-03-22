@@ -41,46 +41,25 @@ public class MonitoringFrameControlleroring extends Application{
 		}
 
 	}
+	
+	//enter id reservation and update and the amount visitor with order if 
 	public void enter(ActionEvent event) {
 		if(validInput()) 
 		{
-			UserRequestController.sendShowBill(visitorIdTxt.getText());
-			if (ClientController.showBill!=null) 
-			{
-				price=ClientController.showBill.returnPrice();
-				UserRequestController.enter(fill());
-				if(ClientController.monitoring)
-				{
-					displayMSG("enterd");
-					ClientController.monitoring=false;
-					SceneController scene = new SceneController();
-					scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/BillCakFrame.fxml");
-					return;
-				}
-			}
-			else {//if null
-				displayMSG("reservation not found ");
-				return;
-					//System.out.println("[BillCakFrameController] - did no bill");
-					//displayMSG("reservation Not Found");
-				 }
-			}
-			//price=ClientController.showBill.returnPrice();
-			/*
 			UserRequestController.enter(fill());
 			if(ClientController.monitoring)
 			{
 				displayMSG("enterd");
 				ClientController.monitoring=false;
-				SceneController scene = new SceneController();
-				scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/BillCakFrame.fxml");
 				return;
-			}*/
-		//	else {
-		//		displayMSG("reservation not found ");
-		//		return;
-		//	}
+			}
+			else {//if null
+				displayMSG("reservation not found ");
+				return;	
+			 }
 		}
+	}
+
 	
 	
 	public boolean validInput() {
@@ -90,12 +69,13 @@ public class MonitoringFrameControlleroring extends Application{
 		}
 		try {
 			Integer.parseInt(visitorIdTxt.getText());
+			return true;
 		//	displayMSG("reservationId has to be Number");
 		}catch(Exception ex) {
 			displayMSG("Invalid id was inputted");
 			return false;
 		}
-		return true;
+	
 	}
 	
 	public void displayMSG(String txt) {
