@@ -20,6 +20,7 @@ public class Order implements Serializable{
 	private boolean isPayed;
 	private boolean canceled;
 	private boolean cancelRequest;
+	private String processed;
 	
 	private boolean sentMsg;
 	private int msgHour;
@@ -50,14 +51,14 @@ public class Order implements Serializable{
 	public Order(String parkName, String date, String hour,String minute,int numOfVisitors,String orderType) {
 		this.parkName =parkName;
 		this.date = date;
+		this.hour = hour;
+		this.minute = minute;
 		this.time = hour+":"+minute;
 		this.numOfVisitors =  String.valueOf(numOfVisitors);
 		this.orderType = orderType;
-
-
 	}
 	
-	public Order( int numberOfVisitors, String parkName,String orderID) {
+	public Order(int numberOfVisitors, String parkName,String orderID) {
 		this.parkName =parkName;
 		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.orderID=String.valueOf(orderID);
@@ -65,7 +66,7 @@ public class Order implements Serializable{
 	
 	//new 
 	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
-			, String parkName , String phone, String email ,int reservationID,String visitorID ,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed) {
+			, String parkName , String phone, String email ,int reservationID,String visitorID ,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed,String processed) {
 		this.orderType = orderType;
 		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.date = date;
@@ -80,6 +81,7 @@ public class Order implements Serializable{
 		this.invitedInAdvance = invitedInAdvance;
 		this.isPayed = isPayed;
 		this.visitorID=visitorID;
+		this.processed=processed;
 	}
 	
     public String getOrderType() {
@@ -218,10 +220,65 @@ public class Order implements Serializable{
 	}
 
 	public String getMessageTitle() {
-		return messageTitle;
+		return messageTitle; 
 	}
-
+ 
 	public void setMessageTitle(String messageTitle) {
 		this.messageTitle = messageTitle;
+	}
+	
+
+	public String isProcessed() {
+		return processed;
+	}
+
+	public void setProcessed(String processed) {
+		this.processed = processed;
+	}
+	
+	public int getYear() {
+		String[] dateSplitted = getDate().split("-");
+		int orderYear = Integer.parseInt(dateSplitted[0]);
+		return orderYear;
+	}
+	
+	public int getMonth() {
+		String[] dateSplitted = getDate().split("-");
+		int orderYear = Integer.parseInt(dateSplitted[1]);
+		return orderYear;
+	}
+	
+	public int getDay() {
+		String[] dateSplitted = getDate().split("-");
+		int orderYear = Integer.parseInt(dateSplitted[2]);
+		return orderYear;
+	}
+	
+	public boolean overlappingOrders(Order o, int estimatedTime) {
+		if (o == null)
+			return false;
+		if (getYear() != o.getYear() || getMonth() != o.getMonth() || getDay() != o.getDay())
+			return false;
+		try {
+			int hour = Integer.parseInt(this.hour);
+			int minute = Integer.parseInt(this.minute);
+				
+			int otherHour = Integer.parseInt(o.getHour());
+			int otherMinute = Integer.parseInt(o.getMinute());
+	
+			
+			if (hour - otherHour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+				return !(minute >= otherMinute);
+			else if (otherHour - hour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+				return !(otherMinute >= minute);
+			else if (hour - otherHour > estimatedTime)//current hour is more than 4 hours ahead of other
+				return false;
+			else if (otherHour - hour > estimatedTime)//current hour is more than 4 hours behind of other
+				return false;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return true;
 	}
 }

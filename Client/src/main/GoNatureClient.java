@@ -70,8 +70,14 @@ public class GoNatureClient extends AbstractClient{
 	  {
 	    try
 	    {
-	    	if (ClientController.connectedToServer)
-	    		handleMessageFromClientUI(new Message(RequestType.DISCONNECT_FROM_SERVER));
+	    	if (ClientController.connectedToServer) {
+	    		String connectedAs = "";
+	    		if (ClientController.connectedUser != null)
+	    			connectedAs = ClientController.connectedUser.getUsername();
+	    		else if (ClientController.connectedVisitor != null)
+	    			connectedAs = ClientController.connectedVisitor.getId();
+	    		handleMessageFromClientUI(new Message(RequestType.DISCONNECT_FROM_SERVER, connectedAs));
+	    	}
 	    	ClientController.connectedVisitor = null;
 	    	closeConnection();
 	    }

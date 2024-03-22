@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
+import main.ClientUI;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
  
@@ -17,6 +18,8 @@ public class MonitoringFrameControlleroring extends Application{
 	private TextField visitorIdTxt;
 	@FXML
 	private Label msgLabel;
+	public static String id;
+	public static double price;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -27,7 +30,7 @@ public class MonitoringFrameControlleroring extends Application{
 	}
 	public void exit(ActionEvent event) {
 		if(validInput()) {
-			UserRequestController.exit(visitorIdTxt.getText());
+			UserRequestController.exit(fill());
 			if(ClientController.monitoring){
 				displayMSG("exit and delete");
 				ClientController.monitoring=false;
@@ -38,19 +41,28 @@ public class MonitoringFrameControlleroring extends Application{
 		}
 
 	}
+	
+	//enter id reservation and update and the amount visitor with order if 
 	public void enter(ActionEvent event) {
-		if(validInput()) {
-			UserRequestController.enter(visitorIdTxt.getText());
+		if(validInput()) 
+		{
+			UserRequestController.enter(fill());	
 			if(ClientController.monitoring)
 			{
+				UserRequestController.sendShowBill(visitorIdTxt.getText());
+				price=ClientController.showBill.returnPrice();
 				displayMSG("enterd");
 				ClientController.monitoring=false;
-			}
-			else {
-				displayMSG("reservation not found ");
+				SceneController scene = new SceneController();
+				scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/InvoicingFrame.fxml");
+				return;
 			}
 		}
+		displayMSG("reservation not found ");
+		return;	
 	}
+
+	
 	
 	public boolean validInput() {
 		if (visitorIdTxt.getText().length() <= 0){
@@ -59,16 +71,27 @@ public class MonitoringFrameControlleroring extends Application{
 		}
 		try {
 			Integer.parseInt(visitorIdTxt.getText());
-			displayMSG("reservationId has to be Number");
+			return true;
+		//	displayMSG("reservationId has to be Number");
 		}catch(Exception ex) {
 			displayMSG("Invalid id was inputted");
 			return false;
 		}
-		return true;
+	
 	}
 	
 	public void displayMSG(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
+	}
+	
+	//put the park and the reservation id 
+	public String[] fill()
+	{
+		String[] s = new String[2];
+		s[0] = ClientController.connectedUser.getParkName();
+		s[1] = visitorIdTxt.getText();
+		id=s[1];
+		return s;
 	}
 }

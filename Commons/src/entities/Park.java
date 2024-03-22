@@ -12,6 +12,7 @@ public class Park implements Serializable{
 	private int gap;
 	private int estimatedTime=4;
 	private int maxCapacity;
+	private int visitorsWithOrder, visitorsWithoutOrder;
 	
 	private int availablePlaces=0 ;
 	public static int DEFAULT_PRICE=50;
@@ -29,6 +30,15 @@ public class Park implements Serializable{
 		this.gap = gap;
 		this.estimatedTime = estTime;
 		this.maxCapacity = capacity;
+	}
+	
+	public Park(String parkname, int gap, int estTime, int capacity, int visitorsWithOrder, int visitorsWithoutOrder) {
+		this.parkname = parkname;
+		this.gap = gap;
+		this.estimatedTime = estTime;
+		this.maxCapacity = capacity;
+		this.visitorsWithOrder = visitorsWithOrder;
+		this.visitorsWithoutOrder = visitorsWithoutOrder;
 	}
 	
 	public String getParkName() {
@@ -89,6 +99,14 @@ public class Park implements Serializable{
 
 	public void setUpdated(boolean updated) {
 		this.updated = updated;
+	}
+
+	public int getVisitorsWithOrder() {
+		return visitorsWithOrder;
+	}
+
+	public int getVisitorsWithoutOrder() {
+		return visitorsWithoutOrder;
 	}
 
 }

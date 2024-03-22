@@ -39,9 +39,9 @@
             </DropShadow>
          </effect>
       </Label>
-      <Label fx:id="label" layoutX="218.0" layoutY="296.0" prefHeight="17.0" prefWidth="54.0" textFill="WHITE">
+      <Label fx:id="label" layoutX="172.0" layoutY="301.0" prefHeight="14.0" prefWidth="257.0" textFill="WHITE">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial" size="11.0" />
          </font></Label>
       <TextField fx:id="idTxt" layoutX="147.0" layoutY="165.0" prefHeight="25.0" prefWidth="142.0">
          <effect>

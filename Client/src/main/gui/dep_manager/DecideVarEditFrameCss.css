@@ -3,15 +3,6 @@
 }
 
 
-
-.table-view .column-header .label{
-	-fx-text-fill:white;
-	-fx-font-size:14px;
-	-fx-font-family:'Arial';
-	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
-	
-}
-
 Button{
 	-fx-background-color: #219a6a;
 	-fx-background-radius: 40px;

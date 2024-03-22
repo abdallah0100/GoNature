@@ -17,4 +17,17 @@ public class ClientConnectionHandler {
 			list.add(newCon);
 		MainServer.setClientConnections(list);
 	}
+	
+	public static void handleUserLogin(ConnectionToClient client, String name) {
+		MainServer.getInstance().getConnectionMap().put(name, client);
+	}
+	
+	public static boolean clientAlreadyConnected(String connectedAs) {
+		return MainServer.getInstance().getConnectionMap().get(connectedAs) != null;
+	}
+	
+	public static void handleLogout(String toLogout) {
+		if (clientAlreadyConnected(toLogout))
+			MainServer.getInstance().getConnectionMap().remove(toLogout);
+	}
 }

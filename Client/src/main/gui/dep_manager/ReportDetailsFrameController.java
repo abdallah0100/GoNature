@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,14 +13,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import main.ClientController;
 import main.controllers.NumOfVisitorsController;
 
 public class ReportDetailsFrameController implements Initializable{
 	
-	@FXML
-	private  TextField parkField;
+	@FXML 
+	private  ComboBox<String> parkBox;
 	@FXML
 	private  ComboBox<String> monthBox;
 	@FXML 
@@ -64,21 +64,24 @@ public class ReportDetailsFrameController implements Initializable{
 		ObservableList<String> yearList = FXCollections.observableArrayList(arr2);
 		yearBox.setItems(yearList);
 		yearsList = new ArrayList<>(Arrays.asList(arr2));
+		
+		//Fill all the parks in comoBox
+		Iterator<String> iterator = ClientController.getParks().keySet().iterator();
+		ArrayList<String> al = new ArrayList<String>();	
+        while(iterator.hasNext()) {		
+			al.add(iterator.next());
+        }
+		ObservableList<String> list = FXCollections.observableArrayList(al);
+		parkBox.setItems(list);	
 	}
 	
 	@FXML
 	public void showNumberOfVisitors(ActionEvent event) {	
 		
 		if(checkInput()) {
-			if (ClientController.getParks().get(parkField.getText()) == null) {
-					changeVisibility(false);
-				    errorMsgLabel.setVisible(true);
-				    errorMsgLabel.setText("Enter Valid park name");
-			}
-			else {
 				errorMsgLabel.setVisible(false);
 				String[] requestedData = new String[3];
-				requestedData[0] = parkField.getText();
+				requestedData[0] = parkBox.getValue();
 				requestedData[1] = monthBox.getValue();
 				requestedData[2] = yearBox.getValue();
 				
@@ -88,19 +91,13 @@ public class ReportDetailsFrameController implements Initializable{
 					    changeVisibility(true);
 					    organizedAmountLabel.setText(organizedGroupAmount);
 					    indivisualsAmountLabel.setText(indivisualsAmount);    
-			  }else{
-				changeVisibility(true);
-				organizedAmountLabel.setText("Not Found");
-				indivisualsAmountLabel.setText("Not Found");
-			  }
-
-			}	
-		}
-	   else {
+				}
+		}else{
 			errorMsgLabel.setText("Fill All Fields");
 			errorMsgLabel.setVisible(true);
 		}	
 	}
+	
 	
 	public void changeVisibility(boolean bool) {
 		reservationTypeLabel.setVisible(bool);;	
@@ -113,7 +110,7 @@ public class ReportDetailsFrameController implements Initializable{
 	
 	@FXML
 	public void clearFieldsBtn(ActionEvent event) {	
-		   parkField.clear();
+		   parkBox.setValue(null);
 		   monthBox.setValue(null);
 		   yearBox.setValue(null);
 		   
@@ -123,9 +120,7 @@ public class ReportDetailsFrameController implements Initializable{
 	}
 	
 	public boolean checkInput() {
-		if (parkField.getText() == null || parkField.getText().length() == 0)
-			return false;
-		if (monthBox.getValue() == null || yearBox.getValue() == null)
+		if (monthBox.getValue() == null || yearBox.getValue() == null || parkBox.getValue() == null)
 			return false;
 		return monthsList.contains(monthBox.getValue()) && yearsList.contains(yearBox.getValue());
 	}

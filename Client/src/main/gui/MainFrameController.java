@@ -15,7 +15,6 @@ import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.UserRequestController;
-import main.threads.VisitorReminder;
 import utilities.SceneController;
 
 public class MainFrameController extends Application implements Initializable{
@@ -44,6 +43,12 @@ public class MainFrameController extends Application implements Initializable{
 	
 	@FXML
 	public void logout(ActionEvent event) {
+		String toLogout;
+		if (ClientController.connectedUser != null)
+			toLogout = ClientController.connectedUser.getUsername();
+		else 
+			toLogout = ClientController.connectedVisitor.getId();
+		UserRequestController.sendLogoutRequest(toLogout);
 		ClientController.connectedVisitor = null;
 		ClientController.connectedUser=null;
 		UserRequestController.LogedIn = false;

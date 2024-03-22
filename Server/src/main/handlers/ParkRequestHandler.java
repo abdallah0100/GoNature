@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import entities.Order;
 import entities.Park;
 import entities.Report;
 import main.Constants;
@@ -126,24 +127,31 @@ public class ParkRequestHandler {
 		}
 	}
 	
-	public static boolean updateCurrentAmoun(String park, int num) {
+	
+	//o=Order ,num=num of the visitor maybe for enter or exit ,coulm to know where to update (with/without reservation)
+	public static boolean updateCurrentAmoun(Order o,int num) {
 			if (MainServer.dbConnection == null) {
 				System.out.println(Constants.DB_CONNECTION_ERROR);
 				return false;
 			}
+			String v;//string to know where i have to change the amount
+			if(o.getInvitedInAdvance())
+				v="visitorsWithOrder";
+			else
+				v="visitorsWithoutOrder";
 			try {
 				Statement st = MainServer.dbConnection.createStatement();
-				ResultSet rs = st.executeQuery("SELECT currentAmount FROM parks WHERE ParkName='"+park+"'");
+				ResultSet rs = st.executeQuery("SELECT "+v+" FROM parks WHERE ParkName='"+o.getParkName()+"'");
 				if (!rs.next()) {
 					return false;
 				}
 					int newCurrent;
-					int oldNumber=rs.getInt("currentAmount");
+					int oldNumber=rs.getInt(v);
 					newCurrent=oldNumber+num;
-					String str = "UPDATE parks SET currentAmount=? WHERE ParkName=? ";
+					String str = "UPDATE parks SET " + v +" = ? WHERE ParkName = ?";
 					PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
 			        ps.setInt(1, newCurrent);
-			        ps.setString(2, park);
+			        ps.setString(2, o.getParkName());
 			        int rowsAffected = ps.executeUpdate(); // Execute the update query
 			        return rowsAffected > 0; // Return true if the update was successful
 					//return true;
@@ -152,7 +160,58 @@ public class ParkRequestHandler {
 					ex.printStackTrace();
 					return false;
 				}
-		}	
+		}
+	
+	public static Park getParkData(String name) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return null;
+		}
+		try {
+			String str = "SELECT * FROM parks WHERE ParkName='"+name+"'";
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next()) {
+				System.out.println("[ParkRequestHandler] - park " + name + " doesn't exist");
+				return null;
+			}
+			Park p = new Park(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
+			return p;
+		}catch(Exception ex) {
+			System.out.println("[ParkRequestHandler] - failed to update park variable");
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	public static boolean processedResData(String park, int num) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT visitorsWithOrder FROM parks WHERE ParkName='"+park+"'");
+			if (!rs.next()) {
+				return false;
+			}
+				int newCurrent;
+				int oldNumber=rs.getInt("visitorsWithOrder");
+				newCurrent=oldNumber+num;
+				String str = "UPDATE parks SET visitorsWithOrder=? WHERE ParkName=? ";
+				PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
+		        ps.setInt(1, newCurrent);
+		        ps.setString(2, park);
+		        int rowsAffected = ps.executeUpdate(); // Execute the update query
+		        return rowsAffected > 0; // Return true if the update was successful
+				//return true;
+			}catch(Exception ex) {
+				System.out.println("[UserRequestHandler] - failed to checkEntering");
+				ex.printStackTrace();
+				return false;
+			}
+	}	
 	
 	
 }
