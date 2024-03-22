@@ -1,7 +1,6 @@
 package main.handlers;
 import java.io.IOException;
 import java.util.HashMap;
-
 import entities.Bill;
 import entities.CancelledReservation;
 import entities.Order;
@@ -319,7 +318,15 @@ public class ServerRequestHandler {
 			}			
 			respondToClient(client, new Message(RequestType.SHOW_EDITED_VARIABLES,
 			DeletedRequestChangeHandler.deleteData((String[])msg.getRequestData())));
-			return ;	
+			return ;
+		case CANCELLATIONS_GRAPH_DATA:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
+				return;
+			}
+			int[] sendNumsRequested = CancellationsGraphDataHandler.getDataForGraph((String[])(msg.getRequestData()));
+			respondToClient(client, new Message(RequestType.CANCELLATIONS_GRAPH_DATA,sendNumsRequested));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
