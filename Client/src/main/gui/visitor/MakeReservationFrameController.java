@@ -56,6 +56,7 @@ public class MakeReservationFrameController extends Application implements Initi
 	String str;
 	LocalDate date;
 	LocalDate today = LocalDate.now();
+	public static boolean hasSpace = false;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -78,13 +79,19 @@ public class MakeReservationFrameController extends Application implements Initi
 			loadData();
 			VisitorRequestController.sendReservation(o);
 			if (VisitorRequestController.finishedMakingReservation) {
-				ClientController.connectedVisitor.setFoundInDB(true);
-				SceneController.switchFrame("GoNature",e,new MainFrameController());
+				if (hasSpace) {
+					ClientController.connectedVisitor.setFoundInDB(true);
+					SceneController.switchFrame("GoNature",e,new MainFrameController());
+				}else {
+					displayError("Park has no available space at this time");
+				}
 			}
 			else {
 				System.out.println("[MakeReservationFrameController] - did not finished Making Reservation");		
 			}	
 		}
+		VisitorRequestController.finishedMakingReservation = false;
+		hasSpace = false;
 	}
 
 	private boolean isValid() {

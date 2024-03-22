@@ -16,11 +16,13 @@ import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.LogInFrameController;
 import main.gui.dep_manager.CancellationsReportFrameController;
+import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
+import main.gui.visitor.MakeReservationFrameController;
 import main.gui.visitor.ValidationFrameController;
 import main.threads.VisitorReminder;
 import requests.Message;
@@ -80,10 +82,16 @@ public class RequestHandler {
 			if (msg.getRequestData() instanceof Order) {
 				ClientController.reservationMade = (Order) msg.getRequestData();
 				VisitorRequestController.finishedMakingReservation = true;
+				MakeReservationFrameController.hasSpace = true;
 				return;
-			}
-			else {
+			}else if (msg.getRequestData() instanceof String && ((String)msg.getRequestData()).equals("Park has no place")) {
+				MakeReservationFrameController.hasSpace = false;
+				VisitorRequestController.finishedMakingReservation = true;
+				return;
+			}else {
 				System.out.println("[RequestHandler] - invalid MAKE_RESERVATION response");
+				MakeReservationFrameController.hasSpace = false;
+				VisitorRequestController.finishedMakingReservation = false;
 				return;
 			}	
 		case REQUEST_BILL:
@@ -269,7 +277,26 @@ public class RequestHandler {
 				ReportDetailsFrameController.setData(null);
 				System.out.println("[RequestHandler] - invalid SHOW_NUM_OF_VISITORS_REPORT response");
 				return;
-			}	
+			}
+		case SHOW_EDITED_VARIABLES:
+			if (msg.getRequestData() instanceof HashMap<?, ?>) {
+				DecideVarEditFrameController.setReturnedHashMap((HashMap<?,?>)msg.getRequestData());
+				System.out.println("[RequestHandler] - Data edited successfully.");
+	            return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid SHOW_EDITED_VARIABLES response");
+				return;
+			}
+		case DELETE_REQUEST_CHANGE:			
+			if(msg.getRequestData() instanceof Boolean ) {
+				if((Boolean)(msg.getRequestData())){
+		            System.out.println("[RequestHandler] - Data deleted successfully.");
+		            return;
+				}
+                System.out.println("[RequestHandler] - invalid DELETE_REQUEST_CHANGE response");
+			}
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

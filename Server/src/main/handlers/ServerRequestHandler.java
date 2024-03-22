@@ -1,5 +1,6 @@
 package main.handlers;
 import java.io.IOException;
+import java.util.HashMap;
 
 import entities.Bill;
 import entities.CancelledReservation;
@@ -65,7 +66,15 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
 			}
-			Order o = VisitorRequestHandler.handleMakeReservationRequest((Order)msg.getRequestData());
+			Order receivedOrder = (Order)msg.getRequestData();
+			
+			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
+				System.out.println("Park has no space!");
+				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, "Park has no place"));
+				return;
+			}
+			
+			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder);
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
 			
@@ -319,6 +328,23 @@ public class ServerRequestHandler {
 			ClientConnectionHandler.handleLogout((String) msg.getRequestData());
 			generalRespondMsg = "Logout has finished successfully";
 			break;
+		case SHOW_EDITED_VARIABLES:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
+				return;
+			}
+			// key is the variable to edit with the new value
+			HashMap<String, String> hashMapWithEdits = EditedVariablesRequestHandler.getEditedVariables((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.SHOW_EDITED_VARIABLES,hashMapWithEdits));
+			return;
+		case DELETE_REQUEST_CHANGE:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
+				return;
+			}			
+			respondToClient(client, new Message(RequestType.SHOW_EDITED_VARIABLES,
+			DeletedRequestChangeHandler.deleteData((String[])msg.getRequestData())));
+			return ;	
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

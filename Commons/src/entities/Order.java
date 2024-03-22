@@ -226,5 +226,46 @@ public class Order implements Serializable{
 
 	public void setProcessed(String processed) {
 		this.processed = processed;
-	}	
+	}
+	
+	public int getYear() {
+		String[] dateSplitted = getDate().split("-");
+		int orderYear = Integer.parseInt(dateSplitted[0]);
+		return orderYear;
+	}
+	
+	public int getMonth() {
+		String[] dateSplitted = getDate().split("-");
+		int orderYear = Integer.parseInt(dateSplitted[1]);
+		return orderYear;
+	}
+	
+	public int getDay() {
+		String[] dateSplitted = getDate().split("-");
+		int orderYear = Integer.parseInt(dateSplitted[2]);
+		return orderYear;
+	}
+	
+	public boolean overlappingOrders(Order o, int estimatedTime) {
+		if (o == null)
+			return false;
+		if (getYear() != o.getYear() || getMonth() != o.getMonth() || getDay() != o.getDay())
+			return false;
+		int hour = Integer.parseInt(this.hour);
+		int minute = Integer.parseInt(this.minute);
+		
+		int otherHour = Integer.parseInt(o.getHour());
+		int otherMinute = Integer.parseInt(o.getMinute());
+		
+		if (hour - otherHour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+			return !(minute >= otherMinute);
+		else if (otherHour - hour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+			return !(otherMinute >= minute);
+		else if (hour - otherHour > estimatedTime)//current hour is more than 4 hours ahead of other
+			return false;
+		else if (otherHour - hour > estimatedTime)//current hour is more than 4 hours behind of other
+			return false;		
+		
+		return true;
+	}
 }
