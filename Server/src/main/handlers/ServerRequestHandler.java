@@ -1,5 +1,6 @@
 package main.handlers;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import entities.Bill;
 import entities.CancelledReservation;
@@ -69,6 +70,12 @@ public class ServerRequestHandler {
 			
 			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
 				System.out.println("Park has no space!");
+				ArrayList<String[]> arr = ReservationRequestHandler.getAvailableTimes(receivedOrder);
+				for (String[] ar : arr) {
+					for (String s : ar)
+						System.out.print(s + " ");
+					System.out.println();
+					}
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, "Park has no place"));
 				return;
 			}

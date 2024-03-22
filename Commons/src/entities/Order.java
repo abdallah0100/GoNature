@@ -52,11 +52,11 @@ public class Order implements Serializable{
 	public Order(String parkName, String date, String hour,String minute,int numOfVisitors,String orderType) {
 		this.parkName =parkName;
 		this.date = date;
+		this.hour = hour;
+		this.minute = minute;
 		this.time = hour+":"+minute;
 		this.numOfVisitors =  String.valueOf(numOfVisitors);
 		this.orderType = orderType;
-
-
 	}
 	
 	public Order(int numberOfVisitors, String parkName,String orderID) {
@@ -251,20 +251,25 @@ public class Order implements Serializable{
 			return false;
 		if (getYear() != o.getYear() || getMonth() != o.getMonth() || getDay() != o.getDay())
 			return false;
-		int hour = Integer.parseInt(this.hour);
-		int minute = Integer.parseInt(this.minute);
-		
-		int otherHour = Integer.parseInt(o.getHour());
-		int otherMinute = Integer.parseInt(o.getMinute());
-		
-		if (hour - otherHour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
-			return !(minute >= otherMinute);
-		else if (otherHour - hour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
-			return !(otherMinute >= minute);
-		else if (hour - otherHour > estimatedTime)//current hour is more than 4 hours ahead of other
-			return false;
-		else if (otherHour - hour > estimatedTime)//current hour is more than 4 hours behind of other
-			return false;		
+		try {
+			int hour = Integer.parseInt(this.hour);
+			int minute = Integer.parseInt(this.minute);
+				
+			int otherHour = Integer.parseInt(o.getHour());
+			int otherMinute = Integer.parseInt(o.getMinute());
+	
+			
+			if (hour - otherHour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+				return !(minute >= otherMinute);
+			else if (otherHour - hour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+				return !(otherMinute >= minute);
+			else if (hour - otherHour > estimatedTime)//current hour is more than 4 hours ahead of other
+				return false;
+			else if (otherHour - hour > estimatedTime)//current hour is more than 4 hours behind of other
+				return false;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		return true;
 	}
