@@ -6,7 +6,7 @@ public class AvailablePlace{
 	private String date;
 	private String time;
 
-	public AvailablePlace(String parkname,String time,String date) {
+	public AvailablePlace(String parkname,String date,String time) {
 		this.parkname=parkname;
 		this.time=time;
 		this.date=date;
@@ -23,6 +23,11 @@ public class AvailablePlace{
 	 
 	public String getdate() {
 		return date;
+	}
+	
+	@Override
+	public String toString() {
+		return parkname + " " + date + " " + time;
 	}
 
 }
