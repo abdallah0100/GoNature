@@ -44,13 +44,13 @@ public class CancellationsGraphFrameController implements Initializable{
 	    String cancelledReservationsStr = String.format("Number Of Cancelled Reservations = %d -> %.2f%%",numOfCancellations, CancellationsPrecentage );
 		String notActivatedReservationStr = String.format("Number Of Not Activated Reservations = %d -> %.2f%%",numOfNotActivated, NotActivatedPrecentage);
 
-		PieChart.Data precentageSlice1 = new PieChart.Data(cancelledReservationsStr, CancellationsPrecentage);
-		PieChart.Data precentageSlice2 = new PieChart.Data(notActivatedReservationStr, NotActivatedPrecentage);
-		PieChart.Data precentageSlice3 = new PieChart.Data("Total Reservations = " + numOfReservations,averagePrecentage);
+		PieChart.Data cancelledSlice = new PieChart.Data(cancelledReservationsStr, CancellationsPrecentage);
+		PieChart.Data notActivatedSlice = new PieChart.Data(notActivatedReservationStr, NotActivatedPrecentage);
+		PieChart.Data totalReservationsSlice = new PieChart.Data("Total Reservations = " + numOfReservations,averagePrecentage);
 
-		pieChart.getData().add(precentageSlice1);
-		pieChart.getData().add(precentageSlice2);
-		pieChart.getData().add(precentageSlice3);
+		pieChart.getData().add(cancelledSlice);
+		pieChart.getData().add(notActivatedSlice);
+		pieChart.getData().add(totalReservationsSlice);
 	}
 	
 	public static void setValues(int numOfCancellations,int numOfNotActivated,int numOfReservations) {
