@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
+import main.controllers.ParkRequestHandler;
 import main.controllers.VisitorRequestController;
 import main.gui.LoginOptionController;
 import main.gui.MainFrameController;
@@ -71,6 +72,7 @@ public class ValidationFrameController extends Application implements Initializa
 		}
 		
 		if (VisitorRequestController.finishedValidating) {
+			ParkRequestHandler.requestAllParks();
 			SceneController.switchFrame("GoNature", e, new MainFrameController());
 		}else {
 			System.out.println("[ValidationFrameController] - did not finished validating");

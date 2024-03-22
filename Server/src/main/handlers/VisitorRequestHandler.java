@@ -70,8 +70,8 @@ public class VisitorRequestHandler {
 	        int invitedInAdvance = o.getInvitedInAdvance() ? 1 : 0;
 	        int payed = o.getIsPayed() ? 1 : 0;
 			Statement st = MainServer.dbConnection.createStatement();
-		    int s = st.executeUpdate( "INSERT INTO reservations (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed)" + 
-			" VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"','"+o.getVisitorID()+"','"+isConfirmed+"','"+invitedInAdvance+"','"+payed+"')");
+		    int s = st.executeUpdate( "INSERT INTO reservations (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed, processed)" + 
+			" VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"','"+o.getVisitorID()+"','"+isConfirmed+"','"+invitedInAdvance+"','"+payed+"', '-1')");
 		    if(s<=0)return null;
 		}catch(Exception ex) {
 			System.out.println("[VisitorRequestHandler] - failed to execute query");
