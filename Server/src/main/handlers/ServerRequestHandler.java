@@ -16,7 +16,6 @@ import requests.RequestType;
 
 public class ServerRequestHandler {
 
-	@SuppressWarnings("null")
 	public static void handleRequest(Message msg, ConnectionToClient client) {
 		String generalRespondMsg = "responded with no message.";
 		Report r;
@@ -29,6 +28,11 @@ public class ServerRequestHandler {
 			generalRespondMsg = "New Connection has been added successfully";
 			break;
 		case DISCONNECT_FROM_SERVER:
+			if (msg.getRequestData() instanceof String) {
+				String connected = (String) msg.getRequestData();
+				if (connected.length() > 0)
+					ClientConnectionHandler.handleLogout(connected);
+			}
 			ClientConnectionHandler.handleConnectRequest(client, false);
 			generalRespondMsg = "Client has succesfully disconnected from the server";
 			break;
