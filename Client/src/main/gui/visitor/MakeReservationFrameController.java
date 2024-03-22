@@ -171,10 +171,10 @@ public class MakeReservationFrameController extends Application implements Initi
 	}
 	private void setParkNameFieldComboBox() {
 		ArrayList<String> al = new ArrayList<String>();	
-		al.add("Park 1");
-		al.add("Park 2");
-		al.add("Park 3");
 
+		for (String pName : ClientController.getParks().keySet())
+			al.add(pName);
+		
 		ObservableList<String> list = FXCollections.observableArrayList(al);
 		parkNameField.setItems(list);
 	}
