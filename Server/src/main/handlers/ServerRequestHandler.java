@@ -74,12 +74,8 @@ public class ServerRequestHandler {
 			Order receivedOrder = (Order)msg.getRequestData();
 			
 			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
-				System.out.println("Park has no space!");
 				AvailablePlace[] arr = ReservationRequestHandler.getAvailableTimes(receivedOrder);
-				for (AvailablePlace ar : arr) {
-					System.out.println(ar);
-					}
-				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, "Park has no place"));
+				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
 			

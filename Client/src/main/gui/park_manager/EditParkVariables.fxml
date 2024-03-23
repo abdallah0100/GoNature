@@ -34,7 +34,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="editVisitorBtn" layoutX="43.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="capacity" textFill="WHITE">
+      <Button fx:id="editVisitorBtn" layoutX="57.0" layoutY="255.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="capacity" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -58,7 +58,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Pane fx:id="rightPane" layoutX="220.0" layoutY="1.0" prefHeight="431.0" prefWidth="395.0" style="-fx-border-color: white; -fx-border-width: 0 0 0 2;" visible="false">
+      <Pane fx:id="rightPane" layoutX="220.0" layoutY="1.0" prefHeight="431.0" prefWidth="395.0" style="-fx-border-color: white; -fx-border-width: 0 0 0 2;">
          <children>
             <Label layoutX="25.0" layoutY="120.0" text="Editing:" textFill="WHITE">
                <font>
