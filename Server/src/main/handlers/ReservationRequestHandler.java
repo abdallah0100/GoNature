@@ -15,7 +15,8 @@ import main.MainServer;
 
 public class ReservationRequestHandler {
 	
-	public static Order getReservationById(String []s,String tableName) {//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+	public static Order getReservationById(String []s,String tableName) {
+		//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
@@ -33,7 +34,7 @@ public class ReservationRequestHandler {
 						rs.getString("Minute"),rs.getString("Park"),rs.getString("Telephone"),rs.getString("Email"),
 						rs.getInt("ReservationID"),rs.getString("visitorID"),
 						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"),rs.getString("processed"));
-				 if(s[0].equals(o.getParkName()))
+				 if(s[0].equals(o.getParkName()) && o.getHour().equals(LocalTime.now().getHour() + ""))//the same time and same park
 					 return o;//reservation data
 				 else 
 					 return null;
