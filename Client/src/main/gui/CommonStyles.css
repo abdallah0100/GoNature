@@ -6,12 +6,20 @@
 	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
 }
 
-ImageView{
--fx-cursor:hand;
+Button{
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+
+Button:hover{
+	-fx-background-color: #808080;
+
 }
 
 #cancelBtn{
-	-fx-background-color: #219a6a;
+	-fx-background-color: #ff453f;
 	-fx-background-radius: 40px;
 	-fx-cursor:hand;
 }

@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
+import main.ClientUI;
 import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
 import utilities.SceneController;
@@ -83,7 +84,9 @@ public class MakeReservationFrameController extends Application implements Initi
 					ClientController.connectedVisitor.setFoundInDB(true);
 					SceneController.switchFrame("GoNature",e,new MainFrameController());
 				}else {
-					displayError("Park has no available space at this time");
+					DeclinedReservationOptions.setOrder(o);
+					SceneController scene = new SceneController();
+					scene.setPane(ClientUI.contentPane, "/main/gui/visitor/DeclinedReservationFrame.fxml");
 				}
 			}
 			else {
@@ -171,10 +174,10 @@ public class MakeReservationFrameController extends Application implements Initi
 	}
 	private void setParkNameFieldComboBox() {
 		ArrayList<String> al = new ArrayList<String>();	
-		al.add("Park 1");
-		al.add("Park 2");
-		al.add("Park 3");
 
+		for (String pName : ClientController.getParks().keySet())
+			al.add(pName);
+		
 		ObservableList<String> list = FXCollections.observableArrayList(al);
 		parkNameField.setItems(list);
 	}
@@ -191,7 +194,10 @@ public class MakeReservationFrameController extends Application implements Initi
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setOrderTypeComboBox();
 		setParkNameFieldComboBox();
-		o = new Order();
+		if (o != null) {
+			//load all data to textfields
+		}else
+			o = new Order();
 		payLabel.setVisible(false);
 	    payedCheckBox.setVisible(false);
 		orderType.setOnAction(event -> {
