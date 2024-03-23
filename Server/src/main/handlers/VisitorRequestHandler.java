@@ -50,7 +50,7 @@ public class VisitorRequestHandler {
 		return v;
 	}
 
-	public static Order handleMakeReservationRequest(Order o) {
+	public static Order handleMakeReservationRequest(Order o,String tableName) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
@@ -70,7 +70,7 @@ public class VisitorRequestHandler {
 	        int invitedInAdvance = o.getInvitedInAdvance() ? 1 : 0;
 	        int payed = o.getIsPayed() ? 1 : 0;
 			Statement st = MainServer.dbConnection.createStatement();
-		    int s = st.executeUpdate( "INSERT INTO reservations (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed, processed)" + 
+		    int s = st.executeUpdate( "INSERT INTO "+tableName+" (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed, processed)" + 
 			" VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"','"+o.getVisitorID()+"','"+isConfirmed+"','"+invitedInAdvance+"','"+payed+"', '-1')");
 		    if(s<=0)return null;
 		}catch(Exception ex) {

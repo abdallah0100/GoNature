@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
+import main.controllers.ReservationController;
 import utilities.SceneController;
 
 public class DeclinedReservationOptions {
@@ -19,9 +20,13 @@ public class DeclinedReservationOptions {
 	@FXML
 	private Label msgLabel;
 	@FXML
+	private Label msg;
+	@FXML
 	private Button cancelBtn;
 	@FXML
 	private Button editReservation;
+	@FXML
+	private Button waitingBtn;
 	@FXML
 	private TableView<AvailablePlace> availablePlaces;
 	@FXML
@@ -31,10 +36,21 @@ public class DeclinedReservationOptions {
 	
 	private static Order order;
 	private static AvailablePlace[] avbl;
+	public static boolean inserted=false;
 	
 	@FXML
 	public void enterWaitingList(ActionEvent event) {
-		//ReservationController.enterWaitingList(order);
+		ReservationController.enterWaitingList(order);
+		if(inserted) {
+			waitingBtn.setDisable(true);
+			msg.setText("inserted to waitng list");
+			msg.setVisible(true);
+			inserted=false;
+			return;
+		}
+		msg.setText("error insert to waitng list");
+		msg.setVisible(true);
+		return;
 	}
 	@FXML
 	public void showAvailableTimes(ActionEvent event) {

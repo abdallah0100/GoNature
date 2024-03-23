@@ -312,6 +312,13 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid CANCELLATIONS_GRAPH_DATA response");
 				return;
 			}
+		case ENTER_WAITING_LIST:
+			if(!(msg.getRequestData() instanceof Order )) {
+		            System.out.println("[RequestHandler] -  not order int waintlist (Order).");
+		            return;
+			}if((Order)(msg.getRequestData())!=null)
+				DeclinedReservationOptions.inserted=true;
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
