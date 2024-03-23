@@ -108,7 +108,7 @@ public class DecideVarEditFrameController implements Initializable {
                     keys[counter] = entry.getKey().toString();
                     values[counter] = entry.getValue().toString();
                     showRow(counter++, entry.getKey().toString(), entry.getValue().toString());
-                }
+                }                
             }
         }
     }
@@ -136,11 +136,11 @@ public class DecideVarEditFrameController implements Initializable {
             case "gap":
                 label.setText(Integer.toString(park.getGap()));
                 break;
-            case "capacity":
-                label.setText(Integer.toString(park.getMaxCapacity()));
+            case "EstimatedTime":
+                label.setText(Integer.toString(park.getEstimatedTime()));
                 break;
             default:
-                label.setText(Integer.toString(park.getEstimatedTime()));
+                label.setText(Integer.toString(park.getMaxCapacity()));
         }
     }
 
