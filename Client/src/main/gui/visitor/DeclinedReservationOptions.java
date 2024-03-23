@@ -2,6 +2,8 @@ package main.gui.visitor;
 
 import entities.AvailablePlace;
 import entities.Order;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,14 +34,20 @@ public class DeclinedReservationOptions {
 	
 	@FXML
 	public void enterWaitingList(ActionEvent event) {
-	//	ReservationController.enterWaitingList(order);
+		//ReservationController.enterWaitingList(order);
 	}
 	@FXML
 	public void showAvailableTimes(ActionEvent event) {
-		
-		dateCol.setCellValueFactory(new PropertyValueFactory<AvailablePlace, String>("date"));
-		timeCol.setCellValueFactory(new PropertyValueFactory<AvailablePlace, String>("time"));
-		availablePlaces.setVisible(true);
+		if (avbl != null) {
+			ObservableList<AvailablePlace> list = FXCollections.observableArrayList();
+			list.setAll(avbl);
+			
+			availablePlaces.setItems(list);
+			dateCol.setCellValueFactory(new PropertyValueFactory<AvailablePlace, String>("date"));
+			timeCol.setCellValueFactory(new PropertyValueFactory<AvailablePlace, String>("time"));
+			availablePlaces.setVisible(true);
+		}else
+			System.out.println("null");
 	}
 	@FXML
 	public void cancel(ActionEvent event) {
