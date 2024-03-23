@@ -3,6 +3,7 @@ package main.client_requests;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
 import entities.Order;
@@ -23,6 +24,7 @@ import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
+import main.gui.visitor.DeclinedReservationOptions;
 import main.gui.visitor.MakeReservationFrameController;
 import main.gui.visitor.ValidationFrameController;
 import main.threads.VisitorReminder;
@@ -85,7 +87,8 @@ public class RequestHandler {
 				VisitorRequestController.finishedMakingReservation = true;
 				MakeReservationFrameController.hasSpace = true;
 				return;
-			}else if (msg.getRequestData() instanceof String && ((String)msg.getRequestData()).equals("Park has no place")) {
+			}else if (msg.getRequestData() instanceof AvailablePlace[]) {
+				DeclinedReservationOptions.setAvbl((AvailablePlace[]) msg.getRequestData());
 				MakeReservationFrameController.hasSpace = false;
 				VisitorRequestController.finishedMakingReservation = true;
 				return;

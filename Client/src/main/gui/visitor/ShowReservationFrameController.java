@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import main.ClientController;
+import main.controllers.ReservationController;
 import main.controllers.VisitorRequestController;
 import utilities.SceneController;
 public class ShowReservationFrameController extends Application implements Initializable{
@@ -54,6 +55,7 @@ public class ShowReservationFrameController extends Application implements Initi
 	private Label msgLabel;
 	String id;
 	Order order;
+	Order selectedOrder;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -71,7 +73,15 @@ public class ShowReservationFrameController extends Application implements Initi
 	}
 	//function deletes reservation (removes it from DB) on action to deleteBtn
 	public void deleteReservation(ActionEvent e) throws Exception {
-		
+		//ReservationController.sendCancelReservation(o);
+		selectedOrder = tableView.getSelectionModel().getSelectedItem();
+	    if (selectedOrder != null) {
+	    	ReservationController.sendCancelReservation(selectedOrder);
+	            tableView.getItems().remove(selectedOrder);
+	            System.out.println("[ShowReservationFrameController] - Reservation deleted successfully");
+	    } else {
+	        displayError("Please select a reservation to delete");
+	    }
 	}
 	public void updateReservation(ActionEvent e) throws Exception {
 	    if (order != null) {	  
@@ -100,13 +110,17 @@ public class ShowReservationFrameController extends Application implements Initi
 		payedColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("isPayed"));
 		orderIDColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("orderID"));
 		updateBtn.setDisable(true);
+		deleteBtn.setDisable(true);
 	    tableView.setRowFactory(tv -> {
 	        TableRow<Order> row = new TableRow<>();
 	        row.setOnMouseClicked(event -> {
 	            if (!row.isEmpty() && event.getClickCount() == 1) {
 	                updateBtn.setDisable(false);
+	                deleteBtn.setDisable(false);
 	            } else {
 	                updateBtn.setDisable(true);
+	                deleteBtn.setDisable(true);
+
 	            }
 	        });
 	        return row;
@@ -180,6 +194,25 @@ public class ShowReservationFrameController extends Application implements Initi
 	                event.getTableView().refresh();
 	            }
 	        });
+	    });
+	    deleteBtn.setOnAction(event -> {
+	        selectedOrder = tableView.getSelectionModel().getSelectedItem();
+	        if (selectedOrder != null) {
+	            Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+	            confirmDeleteAlert.setHeaderText("Confirm Delete");
+	            confirmDeleteAlert.setContentText("Are you sure you want to delete this reservation?");
+	            confirmDeleteAlert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+
+	            confirmDeleteAlert.showAndWait().ifPresent(response -> {
+	                if (response == ButtonType.YES) {
+	                    try {
+	                        deleteReservation(event);
+	                    } catch (Exception e) {
+	                        e.printStackTrace();
+	                    }
+	                }
+	            });
+	        }
 	    });
 	}
 	public void displayError(String txt) {

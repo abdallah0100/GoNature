@@ -2,12 +2,12 @@ package main.threads;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import entities.Order;
 import main.ClientController;
 import main.controllers.ReservationController;
 import main.controllers.VisitorRequestController;
 import main.gui.visitor.VisitorHomePageController;
+
 
 public class VisitorReminder implements Runnable{
 
@@ -62,12 +62,16 @@ public class VisitorReminder implements Runnable{
 		visitorOrders = ClientController.reservationshowed;
 		ordersToConfirm = new ArrayList<>();
 		messageCnt = 0;
+		if(visitorOrders== null)return;
+		int i=1;
 		for (Order o : visitorOrders)
 			if (timeArrived(o) && !o.getIsConfirmed()) {
 				if (!checkForMsgTimeOut(o)) {
 					ordersToConfirm.add(o);
 					messageCnt++;
 					if (!o.isSentMsg()) {
+						o.setMessageTitle("Reservation #"+i);
+						i++;
 						o.setSentMsg(true);
 						o.setMsgHour(rightNow.get(Calendar.HOUR_OF_DAY));
 						o.setMsgMinute(rightNow.get(Calendar.MINUTE));
@@ -77,6 +81,7 @@ public class VisitorReminder implements Runnable{
 					ReservationController.sendCancelReservation(o);
 				}
 			}
+		VisitorHomePageController.ordersToConfirm.setAll(ordersToConfirm);
 	}
 	
 	public static boolean checkForMsgTimeOut(Order o) {

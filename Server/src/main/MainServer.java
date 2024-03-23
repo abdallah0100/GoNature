@@ -24,7 +24,7 @@ public class MainServer extends AbstractServer{
 	private static MainServer server;
 	public static boolean serverStarted = false;
 	
-	private static ObservableList<ClientConnection> connections = FXCollections.observableArrayList();;
+	private static ObservableList<ClientConnection> connections = FXCollections.observableArrayList();
 	//key is the username of user or id of the visitor, used to determine if they are logged in
 	private HashMap<String, ConnectionToClient> connectionMap;
 

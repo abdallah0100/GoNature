@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="615.0" stylesheets="@HomePageStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.VisitorHomePageController">
    <children>
-      <Pane fx:id="newMsgPane" layoutX="308.0" layoutY="57.0" prefHeight="26.0" prefWidth="199.0" style="-fx-border-color: black;" visible="false">
+      <Pane fx:id="newMsgPane" layoutX="316.0" layoutY="41.0" prefHeight="26.0" prefWidth="199.0" style="-fx-border-color: black;" visible="false">
          <children>
-            <Label alignment="CENTER" layoutX="4.0" layoutY="6.0" text="You have received a new message!" textFill="#ee0a0a" />
+            <Label alignment="CENTER" layoutX="8.0" layoutY="5.0" text="You have received a new message!" textFill="#ee0a0a" />
          </children>
       </Pane>
       <ImageView fx:id="inboxImg" fitHeight="50.0" fitWidth="68.0" layoutX="501.0" layoutY="45.0" onMouseClicked="#clickInboxIcon" pickOnBounds="true" preserveRatio="true">
@@ -20,30 +19,11 @@
             <Image url="@../images/inbox.png" />
          </image></ImageView>
       <Label layoutX="511.0" layoutY="87.0" text="inbox" textFill="WHITE" />
-      <Pane fx:id="inboxPane" layoutX="169.0" layoutY="95.0" prefHeight="200.0" prefWidth="332.0" style="-fx-background-color: grey; -fx-border-color: blue;" visible="false">
-         <children>
-            <ImageView fitHeight="26.0" fitWidth="29.0" layoutX="297.0" layoutY="8.0" onMouseClicked="#closeInbox" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/close_icon.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="20.0" layoutY="13.0" text="You have " />
-            <Label fx:id="msgAmount" alignment="CENTER" layoutX="70.0" layoutY="13.0" prefHeight="17.0" prefWidth="18.0" text="0" textAlignment="CENTER" />
-            <Label layoutX="90.0" layoutY="13.0" text="messages" />
-            <ComboBox fx:id="msgSelector" layoutX="88.0" layoutY="53.0" onAction="#selectReservation" prefWidth="150.0" visible="false" />
-            <Pane fx:id="confirmationPane" layoutY="91.0" prefHeight="112.0" prefWidth="332.0" visible="false">
-               <children>
-                  <Label fx:id="confirmationLabel" layoutX="14.0" layoutY="14.0" text="You have a reservation in park1 at  18:40">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="admitBtn" layoutX="83.0" layoutY="52.0" mnemonicParsing="false" onAction="#admit" text="Admit" />
-                  <Button fx:id="cancelBtn" layoutX="166.0" layoutY="52.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-                  <Label fx:id="confirmResultLabel" layoutX="83.0" layoutY="85.0" text="Order has been admitted" visible="false" />
-               </children>
-            </Pane>
-         </children>
-      </Pane>
+      <TableView fx:id="messageTable" layoutX="60.0" layoutY="57.0" prefHeight="333.0" prefWidth="250.0" visible="false">
+        <columns>
+          <TableColumn fx:id="message" prefWidth="248.66666793823242" text="masseges" />
+        </columns>
+      </TableView>
+      <Label fx:id="msgAmount" layoutX="487.0" layoutY="43.0" prefHeight="23.0" prefWidth="28.0" />
    </children>
 </Pane>

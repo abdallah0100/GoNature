@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="615.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.DeclinedReservationOptions">
+   <children>
+      <Label layoutX="36.0" layoutY="30.0" text="The park has no place at the entered time" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="79.0" layoutY="105.0" mnemonicParsing="false" onAction="#enterWaitingList" text="Enter waiting list" />
+      <Button layoutX="240.0" layoutY="105.0" mnemonicParsing="false" onAction="#showAvailableTimes" text="Show alternative times" />
+      <Button fx:id="cancelBtn" layoutX="418.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="79.0" text="Cancel" />
+      <TableView fx:id="availablePlaces" layoutX="159.0" layoutY="177.0" prefHeight="220.0" prefWidth="282.0" visible="false">
+        <columns>
+          <TableColumn fx:id="dateCol" prefWidth="147.2000274658203" text="Date" />
+          <TableColumn fx:id="timeCol" prefWidth="133.60001220703123" text="Time" />
+        </columns>
+      </TableView>
+      <Label fx:id="msgLabel" layoutX="272.0" layoutY="146.0" text="Label" textFill="WHITE" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" text="Edit Reservation" />
+   </children>
+</AnchorPane>

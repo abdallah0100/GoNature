@@ -28,8 +28,7 @@ public class Order implements Serializable{
 	
 	private String orderID;
 	private String time;
-	
-
+	private String messageTitle;
 	public Order() {
     }
 	
@@ -220,6 +219,15 @@ public class Order implements Serializable{
 		this.cancelRequest = cancelRequest;
 	}
 
+	public String getMessageTitle() {
+		return messageTitle; 
+	}
+ 
+	public void setMessageTitle(String messageTitle) {
+		this.messageTitle = messageTitle;
+	}
+	
+
 	public String isProcessed() {
 		return processed;
 	}
@@ -261,9 +269,9 @@ public class Order implements Serializable{
 			
 			if (hour - otherHour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
 				return !(minute >= otherMinute);
-			else if (otherHour - hour == estimatedTime)// e.g: hour = 18:30, otherHour = 14: 29
+			else if (otherHour - hour == estimatedTime)// e.g: hour = 14:30, otherHour = 18: 29
 				return !(otherMinute >= minute);
-			else if (hour - otherHour > estimatedTime)//current hour is more than 4 hours ahead of other
+			else if (hour - otherHour > estimatedTime)//current hour is more than 4 hours ahead of other 18:mm 13:mm
 				return false;
 			else if (otherHour - hour > estimatedTime)//current hour is more than 4 hours behind of other
 				return false;

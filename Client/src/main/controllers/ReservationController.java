@@ -15,4 +15,12 @@ public class ReservationController {
 		ClientController.getController().accept(new Message(RequestType.CANCEL_RESERVATION, o));
 	}
 	
+	public static void enterWaitingList(Order o) {
+		ClientController.getController().accept(new Message(RequestType.ENTER_WAITING_LIST, o));
+	}
+	
+	public static void getAvailablePlaces(Order o) {
+		ClientController.getController().accept(new Message(RequestType.GET_AVAILABLE_PLACES, o));
+	}
+	
 }
