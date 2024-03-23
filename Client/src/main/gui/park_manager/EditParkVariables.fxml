@@ -22,7 +22,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <Button fx:id="editEstimatedTimeBtn" layoutX="34.0" layoutY="175.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="Estimated Time" textFill="WHITE">
+      <Button fx:id="editEstimatedTimeBtn" layoutX="34.0" layoutY="175.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="EstimatedTime" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -34,7 +34,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="editVisitorBtn" layoutX="43.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="Visitor Limit " textFill="WHITE">
+      <Button fx:id="editVisitorBtn" layoutX="43.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="capacity" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -46,7 +46,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="editGapBtn" layoutX="49.0" layoutY="105.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="25.0" prefWidth="92.0" text="Gap" textFill="WHITE">
+      <Button fx:id="editGapBtn" layoutX="49.0" layoutY="105.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="25.0" prefWidth="92.0" text="gap" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
