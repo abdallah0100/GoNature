@@ -283,7 +283,7 @@ public class RequestHandler {
 			if (msg.getRequestData() instanceof HashMap<?, ?>) {
 				DecideVarEditFrameController.setReturnedHashMap((HashMap<?,?>)msg.getRequestData());
 				System.out.println("[RequestHandler] - Data edited successfully.");
-	            return;
+	            break;
 			}
 			else {
 				System.out.println("[RequestHandler] - invalid SHOW_EDITED_VARIABLES response");
