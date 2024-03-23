@@ -3,6 +3,7 @@ package main.handlers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +35,9 @@ public class ReservationRequestHandler {
 						rs.getString("Minute"),rs.getString("Park"),rs.getString("Telephone"),rs.getString("Email"),
 						rs.getInt("ReservationID"),rs.getString("visitorID"),
 						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"),rs.getString("processed"));
-				 if(s[0].equals(o.getParkName()) && o.getHour().equals(LocalTime.now().getHour() + ""))//the same time and same park
+				  String date = o.getDate();
+				  LocalDate parsedDate = LocalDate.parse(date);
+				 if(s[0].equals(o.getParkName()) && o.getHour().equals(LocalTime.now().getHour() + "")  && LocalDate.now().equals(parsedDate)) //the same time and same park
 					 return o;//reservation data
 				 else 
 					 return null;
