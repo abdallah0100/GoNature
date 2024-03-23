@@ -29,6 +29,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" text="Edit Reservation" />
+      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" onAction="#editReservation" text="Edit Reservation" />
    </children>
 </AnchorPane>

@@ -42,9 +42,11 @@ public class DeclinedReservationOptions {
 	public void enterWaitingList(ActionEvent event) {
 		ReservationController.enterWaitingList(order);
 		if(inserted) {
+			MakeReservationFrameController.o=null;
 			waitingBtn.setDisable(true);
 			msg.setText("inserted to waitng list");
 			msg.setVisible(true);
+			editReservation.setDisable(true);
 			inserted=false;
 			return;
 		}
@@ -67,14 +69,17 @@ public class DeclinedReservationOptions {
 	}
 	@FXML
 	public void cancel(ActionEvent event) {
+		MakeReservationFrameController.o=null;
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/HomePage.fxml");
 	}
 	
 	@FXML
 	public void editReservation(ActionEvent event) {
-		System.out.println("Todo - go back to make reservation and have all data inputted");
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
 	}
+
 	
 	public static Order getOrder() {
 		return order;
