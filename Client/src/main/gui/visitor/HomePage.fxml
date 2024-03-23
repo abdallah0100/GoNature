@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="615.0" stylesheets="@HomePageStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.VisitorHomePageController">
    <children>
@@ -21,9 +22,12 @@
       <Label layoutX="511.0" layoutY="87.0" text="inbox" textFill="WHITE" />
       <TableView fx:id="messageTable" layoutX="60.0" layoutY="57.0" prefHeight="333.0" prefWidth="250.0" visible="false">
         <columns>
-          <TableColumn fx:id="message" prefWidth="248.66666793823242" text="masseges" />
+          <TableColumn fx:id="message" prefWidth="248.66666793823242" text="Messages" />
         </columns>
       </TableView>
-      <Label fx:id="msgAmount" layoutX="487.0" layoutY="43.0" prefHeight="23.0" prefWidth="28.0" />
+      <Label fx:id="msgAmount" layoutX="537.0" layoutY="34.0" prefHeight="23.0" prefWidth="28.0" textFill="#ed0000">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </Pane>
