@@ -44,6 +44,7 @@ public class VisitorHomePageController implements Initializable{
 	private Order selectedOrder;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		MakeReservationFrameController.o=null;
 		publicNewMsgPane = newMsgPane;
 		ordersToConfirm.addAll(VisitorReminder.getOrdersToConfirm());
 		messageTable.setItems(ordersToConfirm);

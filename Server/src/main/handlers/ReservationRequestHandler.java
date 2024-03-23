@@ -146,7 +146,6 @@ public class ReservationRequestHandler {
 				return false;
 			}
 	}
-	
 	public static boolean addToCanceledReports(Order o) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -255,6 +254,34 @@ public class ReservationRequestHandler {
 			}
 		}
 		return (AvailablePlace[])arr.toArray(new AvailablePlace[arr.size()]);
+	}
+	
+	
+	
+	
+	//check if waiting list has the same order for the same person
+	public static boolean inWaitngList (Order o) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR); 
+			return false;
+		}
+		try {
+			String str = "SELECT * FROM waiting_list WHERE"
+					+ " Type = '"+o.getOrderType()+"' AND"
+					+" NumberOfVisitors = '"+o.getNumOfVisitors()+"' AND"
+					+" ReservationDate = '"+o.getDate()+"' AND" 
+					+" Hour = '"+o.getHour()+"' AND"
+					+" Minute = '"+o.getMinute()+"' AND"
+					+" Park = '"+o.getParkName()+"' AND"
+					+" visitorID = '"+o.getVisitorID()+"'";	
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			return rs.next();
+		}catch(Exception ex) {
+				System.out.println("[ReservationRequestHandler] - failed to execute query");
+				ex.printStackTrace();
+				return false;
+		}
 	}
 	
 }
