@@ -11,6 +11,7 @@ import entities.Report;
 import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
+import entities.VisitsReport;
 import ocsf.server.src.ConnectionToClient;
 import requests.Message;
 import requests.RequestType;
@@ -357,6 +358,14 @@ public class ServerRequestHandler {
 			}
 			int[] sendNumsRequested = CancellationsGraphDataHandler.getDataForGraph((String[])(msg.getRequestData()));
 			respondToClient(client, new Message(RequestType.CANCELLATIONS_GRAPH_DATA,sendNumsRequested));
+			return;
+		case VISITS_GRAPH_DATA:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
+				return;
+			}
+			VisitsReport[] dataToReturn = VisitsReportGraphHandler.getVisitsDataForGraph((String[])(msg.getRequestData()));
+			respondToClient(client, new Message(RequestType.VISITS_GRAPH_DATA,dataToReturn));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

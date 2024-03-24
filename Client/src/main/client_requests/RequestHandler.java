@@ -2,7 +2,6 @@ package main.client_requests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
@@ -12,6 +11,7 @@ import entities.Report;
 import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
+import entities.VisitsReport;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
@@ -20,6 +20,7 @@ import main.gui.dep_manager.CancellationsGraphFrameController;
 import main.gui.dep_manager.CancellationsReportFrameController;
 import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
+import main.gui.dep_manager.SelectVisitsDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
@@ -312,6 +313,17 @@ public class RequestHandler {
 				System.out.println("[RequestHandler] - invalid CANCELLATIONS_GRAPH_DATA response");
 				return;
 			}
+		case VISITS_GRAPH_DATA:
+			if (msg.getRequestData() instanceof VisitsReport[]) {
+				VisitsReport[] received = (VisitsReport[]) msg.getRequestData();
+				SelectVisitsDetailsFrameController.setReturnedTimesData(received);		
+				System.out.println("[RequestHandler] - Data received successfully.");
+	            return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid VISITS_GRAPH_DATA response");
+				return;
+			}	
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
