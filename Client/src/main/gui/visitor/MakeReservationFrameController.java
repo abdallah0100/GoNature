@@ -53,11 +53,42 @@ public class MakeReservationFrameController extends Application implements Initi
 	private  CheckBox payedCheckBox;
 	@FXML
 	private Label payLabel;
-	Order o;
+	public static Order o;
 	String str;
 	LocalDate date;
 	LocalDate today = LocalDate.now();
 	public static boolean hasSpace = false;
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		setOrderTypeComboBox();
+		setParkNameFieldComboBox();
+		if (o != null) {
+			orderType.setValue(o.getOrderType());
+			numOfVisitorsField.setText((o.getNumOfVisitors())+ "");
+			LocalDate specificDate = LocalDate.of(o.getYear(),o.getMonth(),o.getDay()); // Year, Month, Day
+			dateField.setValue(specificDate);
+			hourField.setText(o.getHour());
+			minuteField.setText(o.getMinute());
+			parkNameField.setValue(o.getParkName());
+			phoneField.setText(o.getPhone());
+			emailField.setText(o.getEmail());
+		}else
+			o = new Order();
+		payLabel.setVisible(false);
+	    payedCheckBox.setVisible(false);
+		orderType.setOnAction(event -> {
+		    String selectedType = orderType.getValue();
+		    if (selectedType != null && selectedType.equals("Organized Group")) {
+		        payLabel.setVisible(true);
+		        payedCheckBox.setVisible(true);
+		    } else {
+		        payLabel.setVisible(false);
+		        payedCheckBox.setVisible(false);
+		    }
+		});	
+		
+	}
 
 	public static void main(String[] args) {
 		launch(args);
@@ -81,6 +112,7 @@ public class MakeReservationFrameController extends Application implements Initi
 			VisitorRequestController.sendReservation(o);
 			if (VisitorRequestController.finishedMakingReservation) {
 				if (hasSpace) {
+					o=null;
 					ClientController.connectedVisitor.setFoundInDB(true);
 					SceneController.switchFrame("GoNature",e,new MainFrameController());
 				}else {
@@ -190,28 +222,7 @@ public class MakeReservationFrameController extends Application implements Initi
 		ObservableList<String> list = FXCollections.observableArrayList(al);
 		orderType.setItems(list);
 	}
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		setOrderTypeComboBox();
-		setParkNameFieldComboBox();
-		if (o != null) {
-			//load all data to textfields
-		}else
-			o = new Order();
-		payLabel.setVisible(false);
-	    payedCheckBox.setVisible(false);
-		orderType.setOnAction(event -> {
-		    String selectedType = orderType.getValue();
-		    if (selectedType != null && selectedType.equals("Organized Group")) {
-		        payLabel.setVisible(true);
-		        payedCheckBox.setVisible(true);
-		    } else {
-		        payLabel.setVisible(false);
-		        payedCheckBox.setVisible(false);
-		    }
-		});	
-		
-	}
+
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);

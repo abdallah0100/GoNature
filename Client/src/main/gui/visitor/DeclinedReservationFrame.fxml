@@ -14,9 +14,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="79.0" layoutY="105.0" mnemonicParsing="false" onAction="#enterWaitingList" text="Enter waiting list" />
+      <Button fx:id="waitingBtn" layoutX="79.0" layoutY="105.0" mnemonicParsing="false" onAction="#enterWaitingList" text="Enter waiting list" />
       <Button layoutX="240.0" layoutY="105.0" mnemonicParsing="false" onAction="#showAvailableTimes" text="Show alternative times" />
       <Button fx:id="cancelBtn" layoutX="418.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="79.0" text="Cancel" />
+      <Label fx:id="msg" layoutX="96.0" layoutY="138.0" text="Label" visible="false" />
       <TableView fx:id="availablePlaces" layoutX="159.0" layoutY="177.0" prefHeight="220.0" prefWidth="282.0" visible="false">
         <columns>
           <TableColumn fx:id="dateCol" prefWidth="147.2000274658203" text="Date" />
@@ -28,6 +29,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" text="Edit Reservation" />
+      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" onAction="#editReservation" text="Edit Reservation" />
    </children>
 </AnchorPane>

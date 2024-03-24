@@ -79,8 +79,8 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
-			
-			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder);
+			//
+			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder,"reservations");
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
 			
@@ -246,7 +246,7 @@ public class ServerRequestHandler {
 							//ParkRequestHandler.updateCurrentAmoun(o.getParkName(),((-1)*o.getNumOfVisitors()))
 							if(ReservationRequestHandler.exitProcessed(o.getOrderID())) {
 								boolean re =ReservationRequestHandler.updateStatus("reservations",o.getOrderID(),1);//change the processed to 1
-								respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
+								respondToClient(client, new Message(RequestType.EXIT_VISITOR,re));
 								return;
 						}
 						respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
@@ -359,6 +359,15 @@ public class ServerRequestHandler {
 			int[] sendNumsRequested = CancellationsGraphDataHandler.getDataForGraph((String[])(msg.getRequestData()));
 			respondToClient(client, new Message(RequestType.CANCELLATIONS_GRAPH_DATA,sendNumsRequested));
 			return;
+		case ENTER_WAITING_LIST://insert to waiting list
+				if (!(msg.getRequestData() instanceof Order)) {
+						respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
+						return;
+				}
+				o = (Order) msg.getRequestData();
+				o=VisitorRequestHandler.handleMakeReservationRequest(o,"waiting_list");
+				respondToClient(client, new Message(RequestType.ENTER_WAITING_LIST, o));
+				return;
 		case VISITS_GRAPH_DATA:
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
@@ -366,7 +375,7 @@ public class ServerRequestHandler {
 			}
 			VisitsReport[] dataToReturn = VisitsReportGraphHandler.getVisitsDataForGraph((String[])(msg.getRequestData()));
 			respondToClient(client, new Message(RequestType.VISITS_GRAPH_DATA,dataToReturn));
-			return;
+			return;			
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			
