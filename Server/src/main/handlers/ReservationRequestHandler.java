@@ -210,7 +210,7 @@ public class ReservationRequestHandler {
 			if (o.overlappingOrders(o1, p.getEstimatedTime()))
 				reserved += o1.getNumOfVisitors();
 		
-		return reserved + o.getNumOfVisitors() <= parkMaxCapacity;
+		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
 	}
 	
 	public static AvailablePlace[] getAvailableTimes(Order o) {
