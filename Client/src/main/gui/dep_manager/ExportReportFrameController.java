@@ -15,9 +15,7 @@ public class ExportReportFrameController {
 	@FXML
 	private Button cancellationsReportsBtn;
 	
-	
-	
-	
+
 	/**
 	 * This method is responsible for opening new window after
 	 * clicking on visits report button
@@ -26,7 +24,7 @@ public class ExportReportFrameController {
 	@FXML
 	public void showvisitsReportWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
-		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/VisitsReportFrame.fxml");
+		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/SelectVisitsDetailsFrame.fxml");
 	}
 
 	/**
@@ -38,6 +36,5 @@ public class ExportReportFrameController {
 	public void showcancellationsReportsWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
 		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/CancellationsReportFrame.fxml");
-	}
-	
+	}	
 }
