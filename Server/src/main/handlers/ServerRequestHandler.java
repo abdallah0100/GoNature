@@ -266,7 +266,7 @@ public class ServerRequestHandler {
 				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
-				}////s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+				}////s[0]  ClientController.connectedUser.getParkName s[1] reservation id
 				String[] s3 = (String[])msg.getRequestData();
 				Order o1=ReservationRequestHandler.getReservationById(s3,"reservations");
 				if(o1!=null)
@@ -378,7 +378,43 @@ public class ServerRequestHandler {
 			}
 			VisitsReport[] dataToReturn = VisitsReportGraphHandler.getVisitsDataForGraph((String[])(msg.getRequestData()));
 			respondToClient(client, new Message(RequestType.VISITS_GRAPH_DATA,dataToReturn));
-			return;			
+			return;	
+			//get park
+		case REQUEST_PARK:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String )"));
+				return;
+			}	
+			p=ParkRequestHandler.getParkData((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.REQUEST_PARK,p));
+			return;	
+		case ORDER_ID:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String )"));
+				return;
+			}
+			 int orderId=ReservationRequestHandler.OrderId((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.ORDER_ID,orderId));
+			return;	
+			
+		case MAKE_RESERVATION_ENTRY:
+			if (!(msg.getRequestData() instanceof Order)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
+				return;
+			}
+			Order receivedOrder1 = (Order)msg.getRequestData();
+			Order o11 = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder1,"reservations");
+			respondToClient(client, new Message(RequestType.MAKE_RESERVATION_ENTRY, o11));
+			return;
+		case CHECK_INSTRUCTOR:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
+				return;
+			}
+			String id=(String)msg.getRequestData();
+			boolean z=UserRequestHandler.isInstructor(id);
+			respondToClient(client, new Message(RequestType.CHECK_INSTRUCTOR, z));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

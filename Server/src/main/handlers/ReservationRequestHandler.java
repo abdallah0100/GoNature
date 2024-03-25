@@ -307,4 +307,26 @@ public class ReservationRequestHandler {
 		}
 	}
 	
+	public static int OrderId(String parkName) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR); 
+			return 0;
+		}
+		try {
+			String str = "SELECT MAX(ReservationID) AS MaxReservationID FROM reservations WHERE InvitedInAdvance = 0";
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			if (rs.next()) {
+			  return rs.getInt("MaxReservationID");
+			} else {
+			   return 0;
+			}
+		}catch(Exception ex) {
+				System.out.println("[ReservationRequestHandler] - failed to execute query");
+				ex.printStackTrace();
+				return 0;
+		}
+		
+	}
+	
 }

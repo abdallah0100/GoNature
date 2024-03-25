@@ -34,7 +34,7 @@ public class InvoicingFrameController  extends Application  implements Initializ
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
-									    "/main/gui/entry_worker/BillCakFrame.fxml");
+									    "/main/gui/entry_worker/InvoicingFrame.fxml");
 	}
 	
 	@Override

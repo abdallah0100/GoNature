@@ -36,7 +36,7 @@ public class MonitoringFrameControlleroring extends Application{
 				ClientController.monitoring=false;
 			}
 			else {
-				displayMSG("reservation not found 1");
+				displayMSG("reservation not found ");
 			}
 		}
 

@@ -150,6 +150,28 @@ public class UserRequestHandler {
 			
 	}
 	
+	public static boolean isInstructor(String id) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM instructor WHERE ID='"+id+"' AND activated='1' ");
+			if (!rs.next()) {
+				System.out.println("[UserRequestHandler] - empty");
+				return false;
+			}
+			rs.close();
+			return true;
+		}catch(Exception ex) {
+			System.out.println("[UserRequestHandler] - failed to execute query");
+			ex.printStackTrace();
+			return false;
+		}
+		
+	}
+	
 
 	
 
