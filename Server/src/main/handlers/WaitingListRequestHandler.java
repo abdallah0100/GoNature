@@ -3,6 +3,7 @@ package main.handlers;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import entities.Order;
 import main.Constants;
@@ -51,11 +52,24 @@ public class WaitingListRequestHandler {
 	
 	public static void checkWaitingListForAdmittableOrder(String parkName) {
 		Order[] waitingList = WaitingListRequestHandler.getAllWaitingList(parkName);
-		for (Order o : waitingList)
-			if (ReservationRequestHandler.parkHasSpace(o)) {
+		Calendar rightNow = Calendar.getInstance();
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		int year = rightNow.get(Calendar.YEAR);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		for (Order o : waitingList) {
+			if ((year > o.getYear())//order expired
+				|| (o.getYear() == year && month > o.getMonth())
+				|| (o.getYear() == year && o.getMonth() == month && day > o.getDay())) {
+				o.setCanceled(false);
+				ReservationRequestHandler.addToCanceledReports(o);
+				WaitingListRequestHandler.removeFromWaitingList(o);
+			}
+			if (ParkRequestHandler.parkHasSpace(o)) {
 				VisitorRequestHandler.handleMakeReservationRequest(o, "reservations");
 				WaitingListRequestHandler.removeFromWaitingList(o);
 			}
+			
+		}
 	}
 	
 }

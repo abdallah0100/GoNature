@@ -4,12 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
 
-import entities.AvailablePlace;
 import entities.Order;
-import entities.Park;
 import main.Constants;
 import main.MainServer;
 
@@ -168,116 +164,7 @@ public class ReservationRequestHandler {
 			ex.printStackTrace();
 			return false;
 		}
-	}
-	
-	public static Order[] getAllParkOrders(String parkName) {
-		if (MainServer.dbConnection == null) {
-			System.out.println(Constants.DB_CONNECTION_ERROR); 
-			return null;
-		}
-		ArrayList<Order> orders = new ArrayList<>();
-		try {
-			String str = "SELECT * FROM reservations WHERE Park='"+parkName+"'";
-			Statement st = MainServer.dbConnection.createStatement();
-			ResultSet rs = st.executeQuery(str);
-			
-			while(rs.next()) {
-				Order o = new Order(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10),
-						rs.getString(11).equals("1"), rs.getString(12).equals("1"), rs.getString(13).equals("1"),rs.getString(14));
-				orders.add(o);
-			}
-		}catch(Exception ex) {
-			System.out.println("[ReservationRequestHandler] - failed to execute query");
-			ex.printStackTrace();
-			return null;
-		}
-		return (Order[])orders.toArray(new Order[orders.size()]);
-	}
-	
-	public static boolean parkHasSpace(Order o) {
-		Order[] parkOrders = getAllParkOrders(o.getParkName());
-		if (parkOrders == null)
-			return true;
-		Park p = ParkRequestHandler.getParkData(o.getParkName());
-		if (p == null)
-			return false;
-		
-		int parkMaxCapacity = p.getMaxCapacity();
-		int reserved = 0;
-		
-		for (Order o1 : parkOrders)
-			if (o.overlappingOrders(o1, p.getEstimatedTime()))
-				reserved += o1.getNumOfVisitors();
-		
-		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
-	}
-	
-	public static boolean parkHasSpace(Order o, Order[] parkOrders, Park p) {
-		if (parkOrders == null)
-			return true;
-
-		if (p == null)
-			return false;
-		
-		int parkMaxCapacity = p.getMaxCapacity();
-		int reserved = 0;
-		
-		for (Order o1 : parkOrders)
-			if (o.overlappingOrders(o1, p.getEstimatedTime()))
-				reserved += o1.getNumOfVisitors();
-		
-		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
-	}
-	
-	public static AvailablePlace[] getAvailableTimes(Order o) {
-		ArrayList<AvailablePlace> arr = new ArrayList<>();
-		//string = {year/month/day, avbl_hour}
-	
-		Calendar rightNow = Calendar.getInstance();
-		int month = rightNow.get(Calendar.MONTH) + 1;
-		int year = rightNow.get(Calendar.YEAR);
-		int day = rightNow.get(Calendar.DAY_OF_MONTH);
-		
-		int numOfSuggestions = 0;
-		int daySuggestions = 0;
-		int hour;
-		Order temp;
-		String date;
-		
-		Park p = ParkRequestHandler.getParkData(o.getParkName());
-		Order[] parkOrders = getAllParkOrders(o.getParkName());
-		
-		while (numOfSuggestions < 10) {
-			if (day + 1 > 30) {
-				day = 1;
-				if (month + 1 > 12) {
-					year++;
-					month = 1;
-				}else{
-					month++;
-				}
-			}else
-				day++;
-
-			hour = 8;//suggestion starting hour
-			daySuggestions = 0;
-			while (daySuggestions < 3 && hour <= 20) {//20 is suggestion closing hour
-				date = year+"-"+month+"-"+day;
-				temp = new Order(o.getParkName(), date, hour+"", "00", o.getNumOfVisitors(), o.getOrderType());
-				if (parkHasSpace(temp, parkOrders, p)) {
-					arr.add(new AvailablePlace(o.getParkName(), date, hour+":00"));
-					daySuggestions++;
-					numOfSuggestions++;
-				}
-				hour++;
-			}
-		}
-		return (AvailablePlace[])arr.toArray(new AvailablePlace[arr.size()]);
-	}
-	
-	
-	
+	}	
 	
 	//check if waiting list has the same order for the same person
 	public static boolean inWaitngList (Order o) {

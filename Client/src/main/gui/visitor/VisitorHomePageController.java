@@ -80,8 +80,7 @@ public class VisitorHomePageController implements Initializable{
                 }
             }
         });
-		if(VisitorReminder.getMsgcount() >0 ) {
-		msgAmount.setText(VisitorReminder.getMsgcount() + "");}
+		msgAmount.setText(VisitorReminder.getMsgcount() + "");
 	}
 	@FXML
 	public void clickInboxIcon(MouseEvent event) {

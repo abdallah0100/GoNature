@@ -73,8 +73,8 @@ public class ServerRequestHandler {
 			}
 			Order receivedOrder = (Order)msg.getRequestData();
 			
-			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
-				AvailablePlace[] arr = ReservationRequestHandler.getAvailableTimes(receivedOrder);
+			if (!ParkRequestHandler.parkHasSpace(receivedOrder)) {
+				AvailablePlace[] arr = ParkRequestHandler.getAvailableTimes(receivedOrder);
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
