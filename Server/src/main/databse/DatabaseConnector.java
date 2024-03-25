@@ -4,9 +4,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Manages the creation and management of database connections.
+ * This class is responsible for initializing the JDBC driver, establishing
+ * connections to the database, and handling any errors that occur during the
+ * connection process.
+ */
 public class DatabaseConnector {	
 
-
+	/**
+	 * Attempts to load the JDBC driver.
+	 * This method tries to initialize the MySQL JDBC driver and logs the outcome.
+	 * 
+	 * @return true if the driver was loaded successfully, false otherwise.
+	 */
 	private boolean loadDriver() {
 		try 
 		{
@@ -19,8 +30,17 @@ public class DatabaseConnector {
         	 return false;
         }
 	}
-	//a function to return a connection to the database, in case of failure returns null
-	//private because the use of this function depends on the success of loadDriver
+
+	/**
+	 * Establishes a connection to the database using the provided credentials.
+	 * This method is private as it should only be called internally once the JDBC
+	 * driver has been successfully loaded.
+	 * 
+	 * @param dbName The URL of the database to connect to.
+	 * @param user The user name for the database login.
+	 * @param pass The password for the database login.
+	 * @return A Connection object if the connection is successful, null otherwise.
+	 */
 	private Connection makeConnection(String dbName, String user, String pass) {
         try 
         {
@@ -37,9 +57,17 @@ public class DatabaseConnector {
             }
 	}
 	
-	//a function that returns a database connection
+	/**
+	 * Sets up a connection to the database with the given login details. First, it 
+	 * checks if the database is ready, and if so, it tries to connect to the database.
+	 * 
+	 * @param dbName The URL of the database to connect to.
+	 * @param user The user name for the database login.
+	 * @param pass The password for the database login.
+	 * @return A Connection object if the connection is successful, null otherwise.
+	 */
 	public Connection getConnection(String dbName, String user, String pass) {
-		if (loadDriver())//if succeded to connect to the driver
+		if (loadDriver())//if succeeded to connect to the driver
 			return makeConnection(dbName, user, pass);//return a Connection
 		return null;
 	}

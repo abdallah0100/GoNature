@@ -158,6 +158,5 @@ public class VisitorRequestHandler {
             e.printStackTrace();
             return false;
          }		
-	}
-		
+	}		
 }
