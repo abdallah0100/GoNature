@@ -51,7 +51,6 @@ public class SelectVisitsDetailsFrameController implements Initializable {
 
     /**
      * Shows the graph window after selecting the park and date.
-     * 
      * @param event the action event
      */
     @FXML
