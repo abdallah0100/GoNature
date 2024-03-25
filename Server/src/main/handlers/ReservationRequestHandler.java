@@ -210,7 +210,24 @@ public class ReservationRequestHandler {
 			if (o.overlappingOrders(o1, p.getEstimatedTime()))
 				reserved += o1.getNumOfVisitors();
 		
-		return reserved + o.getNumOfVisitors() <= parkMaxCapacity;
+		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
+	}
+	
+	public static boolean parkHasSpace(Order o, Order[] parkOrders, Park p) {
+		if (parkOrders == null)
+			return true;
+
+		if (p == null)
+			return false;
+		
+		int parkMaxCapacity = p.getMaxCapacity();
+		int reserved = 0;
+		
+		for (Order o1 : parkOrders)
+			if (o.overlappingOrders(o1, p.getEstimatedTime()))
+				reserved += o1.getNumOfVisitors();
+		
+		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
 	}
 	
 	public static AvailablePlace[] getAvailableTimes(Order o) {
@@ -227,6 +244,9 @@ public class ReservationRequestHandler {
 		int hour;
 		Order temp;
 		String date;
+		
+		Park p = ParkRequestHandler.getParkData(o.getParkName());
+		Order[] parkOrders = getAllParkOrders(o.getParkName());
 		
 		while (numOfSuggestions < 10) {
 			if (day + 1 > 30) {
@@ -245,7 +265,7 @@ public class ReservationRequestHandler {
 			while (daySuggestions < 3 && hour <= 20) {//20 is suggestion closing hour
 				date = year+"-"+month+"-"+day;
 				temp = new Order(o.getParkName(), date, hour+"", "00", o.getNumOfVisitors(), o.getOrderType());
-				if (parkHasSpace(temp)) {
+				if (parkHasSpace(temp, parkOrders, p)) {
 					arr.add(new AvailablePlace(o.getParkName(), date, hour+":00"));
 					daySuggestions++;
 					numOfSuggestions++;
