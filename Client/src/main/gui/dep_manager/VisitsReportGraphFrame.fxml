@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.ScatterChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="400.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.VisitsReportGraphFrameController">
+   <children>
+      <ScatterChart fx:id="scatterChart" layoutX="25.0" layoutY="37.0" prefHeight="338.0" prefWidth="523.0">
+         <xAxis>
+            <CategoryAxis prefHeight="33.0" prefWidth="482.0" side="BOTTOM" fx:id="xAxis" />
+         </xAxis>
+         <yAxis>
+            <CategoryAxis fx:id="yAxis" prefHeight="287.0" prefWidth="25.0" side="LEFT" />
+         </yAxis>
+      </ScatterChart>
+      <Label layoutX="164.0" layoutY="14.0" prefHeight="27.0" prefWidth="319.0" text="Entering And Visiting Time" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Label layoutX="65.0" layoutY="359.0" text="Exiting Time" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="33.0" text="Entering Time" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

@@ -42,7 +42,6 @@ public class EntryWorkerFrameController extends Application {
 	 * that the EntryWorker can check.
 	 * @param event
 	 */
-
 	
 	public void createReservations(ActionEvent event) {
 		SceneController scene = new SceneController();

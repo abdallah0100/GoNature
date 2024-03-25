@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@SelectVisitsDetailsFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.SelectVisitsDetailsFrameController">
+   <children>
+      <Pane fx:id="hiddenPane" layoutX="15.0" layoutY="14.0" prefHeight="98.0" prefWidth="560.0">
+         <children>
+            <Label layoutX="6.0" layoutY="11.0" prefHeight="33.0" prefWidth="130.0" text="Choose Park :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <ComboBox fx:id="parkComboBox" layoutX="136.0" layoutY="15.0" prefHeight="25.0" prefWidth="175.0" />
+            <Label layoutX="6.0" layoutY="57.0" prefHeight="33.0" prefWidth="130.0" text="Choose Date  :" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+            <DatePicker fx:id="datePicker" layoutX="136.0" layoutY="61.0" prefHeight="25.0" prefWidth="175.0" />
+            <Button layoutX="354.0" layoutY="57.0" mnemonicParsing="false" onAction="#showGraphWindow" prefHeight="33.0" prefWidth="109.0" text="Show Graph" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Button>
+            <Label fx:id="errorMsg" layoutX="347.0" layoutY="12.0" prefHeight="39.0" prefWidth="155.0" text="Label" textFill="RED" visible="false">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.20000000298023224" green="0.14814814925193787" blue="0.14814814925193787" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</Pane>

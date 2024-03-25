@@ -11,6 +11,7 @@ import entities.Report;
 import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
+import entities.VisitsReport;
 import ocsf.server.src.ConnectionToClient;
 import requests.Message;
 import requests.RequestType;
@@ -279,7 +280,10 @@ public class ServerRequestHandler {
 							if(ReservationRequestHandler.enterProcessed(o1))//add to processedres
 							{	//add to current number and delete from reservation
 								if(ParkRequestHandler.updateCurrentAmoun(o1,o1.getNumOfVisitors())) {
-									//(ParkRequestHandler.updateCurrentAmoun(o1.getParkName(),o1.getNumOfVisitors()))
+									
+									//if the park is full after entering new visitors, create a full park instance
+									if (ParkRequestHandler.parkReachedMaxCapacity(o1.getParkName()))
+										ParkRequestHandler.createFullParkInstance(o1);
 								boolean re =ReservationRequestHandler.updateStatus("reservations",o1.getOrderID(),0);
 								respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
 								return;
@@ -367,7 +371,14 @@ public class ServerRequestHandler {
 				o=VisitorRequestHandler.handleMakeReservationRequest(o,"waiting_list");
 				respondToClient(client, new Message(RequestType.ENTER_WAITING_LIST, o));
 				return;
-				
+		case VISITS_GRAPH_DATA:
+			if (!(msg.getRequestData() instanceof String[])) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
+				return;
+			}
+			VisitsReport[] dataToReturn = VisitsReportGraphHandler.getVisitsDataForGraph((String[])(msg.getRequestData()));
+			respondToClient(client, new Message(RequestType.VISITS_GRAPH_DATA,dataToReturn));
+			return;			
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
 			break;			

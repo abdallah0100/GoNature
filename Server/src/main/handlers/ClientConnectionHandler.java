@@ -18,6 +18,12 @@ public class ClientConnectionHandler {
 		MainServer.setClientConnections(list);
 	}
 	
+	public static void clearConnectionTable() {
+		ObservableList<ClientConnection> list = MainServer.getConnections();
+		list.clear();
+		MainServer.setClientConnections(list);
+	}
+	
 	public static void handleUserLogin(ConnectionToClient client, String name) {
 		MainServer.getInstance().getConnectionMap().put(name, client);
 	}
