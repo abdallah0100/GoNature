@@ -2,15 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: black;" stylesheets="@WaitingListFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.WaitingListFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ShowReservationFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.WaitingListFrameController">
    <children>
-      <Label layoutX="235.0" layoutY="101.0" prefHeight="27.0" prefWidth="143.0" text="Waiting List" textFill="WHITE">
+      <Label layoutX="230.0" layoutY="21.0" prefHeight="27.0" prefWidth="142.0" text="Waiting List" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -22,29 +23,20 @@
             </DropShadow>
          </effect>
       </Label>
-      <Button fx:id="enterBtn" layoutX="120.0" layoutY="190.0" mnemonicParsing="false" onAction="#enterWaitingList" prefHeight="41.0" prefWidth="178.0" text="Enter waiting list" textFill="WHITE">
+      <TableView fx:id="tableView" editable="true" layoutX="97.0" layoutY="64.0" prefHeight="272.0" prefWidth="405.0">
+        <columns>
+          <TableColumn fx:id="siteColumn" prefWidth="66.66665649414062" text="Site" />
+            <TableColumn fx:id="timeColumn" prefWidth="38.0" text="Hour" />
+            <TableColumn fx:id="minuteColumn" prefWidth="46.66668701171875" text="Minute" />
+          <TableColumn fx:id="dateColumn" prefWidth="79.99993896484375" text="Date" />
+            <TableColumn fx:id="typeColumn" prefWidth="80.66668701171875" text="Type" />
+            <TableColumn fx:id="visitorNumberColumn" prefWidth="92.33331298828125" text="Visitors" />
+        </columns>
+      </TableView>
+      <Button fx:id="deleteBtn" layoutX="482.0" layoutY="354.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="95.0" text="Delete" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Button>
-      <Button fx:id="cancelBtn" layoutX="340.0" layoutY="190.0" mnemonicParsing="false" onAction="#cancelEnteringWaitingList" prefHeight="41.0" prefWidth="136.0" text="Cancel" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect></Button>
-      <ListView fx:id="userWaitingList" layoutX="200.0" layoutY="139.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+            <Font name="Arial Bold" size="16.0" />
+         </font></Button>
+      <Label fx:id="msgLabel" layoutX="135.0" layoutY="361.0" prefHeight="17.0" prefWidth="207.0" textFill="#d71717" />
    </children>
 </Pane>

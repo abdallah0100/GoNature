@@ -44,3 +44,13 @@ ImageView{
 #updateReservation:hover{
    -fx-background-color: #808080;
 }
+#waitingList{
+	-fx-background-color: #219a6a;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
+
+
+#waitingList:hover{
+   -fx-background-color: #808080;
+}
