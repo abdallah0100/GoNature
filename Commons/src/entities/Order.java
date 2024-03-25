@@ -33,10 +33,30 @@ public class Order implements Serializable{
 	
 	private String orderID; // The order id of the reservation.
 	private String time; //The full time of the reservation hours & minutes.
-	private String messageTitle; 
+	private String messageTitle;
+	
+	/**
+	 *  Default constructor
+	 */
 	public Order() {
     }
 	
+	/**
+	 * Constructs an order with the details saved in the DB for every order.
+	 * 
+	 * @param orderType
+	 * @param numberOfVisitors
+	 * @param date
+	 * @param hour
+	 * @param minute
+	 * @param parkName
+	 * @param phone
+	 * @param email
+	 * @param reservationID
+	 * @param isConfirmed
+	 * @param invitedInAdvance
+	 * @param isPayed
+	 */
 	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
 			, String parkName , String phone, String email ,int reservationID,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed) {
 		this.orderType = orderType;
@@ -53,6 +73,15 @@ public class Order implements Serializable{
 		this.invitedInAdvance = invitedInAdvance;
 		this.isPayed = isPayed;
 	}
+	/**
+	 * Constructs an order with the wanted details.
+	 * @param parkName
+	 * @param date
+	 * @param hour
+	 * @param minute
+	 * @param numOfVisitors
+	 * @param orderType
+	 */
 	public Order(String parkName, String date, String hour,String minute,int numOfVisitors,String orderType) {
 		this.parkName =parkName;
 		this.date = date;
@@ -63,13 +92,19 @@ public class Order implements Serializable{
 		this.orderType = orderType;
 	}
 	
+	/**
+	 * 
+	 * @param numberOfVisitors
+	 * @param parkName
+	 * @param orderID
+	 */
 	public Order(int numberOfVisitors, String parkName,String orderID) {
 		this.parkName =parkName;
 		this.numOfVisitors = String.valueOf(numberOfVisitors);
 		this.orderID=String.valueOf(orderID);
 	}
 	
-	//new 
+
 	public Order(String orderType, int numberOfVisitors, String date, String hour, String minute
 			, String parkName , String phone, String email ,int reservationID,String visitorID ,boolean isConfirmed,boolean invitedInAdvance,boolean isPayed,String processed) {
 		this.orderType = orderType;
