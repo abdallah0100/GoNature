@@ -26,6 +26,8 @@ public class VisitorSidePaneController extends Application implements Initializa
 	private Button makeReservation;
 	@FXML
 	private Button showReservation;
+	@FXML
+	private Button waitingList;
 	String id;
 	
 	
@@ -64,7 +66,12 @@ public class VisitorSidePaneController extends Application implements Initializa
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
 	}
-	
+	//function to show waiting list
+	public void waitingList(ActionEvent e) {
+		MakeReservationFrameController.o=null;
+		SceneController scene = new SceneController();
+		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/WaitingListFrame.fxml");
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

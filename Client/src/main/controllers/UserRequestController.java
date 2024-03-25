@@ -1,6 +1,7 @@
 package main.controllers;
 
 import entities.Bill;
+import entities.Order;
 import entities.Report;
 import entities.User;
 import main.ClientController;
@@ -55,4 +56,14 @@ public class UserRequestController {
 		ClientController.getController().accept(new Message(RequestType.LOGOUT, toLogout));
 	}
 	
+	public static void getOrderId(String parkName) {
+		ClientController.getController().accept(new Message(RequestType.ORDER_ID, parkName));
+	}
+	public static void walkInvist(Order o) {
+		ClientController.getController().accept(new Message(RequestType.MAKE_RESERVATION_ENTRY, o));
+	}
+	
+	public static void checkInstructor(String id) {
+		ClientController.getController().accept(new Message(RequestType.CHECK_INSTRUCTOR, id));
+	}
 }

@@ -2,7 +2,6 @@ package main.client_requests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
@@ -13,6 +12,7 @@ import entities.Report;
 import entities.UsageReport;
 import entities.User;
 import entities.Visitor;
+import entities.VisitsReport;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
@@ -21,7 +21,9 @@ import main.gui.dep_manager.CancellationsGraphFrameController;
 import main.gui.dep_manager.CancellationsReportFrameController;
 import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
+import main.gui.dep_manager.SelectVisitsDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
+import main.gui.entry_worker.EnterVisitorsFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
@@ -246,7 +248,6 @@ public class RequestHandler {
 						return;
 					}
 			}
-			System.out.println("finished handlng client");
 		return;
 		case CANCEL_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
@@ -336,7 +337,47 @@ public class RequestHandler {
 					VisitorReminder.removeMsgIfExist(inboxMsg.getId());
 				VisitorReminder.updateAndGetMessages();
 			}
-			return; 
+			return;
+		case VISITS_GRAPH_DATA:
+			if (msg.getRequestData() instanceof VisitsReport[]) {
+				VisitsReport[] received = (VisitsReport[]) msg.getRequestData();
+				SelectVisitsDetailsFrameController.setReturnedTimesData(received);		
+				System.out.println("[RequestHandler] - Data received successfully.");
+	            return;
+			}
+			else {
+				System.out.println("[RequestHandler] - invalid VISITS_GRAPH_DATA response");
+				return;
+			}
+		case REQUEST_PARK:
+			if(!(msg.getRequestData() instanceof Park )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Park).");
+	            return;
+		}
+			EnterVisitorsFrameController.p=(Park)msg.getRequestData();
+			return;
+		case ORDER_ID:
+			if(!(msg.getRequestData() instanceof Integer )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Integer).");
+	            return;
+			}
+			EnterVisitorsFrameController.orderID=(int)msg.getRequestData();
+			return;
+		case MAKE_RESERVATION_ENTRY:
+			if (msg.getRequestData() instanceof Order) {
+				ClientController.reservationMade = (Order) msg.getRequestData();
+				VisitorRequestController.finishedMakingReservation = true;
+				return;
+			}
+			System.out.println("[RequestHandler] -  not order int waintlist (Order).");
+            return;
+		case CHECK_INSTRUCTOR:
+			if(!(msg.getRequestData() instanceof Boolean )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Boolean).");
+	            return;
+			}
+			EnterVisitorsFrameController.isInstructor=(Boolean)msg.getRequestData();
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
