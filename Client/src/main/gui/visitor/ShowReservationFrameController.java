@@ -66,7 +66,7 @@ public class ShowReservationFrameController extends Application implements Initi
 	* @throws Exception if an error occurs during initialization
 	*/
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception { 
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
 									"/main/gui/visitor/ShowReservationFrame.fxml");

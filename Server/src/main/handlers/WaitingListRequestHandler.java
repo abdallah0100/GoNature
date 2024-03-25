@@ -5,6 +5,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import entities.InboxMessage;
 import entities.Order;
 import main.Constants;
 import main.MainServer;
@@ -34,15 +35,19 @@ public class WaitingListRequestHandler {
 			}
 	}
 	
-	public static boolean removeFromWaitingList(Order o) {
+	public static boolean removeFromWaitingList(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
 		}
-		try {  
-			String str = "DELETE * FROM waiting_list WHERE Queue='"+o.getOrderID()+"'";
+		try {
+			String str = "DELETE FROM waiting_list WHERE Queue='"+id+"'";
 			Statement st = MainServer.dbConnection.createStatement();
-			return st.executeUpdate(str) > 0;
+			if (!(st.executeUpdate(str) > 0)) {
+				System.out.println("did not delete from waiting list");
+				return false;
+			}
+			return true;
 			}catch(Exception ex) {
 				System.out.println("[WaitingListRequestHandler] - Error executing query in getAllWaitingList");
 				ex.printStackTrace();
@@ -61,12 +66,15 @@ public class WaitingListRequestHandler {
 				|| (o.getYear() == year && month > o.getMonth())
 				|| (o.getYear() == year && o.getMonth() == month && day > o.getDay())) {
 				o.setCanceled(false);
+				InboxRequestHandler.addMessage(o.getVisitorID(), new InboxMessage("Waiting Expiration", "Your order #"+o.getOrderID() + "'s time has expired"));
 				ReservationRequestHandler.addToCanceledReports(o);
-				WaitingListRequestHandler.removeFromWaitingList(o);
+				WaitingListRequestHandler.removeFromWaitingList(o.getOrderID());
 			}
+			String id = o.getOrderID();
 			if (ParkRequestHandler.parkHasSpace(o)) {
-				VisitorRequestHandler.handleMakeReservationRequest(o, "reservations");
-				WaitingListRequestHandler.removeFromWaitingList(o);
+				Order o2 = VisitorRequestHandler.handleMakeReservationRequest(o, "reservations");
+				InboxRequestHandler.addMessage(o.getVisitorID(), new InboxMessage("New Order", "Your order #"+id + "'s has been set to active, new Id: "+o2.getOrderID()));
+				WaitingListRequestHandler.removeFromWaitingList(id);
 			}
 			
 		}

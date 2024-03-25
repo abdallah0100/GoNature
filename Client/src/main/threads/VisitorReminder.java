@@ -2,10 +2,14 @@ package main.threads;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import entities.InboxMessage;
 import entities.Order;
 import main.ClientController;
+import main.controllers.InboxRequestController;
 import main.controllers.ReservationController;
 import main.controllers.VisitorRequestController;
+import main.entities.ConfirmationMessage;
 import main.gui.visitor.VisitorHomePageController;
 
 
@@ -13,27 +17,36 @@ public class VisitorReminder implements Runnable{
 
 	private static Order[] visitorOrders;
 	private static int messageCnt = 0;
-	private static ArrayList<Order> ordersToConfirm;
+	private static ArrayList<InboxMessage> messages;	
+	private static InboxMessage[] serverInboxResponse;
 	
 	@Override
 	public void run() {
+		if (ClientController.connectedVisitor == null)
+			return;
 		VisitorRequestController.showReservations(ClientController.connectedVisitor.getId());
-		updateOrders();
+		InboxRequestController.fetchInbox(ClientController.connectedVisitor.getId());
+		updateAndGetMessages();
 		
-		while(visitorOrders.length > 0) {
-			updateOrders();
+		while(visitorOrders.length > 0 || serverInboxResponse.length > 0) {
+			if (ClientController.connectedVisitor == null)
+				return;
 			if (messageCnt > 0)
 				VisitorHomePageController.publicNewMsgPane.setVisible(true);
 			else 
 				VisitorHomePageController.publicNewMsgPane.setVisible(false);
 			try {
 				Thread.sleep(60000);
+				if (ClientController.connectedVisitor == null)
+					return;
+				VisitorRequestController.showReservations(ClientController.connectedVisitor.getId());
+				InboxRequestController.fetchInbox(ClientController.connectedVisitor.getId());
+				updateAndGetMessages();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
+		 
 	}
 
 	public static boolean timeArrived(Order o) {
@@ -57,17 +70,25 @@ public class VisitorReminder implements Runnable{
 	public static int getMsgcount() {
 		return messageCnt;
 	}
-	public static void updateOrders() {
+	public static void addConfirmableOrders() {
 		Calendar rightNow = Calendar.getInstance();
+		if (ClientController.reservationshowed == null) {
+			VisitorRequestController.showReservations(ClientController.connectedVisitor.getId());
+		}
 		visitorOrders = ClientController.reservationshowed;
-		ordersToConfirm = new ArrayList<>();
+		messages = new ArrayList<>();
 		messageCnt = 0;
 		if(visitorOrders== null)return;
 		int i=1;
+		String content;
+		String title;
 		for (Order o : visitorOrders)
 			if (timeArrived(o) && !o.getIsConfirmed()) {
 				if (!checkForMsgTimeOut(o)) {
-					ordersToConfirm.add(o);
+					title = "Reservation #"+i;
+					i++;
+					content = "You have a reservation in "+ o.getParkName()+" at " + o.getTime();
+					messages.add(new ConfirmationMessage(title, content, o));
 					messageCnt++;
 					if (!o.isSentMsg()) {
 						o.setMessageTitle("Reservation #"+i);
@@ -81,7 +102,25 @@ public class VisitorReminder implements Runnable{
 					ReservationController.sendCancelReservation(o);
 				}
 			}
-		VisitorHomePageController.ordersToConfirm.setAll(ordersToConfirm);
+	}
+	
+	public static void addInbox() {
+		if (serverInboxResponse != null) {
+			for (InboxMessage msg : serverInboxResponse) {
+				messages.add(msg);
+				messageCnt++;
+			}
+		}
+	}
+	
+	public static void removeMsgIfExist(int id) {
+		ArrayList<InboxMessage> msgs = new ArrayList<>();
+		for (InboxMessage m : serverInboxResponse) {
+			if (m.getId() == id)
+				continue;
+			msgs.add(m);
+		}
+		setServerInboxResponse(msgs.toArray(new InboxMessage[msgs.size()]));
 	}
 	
 	public static boolean checkForMsgTimeOut(Order o) {
@@ -99,9 +138,19 @@ public class VisitorReminder implements Runnable{
 		return false;
 	}
 	
-	public static ArrayList<Order> getOrdersToConfirm(){
-		updateOrders();
-		return ordersToConfirm;
+	public static ArrayList<InboxMessage> updateAndGetMessages(){
+		addConfirmableOrders();
+		addInbox();
+		VisitorHomePageController.inboxMessages.setAll(messages);
+		return messages;
+	}
+
+	public static InboxMessage[] getServerInboxResponse() {
+		return serverInboxResponse;
+	}
+
+	public static void setServerInboxResponse(InboxMessage[] serverInboxResponse) {
+		VisitorReminder.serverInboxResponse = serverInboxResponse;
 	}
 	
 }
