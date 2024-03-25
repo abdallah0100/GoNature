@@ -27,4 +27,11 @@ public class ParkRequestHandler {
 	public static void UpdateData(Report r) {
 		ClientController.getController().accept(new Message(RequestType.UPDATE_REQUEST_CHANGE, r));
 	}
+	
+	//get park 
+	public static void requestPark(String parkName) {
+		ClientController.getController().accept(new Message(RequestType.REQUEST_PARK,parkName));
+	}
+	
+	
 }

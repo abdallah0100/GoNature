@@ -22,6 +22,7 @@ import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.SelectVisitsDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
+import main.gui.entry_worker.EnterVisitorsFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
@@ -330,7 +331,36 @@ public class RequestHandler {
 			else {
 				System.out.println("[RequestHandler] - invalid VISITS_GRAPH_DATA response");
 				return;
-			}	
+			}
+		case REQUEST_PARK:
+			if(!(msg.getRequestData() instanceof Park )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Park).");
+	            return;
+		}
+			EnterVisitorsFrameController.p=(Park)msg.getRequestData();
+			return;
+		case ORDER_ID:
+			if(!(msg.getRequestData() instanceof Integer )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Integer).");
+	            return;
+			}
+			EnterVisitorsFrameController.orderID=(int)msg.getRequestData();
+			return;
+		case MAKE_RESERVATION_ENTRY:
+			if (msg.getRequestData() instanceof Order) {
+				ClientController.reservationMade = (Order) msg.getRequestData();
+				VisitorRequestController.finishedMakingReservation = true;
+				return;
+			}
+			System.out.println("[RequestHandler] -  not order int waintlist (Order).");
+            return;
+		case CHECK_INSTRUCTOR:
+			if(!(msg.getRequestData() instanceof Boolean )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Boolean).");
+	            return;
+			}
+			EnterVisitorsFrameController.isInstructor=(Boolean)msg.getRequestData();
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)
