@@ -3,32 +3,37 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents an order placed by a visitor for park entry or services.
+ * Orders include details such as order type, visitor count, date and time, park name, and contact information.
+ * Orders can also track payment status, confirmation, and cancellation states.
+ */
 public class Order implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String orderType;
-	private String numOfVisitors;
-	private String date;
-	private String hour;
-	private String minute;
-	private String parkName;
-	private String phone;
-	private String email;
-	private String visitorID;
-	private boolean isConfirmed;
-	private boolean invitedInAdvance;
-	private boolean isPayed;
-	private boolean canceled;
-	private boolean cancelRequest;
-	private String processed;
+	private String orderType; // The type of the reservation.
+	private String numOfVisitors; // The number of the visitors for a reservation.
+	private String date; // The date of the reservation.
+	private String hour; // The hour of the reservation.
+	private String minute; // The minute of the reservation.
+	private String parkName; // The park name of the reservation.
+	private String phone; // The phone for the visitor who made this reservation.
+	private String email; // The email for the visitor who made this reservation.
+	private String visitorID; //The visitor ID for the visitor who made this reservation.
+	private boolean isConfirmed; // Flag to save if the reservation if confirmed or not.
+	private boolean invitedInAdvance; // Flag to save if the reservation was reserved in advanced.
+	private boolean isPayed; // Flag to save if the visitor payed in advanced.
+	private boolean canceled; //Flag to save if the reservation was cancelled.
+	private boolean cancelRequest; //Flag to save if there is a cancel request to reservation.
+	private String processed; // Flag to save if reservation has done processing and now is in DB.
 	
-	private boolean sentMsg;
+	private boolean sentMsg; // Flag to save if a message has been sent.
 	private int msgHour;
 	private int msgMinute;
 	
-	private String orderID;
-	private String time;
-	private String messageTitle;
+	private String orderID; // The order id of the reservation.
+	private String time; //The full time of the reservation hours & minutes.
+	private String messageTitle; 
 	public Order() {
     }
 	

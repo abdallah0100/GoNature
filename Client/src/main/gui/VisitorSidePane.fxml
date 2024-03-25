@@ -22,7 +22,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button fx:id="showReservation" layoutX="5.0" layoutY="236.0" mnemonicParsing="false" onAction="#showReservation" prefHeight="25.0" prefWidth="136.0" text="Show Reservation" textFill="WHITE">
+      <Button fx:id="showReservation" layoutX="4.0" layoutY="222.0" mnemonicParsing="false" onAction="#showReservation" prefHeight="25.0" prefWidth="136.0" text="Show Reservation" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -65,5 +65,10 @@
             </DropShadow>
          </effect>
       </ImageView>
+      <Button fx:id="waitingList" layoutX="8.0" layoutY="276.0" mnemonicParsing="false" onAction="#waitingList" prefHeight="25.0" prefWidth="130.0" text="Waiting List" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
