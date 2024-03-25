@@ -18,7 +18,6 @@ import requests.RequestType;
  * The MainServer class extends AbstractServer and is responsible for initializing the server,
  * handling messages from clients, managing client connections, and maintaining the database connection.
  */
-
 public class MainServer extends AbstractServer{
 	
 	public static Connection dbConnection;
@@ -31,7 +30,6 @@ public class MainServer extends AbstractServer{
 	 * Keeps track of who is connected to the server by linking each client's ID to their connection.
 	 * used to determine if they are logged in.
 	 */
-	
 	private HashMap<String, ConnectionToClient> connectionMap;
 
 	/**
@@ -39,7 +37,6 @@ public class MainServer extends AbstractServer{
 	 * 
 	 * @param port is the port number on which the server will listen for connections.
 	 */
-	
 	private MainServer(int port) {
 		super(port);
 		connectionMap = new HashMap<>();
@@ -49,7 +46,6 @@ public class MainServer extends AbstractServer{
 	 * Handles incoming messages from clients. Validates the message type and sends 
 	 * requests to the ServerRequestHandler for further processing.
 	 */
-	
 	@Override
 	protected void handleMessageFromClient(Object incomingMsg, ConnectionToClient client) 
 	{
@@ -69,8 +65,7 @@ public class MainServer extends AbstractServer{
 	 * @param dbName The name of the database to connect to.
 	 * @param dbUser The database user name.
 	 * @param dbPass The database password.
-	 */
-	
+	 */	
 	public static void startServer(String p, String dbName, String dbUser, String dbPass) {
 		int port;
 		try {
@@ -101,7 +96,6 @@ public class MainServer extends AbstractServer{
 	 * @param port The port number for the server.
 	 * @return The newly created instance of MainServer.
 	 */
-	
 	private static MainServer createInstance(int port) {
 		server = new MainServer(port);
 		return server;
@@ -113,7 +107,6 @@ public class MainServer extends AbstractServer{
 	 * 
 	 * @return The single instance of MainServer.
 	 */
-	
 	public static MainServer getInstance() {
 		if (server == null)
 			server = new MainServer(Constants.SERVER_PORT);
@@ -123,7 +116,6 @@ public class MainServer extends AbstractServer{
 	/**
 	 * Closes the server connection and resets the server state.
 	 */
-	
 	public void closeConnection() {
 		try {
 			close();
@@ -140,7 +132,6 @@ public class MainServer extends AbstractServer{
 	/**
 	 *  Resets the server to a null state.
 	 */
-	
 	private static void resetServer() {
 		server = null;
 	}
@@ -150,7 +141,6 @@ public class MainServer extends AbstractServer{
 	 * 
 	 * @return An ObservableList of ClientConnection objects.
 	 */
-	
 	public static ObservableList<ClientConnection> getConnections(){
 		return connections;
 	}
@@ -160,7 +150,6 @@ public class MainServer extends AbstractServer{
 	 * 
 	 * @param conns The new list of client connections to be set.
 	 */
-	
 	public static void setClientConnections(ObservableList<ClientConnection> conns) {
 		connections = conns;
 	}
@@ -170,9 +159,7 @@ public class MainServer extends AbstractServer{
 	 * 
 	 * @return The map of client IDs to connections.
 	 */
-	
 	public HashMap<String, ConnectionToClient> getConnectionMap() {
 		return connectionMap;
 	}
-
 }

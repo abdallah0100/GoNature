@@ -9,7 +9,6 @@ import main.gui.MainServerFrameController;
  * This class extends from Application to leverage JavaFX for creating
  * and managing the GUI elements.
  */
-
 public class ServerUI extends Application{
 	
 	/**
@@ -21,7 +20,6 @@ public class ServerUI extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 	
 	/**
 	 * Starts the primary stage of the application, setting up the main server window.
