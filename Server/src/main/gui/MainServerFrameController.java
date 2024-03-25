@@ -24,6 +24,7 @@ import javafx.stage.StageStyle;
 import main.Constants;
 import main.MainServer;
 import main.entities.ClientConnection;
+import main.handlers.ClientConnectionHandler;
 import utilities.SceneController;
 
 public class MainServerFrameController extends Application implements Initializable{
@@ -137,6 +138,7 @@ public class MainServerFrameController extends Application implements Initializa
 		
 		MainServer.startServer(serverPortField.getText(), dbNameField.getText(), dbUserField.getText(), dbPassField.getText());
 		if (MainServer.serverStarted) {
+			ClientConnectionHandler.clearConnectionTable();
 			lockFieldsAfterStart();
 			connectionTable.setItems(MainServer.getConnections());
 			
@@ -181,6 +183,7 @@ public class MainServerFrameController extends Application implements Initializa
 			displayErrorMsg("You can not stop the server when it is offline", 175);
 			return;
 		}
+		ClientConnectionHandler.clearConnectionTable();
 		serverPortField.setDisable(false);
 		dbNameField.setDisable(false);
 		dbUserField.setDisable(false);

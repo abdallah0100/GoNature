@@ -69,9 +69,9 @@ public class VisitorRequestHandler {
 			int isConfirmed = o.getIsConfirmed() ? 1 : 0;
 	        int invitedInAdvance = o.getInvitedInAdvance() ? 1 : 0;
 	        int payed = o.getIsPayed() ? 1 : 0;
-	        if(ReservationRequestHandler.inWaitngList(o)) { //if in waiting list
+	        if(tableName.equals("waiting_list") && ReservationRequestHandler.inWaitngList(o)) //if in waiting list
 	        	return null;
-	        }
+	        
 			Statement st = MainServer.dbConnection.createStatement();
 		    int s = st.executeUpdate( "INSERT INTO "+tableName+" (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed, processed)" + 
 			" VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"','"+o.getVisitorID()+"','"+isConfirmed+"','"+invitedInAdvance+"','"+payed+"', '-1')");

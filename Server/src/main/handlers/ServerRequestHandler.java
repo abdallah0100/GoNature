@@ -279,7 +279,10 @@ public class ServerRequestHandler {
 							if(ReservationRequestHandler.enterProcessed(o1))//add to processedres
 							{	//add to current number and delete from reservation
 								if(ParkRequestHandler.updateCurrentAmoun(o1,o1.getNumOfVisitors())) {
-									//(ParkRequestHandler.updateCurrentAmoun(o1.getParkName(),o1.getNumOfVisitors()))
+									
+									//if the park is full after entering new visitors, create a full park instance
+									if (ParkRequestHandler.parkReachedMaxCapacity(o1.getParkName()))
+										ParkRequestHandler.createFullParkInstance(o1);
 								boolean re =ReservationRequestHandler.updateStatus("reservations",o1.getOrderID(),0);
 								respondToClient(client, new Message(RequestType.ENTER_VISTOR,re));
 								return;

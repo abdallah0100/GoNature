@@ -213,5 +213,52 @@ public class ParkRequestHandler {
 			}
 	}	
 	
+	public static boolean parkReachedMaxCapacity(String parkName) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR); 
+			return false;
+		}
+		try {
+			String str = "SELECT * FROM parks WHERE ParkName='"+parkName+"'";
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next()) {
+				System.out.println("[ParkRequestHandler] - result set was empty");
+				return false;
+			}
+			int visitorsWithOrder = rs.getInt("visitorsWithOrder");
+			int visitorsWithoutOrder = rs.getInt("visitorsWithoutOrder");
+			int capacity = rs.getInt("capacity");
+			return visitorsWithOrder + visitorsWithoutOrder >= capacity;
+		}catch(Exception ex) {
+				System.out.println("[ParkRequestHandler] - failed to execute query");
+				ex.printStackTrace();
+				return false;
+		}
+	}
+	
+	public static void createFullParkInstance(Order order) {
+		
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR); 
+			return;
+		}
+		try {
+			
+			String str = "INSERT INTO full_park (parkName, year, month, day, hour) VALUES(?,?,?,?,?)";
+			PreparedStatement pr = MainServer.dbConnection.prepareStatement(str);
+			pr.setString(1, order.getParkName());
+			pr.setString(2, order.getYear() + "");
+			pr.setString(3, order.getMonth() + "");
+			pr.setString(4, order.getDay() + "");
+			pr.setString(5, order.getHour());
+			if (!(pr.executeUpdate() > 0))
+				System.out.println("[ParkRequestHandler] - Error creating new full park instance");
+		}catch(Exception ex) {
+				System.out.println("[ParkRequestHandler] - failed to execute query");
+				ex.printStackTrace();
+				return;
+		}
+	}
 	
 }
