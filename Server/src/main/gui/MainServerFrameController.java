@@ -26,6 +26,12 @@ import main.MainServer;
 import main.entities.ClientConnection;
 import utilities.SceneController;
 
+/**
+ * Controls the main server frame UI and handles interactions within the server application GUI.
+ * This class manages the server's start/stop functionality, displays server and database status,
+ * and handles the import of data. It extends the JavaFX Application class and implements Initializable
+ * for initializing controller after the root element has been processed.
+ */
 public class MainServerFrameController extends Application implements Initializable{
 	
 	@FXML
@@ -60,14 +66,21 @@ public class MainServerFrameController extends Application implements Initializa
 	private Pane headerPane;
 	@FXML
 	private Button importBtn;
-	
-	//Saving offsets and the stage to apply drag functionality on the header
+
+	/**
+	 * Saving offset x and the stage to apply drag functionality on the header
+	 */
 	private static double xOffset = 0;
+    /**
+     * Saving offset y and the stage to apply drag functionality on the header
+     */
     private static double yOffset = 0;
     private static Stage stage;
     public static boolean isImport;
 
-
+	/**
+	 *
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
@@ -75,8 +88,9 @@ public class MainServerFrameController extends Application implements Initializa
 		SceneController scene = new SceneController();
 		scene.changeScene("GoNature - Server", primaryStage, "/main/gui/MainServer.fxml");
 	}
-	/*
-	 * a function to set up the labels of the server data
+
+	/**
+	 * Sets up the initial UI elements, including server IP, port, and database information.
 	 */
 	public void setUpUI() {
 		try {
@@ -90,18 +104,22 @@ public class MainServerFrameController extends Application implements Initializa
 		dbUserField.setText(Constants.DB_USERNAME);
 	}
 	
+	/**
+	 * Exits the server application.
+	 * @param e The action event triggering the exit.
+	 */
 	public void exitServer(ActionEvent e) {
 		System.out.println("[MainServerFrameController] - Exiting server");
 		System.exit(0);
 	}
 	
-	//a function that is called when the class is loaded up (from the fxml file in our case)
+	/**
+	 * Initializes the controller class. This method is automatically called
+	 * when we start the server
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//we add the setup here, because the labels are not initiliazed yet untill this function is called
 		setUpUI();
-		
-		// making the client dragable from the header
 		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -122,6 +140,12 @@ public class MainServerFrameController extends Application implements Initializa
 		
 	}
 	
+	/**
+	 * Starts the server using the provided server and database configuration.
+	 * Displays an error message if required fields are not filled or if the server fails to start.
+	 * 
+	 * @param event The action event triggering the server start.
+	 */
 	public void startServer(ActionEvent event) {
 		if (!(serverPortField.getText().length() > 0 || dbNameField.getText().length() > 0 ||
 			dbUserField.getText().length() > 0 || dbPassField.getText().trim().length() > 0)) {
@@ -147,6 +171,13 @@ public class MainServerFrameController extends Application implements Initializa
 		else
 			displayErrorMsg("Server failed to start", -1);
 	}
+	
+	/**
+	 * Displays an error message on the GUI.
+	 * 
+	 * @param msg The error message to display.
+	 * @param x he x-coordinate for positioning the message label, if applicable.
+	 */
 	public void displayErrorMsg(String msg, int x) {
 		msgLabel.setText(msg);
 		msgLabel.setTextFill(Color.valueOf("red"));
@@ -155,6 +186,9 @@ public class MainServerFrameController extends Application implements Initializa
 		msgLabel.setVisible(true);
 	}
 	
+	/**
+	 * Locks input fields after the server has started and updates the UI to reflect the server status.
+	 */
 	public void lockFieldsAfterStart() {
 		if (MainServer.serverStarted) {
 			serverPortField.setDisable(true);
@@ -176,6 +210,10 @@ public class MainServerFrameController extends Application implements Initializa
 		}
 	}
 	
+	/**
+	 * Stops the server and re-enables input fields for server configuration.
+	 * @param event The action event triggering.
+	 */
 	public void stopServer(ActionEvent event) {
 		if (!MainServer.serverStarted) {
 			displayErrorMsg("You can not stop the server when it is offline", 175);
@@ -196,7 +234,10 @@ public class MainServerFrameController extends Application implements Initializa
 		isImport=false;
 	}
 	
-	
+	/**
+	 * Initiates data import if the server is online, shows an error otherwise.
+	 * @param event Action event triggering this method.
+	 */
 	public void importData(ActionEvent event) {
 		if (!MainServer.serverStarted) {
 			displayErrorMsg("You can not import data when the server offline", 175);
@@ -205,6 +246,11 @@ public class MainServerFrameController extends Application implements Initializa
 		isImport=true;
 		importBtn.setDisable(true);
 	}
+	
+	/**
+	 * Closes the server connection if online, then exits the application.
+	 * @param event Mouse event triggering this method. 
+	 */
 	public void exitButton(MouseEvent event) {
 		if (MainServer.serverStarted)
 			MainServer.getInstance().closeConnection();
