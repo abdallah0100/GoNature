@@ -2,6 +2,8 @@ package main.gui.visitor;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import entities.InboxMessage;
 import entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +20,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import main.ClientController;
+import main.controllers.InboxRequestController;
 import main.controllers.ReservationController;
+import main.entities.ConfirmationMessage;
 import main.threads.VisitorReminder;
 
 public class VisitorHomePageController implements Initializable{
@@ -33,55 +37,79 @@ public class VisitorHomePageController implements Initializable{
 	@FXML
 	private Button cancelBtn;
 	@FXML
-	private TableView<Order> messageTable;
+	private TableView<InboxMessage> messageTable;
 	@FXML
-	private TableColumn<Order,String> message;
+	private TableColumn<InboxMessage,String> message;
 	@FXML
 	private Pane newMsgPane;
 	public static Pane publicNewMsgPane;
-	public static ObservableList<Order> ordersToConfirm = FXCollections.observableArrayList();
+	public static ObservableList<InboxMessage> inboxMessages = FXCollections.observableArrayList();
 	int selectedRowIndex;
 	private Order selectedOrder;
+	private InboxMessage selectedMsg;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		MakeReservationFrameController.o=null;
 		publicNewMsgPane = newMsgPane;
-		ordersToConfirm.addAll(VisitorReminder.getOrdersToConfirm());
-		messageTable.setItems(ordersToConfirm);
-		message.setCellValueFactory(new PropertyValueFactory<Order, String>("messageTitle"));
+		inboxMessages.addAll(VisitorReminder.updateAndGetMessages());
+		messageTable.setItems(inboxMessages);
+		message.setCellValueFactory(new PropertyValueFactory<InboxMessage, String>("title"));
 		Thread visitorReminder = new Thread(new VisitorReminder());
 		visitorReminder.start();
-		
+		handleTableSelection();
+		msgAmount.setText(VisitorReminder.getMsgcount() + "");
+	}
+	
+	private void handleTableSelection() {
 		messageTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 	        if (newSelection != null) {
-	            selectedOrder = newSelection;
-	            System.out.println("Selected order: " + selectedOrder);
+	        	selectedMsg = (InboxMessage)newSelection;
+	        	if (newSelection instanceof ConfirmationMessage) {
+	        		ConfirmationMessage msg = (ConfirmationMessage)newSelection;
+		            selectedOrder = msg.getOrder();
+		            System.out.println("Selected order: " + selectedOrder);
+	            }
 	        }
 	    });
 		
 		messageTable.setOnMouseClicked(event -> {
             if (!messageTable.getSelectionModel().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            	Alert alert;
+            	if (selectedMsg instanceof ConfirmationMessage)
+            		alert = new Alert(Alert.AlertType.CONFIRMATION);
+            	else
+            		alert = new Alert(Alert.AlertType.INFORMATION);
+            	
                 alert.getDialogPane().setPrefWidth(300);
-                alert.setTitle("Confirmation");
-                alert.setHeaderText("Reservation Confirmation");
-                alert.setContentText("You have a reservation in "+ selectedOrder.getParkName()+" at " + selectedOrder.getTime());
+                alert.setTitle(selectedMsg.getTitle());
+                alert.setContentText(selectedMsg.getContent());
+            	if (selectedMsg instanceof ConfirmationMessage) {
+                    alert.setHeaderText("Reservation Confirmation");
+                    ButtonType confirmButton = new ButtonType("Confirm");
+                    ButtonType cancelButton = new ButtonType("Cancel");
+                    alert.getButtonTypes().setAll(confirmButton, cancelButton);
 
-                ButtonType confirmButton = new ButtonType("Confirm");
-                ButtonType cancelButton = new ButtonType("Cancel");
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == confirmButton) {
+                       admit();
+                    } else if (result.isPresent() && result.get() == cancelButton){
+                    	cancel();
+                    }
+            	}else {
+            		//inbox message
+                    ButtonType okButton = new ButtonType("OK");
+                    alert.getButtonTypes().setAll(okButton);
 
-                alert.getButtonTypes().setAll(confirmButton, cancelButton);
 
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == confirmButton) {
-                   admit();
-                } else {
-                	cancel();
-                }
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == okButton) {
+                    	System.out.println("deleting");
+                        InboxRequestController.deleteMessage(selectedMsg);
+                    }
+            	}
+       
             }
         });
-		if(VisitorReminder.getMsgcount() >0 ) {
-		msgAmount.setText(VisitorReminder.getMsgcount() + "");}
 	}
 	@FXML
 	public void clickInboxIcon(MouseEvent event) {
@@ -89,21 +117,22 @@ public class VisitorHomePageController implements Initializable{
 			msgAmount.setText(VisitorReminder.getMsgcount() + "");}
 		messageTable.setVisible(!messageTable.isVisible());
 		if (VisitorReminder.getMsgcount() > 1) {
-			 messageTable.setItems(ordersToConfirm);
+			 messageTable.setItems(inboxMessages);
 		}
 
 	}
 	public void admit() {
 		if (selectedOrder != null) {
-				ReservationController.sendConfirmReservation(selectedOrder);//
-				for (Order o : ClientController.reservationshowed) {
-					if (o.getOrderID().equals(selectedOrder.getOrderID())){	
-							msgAmount.setText(VisitorReminder.getMsgcount() + "");
-							if (VisitorReminder.getMsgcount() == 0)
-								newMsgPane.setVisible(false);
-							break;
+				ReservationController.sendConfirmReservation(selectedOrder);
+				if (ClientController.reservationshowed != null)
+					for (Order o : ClientController.reservationshowed) {
+						if (o.getOrderID().equals(selectedOrder.getOrderID())){	
+								msgAmount.setText(VisitorReminder.getMsgcount() + "");
+								if (VisitorReminder.getMsgcount() == 0)
+									newMsgPane.setVisible(false);
+								break;
+							}
 						}
-					}
 			}
 			else
 				System.out.println("[VisitorHomePageController] - Order was null");

@@ -38,7 +38,9 @@ public enum RequestType {
 	REQUEST_PARK(35),
 	ORDER_ID(36),
 	MAKE_RESERVATION_ENTRY(37),
-	CHECK_INSTRUCTOR(38);
+	CHECK_INSTRUCTOR(38),
+	FETCH_INBOX(39),
+	DELETE_MSG(40);
 	
 	private int requestId;
 	

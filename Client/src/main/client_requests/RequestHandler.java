@@ -5,6 +5,7 @@ import java.util.HashMap;
 import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
+import entities.InboxMessage;
 import entities.Order;
 import entities.Park;
 import entities.Report;
@@ -239,15 +240,15 @@ public class RequestHandler {
 				return;
 			}
 			Order temp = (Order)msg.getRequestData();
-			if (temp.getIsConfirmed()) {
+			if (temp.getIsConfirmed() && ClientController.reservationshowed != null) {
 				for (Order o1 : ClientController.reservationshowed)
 					if (o1.getOrderID().equals(temp.getOrderID())) {
 						o1.setIsConfirmed(true);
-						VisitorReminder.updateOrders();
-						break;
+						VisitorReminder.updateAndGetMessages();
+						return;
 					}
 			}
-		break;
+		return;
 		case CANCEL_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
 				System.out.println("[RequestHandler] - invalid server response");
@@ -260,7 +261,7 @@ public class RequestHandler {
 					if (!o2.getOrderID().equals(o.getOrderID()))
 						arr.add(o2);
 				ClientController.reservationshowed = arr.toArray(new Order[arr.size()]);
-				VisitorReminder.updateOrders();
+				VisitorReminder.updateAndGetMessages();
 			}			
 			break;
 		
@@ -320,6 +321,22 @@ public class RequestHandler {
 		            return;
 			}if((Order)(msg.getRequestData())!=null)
 				DeclinedReservationOptions.inserted=true;
+			return;
+		case FETCH_INBOX:
+			if((msg.getRequestData() instanceof InboxMessage[])) {
+	           VisitorReminder.setServerInboxResponse((InboxMessage[]) msg.getRequestData());
+				return;
+			}else {
+		         VisitorReminder.setServerInboxResponse(null);
+		         return;
+		    }
+		case DELETE_MSG:
+			if (msg.getRequestData() instanceof InboxMessage) {
+				InboxMessage inboxMsg = (InboxMessage)msg.getRequestData();
+				if (inboxMsg.isDeleted())
+					VisitorReminder.removeMsgIfExist(inboxMsg.getId());
+				VisitorReminder.updateAndGetMessages();
+			}
 			return;
 		case VISITS_GRAPH_DATA:
 			if (msg.getRequestData() instanceof VisitsReport[]) {

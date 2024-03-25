@@ -5,6 +5,7 @@ import java.util.HashMap;
 import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
+import entities.InboxMessage;
 import entities.Order;
 import entities.Park;
 import entities.Report;
@@ -74,8 +75,8 @@ public class ServerRequestHandler {
 			}
 			Order receivedOrder = (Order)msg.getRequestData();
 			
-			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
-				AvailablePlace[] arr = ReservationRequestHandler.getAvailableTimes(receivedOrder);
+			if (!ParkRequestHandler.parkHasSpace(receivedOrder)) {
+				AvailablePlace[] arr = ParkRequestHandler.getAvailableTimes(receivedOrder);
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
@@ -326,6 +327,7 @@ public class ServerRequestHandler {
 			o = (Order) msg.getRequestData();
 			boolean canceled = ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
 			boolean addedToCanceled = ReservationRequestHandler.addToCanceledReports(o);
+			WaitingListRequestHandler.checkWaitingListForAdmittableOrder(o.getParkName());
 			o.setCanceled(addedToCanceled && canceled);
 			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));
 			return;
@@ -371,6 +373,26 @@ public class ServerRequestHandler {
 				o=VisitorRequestHandler.handleMakeReservationRequest(o,"waiting_list");
 				respondToClient(client, new Message(RequestType.ENTER_WAITING_LIST, o));
 				return;
+				
+		case FETCH_INBOX:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected String)"));
+				return;
+			}
+			String id = (String)msg.getRequestData();
+			InboxMessage[] msgs = InboxRequestHandler.getAllMessages(id);
+			respondToClient(client, new Message(RequestType.FETCH_INBOX, msgs));
+			return;
+		case DELETE_MSG:
+			if (!(msg.getRequestData() instanceof InboxMessage)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected int)"));
+				return;
+			}
+			InboxMessage inboxMsg = (InboxMessage)msg.getRequestData();			
+			result = InboxRequestHandler.deleteMsg(inboxMsg.getId());
+			inboxMsg.setDeleted(result);
+			respondToClient(client, new Message(RequestType.DELETE_MSG, inboxMsg));
+			return;
 		case VISITS_GRAPH_DATA:
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
@@ -411,13 +433,13 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
 			}
-			String id=(String)msg.getRequestData();
+			id=(String)msg.getRequestData();
 			boolean z=UserRequestHandler.isInstructor(id);
 			respondToClient(client, new Message(RequestType.CHECK_INSTRUCTOR, z));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
-			break;			
+			return;			
 		}
 		 
 		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));

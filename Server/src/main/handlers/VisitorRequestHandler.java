@@ -66,16 +66,32 @@ public class VisitorRequestHandler {
 		                 o.getVisitorID() + "', '" + o.getEmail() + "', '" + o.getPhone() + "', '0')";
 		         stat.executeUpdate(insertVisitorQuery);
 		    }
-			int isConfirmed = o.getIsConfirmed() ? 1 : 0;
-	        int invitedInAdvance = o.getInvitedInAdvance() ? 1 : 0;
-	        int payed = o.getIsPayed() ? 1 : 0;
+
 	        if(tableName.equals("waiting_list") && ReservationRequestHandler.inWaitngList(o)) //if in waiting list
 	        	return null;
 	        
-			Statement st = MainServer.dbConnection.createStatement();
-		    int s = st.executeUpdate( "INSERT INTO "+tableName+" (Type,NumberOfVisitors,ReservationDate,Hour,Minute,Park,Telephone,Email,visitorID,isConfirmed,invitedInAdvance,payed, processed)" + 
-			" VALUES ('"+o.getOrderType()+"', '"+o.getNumOfVisitors()+"','"+o.getDate()+"' ,'"+o.getHour()+"', '"+o.getMinute()+"', '"+o.getParkName()+"', '"+o.getPhone()+"', '"+o.getEmail()+"','"+o.getVisitorID()+"','"+isConfirmed+"','"+invitedInAdvance+"','"+payed+"', '-1')");
-		    if(s<=0)return null;
+
+	        String sql = "INSERT INTO " + tableName + " (Type, NumberOfVisitors, ReservationDate, Hour, Minute, Park, Telephone, Email, visitorID, isConfirmed, invitedInAdvance, payed, processed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        PreparedStatement preparedStatement = MainServer.dbConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        preparedStatement.setString(1, o.getOrderType());
+	        preparedStatement.setInt(2, o.getNumOfVisitors());
+	        preparedStatement.setDate(3, java.sql.Date.valueOf(o.getDate()));
+	        preparedStatement.setString(4, o.getHour());
+	        preparedStatement.setString(5, o.getMinute());
+	        preparedStatement.setString(6, o.getParkName());
+	        preparedStatement.setString(7, o.getPhone());
+	        preparedStatement.setString(8, o.getEmail());
+	        preparedStatement.setString(9, o.getVisitorID());
+	        preparedStatement.setBoolean(10, o.getIsConfirmed());
+	        preparedStatement.setBoolean(11, o.getInvitedInAdvance());
+	        preparedStatement.setBoolean(12, o.getIsPayed());
+	        preparedStatement.setString(13, "-1");
+	        
+		    if(preparedStatement.executeUpdate() <=0)return null;
+		    ResultSet keys = preparedStatement.getGeneratedKeys(); //getting the generated order id
+		    if (keys.next())
+		    	o.setOrderID(keys.getInt(1)+ "");
 		}catch(Exception ex) {
 			System.out.println("[VisitorRequestHandler] - failed to execute query");
 			ex.printStackTrace();
