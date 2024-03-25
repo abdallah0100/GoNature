@@ -11,6 +11,6 @@
       <Button layoutX="194.0" layoutY="243.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
       <Button layoutX="300.0" layoutY="243.0" mnemonicParsing="false" onAction="#enter" text="Enter" />
       <TextField fx:id="visitorIdTxt" layoutX="211.0" layoutY="89.0" />
-      <Label fx:id="msgLabel" layoutX="246.0" layoutY="192.0" text="Label" visible="false" />
+      <Label fx:id="msgLabel" layoutX="246.0" layoutY="192.0" text="Label" textFill="RED" visible="false" />
    </children>
 </Pane>

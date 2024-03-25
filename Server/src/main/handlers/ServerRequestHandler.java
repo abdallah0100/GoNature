@@ -5,6 +5,7 @@ import java.util.HashMap;
 import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
+import entities.InboxMessage;
 import entities.Order;
 import entities.Park;
 import entities.Report;
@@ -74,8 +75,8 @@ public class ServerRequestHandler {
 			}
 			Order receivedOrder = (Order)msg.getRequestData();
 			
-			if (!ReservationRequestHandler.parkHasSpace(receivedOrder)) {
-				AvailablePlace[] arr = ReservationRequestHandler.getAvailableTimes(receivedOrder);
+			if (!ParkRequestHandler.parkHasSpace(receivedOrder)) {
+				AvailablePlace[] arr = ParkRequestHandler.getAvailableTimes(receivedOrder);
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
@@ -266,7 +267,7 @@ public class ServerRequestHandler {
 				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
-				}////s[0]  ClientController.connectedUser.getParkName s[1] resevation id
+				}////s[0]  ClientController.connectedUser.getParkName s[1] reservation id
 				String[] s3 = (String[])msg.getRequestData();
 				Order o1=ReservationRequestHandler.getReservationById(s3,"reservations");
 				if(o1!=null)
@@ -326,6 +327,7 @@ public class ServerRequestHandler {
 			o = (Order) msg.getRequestData();
 			boolean canceled = ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
 			boolean addedToCanceled = ReservationRequestHandler.addToCanceledReports(o);
+			WaitingListRequestHandler.checkWaitingListForAdmittableOrder(o.getParkName());
 			o.setCanceled(addedToCanceled && canceled);
 			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));
 			return;
@@ -371,6 +373,26 @@ public class ServerRequestHandler {
 				o=VisitorRequestHandler.handleMakeReservationRequest(o,"waiting_list");
 				respondToClient(client, new Message(RequestType.ENTER_WAITING_LIST, o));
 				return;
+				
+		case FETCH_INBOX:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected String)"));
+				return;
+			}
+			String id = (String)msg.getRequestData();
+			InboxMessage[] msgs = InboxRequestHandler.getAllMessages(id);
+			respondToClient(client, new Message(RequestType.FETCH_INBOX, msgs));
+			return;
+		case DELETE_MSG:
+			if (!(msg.getRequestData() instanceof InboxMessage)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected int)"));
+				return;
+			}
+			InboxMessage inboxMsg = (InboxMessage)msg.getRequestData();			
+			result = InboxRequestHandler.deleteMsg(inboxMsg.getId());
+			inboxMsg.setDeleted(result);
+			respondToClient(client, new Message(RequestType.DELETE_MSG, inboxMsg));
+			return;
 		case VISITS_GRAPH_DATA:
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
@@ -378,10 +400,46 @@ public class ServerRequestHandler {
 			}
 			VisitsReport[] dataToReturn = VisitsReportGraphHandler.getVisitsDataForGraph((String[])(msg.getRequestData()));
 			respondToClient(client, new Message(RequestType.VISITS_GRAPH_DATA,dataToReturn));
-			return;			
+			return;	
+			//get park
+		case REQUEST_PARK:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String )"));
+				return;
+			}	
+			p=ParkRequestHandler.getParkData((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.REQUEST_PARK,p));
+			return;	
+		case ORDER_ID:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String )"));
+				return;
+			}
+			 int orderId=ReservationRequestHandler.OrderId((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.ORDER_ID,orderId));
+			return;	
+			
+		case MAKE_RESERVATION_ENTRY:
+			if (!(msg.getRequestData() instanceof Order)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
+				return;
+			}
+			Order receivedOrder1 = (Order)msg.getRequestData();
+			Order o11 = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder1,"reservations");
+			respondToClient(client, new Message(RequestType.MAKE_RESERVATION_ENTRY, o11));
+			return;
+		case CHECK_INSTRUCTOR:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
+				return;
+			}
+			id=(String)msg.getRequestData();
+			boolean z=UserRequestHandler.isInstructor(id);
+			respondToClient(client, new Message(RequestType.CHECK_INSTRUCTOR, z));
+			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));
-			break;			
+			return;			
 		}
 		 
 		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));

@@ -12,58 +12,60 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.controllers.UsageReportRequestController;
 
+/**
+ * Controller class for managing the Usage Report Frame.
+ */
+public class UsageReportFrameController implements Initializable {
 
-public class UsageReportFrameController  implements Initializable{
+    @FXML
+    private TableView<UsageReport> tableView;
 
-	@FXML
-	private TableView<UsageReport> tableView;
+    @FXML
+    private TableColumn<UsageReport,String> colPark;
 
-	@FXML
-	private TableColumn<UsageReport,String> colPark;
+    @FXML
+    private TableColumn<UsageReport,String> colMonth;
 
-	@FXML
-	private TableColumn<UsageReport,String> colMonth;
+    @FXML
+    private TableColumn<UsageReport,String> colYear;
 
-	@FXML
-	private TableColumn<UsageReport,String> colYear;
+    @FXML
+    private TableColumn<UsageReport,String> colAmount;
 
-	@FXML
-	private TableColumn<UsageReport,String> colAmount;
+    @FXML
+    private TableColumn<UsageReport,String> colMadeBy;
 
-	@FXML
-	private TableColumn<UsageReport,String> colMadeBy;
+    private ObservableList<UsageReport> list = FXCollections.observableArrayList();
 
-	private ObservableList<UsageReport> list =
-	FXCollections.observableArrayList();
-	
-	private static UsageReport[] usageReportArray = null;
+    private static UsageReport[] usageReportArray = null;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		colPark.setCellValueFactory(new PropertyValueFactory<>("Park"));
-		colMonth.setCellValueFactory(new PropertyValueFactory<>("Month"));
-		colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
-		colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
-		colMadeBy.setCellValueFactory(new PropertyValueFactory<>("MadeBy"));
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        colPark.setCellValueFactory(new PropertyValueFactory<>("Park"));
+        colMonth.setCellValueFactory(new PropertyValueFactory<>("Month"));
+        colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        colMadeBy.setCellValueFactory(new PropertyValueFactory<>("MadeBy"));
 
-		UsageReportRequestController.sendShowUsageReport();
+        UsageReportRequestController.sendShowUsageReport();
 
-		if(usageReportArray != null) {
-			 // Loop over the ArrayList and add its data to the ObservableList
-	        for (UsageReport usageReport : usageReportArray) {
-	            	UsageReport report = new UsageReport(usageReport.getMonth(), usageReport.getYear(),usageReport.getAmount(),
-	            						 usageReport.getPark(), usageReport.getMadeBy());
-	                list.add(report); 
-	            	
-	        }
-			tableView.setItems(list);
+        if(usageReportArray != null) {
+            for (UsageReport usageReport : usageReportArray) {
+                UsageReport report = new UsageReport(usageReport.getMonth(), usageReport.getYear(),
+                                                      usageReport.getAmount(), usageReport.getPark(),
+                                                      usageReport.getMadeBy());
+                list.add(report);
+            }
+            tableView.setItems(list);
+        }
+    }
 
-	        }
-		}
-	
-
-	public static void setList(UsageReport[] newArrayList) {
-		usageReportArray =  newArrayList;
-	}
+    /**
+     * Sets the list of usage reports.
+     *
+     * @param newArrayList the array of usage reports
+     */
+    public static void setList(UsageReport[] newArrayList) {
+        usageReportArray =  newArrayList;
+    }
 }
-

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import entities.AvailablePlace;
 import entities.Bill;
 import entities.CancelledReservation;
+import entities.InboxMessage;
 import entities.Order;
 import entities.Park;
 import entities.Report;
@@ -22,6 +23,7 @@ import main.gui.dep_manager.DecideVarEditFrameController;
 import main.gui.dep_manager.ReportDetailsFrameController;
 import main.gui.dep_manager.SelectVisitsDetailsFrameController;
 import main.gui.dep_manager.UsageReportFrameController;
+import main.gui.entry_worker.EnterVisitorsFrameController;
 import main.gui.park_manager.EditParkVariablesController;
 import main.gui.park_manager.PrepareReportFrameController;
 import main.gui.service_agent.RegisterInstructorFrameController;
@@ -238,15 +240,15 @@ public class RequestHandler {
 				return;
 			}
 			Order temp = (Order)msg.getRequestData();
-			if (temp.getIsConfirmed()) {
+			if (temp.getIsConfirmed() && ClientController.reservationshowed != null) {
 				for (Order o1 : ClientController.reservationshowed)
 					if (o1.getOrderID().equals(temp.getOrderID())) {
 						o1.setIsConfirmed(true);
-						VisitorReminder.updateOrders();
-						break;
+						VisitorReminder.updateAndGetMessages();
+						return;
 					}
 			}
-		break;
+		return;
 		case CANCEL_RESERVATION:
 			if (!(msg.getRequestData() instanceof Order)) {
 				System.out.println("[RequestHandler] - invalid server response");
@@ -259,7 +261,7 @@ public class RequestHandler {
 					if (!o2.getOrderID().equals(o.getOrderID()))
 						arr.add(o2);
 				ClientController.reservationshowed = arr.toArray(new Order[arr.size()]);
-				VisitorReminder.updateOrders();
+				VisitorReminder.updateAndGetMessages();
 			}			
 			break;
 		
@@ -320,6 +322,22 @@ public class RequestHandler {
 			}if((Order)(msg.getRequestData())!=null)
 				DeclinedReservationOptions.inserted=true;
 			return;
+		case FETCH_INBOX:
+			if((msg.getRequestData() instanceof InboxMessage[])) {
+	           VisitorReminder.setServerInboxResponse((InboxMessage[]) msg.getRequestData());
+				return;
+			}else {
+		         VisitorReminder.setServerInboxResponse(null);
+		         return;
+		    }
+		case DELETE_MSG:
+			if (msg.getRequestData() instanceof InboxMessage) {
+				InboxMessage inboxMsg = (InboxMessage)msg.getRequestData();
+				if (inboxMsg.isDeleted())
+					VisitorReminder.removeMsgIfExist(inboxMsg.getId());
+				VisitorReminder.updateAndGetMessages();
+			}
+			return;
 		case VISITS_GRAPH_DATA:
 			if (msg.getRequestData() instanceof VisitsReport[]) {
 				VisitsReport[] received = (VisitsReport[]) msg.getRequestData();
@@ -330,7 +348,36 @@ public class RequestHandler {
 			else {
 				System.out.println("[RequestHandler] - invalid VISITS_GRAPH_DATA response");
 				return;
-			}	
+			}
+		case REQUEST_PARK:
+			if(!(msg.getRequestData() instanceof Park )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Park).");
+	            return;
+		}
+			EnterVisitorsFrameController.p=(Park)msg.getRequestData();
+			return;
+		case ORDER_ID:
+			if(!(msg.getRequestData() instanceof Integer )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Integer).");
+	            return;
+			}
+			EnterVisitorsFrameController.orderID=(int)msg.getRequestData();
+			return;
+		case MAKE_RESERVATION_ENTRY:
+			if (msg.getRequestData() instanceof Order) {
+				ClientController.reservationMade = (Order) msg.getRequestData();
+				VisitorRequestController.finishedMakingReservation = true;
+				return;
+			}
+			System.out.println("[RequestHandler] -  not order int waintlist (Order).");
+            return;
+		case CHECK_INSTRUCTOR:
+			if(!(msg.getRequestData() instanceof Boolean )) {
+	            System.out.println("[RequestHandler] -  not order int waintlist (Boolean).");
+	            return;
+			}
+			EnterVisitorsFrameController.isInstructor=(Boolean)msg.getRequestData();
+			return;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

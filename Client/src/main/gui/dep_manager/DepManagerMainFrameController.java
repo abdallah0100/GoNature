@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import main.ClientUI;
 import utilities.SceneController;
 
+/**
+ * Main side frame for department manager to choose 
+ * the specific action.
+ */
 public class DepManagerMainFrameController extends Application{
 	
 	
@@ -41,9 +45,9 @@ public class DepManagerMainFrameController extends Application{
 	
 	
 	/**
-	 * This method is responsible for opening new window after
-	 * clicking on View Reports button
-	* @param event 
+	 * This method is responsible for opening Selecting Report
+	 * window after clicking on View Reports button
+	* @param event clicking on View Reports button
 	*/
 	@FXML
 	public void showviewReportsWindow(ActionEvent event) {	
@@ -54,7 +58,7 @@ public class DepManagerMainFrameController extends Application{
 	/**
 	 * This method is responsible for opening new window after
 	 * clicking on Confirm Change Request button
-	* @param event 
+	* @param event clicking on confirm change button
 	*/
 	@FXML
 	public void confirmChange(ActionEvent event) {
@@ -63,9 +67,9 @@ public class DepManagerMainFrameController extends Application{
 	}
 	
 	/**
-	 * This method is responsible for opening new window after
-	 * clicking on Generate Report button
-	* @param event 
+	 * This method is responsible for opening Export Report
+	 * window after clicking on Generate Report button
+	* @param event clicking on export button
 	*/
 	@FXML
 	public void showExportReportWindow(ActionEvent event) {	

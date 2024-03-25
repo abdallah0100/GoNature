@@ -3,12 +3,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.controllers.UserRequestController;
@@ -34,7 +31,7 @@ public class InvoicingFrameController  extends Application  implements Initializ
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
-									    "/main/gui/entry_worker/BillCakFrame.fxml");
+									    "/main/gui/entry_worker/InvoicingFrame.fxml");
 	}
 	
 	@Override
