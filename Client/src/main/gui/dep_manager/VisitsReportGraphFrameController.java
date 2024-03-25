@@ -18,12 +18,17 @@ import javafx.scene.paint.Color;
 import java.time.LocalTime;
 import java.time.Duration;
 
+/**
+ * Controller class for managing the Visits Report Graph Frame.
+ */
 public class VisitsReportGraphFrameController implements Initializable {
 
     @FXML
     private ScatterChart<String, String> scatterChart;
+
     @FXML
     private CategoryAxis xAxis;
+
     @FXML
     private CategoryAxis yAxis;
 
@@ -142,9 +147,12 @@ public class VisitsReportGraphFrameController implements Initializable {
         }
     }
 
-    public static void getReturnedTimesData(VisitsReport[] returnedTimesData) {
+    /**
+     * Sets the returned visits report data.
+     *
+     * @param returnedTimesData the array of visits report data
+     */
+    public static void setReturnedTimesData(VisitsReport[] returnedTimesData) {
         VisitsReportGraphFrameController.ReturnedTimesData = returnedTimesData;
     }
 }
-
-		

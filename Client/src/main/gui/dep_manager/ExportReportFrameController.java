@@ -6,6 +6,9 @@ import javafx.scene.control.Button;
 import main.ClientUI;
 import utilities.SceneController;
 
+/**
+ * Controller class for managing the Export Report Frame.
+ */
 public class ExportReportFrameController {
 
 	
@@ -17,9 +20,9 @@ public class ExportReportFrameController {
 	
 
 	/**
-	 * This method is responsible for opening new window after
-	 * clicking on visits report button
-	* @param event 
+	 * This method is responsible for opening Select Visits Details 
+	 * Details window after clicking on visits report button
+	* @param event clicking on button
 	*/
 	@FXML
 	public void showvisitsReportWindow(ActionEvent event) {	
@@ -28,9 +31,9 @@ public class ExportReportFrameController {
 	}
 
 	/**
-	 * This method is responsible for opening new window after
-	 * clicking on cancellations Report button
-	* @param event 
+	 * This method is responsible for opening Cancellations
+	 * Report window after clicking on cancellations Report button
+	* @param event clicking on button
 	*/
 	@FXML
 	public void showcancellationsReportsWindow(ActionEvent event) {	
