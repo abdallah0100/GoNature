@@ -37,7 +37,7 @@ public class MainFrameController extends Application implements Initializable{
 		SceneController.stage = primaryStage;
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
+		sceneController.changeScene("GoNature", primaryStage,
 							               "/main/gui/MainFrame.fxml");
 	}
 	
@@ -74,7 +74,7 @@ public class MainFrameController extends Application implements Initializable{
 		
 		SceneController scene = new SceneController();
 		if (ClientController.connectedVisitor != null) {
-			scene.setPane(leftNavPane, "/main/gui/VisitorSidePane.fxml");
+			scene.setPane(leftNavPane, "/main/gui/visitor/VisitorSidePane.fxml");
 			if(!(ClientController.connectedVisitor.isFoundInDB()))
 			{
 				scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
