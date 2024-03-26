@@ -1,0 +1,10 @@
+#rightPane{
+
+	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
+}
+
+#updateBtn{
+	-fx-background-color: #c2b830;
+	-fx-background-radius: 40px;
+	-fx-cursor:hand;
+}
