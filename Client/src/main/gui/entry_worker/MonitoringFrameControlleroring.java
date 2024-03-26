@@ -1,18 +1,16 @@
 package main.gui.entry_worker;
 
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
  
-public class MonitoringFrameControlleroring extends Application{
+public class MonitoringFrameControlleroring {
 	
 	@FXML
 	private TextField visitorIdTxt;
@@ -21,13 +19,6 @@ public class MonitoringFrameControlleroring extends Application{
 	public static String id;
 	public static double price;
 	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
-							"/main/gui/entry_worker/MonitoringFrame.fxml");
-		
-	}
 	public void exit(ActionEvent event) {
 		if(validInput()) {
 			UserRequestController.exit(fill());

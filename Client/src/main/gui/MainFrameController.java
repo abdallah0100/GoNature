@@ -27,10 +27,6 @@ public class MainFrameController extends Application implements Initializable{
 	private Pane headerPane;
 	@FXML
 	private ImageView closeIcon;
-
-	public static void main(String[] args) {
-		launch(args);
-	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
