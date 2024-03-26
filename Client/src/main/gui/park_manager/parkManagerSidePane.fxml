@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@ParkManagerSidePaneStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.ParkManagerSidePaneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.ParkManagerSidePaneController">
    <children>
       <Button layoutY="270.0" mnemonicParsing="false" onAction="#showVariableEditWindow" prefHeight="43.0" prefWidth="156.0" text="Edit Park Variables " textFill="#f8f8f8">
          <font>

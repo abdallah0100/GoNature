@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@ShowReservationFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.WaitingListFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.WaitingListFrameController">
    <children>
       <Label layoutX="230.0" layoutY="21.0" prefHeight="27.0" prefWidth="142.0" text="Waiting List" textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -39,4 +40,8 @@
          </font></Button>
       <Label fx:id="msgLabel" layoutX="135.0" layoutY="361.0" prefHeight="17.0" prefWidth="207.0" textFill="#d71717" />
    </children>
+   <stylesheets>
+      <URL value="@../CommonStyles.css" />
+      <URL value="@VisitorStyles.css" />
+   </stylesheets>
 </Pane>

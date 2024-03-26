@@ -1,0 +1,9 @@
+#hourField, #minuteField{
+		-fx-background-radius: 5px;
+}
+
+.table-view .column-header .label{
+	-fx-text-fill:black;
+	-fx-font-size:13px;
+	-fx-font-family:'arial';
+}

@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@DepManagerMainFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
    <children>
       <Button fx:id="confirmChangeRequestBtn" layoutX="5.0" layoutY="231.0" mnemonicParsing="false" onAction="#confirmChange" prefHeight="30.0" prefWidth="147.0" text="Confirm Change Request" textFill="WHITE">
          <font>
@@ -53,12 +53,12 @@
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="6.0" layoutY="123.0" prefHeight="21.0" prefWidth="147.0" text="Department Manager" textFill="WHITE">
+      <Label layoutX="7.0" layoutY="4.0" prefHeight="21.0" prefWidth="147.0" text="Department Manager" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="92.0" fitWidth="122.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="82.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
@@ -66,5 +66,10 @@
             <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
          </effect>
       </ImageView>
+      <Label fx:id="username" layoutX="14.0" layoutY="130.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
