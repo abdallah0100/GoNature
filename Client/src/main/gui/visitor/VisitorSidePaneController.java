@@ -1,4 +1,4 @@
-package main.gui;
+package main.gui.visitor;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
-import main.gui.visitor.MakeReservationFrameController;
 import utilities.SceneController;
 import javafx.scene.input.MouseEvent;
 
