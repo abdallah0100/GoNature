@@ -29,8 +29,6 @@ public class VisitorHomePageController implements Initializable{
 	@FXML
 	private ImageView inboxImg;
 	@FXML
-	private Label msgAmount;
-	@FXML
 	private Label msgAlert;
 	@FXML
 	private Button admitBtn;
@@ -57,7 +55,6 @@ public class VisitorHomePageController implements Initializable{
 		Thread visitorReminder = new Thread(new VisitorReminder());
 		visitorReminder.start();
 		handleTableSelection();
-		msgAmount.setText(VisitorReminder.getMsgcount() + "");
 	}
 	
 	private void handleTableSelection() {
@@ -113,8 +110,6 @@ public class VisitorHomePageController implements Initializable{
 	}
 	@FXML
 	public void clickInboxIcon(MouseEvent event) {
-		if(VisitorReminder.getMsgcount() >0 ) {
-			msgAmount.setText(VisitorReminder.getMsgcount() + "");}
 		messageTable.setVisible(!messageTable.isVisible());
 		if (VisitorReminder.getMsgcount() > 1) {
 			 messageTable.setItems(inboxMessages);
@@ -127,7 +122,6 @@ public class VisitorHomePageController implements Initializable{
 				if (ClientController.reservationshowed != null)
 					for (Order o : ClientController.reservationshowed) {
 						if (o.getOrderID().equals(selectedOrder.getOrderID())){	
-								msgAmount.setText(VisitorReminder.getMsgcount() + "");
 								if (VisitorReminder.getMsgcount() == 0)
 									newMsgPane.setVisible(false);
 								break;
@@ -142,7 +136,6 @@ public class VisitorHomePageController implements Initializable{
 		if (selectedOrder != null) {
 			selectedOrder.setCancelRequest(true);
 			ReservationController.sendCancelReservation(selectedOrder);		
-			msgAmount.setText(VisitorReminder.getMsgcount() + "");
 			if (VisitorReminder.getMsgcount() == 0)
 					newMsgPane.setVisible(false);
 		}else
