@@ -26,9 +26,12 @@ public class UserRequestController {
 	
 	public static void fetchReportData(String parkName, String month, String year, String type) {
 		Report r = new Report(parkName, month, year, ClientController.connectedUser.getUsername(), type);
-		if (type.contains("Number"))
+		if (type.contains("Number")) {
+			r.setNotFullParkReport(false);
 			ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
+		}
 		else {
+			r.setNotFullParkReport(true);
 			ClientController.getController().accept(new Message(RequestType.FETCH_NOT_FULL_DATA, r));
 			return;
 		}  

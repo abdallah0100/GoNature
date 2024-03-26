@@ -135,16 +135,17 @@ public class ServerRequestHandler {
 			}
 			r = (Report) msg.getRequestData();
 			if (r.isReportExist()) {
-				if (r.getAmountOfFullDays() >= 0) {
-					ReportRequestHandler.updateEmptyReport(r);
+				if (r.isNotFullParkReport()) {
+					result = ReportRequestHandler.updateEmptyReport(r);
+					generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
 				}else {
 					result = ReportRequestHandler.updateNumReport(r);
 					generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
 				}
-			}
-			else {
-				if (r.getAmountOfFullDays() >= 0) {
-					ReportRequestHandler.createEmptyReport(r);
+			}else {
+				if (r.isNotFullParkReport()) {
+					result = ReportRequestHandler.createEmptyReport(r);
+					generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
 				}else {
 					result = ReportRequestHandler.insertNewNumReport(r);
 					generalRespondMsg = result ? "Successfully created report" : "Error creating report";
