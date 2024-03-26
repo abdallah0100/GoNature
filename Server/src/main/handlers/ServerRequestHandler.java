@@ -76,11 +76,13 @@ public class ServerRequestHandler {
 			Order receivedOrder = (Order)msg.getRequestData();
 			
 			if (!ParkRequestHandler.parkHasSpace(receivedOrder)) {
+				System.out.println("1");
 				AvailablePlace[] arr = ParkRequestHandler.getAvailableTimes(receivedOrder);
+				System.out.println(2);
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
-			//
+			System.out.println(3);
 			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder,"reservations");
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
@@ -335,6 +337,8 @@ public class ServerRequestHandler {
 			}
 			o = (Order) msg.getRequestData();
 			boolean canceled = ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
+			if (canceled)
+				InboxRequestHandler.addMessage(o.getVisitorID(), new InboxMessage("Order Cancellation", "Your order #"+o.getOrderID() + " has been canceled."));
 			boolean addedToCanceled = ReservationRequestHandler.addToCanceledReports(o);
 			WaitingListRequestHandler.checkWaitingListForAdmittableOrder(o.getParkName());
 			o.setCanceled(addedToCanceled && canceled);

@@ -12,6 +12,8 @@ public class ReservationController {
 	}
 	 
 	public static void sendCancelReservation(Order o) {
+		if (o.getVisitorID() == null)
+			o.setVisitorID(ClientController.connectedVisitor.getId());
 		ClientController.getController().accept(new Message(RequestType.CANCEL_RESERVATION, o));
 	}
 	

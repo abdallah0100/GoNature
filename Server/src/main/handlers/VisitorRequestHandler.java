@@ -35,6 +35,7 @@ public class VisitorRequestHandler {
 		Visitor v;
 		try {
 			Statement st = MainServer.dbConnection.createStatement();
+			System.out.println(id);
 			ResultSet rs = st.executeQuery("SELECT * FROM visitors WHERE ID='"+id+"'");
 			if (!rs.next()) {
 				System.out.println("[VisitorRequestHandler] - result set was empty");
