@@ -10,16 +10,15 @@
 
 <Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@UsageReportFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.UsageReportFrameController">
    <children>
-      <TableView fx:id="tableView" layoutX="28.0" layoutY="80.0" prefHeight="286.0" prefWidth="550.0">
+      <TableView fx:id="tableView" layoutX="28.0" layoutY="75.0" prefHeight="189.0" prefWidth="471.0">
         <columns>
             <TableColumn fx:id="colPark" prefWidth="110.39999008178711" text="Park" />
           <TableColumn fx:id="colMonth" prefWidth="107.20001220703125" text="Month" />
           <TableColumn fx:id="colYear" prefWidth="108.80000305175781" text="Year" />
-            <TableColumn fx:id="colAmount" prefWidth="105.5999755859375" text="Amount" />
             <TableColumn fx:id="colMadeBy" prefWidth="142.4000244140625" text="Made By" />
         </columns>
       </TableView>
-      <Label layoutX="66.0" layoutY="29.0" text="Times When Park Was Not Full :" textFill="WHITE">
+      <Label layoutX="66.0" layoutY="29.0" text="Not Full Park Reports" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -31,5 +30,14 @@
             </DropShadow>
          </effect>
       </Label>
+      <Pane fx:id="statisticsPane" layoutX="14.0" layoutY="273.0" prefHeight="104.0" prefWidth="331.0" visible="false">
+         <children>
+            <Label layoutX="10.0" layoutY="17.0" text="Park was not full" textFill="WHITE" />
+            <Label fx:id="percentage" layoutX="103.0" layoutY="17.0" text="\%" textFill="WHITE" />
+            <Label layoutX="10.0" layoutY="44.0" text="Not full hours:" textFill="WHITE" />
+            <Label layoutX="137.0" layoutY="17.0" text="of the working hours" textFill="WHITE" />
+            <Label fx:id="amountLabel" layoutX="99.0" layoutY="44.0" text="Label" textFill="WHITE" />
+         </children>
+      </Pane>
    </children>
 </Pane>
