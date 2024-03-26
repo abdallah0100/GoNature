@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="146.0" stylesheets="@VisitorSidePaneCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.VisitorSidePaneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="146.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.VisitorSidePaneController">
    <children>
       <Button fx:id="makeReservation" layoutX="4.0" layoutY="167.0" mnemonicParsing="false" onAction="#makeReservation" prefHeight="26.0" prefWidth="136.0" text="Make Reservation" textFill="WHITE">
          <font>
@@ -55,7 +55,7 @@
          </font></Label>
       <ImageView fitHeight="40.0" fitWidth="35.0" layoutX="55.0" layoutY="14.0" onMouseClicked="#homePage" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/home.png" />
+            <Image url="@../images/home.png" />
          </image>
          <effect>
             <DropShadow height="22.21" radius="9.815000000000001" spread="0.68" width="19.05">

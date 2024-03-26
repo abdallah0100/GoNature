@@ -135,12 +135,21 @@ public class ServerRequestHandler {
 			}
 			r = (Report) msg.getRequestData();
 			if (r.isReportExist()) {
-				result = ReportRequestHandler.updateNumReport(r);
-				generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
-			}
-			else {
-				result = ReportRequestHandler.insertNewNumReport(r);
-				generalRespondMsg = result ? "Successfully created report" : "Error creating report";
+				if (r.isNotFullParkReport()) {
+					result = ReportRequestHandler.updateEmptyReport(r);
+					generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
+				}else {
+					result = ReportRequestHandler.updateNumReport(r);
+					generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
+				}
+			}else {
+				if (r.isNotFullParkReport()) {
+					result = ReportRequestHandler.createEmptyReport(r);
+					generalRespondMsg = result ? "Successfully updated report" : "Error updating report";
+				}else {
+					result = ReportRequestHandler.insertNewNumReport(r);
+					generalRespondMsg = result ? "Successfully created report" : "Error creating report";
+				}
 			}
 			respondToClient(client, new Message(RequestType.CREATE_REPORT, generalRespondMsg));
 			return;
@@ -385,7 +394,7 @@ public class ServerRequestHandler {
 			return;
 		case DELETE_MSG:
 			if (!(msg.getRequestData() instanceof InboxMessage)) {
-				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected int)"));
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected InboxMessage)"));
 				return;
 			}
 			InboxMessage inboxMsg = (InboxMessage)msg.getRequestData();			
@@ -436,6 +445,18 @@ public class ServerRequestHandler {
 			id=(String)msg.getRequestData();
 			boolean z=UserRequestHandler.isInstructor(id);
 			respondToClient(client, new Message(RequestType.CHECK_INSTRUCTOR, z));
+			return;
+		case FETCH_NOT_FULL_DATA:
+			if (!(msg.getRequestData() instanceof Report)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected Report)"));
+				return;
+			}
+			r = (Report)msg.getRequestData();
+			int amountOfFullDays = ReportRequestHandler.getFullDays(r);
+			result = ReportRequestHandler.notFullReportExist(r);
+			r.setReportExist(result);
+			r.setAmountOfFullDays(amountOfFullDays);
+			respondToClient(client, new Message(RequestType.FETCH_NOT_FULL_DATA, r));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

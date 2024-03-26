@@ -1,10 +1,14 @@
 package main.gui.dep_manager;
 
-import javafx.application.Application;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import main.ClientController;
 import main.ClientUI;
 import utilities.SceneController;
 
@@ -12,11 +16,13 @@ import utilities.SceneController;
  * Main side frame for department manager to choose 
  * the specific action.
  */
-public class DepManagerMainFrameController extends Application{
+public class DepManagerMainFrameController implements Initializable{
 	
 	
 	@FXML
 	 private Button viewReportsBtn;
+	@FXML
+	private Label username;
 	
 	
 	@FXML
@@ -25,23 +31,6 @@ public class DepManagerMainFrameController extends Application{
 	
 	@FXML
 	 private Button generateReportBtn;
-	
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-	/**
-    * @param primaryStage the primary stage for the application
-    * @throws Exception if an error occurs during initialization
-	*/
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Department Manager", primaryStage,
-							    "/main/gui/dep_manager/DepManagerMainFrame.fxml");
-	}
 	
 	
 	/**
@@ -75,6 +64,12 @@ public class DepManagerMainFrameController extends Application{
 	public void showExportReportWindow(ActionEvent event) {	
 		SceneController sc = new SceneController();
 		sc.setPane(ClientUI.contentPane, "/main/gui/dep_manager/ExportReportFrame.fxml");
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		username.setText(ClientController.connectedUser.getFirstName());
+		
 	}
 
 }

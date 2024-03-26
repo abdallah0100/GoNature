@@ -2,14 +2,17 @@ package main.gui.dep_manager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import entities.UsageReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import main.controllers.UsageReportRequestController;
 
 /**
@@ -30,21 +33,25 @@ public class UsageReportFrameController implements Initializable {
     private TableColumn<UsageReport,String> colYear;
 
     @FXML
-    private TableColumn<UsageReport,String> colAmount;
-
-    @FXML
     private TableColumn<UsageReport,String> colMadeBy;
+    @FXML
+    private Pane statisticsPane;
+    @FXML
+    private Label percentage;
+    @FXML
+    private Label amountLabel;
 
     private ObservableList<UsageReport> list = FXCollections.observableArrayList();
 
     private static UsageReport[] usageReportArray = null;
+    private UsageReport selectedReport;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colPark.setCellValueFactory(new PropertyValueFactory<>("Park"));
         colMonth.setCellValueFactory(new PropertyValueFactory<>("Month"));
         colYear.setCellValueFactory(new PropertyValueFactory<>("Year"));
-        colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
         colMadeBy.setCellValueFactory(new PropertyValueFactory<>("MadeBy"));
 
         UsageReportRequestController.sendShowUsageReport();
@@ -58,6 +65,23 @@ public class UsageReportFrameController implements Initializable {
             }
             tableView.setItems(list);
         }
+        handleTable();
+    }
+    
+    private void handleTable() {
+    	tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+	        if (newSelection != null) {
+	        	selectedReport = (UsageReport)newSelection;    
+	        	if (selectedReport != null) {
+	        		double amount = Double.parseDouble(selectedReport.getAmount());
+	        		double percent = amount /(30*14);
+	        		String percentFormatted = String.format("%.2f", percent);
+	        		percentage.setText(percentFormatted + "% ");
+	        		amountLabel.setText(amount + "");
+	        		statisticsPane.setVisible(true);
+	        	}
+	        }    
+	    });
     }
 
     /**

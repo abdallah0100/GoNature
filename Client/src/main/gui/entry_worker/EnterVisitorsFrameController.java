@@ -165,7 +165,6 @@ public class EnterVisitorsFrameController extends Application implements Initial
 	private boolean isValid() {
 		UserRequestController.checkInstructor(InstructoIdField.getText());
 		if("Organized Group".equals(orderType.getValue()) && !isInstructor){
-			System.out.println("line 179");
 			displayError("the instructor not active");
 			return false;
 		}

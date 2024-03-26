@@ -40,7 +40,8 @@ public enum RequestType {
 	MAKE_RESERVATION_ENTRY(37),
 	CHECK_INSTRUCTOR(38),
 	FETCH_INBOX(39),
-	DELETE_MSG(40);
+	DELETE_MSG(40),
+	FETCH_NOT_FULL_DATA(41);
 	
 	private int requestId;
 	

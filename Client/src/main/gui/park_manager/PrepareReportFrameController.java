@@ -159,7 +159,24 @@ public class PrepareReportFrameController implements Initializable{
 		}
 	}
 	
-	public void handleNotFullPark() {}
+	public void handleNotFullPark() {
+		reportDataTxt1.setText("Times park was full:");
+		dataValue1.setText(report_withData.getAmountOfFullDays() + "");
+		reportDataTxt1.setVisible(true);
+		dataValue1.setVisible(true);
+		fetchBtn.setVisible(false);
+		if (report_withData.isReportExist()) {		
+			updateBtn.setVisible(true);
+			msgLabel.setText("Report already exists, would you like to update it ?");
+			msgLabel.setLayoutX(26);
+			msgLabel.setLayoutY(300);
+			msgLabel.setTextFill(Color.valueOf("#c2b830"));
+			msgLabel.setVisible(true);
+		}else {
+			generateBtn.setVisible(true);
+			msgLabel.setVisible(false);
+		}
+	}
 	
 	public void handleNumOfVisitors() {
 		reportDataTxt1.setText("Individual Orders:");

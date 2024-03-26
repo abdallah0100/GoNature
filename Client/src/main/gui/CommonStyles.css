@@ -2,7 +2,7 @@
 	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
 }
 
-#contentPane{
+#headerPane, #leftNavPane, #contentPane, BorderPane{
 	-fx-background-color:linear-gradient(to bottom right, #272b3f, #256b51);
 }
 
@@ -28,4 +28,12 @@ Button:hover{
 #cancelBtn:hover{
 	-fx-background-color: #808080;
 
+}
+
+PasswordField, TextField{
+		-fx-background-radius: 40px;
+}
+
+ImageView{
+	-fx-cursor:hand;
 }

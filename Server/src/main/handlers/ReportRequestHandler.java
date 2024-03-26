@@ -158,4 +158,66 @@ public class ReportRequestHandler {
 		return 0;
 	}
 	
+	public static int getFullDays(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return 0;
+		}
+		try{
+			String str = "SELECT COUNT(*) FROM full_park WHERE parkName='"+r.getPark()+"' AND year='"+r.getYear()+"' AND month='"+r.getMonth()+"'";
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			if (!rs.next()) {
+				System.out.println("[ReportRequestHandler] - ");
+				return 0;
+			}
+			return rs.getInt(1);
+		}catch(Exception ex) {
+			System.out.println("[ReportRequestHandler] - failed to execute getFullDays");
+			ex.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public static boolean createEmptyReport(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			String str = "INSERT INTO NotFullReports (year,month,amount,Park,madeBy) VALUES(?,?,?,?,?)";
+			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);
+			ps.setString(1, r.getYear());
+			ps.setString(2, r.getMonth());
+			ps.setInt(3, r.getAmountOfFullDays());
+			ps.setString(4, r.getPark());
+			ps.setString(5, r.getMadeBy());
+			
+			return ps.executeUpdate() > 0;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean updateEmptyReport(Report r) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return false;
+		}
+		try {
+			String str = "UPDATE NotFullReports SET amount=? WHERE Park=? AND year=? AND month=?";
+			PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);
+			ps.setInt(1, r.getAmountOfFullDays());
+			ps.setString(2, r.getPark());
+			ps.setString(3, r.getYear());
+			ps.setString(4, r.getMonth());
+			
+			return ps.executeUpdate() > 0;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 }
