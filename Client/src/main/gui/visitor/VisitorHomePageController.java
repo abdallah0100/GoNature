@@ -100,8 +100,9 @@ public class VisitorHomePageController implements Initializable{
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.isPresent() && result.get() == okButton) {
-                    	System.out.println("deleting");
                         InboxRequestController.deleteMessage(selectedMsg);
+                        if (VisitorReminder.getMsgcount() < 1)
+                        	newMsgPane.setVisible(false);
                     }
             	}
        
