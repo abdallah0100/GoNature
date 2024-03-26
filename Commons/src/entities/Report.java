@@ -23,6 +23,7 @@ public class Report implements Serializable{
 	private String variableToChange; // In case of a change request report, the variable to be changed.
 	private int newValue; // The new value proposed for the variable in a change request.
 	private int amountOfFullDays;
+	private boolean notFullParkReport;
 	
 	/**
 	 * Constructor for creating a general report with essential details
@@ -218,5 +219,13 @@ public class Report implements Serializable{
 
 	public void setAmountOfFullDays(int amountOfFullDays) {
 		this.amountOfFullDays = amountOfFullDays;
+	}
+
+	public boolean isNotFullParkReport() {
+		return notFullParkReport;
+	}
+
+	public void setNotFullParkReport(boolean notFullParkReport) {
+		this.notFullParkReport = notFullParkReport;
 	}
 }

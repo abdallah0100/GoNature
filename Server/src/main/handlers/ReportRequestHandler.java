@@ -179,10 +179,10 @@ public class ReportRequestHandler {
 		}
 	}
 	
-	public static void createEmptyReport(Report r) {
+	public static boolean createEmptyReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
-			return;
+			return false;
 		}
 		try {
 			String str = "INSERT INTO NotFullReports (year,month,amount,Park,madeBy) VALUES(?,?,?,?,?)";
@@ -193,17 +193,17 @@ public class ReportRequestHandler {
 			ps.setString(4, r.getPark());
 			ps.setString(5, r.getMadeBy());
 			
-			if (!(ps.executeUpdate() > 0))
-				System.out.println("[ReportRequestHandler] - Error creating empty report");
+			return ps.executeUpdate() > 0;
 		}catch(Exception ex) {
 			ex.printStackTrace();
+			return false;
 		}
 	}
 	
-	public static void updateEmptyReport(Report r) {
+	public static boolean updateEmptyReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
-			return;
+			return false;
 		}
 		try {
 			String str = "UPDATE NotFullReports SET amount=? WHERE Park=? AND year=? AND month=?";
@@ -213,10 +213,10 @@ public class ReportRequestHandler {
 			ps.setString(3, r.getYear());
 			ps.setString(4, r.getMonth());
 			
-			if (!(ps.executeUpdate() > 0))
-				System.out.println("[ReportRequestHandler] - Error updating report");
+			return ps.executeUpdate() > 0;
 		}catch(Exception ex) {
 			ex.printStackTrace();
+			return false;
 		}
 	}
 	
