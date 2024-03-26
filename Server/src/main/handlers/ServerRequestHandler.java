@@ -76,13 +76,10 @@ public class ServerRequestHandler {
 			Order receivedOrder = (Order)msg.getRequestData();
 			
 			if (!ParkRequestHandler.parkHasSpace(receivedOrder)) {
-				System.out.println("1");
 				AvailablePlace[] arr = ParkRequestHandler.getAvailableTimes(receivedOrder);
-				System.out.println(2);
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
-			System.out.println(3);
 			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder,"reservations");
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
