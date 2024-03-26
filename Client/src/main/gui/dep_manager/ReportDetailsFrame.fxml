@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@ReportDetailsFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.ReportDetailsFrameController">
+<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.ReportDetailsFrameController">
    <children>
       <Label layoutX="16.0" layoutY="36.0" text="Choose Park :" textFill="WHITE">
          <font>
