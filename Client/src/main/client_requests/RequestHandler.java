@@ -378,6 +378,13 @@ public class RequestHandler {
 			}
 			EnterVisitorsFrameController.isInstructor=(Boolean)msg.getRequestData();
 			return;
+		case FETCH_NOT_FULL_DATA:
+			if (!(msg.getRequestData() instanceof Report)) {
+				System.out.println("[RequestHandler] - Invalid response type FETCH_NOT_FULL_DATA");
+				return;
+			}
+			PrepareReportFrameController.report_withData = (Report)msg.getRequestData();
+			break;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());
 				if (msg.getRequestData() != null)

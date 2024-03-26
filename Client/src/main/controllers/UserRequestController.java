@@ -19,12 +19,6 @@ public class UserRequestController {
 		ClientController.getController().accept(new Message(RequestType.REQUEST_BILL,new Bill(id)));
 	} 
 	
-	/*
-	public static void insertInstructor(String instructor_id,String instructorName,String instructor_email,String instructor_tel) {
-		ClientController.getController().accept(new Message(RequestType.INSERT_INSTRUCTOR,
-												new Visitor(instructor_id,instructorName,instructor_email,instructor_tel)));
-	}*/
-	
 	
 	public static void registInstructor(String id) {
 		ClientController.getController().accept(new Message(RequestType.REGIST_INSTRUCTOR,id));
@@ -35,8 +29,7 @@ public class UserRequestController {
 		if (type.contains("Number"))
 			ClientController.getController().accept(new Message(RequestType.FETCH_RESERVATION_DATA, r));
 		else {
-			//ClientController.getController().accept(new Message(RequestType.FETCH_MONTHLY_VISITOR_NUM, r));
-			System.out.println("Fetching monthly visitor data is not implemented yet");
+			ClientController.getController().accept(new Message(RequestType.FETCH_NOT_FULL_DATA, r));
 			return;
 		}  
 	} 

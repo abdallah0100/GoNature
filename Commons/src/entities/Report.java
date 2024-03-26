@@ -22,6 +22,7 @@ public class Report implements Serializable{
 	private boolean reportExist; // Flag indicating whether the report already exists.
 	private String variableToChange; // In case of a change request report, the variable to be changed.
 	private int newValue; // The new value proposed for the variable in a change request.
+	private int amountOfFullDays;
 	
 	/**
 	 * Constructor for creating a general report with essential details
@@ -209,5 +210,13 @@ public class Report implements Serializable{
 	 */
 	public void setNewValue(int newValue) {
 		this.newValue = newValue;
+	}
+
+	public int getAmountOfFullDays() {
+		return amountOfFullDays;
+	}
+
+	public void setAmountOfFullDays(int amountOfFullDays) {
+		this.amountOfFullDays = amountOfFullDays;
 	}
 }
