@@ -348,7 +348,7 @@ public class ParkRequestHandler {
 		Park p = ParkRequestHandler.getParkData(o.getParkName());
 		Order[] parkOrders = getAllParkOrders(o.getParkName());
 		
-		if (getReservedPlaces(parkOrders) + o.getNumOfVisitors() > p.getMaxCapacity() - p.getGap())
+		if (o.getNumOfVisitors() > p.getMaxCapacity() - p.getGap())
 			return new AvailablePlace[0];//new empty array
 		
 		while (numOfSuggestions < 10) {

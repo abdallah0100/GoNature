@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import entities.Order;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,14 +19,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
 import utilities.SceneController;
 
-public class MakeReservationFrameController extends Application implements Initializable{
+public class MakeReservationFrameController implements Initializable{
  
 	@FXML
 	private  ComboBox<String> orderType;
@@ -89,21 +87,6 @@ public class MakeReservationFrameController extends Application implements Initi
 		});	
 		
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-	/**
-	* @param primaryStage the primary stage for the application
-	* @throws Exception if an error occurs during initialization
-	*/
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
-									"/main/gui/visitor/MakeReservationFrame.fxml");
-	}	
 	
 	//function makes reservation 
 	public void makeReservation(ActionEvent e) throws Exception{

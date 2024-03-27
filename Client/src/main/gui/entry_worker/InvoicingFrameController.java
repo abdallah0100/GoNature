@@ -2,38 +2,19 @@ package main.gui.entry_worker;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import main.ClientController;
 import main.controllers.UserRequestController;
-import utilities.SceneController;
 
-public class InvoicingFrameController  extends Application  implements Initializable {
+public class InvoicingFrameController implements Initializable {
 	
 	@FXML
 	private Label reservationId;
 	@FXML
 	private Label msgLabel;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
-	 
-	
-	/**
-	* @param primaryStage the primary stage for the application
-	* @throws Exception if an error occurs during initialization
-	*/
-	@Override 
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
-									    "/main/gui/entry_worker/InvoicingFrame.fxml");
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		reservationId.setText(MonitoringFrameControlleroring.id);

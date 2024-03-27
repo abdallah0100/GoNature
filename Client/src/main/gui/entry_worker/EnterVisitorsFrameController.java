@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 import entities.Order;
 import entities.Park;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +22,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.ParkRequestHandler;
@@ -31,7 +29,7 @@ import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import utilities.SceneController;
 
-public class EnterVisitorsFrameController extends Application implements Initializable{
+public class EnterVisitorsFrameController implements Initializable{
 	
 	@FXML
 	private  ComboBox<String> orderType;
@@ -61,12 +59,6 @@ public class EnterVisitorsFrameController extends Application implements Initial
 	public static Park p;
 	public static int orderID;
 	public static boolean isInstructor;
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Entry Worker", primaryStage,
-							"/main/gui/entry_worker/EnterVisitorsFrame.fxml");		
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -74,10 +66,6 @@ public class EnterVisitorsFrameController extends Application implements Initial
 		setValue();
 		
 	}
-	
-	 public static void main(String args[]) {
-		 launch(args);
-	 }
 	 
 	 public void enter(ActionEvent event) {
 		// System.out.println("15265");
