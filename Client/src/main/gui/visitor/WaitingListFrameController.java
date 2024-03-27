@@ -2,8 +2,8 @@ package main.gui.visitor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import entities.Order;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,10 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import utilities.SceneController;
 
-public class WaitingListFrameController extends Application	implements Initializable{
+public class WaitingListFrameController implements Initializable{
 	
 	@FXML
 	private TableColumn<Order, String> siteColumn;
@@ -36,17 +34,6 @@ public class WaitingListFrameController extends Application	implements Initializ
 	@FXML
     private TableView<Order> tableView;
 	Order selectedOrder;
-	
-	public static void main(String args[]){
-		launch(args);
-	}
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
-							"/main/gui/visitor/WaitingListFrame.fxml");
-	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

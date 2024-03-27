@@ -67,6 +67,21 @@ public class VisitorReminder implements Runnable{
 			return false;
 	}
 	
+	public static boolean timePassed(Order o) {
+		Calendar rightNow = Calendar.getInstance();
+		int month = rightNow.get(Calendar.MONTH) + 1;
+		int year = rightNow.get(Calendar.YEAR);
+		int day = rightNow.get(Calendar.DAY_OF_MONTH);
+		
+		if (year > o.getYear())
+			return true;
+		if (year == o.getYear() && month > o.getMonth())
+			return true;
+		if (year == o.getYear() && month == o.getMonth() && day > o.getDay())
+			return true;
+		return false;
+	}
+	
 	public static int getMsgcount() {
 		return messageCnt;
 	}
@@ -82,7 +97,7 @@ public class VisitorReminder implements Runnable{
 		int i=1;
 		String content;
 		String title;
-		for (Order o : visitorOrders)
+		for (Order o : visitorOrders) {
 			if (timeArrived(o) && !o.getIsConfirmed()) {
 				if (!checkForMsgTimeOut(o)) {
 					title = "Reservation #"+i;
@@ -101,7 +116,11 @@ public class VisitorReminder implements Runnable{
 					o.setCancelRequest(false);
 					ReservationController.sendCancelReservation(o);
 				}
+			}else if (timePassed(o) && o.getIsConfirmed()) { //handling confirmed but have not been used reservations
+				o.setCancelRequest(false);
+				ReservationController.sendCancelReservation(o);
 			}
+		}
 	}
 	
 	public static void addInbox() {

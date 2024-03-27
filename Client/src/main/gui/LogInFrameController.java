@@ -79,10 +79,6 @@ public class LogInFrameController extends Application implements Initializable{
 		msgLabel.setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
 	@FXML
 	public void goBack(MouseEvent event) {
 		SceneController.switchFrame("GoNature - Client", event, new LoginOptionController());

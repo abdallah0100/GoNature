@@ -73,8 +73,5 @@ public class ClientStartUpController extends Application{
 			errorMsg.setVisible(true);
 		}
 	}
-	public static void main(String[] args) {
-		launch(args);
-	}
 
 }

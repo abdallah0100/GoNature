@@ -323,6 +323,13 @@ public class ParkRequestHandler {
 		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
 	}
 	
+	public static int getReservedPlaces(Order[] parkOrders) {
+		int reserved = 0;	
+		for (Order o1 : parkOrders)
+			reserved += o1.getNumOfVisitors();
+		return reserved;
+	}
+	
 	public static AvailablePlace[] getAvailableTimes(Order o) {
 		ArrayList<AvailablePlace> arr = new ArrayList<>();
 		//string = {year/month/day, avbl_hour}
@@ -340,6 +347,9 @@ public class ParkRequestHandler {
 		
 		Park p = ParkRequestHandler.getParkData(o.getParkName());
 		Order[] parkOrders = getAllParkOrders(o.getParkName());
+		
+		if (o.getNumOfVisitors() > p.getMaxCapacity() - p.getGap())
+			return new AvailablePlace[0];//new empty array
 		
 		while (numOfSuggestions < 10) {
 			if (day + 1 > 30) {

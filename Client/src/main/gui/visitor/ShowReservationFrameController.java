@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import entities.Order;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,12 +18,10 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
 import main.ClientController;
 import main.controllers.ReservationController;
 import main.controllers.VisitorRequestController;
-import utilities.SceneController;
-public class ShowReservationFrameController extends Application implements Initializable{
+public class ShowReservationFrameController implements Initializable{
 	@FXML
 	private TableColumn<Order, String> siteColumn;
 	@FXML
@@ -57,20 +54,6 @@ public class ShowReservationFrameController extends Application implements Initi
 	Order order;
 	Order selectedOrder;
 
-	public static void main(String[] args) {
-		launch(args);
-	}
-	
-	/**
-	* @param primaryStage the primary stage for the application
-	* @throws Exception if an error occurs during initialization
-	*/
-	@Override
-	public void start(Stage primaryStage) throws Exception { 
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Visitor/Instructor", primaryStage,
-									"/main/gui/visitor/ShowReservationFrame.fxml");
-	}
 	//function deletes reservation (removes it from DB) on action to deleteBtn
 	public void deleteReservation(ActionEvent e) throws Exception {
 		//ReservationController.sendCancelReservation(o);

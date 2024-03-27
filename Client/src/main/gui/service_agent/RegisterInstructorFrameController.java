@@ -6,18 +6,15 @@ package main.gui.service_agent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import main.controllers.UserRequestController;
-import utilities.SceneController;
 
 
-public class RegisterInstructorFrameController extends Application{
+public class RegisterInstructorFrameController{
 	public static String regist;
 	  	@FXML
 	    private Button btnRegister;
@@ -25,23 +22,6 @@ public class RegisterInstructorFrameController extends Application{
 	    private TextField idTxt;
 	    @FXML
 	    private Label label;
-
-	 public static void main(String args[]) {
-		 launch(args);
-	 }
-	
-	
-	/**
-	* @param primaryStage the primary stage for the application
-	* @throws Exception if an error occurs during initialization
-    */
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - Service Agent", primaryStage,
-					    "/main/gui/service_agent/RegisterInstructorFrame.fxml");
-		
-	}
 	
 	public void register(ActionEvent e) {//we will check all the fields are not empty and not in database to add
 		if(validInput()) {

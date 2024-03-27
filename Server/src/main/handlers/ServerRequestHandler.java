@@ -80,7 +80,6 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.MAKE_RESERVATION, arr));
 				return;
 			}
-			//
 			Order o = VisitorRequestHandler.handleMakeReservationRequest(receivedOrder,"reservations");
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION, o));
 			return;
@@ -335,6 +334,8 @@ public class ServerRequestHandler {
 			}
 			o = (Order) msg.getRequestData();
 			boolean canceled = ReservationRequestHandler.deleteReservation("reservations",o.getOrderID());
+			if (canceled)
+				InboxRequestHandler.addMessage(o.getVisitorID(), new InboxMessage("Order Cancellation", "Your order #"+o.getOrderID() + " has been canceled."));
 			boolean addedToCanceled = ReservationRequestHandler.addToCanceledReports(o);
 			WaitingListRequestHandler.checkWaitingListForAdmittableOrder(o.getParkName());
 			o.setCanceled(addedToCanceled && canceled);

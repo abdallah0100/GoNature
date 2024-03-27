@@ -47,10 +47,6 @@ public class LoginOptionController extends Application implements Initializable{
 		ClientController.getController().getClient().quit();
 		System.exit(0);
 	}
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
