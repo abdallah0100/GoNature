@@ -10,9 +10,22 @@ import entities.Order;
 import main.Constants;
 import main.MainServer;
 
+/**
+ * The WaitingListRequestHandler class is responsible for managing the waiting list for park reservations.
+ * This includes operations such as fetching the entire waiting list for a specific park, removing orders from the waiting list,
+ * and checking the waiting list for orders that can be admitted to the park based on current availability or those that have expired.
+ */
 public class WaitingListRequestHandler {
 
+	/**
+	 * Retrieves all orders in the waiting list for a specified park.
+	 *  
+	 * @param parkName The name of the park for which the waiting list orders are to be fetched.
+	 * @return An array of Order objects representing the orders in the waiting list for the specified park
+	 *         or null if the database connection is unavailable or an error occurs during the query execution.
+	 */
 	public static Order[] getAllWaitingList(String parkName) {
+		 // Check for database connection availability
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
@@ -35,6 +48,12 @@ public class WaitingListRequestHandler {
 			}
 	}
 	
+	/**
+	 * Removes an order from the waiting list based on a given reservation ID.
+	 * 
+	 * @param id The identifier of the order to be removed from the waiting list.
+	 * @return True if the order is successfully removed from the waiting list false otherwise.
+	 */
 	public static boolean removeFromWaitingList(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -55,6 +74,12 @@ public class WaitingListRequestHandler {
 			}
 	}
 	
+	/**
+	 * Checks the waiting list for the specified park and processes orders that can be admitted based on the current availability,
+	 * or marks orders as canceled if they have expired (past the reservation date).
+	 * 
+	 * @param parkName The name of the park for which the waiting list is to be checked.
+	 */
 	public static void checkWaitingListForAdmittableOrder(String parkName) {
 		Order[] waitingList = WaitingListRequestHandler.getAllWaitingList(parkName);
 		Calendar rightNow = Calendar.getInstance();

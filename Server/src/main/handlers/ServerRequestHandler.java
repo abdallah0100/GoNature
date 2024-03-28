@@ -17,8 +17,17 @@ import ocsf.server.src.ConnectionToClient;
 import requests.Message;
 import requests.RequestType;
 
+/**
+ * Handles incoming requests from clients, categorizing them by type, and manages the responses accordingly.
+ */
 public class ServerRequestHandler {
 
+	/**
+	 * Processes incoming requests from the client, directing each to its respective handler based on the request type.
+	 * 
+	 * @param msg The message object containing the type of request and its data.
+	 * @param client The client connection that sent the request.
+	 */
 	public static void handleRequest(Message msg, ConnectionToClient client) {
 		String generalRespondMsg = "responded with no message.";
 		Report r;
@@ -27,10 +36,12 @@ public class ServerRequestHandler {
 		boolean result;
 		switch(msg.getRequestEnumType()) {
 		case CONNECT_TO_SERVER:
+			// Establishes a new connection for the client.
 			ClientConnectionHandler.handleConnectRequest(client, true);
 			generalRespondMsg = "New Connection has been added successfully";
 			break;
 		case DISCONNECT_FROM_SERVER:
+			// Handles client disconnection and cleans up any related data or state.
 			if (msg.getRequestData() instanceof String) {
 				String connected = (String) msg.getRequestData();
 				if (connected.length() > 0)
@@ -40,6 +51,7 @@ public class ServerRequestHandler {
 			generalRespondMsg = "Client has succesfully disconnected from the server";
 			break;
 		case VALIDATE_VISITOR:
+			// Validates visitor information, checking against a database.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
@@ -54,6 +66,7 @@ public class ServerRequestHandler {
 			return;
 			
 		case LOGIN_USER:
+			// Processes user login, including authentication and initializing user.
 			if (!(msg.getRequestData() instanceof User)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not User)"));
 				return;
@@ -69,6 +82,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.LOGIN_USER, u));
 			return;
 		case MAKE_RESERVATION:
+			// Handles reservation creation, involving availability checks and reservation confirmations.
 			if (!(msg.getRequestData() instanceof Order)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
@@ -86,6 +100,7 @@ public class ServerRequestHandler {
 			
 			
 		case REQUEST_BILL:
+			// Generates or retrieves a bill for a client, involving calculations and database queries.
 			if (!(msg.getRequestData() instanceof Bill)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Bill)"));
 				return;
@@ -96,6 +111,7 @@ public class ServerRequestHandler {
 			
 			
 		case REGIST_INSTRUCTOR:
+			// Registers an instructor.
 			if(!(msg.getRequestData() instanceof String)) {	
 			respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 			return;
@@ -105,6 +121,7 @@ public class ServerRequestHandler {
 			return;
 		
 		case FETCH_RESERVATION_DATA:
+			 // Retrieves data related to a reservation, for making reports.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> fetching data)"));
 				return;
@@ -119,6 +136,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, r));
 		return;
 		case FETCH_MONTHLY_VISITOR_NUM:
+			// Gathers statistics on visitor numbers for a given month.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> fetching monthly visitor num data)"));
 				return;
@@ -128,6 +146,7 @@ public class ServerRequestHandler {
 			r.setReportExist(reportExists);
 			return;
 		case CREATE_REPORT:
+			// Initiates the creation of a report, involving data collection, analysis, and formatting.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Report -> Creation)"));
 				return;
@@ -154,6 +173,7 @@ public class ServerRequestHandler {
 			return;
 			
 		case SHOW_RESERVATIONS:
+			// Displays a list of reservations for a visitor.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
@@ -163,12 +183,14 @@ public class ServerRequestHandler {
 			return;
 			
 		case FETCH_PARKS:
+			// Retrieves a list of parks from the data base.
 			Park[] parks = ParkRequestHandler.getAllParks();
 			if (parks == null || parks.length == 0)
 				System.out.println("[ServerRequestHandler] - found no parks");
 			respondToClient(client, new Message(RequestType.FETCH_PARKS, parks));
 			return;
 		case UPDATE_PARK_VARIABLE:
+			// Updates a specific variable or setting for a park, such as capacity or opening hours.
 			if (!(msg.getRequestData() instanceof Park)) {
 				respondToClient(client, new Message(RequestType.FETCH_RESERVATION_DATA, "invalid request data (Expected Park)"));
 				return;
@@ -181,11 +203,13 @@ public class ServerRequestHandler {
 				respondToClient(client, new Message(RequestType.UPDATE_PARK_VARIABLE, p, "Failed to update variable"));
 			return;
 		case SHOW_USAGE_REPORT:
+			// Generates or retrieves a report on park usage, including visitor statistics or resource usage.
 			UsageReport[] listToReturn = UsageReportHandler.getUsageReports();
 			respondToClient(client, new Message(RequestType.SHOW_USAGE_REPORT,listToReturn));
 			return;
 			
 		case SHOW_CANCELLATIONS_REPORTS:
+			// Retrieves reports on reservation cancellations, for analysis or customer service purposes.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
@@ -196,6 +220,7 @@ public class ServerRequestHandler {
 			
 		
 		case CHECK_IF_REQ_EXIST:
+			// Checks if a specific request already exists in the system, to avoid duplicates or conflicts.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
 				return;
@@ -205,6 +230,7 @@ public class ServerRequestHandler {
 			return; 
 			
 		case CONFIRM_RESERVATION:
+			// Confirms a reservation, involving communication with the client and updates to the data base.
 			if (!(msg.getRequestData() instanceof Order)) {
 			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
 			    return;
@@ -216,6 +242,7 @@ public class ServerRequestHandler {
 			return;
 			
 		case UPDATE_REQUEST_CHANGE:
+			// Updates an existing change request with new information.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.UPDATE_REQUEST_CHANGE, "invalid request data Report"));
 				return;
@@ -226,6 +253,7 @@ public class ServerRequestHandler {
 			return;
 			
 		case REQUEST_CHANGE: 
+			// Submits a new change request to the variable in a park for processing.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.REQUEST_CHANGE, "invalid request data Report"));
 				return;
@@ -235,10 +263,9 @@ public class ServerRequestHandler {
 			i=ParkRequestHandler.reqToChange(r);//add it
 			respondToClient(client, new Message(RequestType.REQUEST_CHANGE,i));	
 			return;
-			
-			
-			//exit from park 	
-			case EXIT_VISITOR://for visitor with reservation
+				
+			case EXIT_VISITOR:
+				// Manages the exit of a visitor from the park, updating their reservation status.
 				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
@@ -270,12 +297,13 @@ public class ServerRequestHandler {
 				}
 				respondToClient(client, new Message(RequestType.EXIT_VISITOR,false));
 				return;
-				//entry worker enter the reservation id
-			case ENTER_VISTOR://for visitor with reservation
+				
+			case ENTER_VISTOR:
+				// Handles the entry process for a visitor with a reservation, including verification and logging.
 				if (!(msg.getRequestData() instanceof String[])) {
 					respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data String"));
 					return;
-				}////s[0]  ClientController.connectedUser.getParkName s[1] reservation id
+				}//s[0]  ClientController.connectedUser.getParkName s[1] reservation id
 				String[] s3 = (String[])msg.getRequestData();
 				Order o1=ReservationRequestHandler.getReservationById(s3,"reservations");
 				if(o1!=null)
@@ -307,8 +335,9 @@ public class ServerRequestHandler {
 				else
 					respondToClient(client, new Message(RequestType.ENTER_VISTOR,false));
 				return;
-	/////////////////////////////				//////////////////////////////////////////////////////////////
+	
 				case UPDATE_RESERVATION:
+					// Allows for updates to be made to an existing reservation, such as changing the email or phone number.
 					if (!(msg.getRequestData() instanceof Order)) {
 						respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 						return;
@@ -319,6 +348,7 @@ public class ServerRequestHandler {
 					
 					
 				case SHOW_NUM_OF_VISITORS_REPORT:
+					// Generates a report showing the number of visitors within a specified timeframe.
 					if (!(msg.getRequestData() instanceof String[])) {
 						respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Strings list)"));
 						return;
@@ -327,7 +357,9 @@ public class ServerRequestHandler {
 					String[] listToReturn3 = NumOfVisitorsReportHandler.getNumOfVisitors((String[])msg.getRequestData());
 					respondToClient(client, new Message(RequestType.SHOW_NUM_OF_VISITORS_REPORT,listToReturn3));
 				return;
+				
 		case CANCEL_RESERVATION:
+			//  Processes the cancellation of an existing reservation, including notifying affected parties.
 			if (!(msg.getRequestData() instanceof Order)) {
 			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected Order)"));
 			    return;
@@ -342,6 +374,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.CANCEL_RESERVATION, o));
 			return;
 		case LOGOUT:
+			// Manages the logout process for a user, ensuring a clean disconnection and system update. 
 			if (!(msg.getRequestData() instanceof String)) {
 			    respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (Expected String)"));
 			    return;
@@ -350,6 +383,7 @@ public class ServerRequestHandler {
 			generalRespondMsg = "Logout has finished successfully";
 			break;
 		case SHOW_EDITED_VARIABLES:
+			// Retrieves and displays a list of variables that have been edited.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String)"));
 				return;
@@ -359,6 +393,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.SHOW_EDITED_VARIABLES,hashMapWithEdits));
 			return;
 		case DELETE_REQUEST_CHANGE:
+			// Removes an existing request for change from the data base, effectively canceling it.
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
 				return;
@@ -367,6 +402,7 @@ public class ServerRequestHandler {
 			DeletedRequestChangeHandler.deleteData((String[])msg.getRequestData())));
 			return ;
 		case CANCELLATIONS_GRAPH_DATA:
+			// Provides data for generating graphs related to reservation cancellations.
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
 				return;
@@ -375,6 +411,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.CANCELLATIONS_GRAPH_DATA,sendNumsRequested));
 			return;
 		case ENTER_WAITING_LIST://insert to waiting list
+			// Adds a reservation request to the waiting list if the initial request cannot be immediately accommodated.
 				if (!(msg.getRequestData() instanceof Order)) {
 						respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
 						return;
@@ -385,6 +422,7 @@ public class ServerRequestHandler {
 				return;
 				
 		case FETCH_INBOX:
+			// Retrieves messages from a user's inbox, including notifications, confirmations.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected String)"));
 				return;
@@ -394,6 +432,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.FETCH_INBOX, msgs));
 			return;
 		case DELETE_MSG:
+			// Allows a user to delete a message from their inbox.
 			if (!(msg.getRequestData() instanceof InboxMessage)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected InboxMessage)"));
 				return;
@@ -404,6 +443,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.DELETE_MSG, inboxMsg));
 			return;
 		case VISITS_GRAPH_DATA:
+			// Provides data for creating graphs related to park visits, useful for analysis.
 			if (!(msg.getRequestData() instanceof String[])) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String list)"));
 				return;
@@ -411,8 +451,8 @@ public class ServerRequestHandler {
 			VisitsReport[] dataToReturn = VisitsReportGraphHandler.getVisitsDataForGraph((String[])(msg.getRequestData()));
 			respondToClient(client, new Message(RequestType.VISITS_GRAPH_DATA,dataToReturn));
 			return;	
-			//get park
 		case REQUEST_PARK:
+			// Retrieves detailed information about a specific park, such as capacity , number of visitor.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String )"));
 				return;
@@ -421,6 +461,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.REQUEST_PARK,p));
 			return;	
 		case ORDER_ID:
+			// Retrieves the latest order ID from the data base.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not String )"));
 				return;
@@ -430,6 +471,7 @@ public class ServerRequestHandler {
 			return;	
 			
 		case MAKE_RESERVATION_ENTRY:
+			// Processes the entry of a reservation into the system, confirming details and availability.
 			if (!(msg.getRequestData() instanceof Order)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
@@ -439,6 +481,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.MAKE_RESERVATION_ENTRY, o11));
 			return;
 		case CHECK_INSTRUCTOR:
+			// Verifies whether a user is registered as an instructor, granting them specific permissions to make an organized reservation.
 			if (!(msg.getRequestData() instanceof String)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (not Order)"));
 				return;
@@ -448,6 +491,7 @@ public class ServerRequestHandler {
 			respondToClient(client, new Message(RequestType.CHECK_INSTRUCTOR, z));
 			return;
 		case FETCH_NOT_FULL_DATA:
+			// Retrieves data related to days when the park was not at full capacity.
 			if (!(msg.getRequestData() instanceof Report)) {
 				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected Report)"));
 				return;
@@ -467,6 +511,12 @@ public class ServerRequestHandler {
 		respondToClient(client, new Message(RequestType.GENERAL_RESPOND, generalRespondMsg));
 	}
 	
+	/**
+	 * Sends a response to the client through their connection.
+	 * 
+	 * @param client The client connection through which to send the response.
+	 * @param msg The message to be sent.
+	 */
 	public static void respondToClient(ConnectionToClient client, Message msg) {
 		try {
 			client.sendToClient(msg);

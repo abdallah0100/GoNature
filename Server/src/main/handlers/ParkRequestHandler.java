@@ -13,8 +13,16 @@ import entities.Report;
 import main.Constants;
 import main.MainServer;
 
+/**
+ * Handles various park-related requests, such as fetching park details, updating park information,
+ * managing park capacity and reservations, and providing available visiting times based on park capacity.
+ */
 public class ParkRequestHandler {
 
+	/**
+	 *  Fetches all parks from the database.
+	 * @return An array of Park objects containing details for each park.
+	 */
 	public static Park[] getAllParks() {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -39,6 +47,11 @@ public class ParkRequestHandler {
 		return (Park[])list.toArray(new Park[list.size()]);
 	}
 	
+	/**
+	 * Updates a specific variable of a park.
+	 * @param p The park object containing the variable to update and its new value.
+	 * @return True if the update is successful, false otherwise.
+	 */
 	public static boolean updateParkVariable(Park p) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -56,13 +69,12 @@ public class ParkRequestHandler {
 			return false;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	// insert the request change to requestchange table
+
+	/**
+	 * Checks if a specific report request has already been made if not insert the request change to requestchange table.
+	 * @param r The report to check.
+	 * @return True if the report request exists, false otherwise.
+	 */
 	public static boolean checkReportRequest(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -82,8 +94,12 @@ public class ParkRequestHandler {
 		}
 	}	
 	
-	
-	// insert the request change to requestchange table
+	/**
+	 * Inserts or updates a change request for a park variable to requestchange table.
+	 * 
+	 * @param r The report containing the change request details.
+	 * @return True if the operation is successful, false otherwise.
+	 */
 	public static boolean reqToChange(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -106,10 +122,11 @@ public class ParkRequestHandler {
 		 }
 	}	
 	
-	
-	
-	
-	//update 2 time or more park manager ask to update value second time or more 
+	/**
+	 * Update 2 time or more park manager ask to update value second time or more 
+	 * @param r The report containing the change request details.
+	 * @return True if the operation is successful, false otherwise.
+	 */
 	public static boolean reqToChange2(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -129,14 +146,20 @@ public class ParkRequestHandler {
 		}
 	}
 	
-	
-	//o=Order ,num=num of the visitor maybe for enter or exit ,coulm to know where to update (with/without reservation)
+	/**
+	 * Updates the number of visitors currently in the park based on reservations.
+	 * 
+	 * @param o The order affecting the visitor count.
+	 * @param num The number to add to the current visitor count.
+	 * @return True if the update is successful, false otherwise.
+	 */
 	public static boolean updateCurrentAmoun(Order o,int num) {
 			if (MainServer.dbConnection == null) {
 				System.out.println(Constants.DB_CONNECTION_ERROR);
 				return false;
 			}
-			String v;//string to know where i have to change the amount
+			// String to know where i have to change the amount
+			String v;
 			if(o.getInvitedInAdvance())
 				v="visitorsWithOrder";
 			else
@@ -154,16 +177,24 @@ public class ParkRequestHandler {
 					PreparedStatement ps = MainServer.dbConnection.prepareStatement(str);	
 			        ps.setInt(1, newCurrent);
 			        ps.setString(2, o.getParkName());
-			        int rowsAffected = ps.executeUpdate(); // Execute the update query
-			        return rowsAffected > 0; // Return true if the update was successful
+			        // Execute the update query
+			        int rowsAffected = ps.executeUpdate();
+			        // Return true if the update was successful 
+			        return rowsAffected > 0; 
 					//return true;
 				}catch(Exception ex) {
 					System.out.println("[UserRequestHandler] - failed to checkEntering");
 					ex.printStackTrace();
 					return false;
 				}
-		}
+	}
 	
+	/**
+	 * Fetches detailed data for a specific park.
+	 * 
+	 * @param name The name of the park.
+	 * @return A Park object with the park's details.
+	 */
 	public static Park getParkData(String name) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -184,9 +215,15 @@ public class ParkRequestHandler {
 			ex.printStackTrace();
 			return null;
 		}
-	}
+	}	
 	
-	
+	/**
+	 * Updates the current visitor count with reservation in the specified park.
+	 * 
+	 * @param park The name of the park where the update is to be made.
+	 * @param num The number to add to the current visitor count with reservation.
+	 * @return True if the update is successful, indicating the new visitor count is set in the database; false otherwise.
+	 */
 	public static boolean processedResData(String park, int num) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -215,6 +252,12 @@ public class ParkRequestHandler {
 			}
 	}	
 	
+	/**
+	 * Checks if a park has reached its maximum capacity including both visitors with and without reservations.
+	 * 
+	 * @param parkName The name of the park to check for capacity.
+	 * @return True if the total number of visitors (with and without reservations) equals or exceeds the park's capacity; false otherwise
+	 */
 	public static boolean parkReachedMaxCapacity(String parkName) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR); 
@@ -239,6 +282,10 @@ public class ParkRequestHandler {
 		}
 	}
 	
+	/**
+	 * Creates a record in the 'full_park' table indicating that the park has reached its full capacity at a specific time.
+	 * @param order The order object containing details such as park name, date, and time when the park reached full capacity.
+	 */
 	public static void createFullParkInstance(Order order) {
 		
 		if (MainServer.dbConnection == null) {
@@ -263,6 +310,12 @@ public class ParkRequestHandler {
 		}
 	}
 	
+	/**
+	 * Gets all orders of a given park.
+	 * 
+	 * @param parkName The park name.
+	 * @return An array of Order containing all orders in the park.
+	 */
 	public static Order[] getAllParkOrders(String parkName) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR); 
@@ -288,6 +341,12 @@ public class ParkRequestHandler {
 		return (Order[])orders.toArray(new Order[orders.size()]);
 	}
 	
+	/**
+	 * Checks if the park has space for a new reservation.
+	 * 
+	 * @param o The order representing the reservation request.
+	 * @return True if there is space available, false otherwise.
+	 */
 	public static boolean parkHasSpace(Order o) {
 		Order[] parkOrders = getAllParkOrders(o.getParkName());
 		if (parkOrders == null)
@@ -306,6 +365,14 @@ public class ParkRequestHandler {
 		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
 	}
 	
+	/**
+	 * Checks if the park has space for a new reservation.
+	 * 
+	 * @param o The order representing the reservation request.
+	 * @param parkOrders All orders of the park in the reservation details.
+	 * @param p The park that the order reservation request was made for.
+	 * @return True if there is space available, false otherwise.
+	 */
 	public static boolean parkHasSpace(Order o, Order[] parkOrders, Park p) {
 		if (parkOrders == null)
 			return true;
@@ -323,6 +390,12 @@ public class ParkRequestHandler {
 		return reserved + o.getNumOfVisitors() <= (parkMaxCapacity - p.getGap());
 	}
 	
+	/**
+	 * Calculates the total number of reserved places in the park.
+	 * 
+	 * @param parkOrders The list of all orders for the park.
+	 * @return The total number of places reserved.
+	 */
 	public static int getReservedPlaces(Order[] parkOrders) {
 		int reserved = 0;	
 		for (Order o1 : parkOrders)
@@ -330,10 +403,15 @@ public class ParkRequestHandler {
 		return reserved;
 	}
 	
+	/**
+	 * Provides available visiting times based on park capacity and existing reservations.
+	 * 
+	 * @param o The order containing the visiting details.
+	 * @return An array of AvailablePlace objects representing available visiting times.
+	 */
 	public static AvailablePlace[] getAvailableTimes(Order o) {
 		ArrayList<AvailablePlace> arr = new ArrayList<>();
 		//string = {year/month/day, avbl_hour}
-	
 		Calendar rightNow = Calendar.getInstance();
 		int month = rightNow.get(Calendar.MONTH) + 1;
 		int year = rightNow.get(Calendar.YEAR);
@@ -378,5 +456,4 @@ public class ParkRequestHandler {
 		}
 		return (AvailablePlace[])arr.toArray(new AvailablePlace[arr.size()]);
 	}
-	
 }
