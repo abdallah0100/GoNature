@@ -9,8 +9,17 @@ import entities.InboxMessage;
 import main.Constants;
 import main.MainServer;
 
+/**
+ * Handles inbox-related requests such as adding, retrieving, and deleting messages for visitors.
+ * It interacts with the 'inbox' table in the database to perform these operations.
+ */
 public class InboxRequestHandler {
 
+	/**
+	 * Adds a message to the inbox of a specific visitor.
+	 * @param id The ID of the visitor for whom the message is intended.
+	 * @param msg The InboxMessage object containing the message details to be added.
+	 */
 	public static void addMessage(String id, InboxMessage msg) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -31,6 +40,12 @@ public class InboxRequestHandler {
 		}
 	}
 	
+	/**
+	 * Retrieves all messages from the inbox of a specific visitor.
+	 * 
+	 * @param id The ID of the visitor whose messages are to be retrieved.
+	 * @return An array of InboxMessage objects containing all messages for the visitor.
+	 */
 	public static InboxMessage[] getAllMessages(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -53,6 +68,11 @@ public class InboxRequestHandler {
 		}
 	}
 	
+	/**
+	 * Deletes a specific message from the inbox.
+	 * @param id The unique identifier of the message to be deleted.
+	 * @return True if the message was successfully deleted; false otherwise.
+	 */
 	public static boolean deleteMsg(int id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -67,6 +87,5 @@ public class InboxRequestHandler {
 			ex.printStackTrace();
 			return false;
 		}
-	}
-	
+	}	
 }

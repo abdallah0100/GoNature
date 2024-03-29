@@ -12,8 +12,20 @@ import entities.Visitor;
 import main.Constants;
 import main.MainServer;
 
+/**
+ * The VisitorRequestHandler class provides functionalities to handle various visitor-related requests such as
+ * validating visitor existence, making reservation requests, showing reservations for a visitor, updating reservations,
+ * and admitting a reservation. It interacts with the database to perform these operations.
+ */
 public class VisitorRequestHandler {
 
+	/**
+	 * Validates if a visitor exists in the database and returns a Visitor object.
+	 * If the visitor does not exist, a new Visitor object is created without marking it as found in the database.
+	 * 
+	 * @param id The unique ID of the visitor.
+	 * @return A Visitor object with information from the database if the visitor exists, otherwise a new Visitor object.
+	 */
 	public static Visitor handleValidateRequest(String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -27,6 +39,12 @@ public class VisitorRequestHandler {
 		return v;
 	}
 	
+	/**
+	 * Checks if a visitor exists in the database by their unique ID.
+	 * 
+	 * @param id The unique ID of the visitor.
+	 * @return A Visitor object if the visitor exists, otherwise null.
+	 */
 	public static Visitor visitorExists(String id){
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -50,13 +68,21 @@ public class VisitorRequestHandler {
 		return v;
 	}
 
+	/**
+	 * Handles the request to make a reservation for a visitor. It checks if the visitor exists and adds them if not.
+	 * Then, it either adds the reservation to the reservations table or to the waiting list depending on the provided table name.
+	 * 
+	 * @param o The Order object containing reservation details.
+	 * @param tableName  The name of the table to insert the reservation into, either "reservations" or "waiting_list".
+	 * @return The Order object with updated information, including the generated reservation ID if the operation is successful, otherwise null.
+	 */
 	public static Order handleMakeReservationRequest(Order o,String tableName) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return null;
 		}
-		try{
-			
+		// Check visitor existence, insert visitor if not exists, and insert reservation details to specified table.
+		try{			
 			Statement stat = MainServer.dbConnection.createStatement();
 		    String checkVisitorQuery = "SELECT * FROM visitors WHERE ID = '" + o.getVisitorID() + "'";
 		    ResultSet rs = stat.executeQuery(checkVisitorQuery);
@@ -66,14 +92,12 @@ public class VisitorRequestHandler {
 		                 o.getVisitorID() + "', '" + o.getEmail() + "', '" + o.getPhone() + "', '0')";
 		         stat.executeUpdate(insertVisitorQuery);
 		    }
-
-	        if(tableName.equals("waiting_list") && ReservationRequestHandler.inWaitngList(o)) //if in waiting list
+		    // If in waiting list
+	        if(tableName.equals("waiting_list") && ReservationRequestHandler.inWaitngList(o)) 
 	        	return null;
 	        
-
 	        String sql = "INSERT INTO " + tableName + " (Type, NumberOfVisitors, ReservationDate, Hour, Minute, Park, Telephone, Email, visitorID, isConfirmed, invitedInAdvance, payed, processed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        PreparedStatement preparedStatement = MainServer.dbConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-	        
 	        preparedStatement.setString(1, o.getOrderType());
 	        preparedStatement.setInt(2, o.getNumOfVisitors());
 	        preparedStatement.setDate(3, java.sql.Date.valueOf(o.getDate()));
@@ -89,7 +113,8 @@ public class VisitorRequestHandler {
 	        preparedStatement.setString(13, "-1");
 	        
 		    if(preparedStatement.executeUpdate() <=0)return null;
-		    ResultSet keys = preparedStatement.getGeneratedKeys(); //getting the generated order id
+		    // Getting the generated order id
+		    ResultSet keys = preparedStatement.getGeneratedKeys(); 
 		    if (keys.next())
 		    	o.setOrderID(keys.getInt(1)+ "");
 		}catch(Exception ex) {
@@ -100,9 +125,16 @@ public class VisitorRequestHandler {
 			
 	}
 	
+	/**
+	 * Retrieves all reservations associated with a given visitor ID.
+	 * 
+	 * @param id The unique ID of the visitor.
+	 * @return An array of Order objects representing the reservations made by the visitor.
+	 */
 	public static Order[] handleShowReservationsRequest(String id) {
 		 List<Order> orders = new ArrayList<>();
 		    ResultSet rs = null;
+		    // Fetch reservations from the database and populate the orders list.
 		    try {           
 		        String query = "SELECT Type, NumberOfVisitors, ReservationDate, Hour, Minute, Park, Telephone, Email, ReservationID, isConfirmed, InvitedInAdvance, payed " +
 		                       "FROM reservations " +
@@ -133,10 +165,17 @@ public class VisitorRequestHandler {
 		    ordersArray = orders.toArray(ordersArray);
 		    
 		    return ordersArray;
-			
 		}
+	
+	/**
+	 * Updates an existing reservation with new details provided in the {@code Order} object.
+	 *  
+	 * @param o The Order object containing the updated reservation details.
+	 * @return The updated Order object if the operation is successful, otherwise null.
+	 */
 	public static Order handleUpdateReservationRequest(Order o) {
 		 try {
+		// Update reservation details in the database.
         String query = "UPDATE reservations " +
                        "SET Type = ?, NumberOfVisitors = ?, ReservationDate = ?, Hour = ?, Minute = ?, Park = ?, Telephone = ?, Email = ?, isConfirmed = ?, InvitedInAdvance = ?, payed = ? " +
                        "WHERE ReservationID = ?";
@@ -161,12 +200,18 @@ public class VisitorRequestHandler {
          return null;
     }
 	
+	/**
+	 * Marks a reservation as confirmed/admitted in the database based on the reservation ID provided in the Order object.
+	 * @param o The Order object containing the reservation ID to be confirmed.
+	 * @return True if the operation is successful and the reservation is marked as confirmed, otherwise false.
+	 */
 	public static boolean admitReservation(Order o) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
 			return false;
 		}
         try {
+        	// Update the reservation's confirmed status in the database.
         	Statement st = MainServer.dbConnection.createStatement();
         	String str = "UPDATE reservations SET isConfirmed='1' WHERE ReservationID='"+o.getOrderID()+"'";
         	return st.executeUpdate(str) > 0;
