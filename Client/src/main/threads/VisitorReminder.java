@@ -15,7 +15,7 @@ import main.gui.visitor.VisitorHomePageController;
 
 /**
  * This class is responsible of the thread that runs to handle the visitor's inbox and to update
- * his reservations as time runs
+ * his reservations as time runs.
  * */
 public class VisitorReminder implements Runnable{
 
@@ -26,7 +26,7 @@ public class VisitorReminder implements Runnable{
 	
 	/**
 	 * The main running function of the thread, checks the visitor's reservation each minute
-	 * and sends messages if the reservation's time arrived or cancels them if it passed
+	 * and sends messages if the reservation's time arrived or cancels them if it passed.
 	 * */
 	@Override
 	public void run() {
@@ -58,8 +58,8 @@ public class VisitorReminder implements Runnable{
 	}
 
 	/**
-	 * Checks if the received order's time is going to be tomorrow
-	 * @param o the Order to be checked
+	 * Checks if the received order's time is going to be tomorrow.
+	 * @param o the Order to be checked.
 	 * */
 	public static boolean timeArrived(Order o) {
 		
@@ -80,7 +80,7 @@ public class VisitorReminder implements Runnable{
 	}
 	
 	/**
-	 * Checks if the received order's time has passed
+	 * Checks if the received order's time has passed.
 	 * @param o the Order to be checked
 	 * */
 	public static boolean timePassed(Order o) {
@@ -100,7 +100,7 @@ public class VisitorReminder implements Runnable{
 	
 	
 	/**
-	 * returns the amount of messages the visitor has (for the inbox)
+	 * @returns the amount of messages the visitor has (for the inbox).
 	 * */
 	public static int getMsgcount() {
 		return messageCnt;
@@ -108,7 +108,7 @@ public class VisitorReminder implements Runnable{
 	
 	/**
 	 * Fetches the visitor's reservation and goes over them, creates a message for each order
-	 * that its time has arrived and adds it to the messages array
+	 * that its time has arrived and adds it to the messages array.
 	 * */
 	public static void addConfirmableOrders() {
 		Calendar rightNow = Calendar.getInstance();
@@ -141,7 +141,7 @@ public class VisitorReminder implements Runnable{
 					o.setCancelRequest(false);
 					ReservationController.sendCancelReservation(o);
 				}
-			}else if (timePassed(o)) { //handling confirmed but have not been used reservations
+			}else if (timePassed(o)) { // Handling confirmed but have not been used reservations
 				
 				o.setCancelRequest(false);
 				ReservationController.sendCancelReservation(o);
@@ -150,7 +150,7 @@ public class VisitorReminder implements Runnable{
 	}
 	/**
 	 * Goes over the visitor's inbox that is from the server,
-	 * adds each message to the messages array
+	 * adds each message to the messages array.
 	 * */
 	public static void addInbox() {
 		if (serverInboxResponse != null) {
@@ -162,9 +162,9 @@ public class VisitorReminder implements Runnable{
 	}
 	
 	/**
-	 * removes the message with the received id from the serverInbox array
+	 * removes the message with the received id from the serverInbox array.
 	 * 
-	 * @param id the id of the message
+	 * @param id the id of the message.
 	 * */
 	public static void removeMsgIfExist(int id) {
 		ArrayList<InboxMessage> msgs = new ArrayList<>();
@@ -177,9 +177,10 @@ public class VisitorReminder implements Runnable{
 	}
 	
 	/**
-	 * checks if the message that was sent for the received order has timed out 
-	 * (2 hours passed since sending)
-	 * @param o the Order we are performing the function on
+	 * Checks if the message that was sent for the received order has timed out 
+	 * (2 hours passed since sending).
+	 * @param o the Order we are performing the function on.
+	 * @returns True if the message time is out false otherwise.
 	 * */
 	public static boolean checkForMsgTimeOut(Order o) {
 		if (!o.isSentMsg())
@@ -197,7 +198,7 @@ public class VisitorReminder implements Runnable{
 	}
 	
 	/**
-	 * @return ArrayList<InboxMessage> the combined array of the server messages and the confirmable orders
+	 * @return ArrayList<InboxMessage> the combined array of the server messages and the confirmable orders.
 	 * */
 	public static ArrayList<InboxMessage> updateAndGetMessages(){
 		addConfirmableOrders();
@@ -207,7 +208,7 @@ public class VisitorReminder implements Runnable{
 	}
 
 	/**
-	 * returns the messages received from the server
+	 * Returns the messages received from the server.
 	 * @return InboxMessage[]
 	 * */
 	public static InboxMessage[] getServerInboxResponse() {
@@ -215,8 +216,8 @@ public class VisitorReminder implements Runnable{
 	}
 
 	/**
-	 * updates the static array representing the server messages
-	 * @param serverInboxResponse InboxMessage[] - InboxMessage message array
+	 * Updates the static array representing the server messages.
+	 * @param serverInboxResponse InboxMessage[] - InboxMessage message array.
 	 * */
 	public static void setServerInboxResponse(InboxMessage[] serverInboxResponse) {
 		VisitorReminder.serverInboxResponse = serverInboxResponse;
