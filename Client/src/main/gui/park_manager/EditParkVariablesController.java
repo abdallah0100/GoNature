@@ -117,7 +117,6 @@ public class EditParkVariablesController implements Initializable{
 		else {
 			ParkRequestHandler.requsetChange(insertDataChange());	
 			displayMsg("sent request", 129, "red");
-			System.out.println(requestResult);
 		}
 
 	   }

@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import entities.Order;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import main.ClientController;
+import main.controllers.VisitorRequestController;
 
 public class WaitingListFrameController implements Initializable{
 	
@@ -35,8 +39,19 @@ public class WaitingListFrameController implements Initializable{
     private TableView<Order> tableView;
 	Order selectedOrder;
 	
+	public static boolean deleteResult = false;
+	private ObservableList<Order> list;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		VisitorRequestController.fetchWaitingList(ClientController.connectedVisitor.getId());
+		list = FXCollections.observableArrayList();
+		
+		if (ClientController.connectedVisitor.getWaitingList() != null)
+			list.setAll(ClientController.connectedVisitor.getWaitingList());
+		
+		tableView.setItems(list);
+		
 		siteColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("parkName"));
 		dateColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("date"));
 		timeColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("hour"));
@@ -67,7 +82,7 @@ public class WaitingListFrameController implements Initializable{
 	            confirmDeleteAlert.showAndWait().ifPresent(response -> {
 	                if (response == ButtonType.YES) {
 	                    try {
-	                        delete(event);
+	                    	delete(event);
 	                    } catch (Exception e) {
 	                        e.printStackTrace();
 	                    }
@@ -76,10 +91,13 @@ public class WaitingListFrameController implements Initializable{
 	        }
 	    });
 	}
-	//delete button deletes a reservation from the waiting list
-	public void delete(ActionEvent e) {
-		System.out.println("Hi");
-	}
 
-	
+	public void delete(ActionEvent e) {
+		if (selectedOrder != null) {
+       		VisitorRequestController.deleteOrderFromWaitingList(selectedOrder.getOrderID());
+    		if (deleteResult)
+    			list.remove(selectedOrder);
+    		deleteResult = false;
+		}
+	}
 }

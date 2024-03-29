@@ -66,12 +66,11 @@ public class ShowReservationFrameController implements Initializable{
      * @throws Exception if an error occurs during deletion.
      */
 	public void deleteReservation(ActionEvent e) throws Exception {
-		//ReservationController.sendCancelReservation(o);
 		selectedOrder = tableView.getSelectionModel().getSelectedItem();
 	    if (selectedOrder != null) {
 	    	ReservationController.sendCancelReservation(selectedOrder);
-	            tableView.getItems().remove(selectedOrder);
-	            System.out.println("[ShowReservationFrameController] - Reservation deleted successfully");
+	        tableView.getItems().remove(selectedOrder);
+	        System.out.println("[ShowReservationFrameController] - Reservation deleted successfully");
 	    } else {
 	        displayError("Please select a reservation to delete");
 	    }

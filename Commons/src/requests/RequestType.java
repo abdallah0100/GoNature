@@ -86,7 +86,11 @@ public enum RequestType {
 	/** Delete a message from the inbox. */
 	DELETE_MSG(40),
 	/** Fetch data on the days were the park was not full in a specific park. */
-	FETCH_NOT_FULL_DATA(41);
+	FETCH_NOT_FULL_DATA(41),
+	/** Fetch data of the waiting list for a specific visitor. */
+	FETCH_VISITOR_WAITINGLIST(42),
+	/** Delete an order from the waiting list. */
+	DELETE_FROM_WAITINGLIST(43);
 	
 	/** The unique identifier for the request type. */
 	private int requestId;

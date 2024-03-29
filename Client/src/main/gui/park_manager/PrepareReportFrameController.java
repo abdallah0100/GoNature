@@ -262,6 +262,8 @@ public class PrepareReportFrameController implements Initializable{
 		dataValue2.setVisible(false);
 		generateBtn.setVisible(false);
 		
+		monthBox.getSelectionModel().clearSelection();
+		yearBox.getSelectionModel().clearSelection();
 		parkField.setText("");
 		fetchBtn.setVisible(true);
 		msgLabel.setVisible(false);
