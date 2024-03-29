@@ -34,6 +34,13 @@ public class VisitsReportGraphFrameController implements Initializable {
 
     private static VisitsReport[] ReturnedTimesData;
 
+    
+    
+    /**
+     * initialize the visits graph with details for the chosen park.
+     * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         xAxis.setTickLabelFill(Color.WHITE);
@@ -77,6 +84,11 @@ public class VisitsReportGraphFrameController implements Initializable {
         scatterChart.getData().add(seriesOrg);
     }
 
+    /**
+    * Creates a StackPane node with a label for displaying visit time inside the node.
+    * @param visitTime The visit time to be displayed.
+    * @return A StackPane node containing the visit time label.
+    */
     private StackPane createDataNode(String visitTime) {
         StackPane stackPane = new StackPane();
         Label label = new Label(visitTime);
@@ -85,7 +97,9 @@ public class VisitsReportGraphFrameController implements Initializable {
         return stackPane;
     }
 
-    // Custom class to hold enter and exit times
+    /**
+    * Custom class to hold enter and exit times.
+    */
     static class TimePair {
         private int enterHour;
         private int enterMin;
@@ -135,7 +149,9 @@ public class VisitsReportGraphFrameController implements Initializable {
             return visitTime;
         }
 
-        // Custom comparator class for sorting times
+        /**
+        * Custom comparator class for sorting times according to entry time.
+        */
         static class TimeComparator implements Comparator<TimePair> {
             @Override
             public int compare(TimePair pair1, TimePair pair2) {
@@ -149,7 +165,6 @@ public class VisitsReportGraphFrameController implements Initializable {
 
     /**
      * Sets the returned visits report data.
-     *
      * @param returnedTimesData the array of visits report data
      */
     public static void setReturnedTimesData(VisitsReport[] returnedTimesData) {

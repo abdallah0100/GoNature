@@ -25,6 +25,12 @@ public class CancellationsGraphFrameController implements Initializable {
     private static int numOfNotActivated;
     private static int numOfReservations;
 
+    
+    /**
+    * initialize the pie chart with the data and the distributions
+    * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+    * @param resources The resources used to localize the root object, or null if the root object was not localized.
+    */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String[] listToSend = new String[2];

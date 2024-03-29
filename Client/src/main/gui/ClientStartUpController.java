@@ -26,10 +26,7 @@ public class ClientStartUpController extends Application{
 	private Button exitBtn;
 	
 	
-	/**
-	* @param primaryStage the primary stage for the application
-	* @throws Exception if an error occurs during initialization
-	*/
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
