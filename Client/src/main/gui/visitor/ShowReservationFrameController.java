@@ -2,7 +2,6 @@ package main.gui.visitor;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +20,12 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import main.ClientController;
 import main.controllers.ReservationController;
 import main.controllers.VisitorRequestController;
+
+
+/**
+ * This class represents the controller for the frame displaying visitor reservations.
+ * It allows visitors to view, edit, update, and delete their reservations.
+ */
 public class ShowReservationFrameController implements Initializable{
 	@FXML
 	private TableColumn<Order, String> siteColumn;
@@ -54,7 +59,12 @@ public class ShowReservationFrameController implements Initializable{
 	Order order;
 	Order selectedOrder;
 
-	//function deletes reservation (removes it from DB) on action to deleteBtn
+	
+	/**
+     * Deletes the selected reservation.
+     * @param e The action event.
+     * @throws Exception if an error occurs during deletion.
+     */
 	public void deleteReservation(ActionEvent e) throws Exception {
 		//ReservationController.sendCancelReservation(o);
 		selectedOrder = tableView.getSelectionModel().getSelectedItem();
@@ -66,6 +76,12 @@ public class ShowReservationFrameController implements Initializable{
 	        displayError("Please select a reservation to delete");
 	    }
 	}
+	
+	 /**
+     * Updates the selected reservation.
+     * @param e The action event.
+     * @throws Exception if an error occurs during update.
+     */
 	public void updateReservation(ActionEvent e) throws Exception {
 	    if (order != null) {	  
 	    	 VisitorRequestController.updateReservation(order);
@@ -80,6 +96,12 @@ public class ShowReservationFrameController implements Initializable{
 	    tableView.getSelectionModel().clearSelection();
 	}
 
+	
+	 /**
+     * set the reservations of that visitor that he made in the table 
+     * @param arg0 The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param arg1 The resources used to localize the root object, or null if the root object was not localized.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		siteColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("parkName"));
@@ -124,6 +146,11 @@ public class ShowReservationFrameController implements Initializable{
 		} 
 		editData();	 
 	}
+	
+	
+	/**
+    * Edits the data in the table columns.
+    */
 	public void editData() {
 	    phoneColumn.setCellFactory(TextFieldTableCell.<Order>forTableColumn());
 	    phoneColumn.setOnEditCommit(event ->{
@@ -198,6 +225,11 @@ public class ShowReservationFrameController implements Initializable{
 	        }
 	    });
 	}
+	
+	/**
+     * Displays an error message.
+     * @param txt The error message to display.
+     */
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);

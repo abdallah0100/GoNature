@@ -33,8 +33,19 @@ import main.gui.visitor.ValidationFrameController;
 import main.threads.VisitorReminder;
 import requests.Message;
 
+
+/**
+ * The RequestHandler class manages incoming requests from the server and handles them accordingly.
+ * It contains a static method `handleIncomingRequests` which interprets the incoming messages
+ * and takes appropriate actions based on the type of request.
+ */
 public class RequestHandler {
 	
+	
+	/**
+     * Handles incoming requests from the server.
+     * @param msg The message received from the server.
+     */
 	public static void handleIncomingRequests(Message msg) {
 		Order o;
 		String response;

@@ -1,6 +1,7 @@
 package main.gui.park_manager;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -23,7 +24,10 @@ import javafx.scene.text.Text;
 import main.ClientController;
 import main.controllers.UserRequestController;
 import utilities.Utils;
-
+/**
+ * The controller class for managing the preparation of reports in the GUI for park manager.
+ * This class handles interactions and data retrieval for generating reports.
+ */
 public class PrepareReportFrameController implements Initializable{
 	
 	@FXML
@@ -62,6 +66,13 @@ public class PrepareReportFrameController implements Initializable{
 	public static Report report_withData;
 	private boolean fetched = false;
 	
+	
+	/**
+     * Sets up month and year ComboBox with years (2024,2024,2022).
+     * And month ComboBox with all the months.
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String[] arr1 = {"January", "February", "March", "April",
@@ -82,6 +93,11 @@ public class PrepareReportFrameController implements Initializable{
 		yearsList = new ArrayList<>(Arrays.asList(arr2));
 	}
 	
+	
+	/**
+     * Shows the report pane when Number Of Visitors button is clicked.
+     * @param event The ActionEvent that triggered this method.
+     */
 	@FXML
 	public void showReportPane(ActionEvent event) {
 		resetValues();
@@ -90,12 +106,22 @@ public class PrepareReportFrameController implements Initializable{
 		rightPane.setVisible(true);
 	}
 	
+	/**
+     * Hides the report pane when clicking of cancel button.
+     * @param event The ActionEvent that triggered this method.
+     */
 	@FXML
 	public void cancelReportCreation(ActionEvent event) {
 		resetValues();
 		rightPane.setVisible(false);
 	}
 	
+	
+	
+	/**
+     * Generates the report based on the input provided when clicking of Generate Report Button.
+     * @param event The ActionEvent that triggered this method.
+     */
 	@FXML
 	public void generateReport(ActionEvent event) {
 		if (validInput() && report_withData != null) {
@@ -112,6 +138,11 @@ public class PrepareReportFrameController implements Initializable{
 		}
 	}
 	
+	
+	/**
+     * Hide the generate report Button and the labels to start new report creation
+     * @param event The Event that triggered this method.
+     */
 	@FXML
 	public void newInputTrigger(Event event) {
 		if (fetched) {
@@ -130,6 +161,11 @@ public class PrepareReportFrameController implements Initializable{
 		}
 	}
 	
+	
+	/**
+     * Shows the individuals orders and the group orders number when clicking fetch data button.
+     * @param event The ActionEvent that triggered this method.
+     */
 	@FXML
 	public void fetchData(ActionEvent event) {
 		if (validInput()) {
@@ -159,6 +195,11 @@ public class PrepareReportFrameController implements Initializable{
 		}
 	}
 	
+	/**
+	* This method updates the UI components to display the relevant data about the park's full capacity.
+	* It sets the appropriate labels and values based on the report data fetched.
+	* If the report already exists, it prompts the park manager to update it, otherwise, it allows generating a new report.
+	*/
 	public void handleNotFullPark() {
 		reportDataTxt1.setText("Times park was full:");
 		dataValue1.setText(report_withData.getAmountOfFullDays() + "");
@@ -178,6 +219,10 @@ public class PrepareReportFrameController implements Initializable{
 		}
 	}
 	
+	
+	/**
+	* Handles the display for the  number of visitors.
+	*/
 	public void handleNumOfVisitors() {
 		reportDataTxt1.setText("Individual Orders:");
 		reportDataTxt2.setText("Group Orders:");
@@ -204,6 +249,10 @@ public class PrepareReportFrameController implements Initializable{
 		}
 	}
 	
+	
+	/**
+	* Resets input fields and hides unnecessary components.
+	*/
 	private void resetValues() {
 		cancelBtn.setLayoutX(135);
 		
@@ -219,6 +268,12 @@ public class PrepareReportFrameController implements Initializable{
 		updateBtn.setVisible(false);
 	}
 	
+	
+	/**
+	* Displays an error message.
+	* @param txt The text of the error message.
+	* @param layoutX The x-coordinate for displaying the error message.
+	*/
 	public void displayError(String txt, int layoutX) {
 		msgLabel.setText(txt);
 		msgLabel.setLayoutX(layoutX);
@@ -227,6 +282,10 @@ public class PrepareReportFrameController implements Initializable{
 		msgLabel.setVisible(true);
 	}
 	
+	/**
+	* Validates that the park manager input for report generation is valid.
+	* @return True if input is valid, otherwise false.
+	*/
 	public boolean validInput() {
 		if (parkField.getText() == null || parkField.getText().length() == 0)
 			return false;
