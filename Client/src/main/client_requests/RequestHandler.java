@@ -387,7 +387,10 @@ public class RequestHandler {
 	            System.out.println("[RequestHandler] -  not order int waintlist (Boolean).");
 	            return;
 			}
-			EnterVisitorsFrameController.isInstructor=(Boolean)msg.getRequestData();
+			if (ClientController.connectedVisitor != null)
+				ClientController.connectedVisitor.setInstructor((Boolean)msg.getRequestData());
+			else
+				EnterVisitorsFrameController.isInstructor=(Boolean)msg.getRequestData();
 			return;
 		case FETCH_NOT_FULL_DATA:
 			if (!(msg.getRequestData() instanceof Report)) {

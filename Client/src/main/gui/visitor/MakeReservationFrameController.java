@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.ClientController;
 import main.ClientUI;
+import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
 import utilities.SceneController;
@@ -142,9 +143,12 @@ public class MakeReservationFrameController implements Initializable{
 			return false;}
 		
 		//test to check if the organized group reservation is done by an instructor
-		if("Organized Group".equals(orderType.getValue()) && !(ClientController.connectedVisitor.isInstructor())){
-			displayError("Please enter legal type");
-			return false;
+		if("Organized Group".equals(orderType.getValue())) {
+			UserRequestController.checkInstructor(ClientController.connectedVisitor.getId());
+			if(!ClientController.connectedVisitor.isInstructor()){
+				displayError("Please enter legal type");
+				return false;
+			}
 		}
 		//illegal input
 		try {
