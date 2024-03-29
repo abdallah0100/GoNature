@@ -15,6 +15,7 @@ public class Visitor implements Serializable{
 	private String name; // The name of the visitor.
 	private boolean isInstructor; // Flag indicating whether the visitor is an instructor.
 	private boolean foundInDB; // Flag indicating whether the visitor is in the DB.
+	private Order[] waitingList;
 	
 	/**
 	 * Constructs a new Visitor with specified ID, email, phone number, and instructor status.
@@ -141,5 +142,13 @@ public class Visitor implements Serializable{
 	 */
 	public void setFoundInDB(boolean foundInDB) {
 		this.foundInDB = foundInDB;
+	}
+
+	public Order[] getWaitingList() {
+		return waitingList;
+	}
+
+	public void setWaitingList(Order[] waitingList) {
+		this.waitingList = waitingList;
 	}
 }

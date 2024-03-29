@@ -73,6 +73,7 @@ public class MakeReservationFrameController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setOrderTypeComboBox();
 		setParkNameFieldComboBox();
+		
 		if (o != null) {
 			orderType.setValue(o.getOrderType());
 			numOfVisitorsField.setText((o.getNumOfVisitors())+ "");
@@ -83,8 +84,11 @@ public class MakeReservationFrameController implements Initializable{
 			parkNameField.setValue(o.getParkName());
 			phoneField.setText(o.getPhone());
 			emailField.setText(o.getEmail());
-		}else
+		}else {
 			o = new Order();
+			orderType.getSelectionModel().select("Private");
+			numOfVisitorsField.setText("1");
+		}
 		payLabel.setVisible(false);
 	    payedCheckBox.setVisible(false);
 		orderType.setOnAction(event -> {

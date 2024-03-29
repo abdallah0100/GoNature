@@ -30,6 +30,7 @@ import main.gui.service_agent.RegisterInstructorFrameController;
 import main.gui.visitor.DeclinedReservationOptions;
 import main.gui.visitor.MakeReservationFrameController;
 import main.gui.visitor.ValidationFrameController;
+import main.gui.visitor.WaitingListFrameController;
 import main.threads.VisitorReminder;
 import requests.Message;
 
@@ -398,6 +399,20 @@ public class RequestHandler {
 				return;
 			}
 			PrepareReportFrameController.report_withData = (Report)msg.getRequestData();
+			break;
+		case FETCH_VISITOR_WAITINGLIST:
+			if ((msg.getRequestData() instanceof Order[])) {
+				ClientController.connectedVisitor.setWaitingList((Order[]) msg.getRequestData());
+			}else {
+				System.out.println("[RequestHandler] - user had no orders in the waiting list");
+				ClientController.connectedVisitor.setWaitingList(null);
+			}			
+			break;
+		case DELETE_FROM_WAITINGLIST:
+			if (!(msg.getRequestData() instanceof Boolean)) {
+				System.out.println("[RequestHandler] - Invalid response type DELETE_FROM_WAITINGLIST");
+			}
+			WaitingListFrameController.deleteResult = (Boolean)msg.getRequestData();
 			break;
 		default:
 				System.out.println("[GoNatureClient] - unimplemented message type: " + msg.toString());

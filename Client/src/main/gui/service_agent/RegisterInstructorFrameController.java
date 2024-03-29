@@ -41,7 +41,7 @@ public class RegisterInstructorFrameController{
 				return;
 			}
 			else {
-				displayMsg(regist);
+				displayMsg("Instructor was not registered.");
 				return;
 			}
 		}
@@ -62,8 +62,8 @@ public class RegisterInstructorFrameController{
      * @return true if input is valid, false otherwise.
      */
 	public boolean validInput() {
-		if (idTxt.getText() == null || idTxt.getText().length() < 9|| idTxt.getText().equals("0")) {
-			displayMsg("Enter a new value to update");
+		if (idTxt.getText() == null || idTxt.getText().length() != 9) {
+			displayMsg("Enter a valid id");
 			return false;
 		}
 		Pattern p = Pattern.compile("[0-9]+");
