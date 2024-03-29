@@ -1,17 +1,24 @@
 package main.gui.visitor;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import entities.AvailablePlace;
 import entities.Order;
+import entities.Park;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import main.ClientController;
 import main.ClientUI;
+import main.controllers.ParkRequestHandler;
 import main.controllers.ReservationController;
 import utilities.SceneController;
 
@@ -20,7 +27,7 @@ import utilities.SceneController;
 * where visitors can choose options(enter waiting list or alternative times)
 * after a reservation has been declined.
 */
-public class DeclinedReservationOptions {
+public class DeclinedReservationOptions implements Initializable{
 
 	@FXML
 	private Label msgLabel;
@@ -38,6 +45,8 @@ public class DeclinedReservationOptions {
 	private TableColumn<AvailablePlace, String> dateCol;
 	@FXML
 	private TableColumn<AvailablePlace, String> timeCol;
+	@FXML
+	private Label maxCapacity;
 	
 	private static Order order;
 	private static AvailablePlace[] avbl;
@@ -147,4 +156,12 @@ public class DeclinedReservationOptions {
 	public static void setAvbl(AvailablePlace[] avbl) {
 		DeclinedReservationOptions.avbl = avbl;
 	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ParkRequestHandler.requestAllParks();
+		
+		Park p = ClientController.getParks().get(order.getParkName());
+		maxCapacity.setText((p.getMaxCapacity() - p.getGap())  + "");
+	}
+	
 }
