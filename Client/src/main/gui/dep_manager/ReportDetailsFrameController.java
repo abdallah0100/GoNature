@@ -57,6 +57,13 @@ public class ReportDetailsFrameController implements Initializable {
     private static ArrayList<String> monthsList;
     private static ArrayList<String> yearsList;
 
+    
+    /**
+    * Initializes the Report Details Frame controller. It populates the ComboBoxes with appropriate values,
+    * sets up the available options for parks, months, and years, and prepares the interface for department manager interaction.
+    * @param location  the location used to resolve relative paths for the root object, or null if the location is not known
+    * @param resources the resources used to localize the root object, or null if the root object was not localized
+    */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String[] arr1 = {"January", "February", "March", "April",
