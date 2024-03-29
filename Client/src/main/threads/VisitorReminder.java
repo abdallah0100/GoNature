@@ -116,7 +116,8 @@ public class VisitorReminder implements Runnable{
 					o.setCancelRequest(false);
 					ReservationController.sendCancelReservation(o);
 				}
-			}else if (timePassed(o) && o.getIsConfirmed()) { //handling confirmed but have not been used reservations
+			}else if (timePassed(o)) { //handling confirmed but have not been used reservations
+				
 				o.setCancelRequest(false);
 				ReservationController.sendCancelReservation(o);
 			}
