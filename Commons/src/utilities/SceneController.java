@@ -13,13 +13,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * Utility class for controlling navigation between scenes in a JavaFX application.
+ * It provides methods to change the current scene, switch the frame of an application,
+ * dynamically set content in a Pane, and enable dragging of the application window.
+ */
 public class SceneController {
 	
-	public static Pane headerPane;
-	public static Stage stage;
-	private static double xOffset = 0;
-    private static double yOffset = 0;
+	public static Pane headerPane; // Pane representing the draggable header area of the application window.
+	public static Stage stage; // The primary stage of the application.
+	private static double xOffset = 0; // X offset for window dragging.
+    private static double yOffset = 0; // Y offset for window dragging.
 
+	/**
+	 * Changes the current scene of the specified stage to a new scene loaded from an FXML file.
+	 * 
+	 * @param title The title for the new scene's stage.
+	 * @param stage The stage in which the scene will be set.
+	 * @param fxmlPath The path to the FXML file to load the scene from.
+	 */
 	public void changeScene(String title, Stage stage, String fxmlPath) {
 		Parent root = new Pane();
 		try {
@@ -35,6 +47,14 @@ public class SceneController {
 	}
 	
 	
+	/**
+	 * Switches the application to a new frame by hiding the current window and starting a 
+	 * new instance of the specified Application.
+	 * 
+	 * @param title The title for the new frame.
+	 * @param e The event that triggered the frame switch.
+	 * @param o The Application instance to start.
+	 */
 	public static void switchFrame(String title, Event e, Application o) {
 		((Node)e.getSource()).getScene().getWindow().hide(); 
 		try {
@@ -46,6 +66,12 @@ public class SceneController {
 		}
 	}
 	
+	/**
+	 * Sets the content of the specified pane by loading it from an FXML file.
+	 * 
+	 * @param pane The pane to set the content for.
+	 * @param fxmlPath The path to the FXML file to load the content from.
+	 */
 	public void setPane(Pane pane, String fxmlPath) {
 		try {
 			Parent visitorSidePane = FXMLLoader.load(getClass().getResource(fxmlPath));
@@ -57,8 +83,13 @@ public class SceneController {
 		}
 	}
 	
+	/**
+	 * Configures the headerPane for dragging, allowing the user to click and drag 
+	 * the pane to move the application window.
+	 * This method must be called after headerPane and stage are initialized.
+	 */
 	public static void setUpHeaderDrag() {
-		// making the client dragable from the header
+		// making the client draggable from the header
 		headerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
 
 			@Override

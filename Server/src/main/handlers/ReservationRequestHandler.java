@@ -10,8 +10,18 @@ import entities.Order;
 import main.Constants;
 import main.MainServer;
 
+/**
+ * Handles requests related to reservations including retrieval, entry processing, status updates, and deletions.
+ */
 public class ReservationRequestHandler {
 	
+	/**
+	 * Retrieves a reservation by its ID and table name, ensuring it matches the park name and the current time.
+	 * 
+	 * @param s Array containing the park name and reservation ID.
+	 * @param tableName The name of the table from which to retrieve the reservation.
+	 * @return The matching Order object if found; null otherwise.
+	 */
 	public static Order getReservationById(String []s,String tableName) {
 		//s[0]  ClientController.connectedUser.getParkName s[1] resevation id
 		if (MainServer.dbConnection == null) {
@@ -44,9 +54,12 @@ public class ReservationRequestHandler {
 		}
 	}
 
-	
-	
-	//insert copy to processedres reservation
+	/**
+	 * Inserts a reservation into the processed reservations table upon entry.
+	 * 
+	 * @param o The Order object representing the reservation.
+	 * @return True if the insertion is successful; false otherwise.
+	 */
 	public static boolean enterProcessed(Order o) {
 			if (MainServer.dbConnection == null) {
 				System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -78,9 +91,14 @@ public class ReservationRequestHandler {
 				}
 		}
 
-	
-	
-	// change  processed in reservation table to 0/1 (know if the reservation )
+		/**
+		 *  Updates the processed status of a reservation in a specified table.
+		 *  
+		 * @param tableName The name of the table to update.
+		 * @param id The ID of the reservation to update.
+		 * @param n The new processed status value.
+		 * @return True if the update is successful; false otherwise.
+		 */
 		public static boolean updateStatus(String tableName,String id ,int n) {
 			if (MainServer.dbConnection == null) {
 				System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -101,9 +119,12 @@ public class ReservationRequestHandler {
 				}
 		}
 		
-
-	
-	//change
+	/**
+	 * Updates a processed reservation with exit times.
+	 * 
+	 * @param id The ID of the reservation to update.
+	 * @return True if the update is successful; false otherwise.
+	 */
 	public static boolean exitProcessed(String id)
 	{
 		if (MainServer.dbConnection == null) {
@@ -118,7 +139,6 @@ public class ReservationRequestHandler {
     			ps.setString(3, id);
 		        int rowsAffected = ps.executeUpdate(); 
 		        return rowsAffected > 0; // Return true if the update was successful
-				//return true;
 			}catch(Exception ex) {
 				System.out.println("[UserRequestHandler] - failed to checkEntering");
 				ex.printStackTrace();
@@ -126,7 +146,13 @@ public class ReservationRequestHandler {
 			}
 	}
 	
-	// if reservation deleted 
+	/**
+	 * Deletes a reservation from a specified table.
+	 * 
+	 * @param tableName The name of the table to delete from.
+	 * @param id The ID of the reservation to delete.
+	 * @return True if the deletion is successful; false otherwise.
+	 */
 	public static boolean deleteReservation(String tableName,String id) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -138,13 +164,19 @@ public class ReservationRequestHandler {
     			ps.setString(1, id);
 		        int rowsAffected = ps.executeUpdate(); 
 		        return rowsAffected > 0; // Return true if the Delete was successful
-				//return true;
 			}catch(Exception ex) {
 				System.out.println("[UserRequestHandler] - failed to checkEntering");
 				ex.printStackTrace();
 				return false;
 			}
 	}
+	
+	/**
+	 * Adds a cancelled reservation to the cancellations reports table.
+	 * 
+	 * @param o The Order object representing the cancelled reservation.
+	 * @return True if the addition is successful; false otherwise.
+	 */
 	public static boolean addToCanceledReports(Order o) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -169,7 +201,12 @@ public class ReservationRequestHandler {
 		}
 	}	
 	
-	//check if waiting list has the same order for the same person
+	/**
+	 * Checks if a similar order exists in the waiting list to avoid duplicates.
+	 * 
+	 * @param o The Order object to check against the waiting list.
+	 * @return True if a similar order exists; false otherwise.
+	 */
 	public static boolean inWaitngList (Order o) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR); 
@@ -194,6 +231,12 @@ public class ReservationRequestHandler {
 		}
 	}
 	
+	/**
+	 * Retrieves the  ReservationID from the reservations table for non-advance reservations.
+	 * 
+	 * @param parkName The name of the park for the reservation.
+	 * @return The highest ReservationID or 0 if none found.
+	 */
 	public static int OrderId(String parkName) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR); 
@@ -213,7 +256,5 @@ public class ReservationRequestHandler {
 				ex.printStackTrace();
 				return 0;
 		}
-		
 	}
-	
 }
