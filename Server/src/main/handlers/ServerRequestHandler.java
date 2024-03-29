@@ -197,9 +197,10 @@ public class ServerRequestHandler {
 			}
 			Park p = (Park)msg.getRequestData();
 			p.setUpdated(ParkRequestHandler.updateParkVariable(p));
-			if (p.isUpdated()) 
+			if (p.isUpdated()) {
+				WaitingListRequestHandler.checkWaitingListForAdmittableOrder(p.getParkName());
 				respondToClient(client, new Message(RequestType.UPDATE_PARK_VARIABLE, p, "Successfully update variable"));
-			else
+			}else
 				respondToClient(client, new Message(RequestType.UPDATE_PARK_VARIABLE, p, "Failed to update variable"));
 			return;
 		case SHOW_USAGE_REPORT:
@@ -502,6 +503,22 @@ public class ServerRequestHandler {
 			r.setReportExist(result);
 			r.setAmountOfFullDays(amountOfFullDays);
 			respondToClient(client, new Message(RequestType.FETCH_NOT_FULL_DATA, r));
+			return;
+		case FETCH_VISITOR_WAITINGLIST:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected String)"));
+				return;
+			}
+			id = (String)msg.getRequestData();
+			respondToClient(client, new Message(RequestType.FETCH_VISITOR_WAITINGLIST, WaitingListRequestHandler.getVisitorWaitingList(id)));
+			return;
+		case DELETE_FROM_WAITINGLIST:
+			if (!(msg.getRequestData() instanceof String)) {
+				respondToClient(client, new Message(RequestType.REQUEST_ERROR, "invalid request data (expected String)"));
+				return;
+			}
+			result = WaitingListRequestHandler.removeFromWaitingList((String)msg.getRequestData());
+			respondToClient(client, new Message(RequestType.DELETE_FROM_WAITINGLIST, result));
 			return;
 		default:
 			respondToClient(client, new Message(RequestType.UNIMPLEMENTED_RESPOND, "response type is not implemented"));

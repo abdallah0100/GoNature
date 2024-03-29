@@ -152,7 +152,11 @@ public class Order implements Serializable{
 	 * @return The number of the visitors for a reservation.
 	 */
 	public int getNumOfVisitors() {
-		return Integer.parseInt(numOfVisitors);
+		try {
+			return Integer.parseInt(numOfVisitors);
+		}catch(Exception ex) {
+			return 0;
+		}
 	}
 	
 	/**

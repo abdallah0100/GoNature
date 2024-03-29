@@ -47,4 +47,12 @@ public class VisitorRequestController {
 	public static void updateReservation(Order o) {
 		ClientController.getController().accept(new Message(RequestType.UPDATE_RESERVATION, o));
 	}
+	
+	public static void fetchWaitingList(String id) {
+		ClientController.getController().accept(new Message(RequestType.FETCH_VISITOR_WAITINGLIST, id));
+	}
+	
+	public static void deleteOrderFromWaitingList(String orderId) {
+		ClientController.getController().accept(new Message(RequestType.DELETE_FROM_WAITINGLIST, orderId));
+	}
 }

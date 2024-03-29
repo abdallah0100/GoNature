@@ -16,6 +16,7 @@ import main.MainServer;
  * and checking the waiting list for orders that can be admitted to the park based on current availability or those that have expired.
  */
 public class WaitingListRequestHandler {
+	
 
 	/**
 	 * Retrieves all orders in the waiting list for a specified park.
@@ -103,6 +104,32 @@ public class WaitingListRequestHandler {
 			}
 			
 		}
+	}
+	
+	public static Order[] getVisitorWaitingList(String id) {
+		if (MainServer.dbConnection == null) {
+			System.out.println(Constants.DB_CONNECTION_ERROR);
+			return null;
+		}
+		
+		try {
+			String str = "SELECT * FROM waiting_list WHERE visitorID='"+id+"'";
+			Statement st = MainServer.dbConnection.createStatement();
+			ResultSet rs = st.executeQuery(str);
+			ArrayList<Order> arr = new ArrayList<>();
+			while(rs.next()) {
+				Order o=new Order(rs.getString("Type"),rs.getInt("NumberOfVisitors"),rs.getString("ReservationDate"),rs.getString("Hour"),
+						rs.getString("Minute"),rs.getString("Park"),rs.getString("Telephone"),rs.getString("Email"),
+						rs.getInt("Queue"),rs.getString("visitorID"),
+						rs.getBoolean("isConfirmed"),rs.getBoolean("InvitedInAdvance"),rs.getBoolean("payed"),rs.getString("processed"));
+				arr.add(o);
+			}
+			return (Order[])arr.toArray(new Order[arr.size()]);
+			}catch(Exception ex) {
+				System.out.println("[WaitingListRequestHandler] - Error executing query in getAllWaitingList");
+				ex.printStackTrace();
+				return null;
+			}
 	}
 	
 }

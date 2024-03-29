@@ -35,11 +35,11 @@ public class MonitoringFrameControlleroring {
 		if(validInput()) {
 			UserRequestController.exit(fill());
 			if(ClientController.monitoring){
-				displayMSG("exit and delete");
+				displayMSG("Visitor left the park");
 				ClientController.monitoring=false;
 			}
 			else {
-				displayMSG("reservation not found ");
+				displayMSG("Reservation not found");
 			}
 		}
 
@@ -61,7 +61,7 @@ public class MonitoringFrameControlleroring {
 			{
 				UserRequestController.sendShowBill(visitorIdTxt.getText());
 				price=ClientController.showBill.returnPrice();
-				displayMSG("enterd");
+				displayMSG("Order confirmed, visitor has entered");
 				ClientController.monitoring=false;
 				SceneController scene = new SceneController();
 				scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/InvoicingFrame.fxml");
@@ -80,13 +80,12 @@ public class MonitoringFrameControlleroring {
     */
 	public boolean validInput() {
 		if (visitorIdTxt.getText().length() <= 0){
-			displayMSG("Please enter the  Bill Id");
+			displayMSG("Enter a valid Id");
 			return false;
 		}
 		try {
 			Integer.parseInt(visitorIdTxt.getText());
 			return true;
-		//	displayMSG("reservationId has to be Number");
 		}catch(Exception ex) {
 			displayMSG("Invalid id was inputted");
 			return false;
