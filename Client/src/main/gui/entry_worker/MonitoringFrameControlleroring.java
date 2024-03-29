@@ -10,6 +10,11 @@ import main.ClientUI;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
  
+/**
+* Controller class for managing the Monitoring Frame,
+* which allows entry workers to monitor visitors and
+* handle entry/exit operations.
+*/
 public class MonitoringFrameControlleroring {
 	
 	@FXML
@@ -19,6 +24,13 @@ public class MonitoringFrameControlleroring {
 	public static String id;
 	public static double price;
 	
+	
+	/**
+    * Handles the action event when the exit button is clicked.
+    * Checks for valid input, then calls the exit method in the UserRequestController.
+    * Displays appropriate messages based on the operation result.
+    * @param event The ActionEvent triggered when the exit button is clicked.
+    */
 	public void exit(ActionEvent event) {
 		if(validInput()) {
 			UserRequestController.exit(fill());
@@ -33,7 +45,14 @@ public class MonitoringFrameControlleroring {
 
 	}
 	
-	//enter id reservation and update and the amount visitor with order if 
+	
+	 /**
+     * Handles the action event when the enter button is clicked.
+     * Checks for valid input, then calls the enter method in the UserRequestController.
+     * If monitoring is successful, retrieves the bill amount and redirects to the Invoicing Frame.
+     * Displays appropriate messages based on the operation result.
+     * @param event The ActionEvent triggered when the enter button is clicked.
+     */ 
 	public void enter(ActionEvent event) {
 		if(validInput()) 
 		{
@@ -54,7 +73,11 @@ public class MonitoringFrameControlleroring {
 	}
 
 	
-	
+    /**
+    * Checks whether the input in the visitor ID TextField is valid.
+    * Displays a message if the input is invalid.
+    * @return true if the input is valid, false otherwise.
+    */
 	public boolean validInput() {
 		if (visitorIdTxt.getText().length() <= 0){
 			displayMSG("Please enter the  Bill Id");
@@ -70,12 +93,21 @@ public class MonitoringFrameControlleroring {
 	
 	}
 	
+	/**
+    * Displays a message on the message Label.
+    * @param txt The message to be displayed.
+    */
 	public void displayMSG(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
 	}
 	
-	//put the park and the reservation id 
+	
+	/**
+    * Creates an array with park name and visitor ID to
+    * fill in the UserRequestController methods.
+    * @return An array containing park name and visitor ID.
+    */
 	public String[] fill()
 	{
 		String[] s = new String[2];

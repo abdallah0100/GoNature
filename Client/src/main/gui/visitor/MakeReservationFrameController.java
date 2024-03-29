@@ -172,6 +172,18 @@ public class MakeReservationFrameController implements Initializable{
         if(!(Pattern.matches(minutesPattern, text2))) {
         	displayError("Please enter a legal minutes");
 			return false;}
+        // The park working hours are 8:00 - 22:00
+        try {
+	        int hour = Integer.parseInt(hourField.getText());
+	        int minute = Integer.parseInt(minuteField.getText());
+	        if (hour < 8 || hour > 22 || (hour == 22 && minute > 0)) {
+	            displayError("Please enter a time between 8:00 and 22:00");
+	            return false;
+	        }
+	    } catch (NumberFormatException e) {
+	        displayError("Please enter valid hour and minute values");
+	        return false;
+	    }
         String phonePattern = "^05\\d{8}$";
         String text3 = phoneField.getText();
         // Check if the text matches the phone number pattern

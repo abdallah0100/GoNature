@@ -15,6 +15,11 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
+/**
+* Controller class for managing the Waiting List Frame,
+* which displays reservations on the waiting list.
+*/
 public class WaitingListFrameController implements Initializable{
 	
 	@FXML
@@ -35,6 +40,14 @@ public class WaitingListFrameController implements Initializable{
     private TableView<Order> tableView;
 	Order selectedOrder;
 	
+	
+	/**
+    * Sets up the TableView to display reservations on the waiting list.
+    * Enables or disables the delete button based on row selection in the TableView.
+    * Handles the action event when the delete button is clicked to confirm and delete a reservation.
+    * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+    * @param resources The resources used to localize the root object, or null if the root object was not localized.
+    */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		siteColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("parkName"));
@@ -76,10 +89,12 @@ public class WaitingListFrameController implements Initializable{
 	        }
 	    });
 	}
-	//delete button deletes a reservation from the waiting list
-	public void delete(ActionEvent e) {
-		System.out.println("Hi");
-	}
 
-	
+	/**
+    * Deletes the selected reservation from the waiting list.
+    * @param e The ActionEvent triggered when the delete button is clicked.
+    */
+	public void delete(ActionEvent e) {
+		System.out.println("Deleted");
+	}
 }

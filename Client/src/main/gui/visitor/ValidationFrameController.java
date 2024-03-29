@@ -30,11 +30,11 @@ public class ValidationFrameController extends Application implements Initializa
 	private TextField idField;
 	@FXML
 	private Label msgLabel;
-	 @FXML
-	 private Button loginBtn;
-	 @FXML
-	 private Button  exitbtn;
-	 @FXML
+	@FXML
+    private Button loginBtn;
+	@FXML
+	private Button  exitbtn;
+	@FXML
 	private Pane headerPane;
 	
 	 public static boolean alreadyIn = false;

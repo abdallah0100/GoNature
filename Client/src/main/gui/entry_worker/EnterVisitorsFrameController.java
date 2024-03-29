@@ -29,6 +29,11 @@ import main.controllers.UserRequestController;
 import main.controllers.VisitorRequestController;
 import utilities.SceneController;
 
+
+/**
+* This class manages the actions and events related
+* to entering visitor information by the entry worker.
+*/
 public class EnterVisitorsFrameController implements Initializable{
 	
 	@FXML
@@ -60,6 +65,13 @@ public class EnterVisitorsFrameController implements Initializable{
 	public static int orderID;
 	public static boolean isInstructor;
 
+	
+	/**
+	 * filling the combo box with reservations types,
+	 * date and park of the current entry worker that he work in.
+     * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setOrderTypeComboBox();
@@ -67,8 +79,14 @@ public class EnterVisitorsFrameController implements Initializable{
 		
 	}
 	 
+ 
+	 /**
+	 * Handles the action event when the enter button is clicked.
+	 * create a new reservation with the details inputed
+	 * @param event The ActionEvent triggered when the button is clicked.
+	 */
 	 @FXML
-	 public void enter1(ActionEvent event) {	
+	 public void enter1(ActionEvent event) {
 		 o=new Order();
 		 if(isValid()) {
 			 if(checkIfHasPlace()) {
@@ -91,6 +109,7 @@ public class EnterVisitorsFrameController implements Initializable{
 						Alert infoAlert = new Alert(AlertType.INFORMATION);
 				        infoAlert.setTitle("OrderID");
 				        infoAlert.setHeaderText(null);
+				        //infoAlert.setContentText("This is an information message. Order ID: " + ClientController.reservationMade.getOrderID());
 				        infoAlert.setContentText("This is an information message. Order ID: " + orderID);					        
 				        infoAlert.showAndWait();
 						SceneController scene = new SceneController();
@@ -116,7 +135,10 @@ public class EnterVisitorsFrameController implements Initializable{
 	 }
 	 
 	 
-	 
+	/**
+	* Sets the items of the orderType ComboBox.
+	* It populates the ComboBox with "Private" and "Organized Group" options.
+	*/ 
 	private void setOrderTypeComboBox() {
 		    ArrayList<String> al = new ArrayList<String>();	
 			al.add("Private");
@@ -126,6 +148,9 @@ public class EnterVisitorsFrameController implements Initializable{
 			orderType.setItems(list);
 	}
 	
+	/**
+    * Sets initial values for certain fields.
+    */
 	private void setValue() {
 		dateField.setValue(LocalDate.now());
 		minuteField.setText(Integer.toString(LocalTime.now().getMinute()));
@@ -137,6 +162,11 @@ public class EnterVisitorsFrameController implements Initializable{
 		parkNameField.setText(ClientController.connectedUser.getParkName());
 	}
 	 
+	
+	/**
+    * Checks if the park has enough places for the visitors.
+    * @return true if there are enough places, otherwise false.
+    */
 	public boolean checkIfHasPlace(){
 		ParkRequestHandler.requestPark(ClientController.connectedUser.getParkName());
 		int gap=p.getGap();
@@ -145,6 +175,11 @@ public class EnterVisitorsFrameController implements Initializable{
 		return(Integer.parseInt(numOfVisitorsField.getText())+number<=gap);
 	}
 	
+	
+	/**
+    * Validates the input entered by the entry worker.
+    * @return true if the input is valid, otherwise false.
+    */
 	private boolean isValid() {
 		UserRequestController.checkInstructor(InstructoIdField.getText());
 		if("Organized Group".equals(orderType.getValue()) && !isInstructor){
@@ -181,6 +216,11 @@ public class EnterVisitorsFrameController implements Initializable{
     
 	}
 	
+	
+	/**
+    * Displays an error message.
+    * @param txt The text of the error message.
+    */
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);
