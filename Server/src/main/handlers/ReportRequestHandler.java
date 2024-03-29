@@ -8,8 +8,18 @@ import entities.Report;
 import main.Constants;
 import main.MainServer;
 
+/**
+ * Manages creation, verification, and updating of reports related to park visitor statistics.
+ * This includes handling reports for the number of visitors, not full park days, and managing full park instances.
+ */
 public class ReportRequestHandler {
 
+	/**
+	 * Checks if a numerical visitor report for a specific period and creator exists.
+	 * 
+	 * @param r The report containing the month, year, and creator to check for.
+	 * @return True if the report exists, false otherwise.
+	 */
 	public static boolean numReportExist(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -35,6 +45,12 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Verifies the existence of a 'Not Full Report' for a given period and report creator.
+	 * 
+	 * @param r The report to verify.
+	 * @return True if such a report exists, false otherwise.
+	 */
 	public static boolean notFullReportExist(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -60,6 +76,13 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Retrieves the count of reservations by type for a given report.
+	 * 
+	 * @param type The type of reservation to count.
+	 * @param r The report detailing the park, month, and year to filter by.
+	 * @return The count of reservations of the specified type.
+	 */
 	public static int getReservationCountByType(String type, Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -90,6 +113,12 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Inserts a new numerical visitor report into the database.
+	 * 
+	 * @param r The report to insert.
+	 * @return True if the insertion is successful, false otherwise.
+	 */
 	public static boolean insertNewNumReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -107,6 +136,12 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Updates an existing numerical visitor report with new values.
+	 * 
+	 * @param r The report containing the new values and the identifiers to find the existing report.
+	 * @return True if the update is successful, false otherwise.
+	 */
 	public static boolean updateNumReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -131,6 +166,12 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Calculates the total number of visitors for a given month, year, and report creator.
+	 * 
+	 * @param r The report detailing the month, year, and creator to filter by.
+	 * @return The total number of visitors in the specified period.
+	 */
 	public static int getTotalVisitorsInMonth(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -158,6 +199,12 @@ public class ReportRequestHandler {
 		return 0;
 	}
 	
+	/**
+	 * Retrieves the count of days when the park was fully occupied in a given month and year.
+	 * 
+	 * @param r The report specifying the park, month, and year.
+	 * @return The count of full park days.
+	 */
 	public static int getFullDays(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -179,6 +226,12 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Inserts a new 'Not Full Report' indicating days the park was not fully occupied.
+	 * 
+	 * @param r The report containing the data for the new 'Not Full Report'.
+	 * @return True if the report is successfully inserted, false otherwise.
+	 */
 	public static boolean createEmptyReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -200,6 +253,12 @@ public class ReportRequestHandler {
 		}
 	}
 	
+	/**
+	 * Updates an existing 'Not Full Report' with a new amount of not fully occupied days.
+	 * 
+	 * @param r The report containing the new amount and the identifiers to find the existing report.
+	 * @return True if the update is successful, false otherwise.
+	 */
 	public static boolean updateEmptyReport(Report r) {
 		if (MainServer.dbConnection == null) {
 			System.out.println(Constants.DB_CONNECTION_ERROR);
@@ -219,5 +278,4 @@ public class ReportRequestHandler {
 			return false;
 		}
 	}
-	
 }

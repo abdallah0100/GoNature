@@ -16,6 +16,11 @@ import javafx.scene.paint.Color;
 import main.ClientController;
 import main.controllers.ParkRequestHandler;
 
+/**
+ * Controller class for editing park variables.
+ * This class manages the UI and logic for editing park-related variables such as gap, estimated time, and visitor limit.
+ * It allows park managers to send requests to update these variables that so department manager can check them.
+ */
 public class EditParkVariablesController implements Initializable{
 	
 	public static String updateResult;
@@ -50,6 +55,12 @@ public class EditParkVariablesController implements Initializable{
 	public static boolean time;
 	public static boolean limit;
 	
+	
+	/**
+     * Handles the action when a variable to edit is selected.
+     * Sets up the UI for editing the selected variable.
+     * @param e The ActionEvent triggered by selecting a variable to edit.
+     */
 	public void selectVariableToEdit(ActionEvent e ) {
 		newValue.setText("");
 		msgLabel.setVisible(false);
@@ -61,6 +72,12 @@ public class EditParkVariablesController implements Initializable{
 		   send.setVisible(true);
 	    
 	}
+	
+	/**
+     * Handles the action when the cancel button is clicked.
+     * Clears the input field and hides the edit pane.
+     * @param e The ActionEvent triggered by clicking the cancel button.
+     */
 	@FXML
 	public void cancel(ActionEvent e ) {
 		newValue.setText("");
@@ -68,6 +85,10 @@ public class EditParkVariablesController implements Initializable{
 		msgLabel.setVisible(false);
 	}
 	
+	
+	/**
+     * Get the current value of a variable for the park that the set work in
+     */
 	public void setValues() {
 	    if (editingVariable.getText().contains("Gap"))
 	    	currentValue.setText(ClientController.connectedUser.getPark().getGap() + "");
@@ -77,6 +98,12 @@ public class EditParkVariablesController implements Initializable{
 	    	currentValue.setText(ClientController.connectedUser.getPark().getMaxCapacity() + "");
 	}
 	
+	
+	/**
+     * Handles the action when the update button is clicked.
+     * Validates the input and sends a request to update the variable.
+     * @param e The ActionEvent triggered by clicking the update button.
+     */
 	@FXML
 	public void update(ActionEvent e ) { //first time send request to update values
 	   if (validInput()) {
@@ -97,7 +124,11 @@ public class EditParkVariablesController implements Initializable{
 }
 	
 	
-	//need to update the not the first time //2+
+	 /**
+     * Handles the action when the resend button is clicked.
+     * Validates the input and resends the update request.
+     * @param e The ActionEvent triggered by clicking the resend button.
+     */
 	public void reSend(ActionEvent e ) {
 		   if (validInput()) {
 			   msgLabel.setVisible(false);
@@ -106,6 +137,12 @@ public class EditParkVariablesController implements Initializable{
 		   }
 	} 
 
+	
+	/**
+     * Validates the input for updating the variable.
+     * Checks if the new value is valid and different from the current value.
+     * @return true if input is valid, false otherwise.
+     */
 	public boolean validInput() {
 		if (newValue.getText().equals(currentValue.getText())) {
 			displayMsg("Enter Number Differnt from the Current", 106, "red");
@@ -123,12 +160,23 @@ public class EditParkVariablesController implements Initializable{
 		}
 		return true;
 	}
+	
+	/**
+     * Sets the park user name for the label.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		parkName.setText(ClientController.connectedUser.getPark().getParkName());
 		
 	}
 	
+	
+	 /**
+     * Displays a message on the message label.
+     * @param str The message to display.
+     * @param layoutx The X-coordinate for the layout.
+     * @param color The color of the message.
+     */
 	public void displayMsg(String str, int layoutx, String color) {
 		msgLabel.setText(str);
 		msgLabel.setLayoutX(layoutx);
@@ -136,13 +184,16 @@ public class EditParkVariablesController implements Initializable{
 		msgLabel.setVisible(true);
 	}
 	
+	
+	 /**
+     * Creates a report object with the updated data.
+     * @return A Report object containing the updated data.
+     */
 	public Report insertDataChange()
 	{
 		Report r=new Report(parkName.getText(),ClientController.connectedUser.getUsername(),
 				editingVariable.getText(),Integer.parseInt(newValue.getText()));
 		return r;
 			    
-	}
-		    
-
+	}		  
 }

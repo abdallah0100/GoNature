@@ -6,8 +6,18 @@ import main.Constants;
 import main.MainServer;
 import utilities.Utils;
 
+/**
+ * Handles the retrieval of visitor statistics from the 'numofvisitorsreports' table,
+ * specifically focusing on the number of organized group visitors and private visitors for a given park, month, and year.
+ */
 public class NumOfVisitorsReportHandler {
 
+	/**
+	 * Gets the number of organized group and private visitors.
+	 * @param requestedData Contains park name, month name, and year.
+	 * @return Array with totals: [0] for organized groups, [1] for privates.
+	 *         null if the database connection is unavailable or if an error occurs during the query execution.
+	 */
 	public static String[] getNumOfVisitors(String[] requestedData){
 				
 		if (MainServer.dbConnection == null) {

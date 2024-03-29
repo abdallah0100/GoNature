@@ -16,22 +16,25 @@ public class EntryWorkerFrameController {
 	 @FXML
 	 private Button createReservations;
 	 
-	/***
-	 * This method responsible for hiding EntryWorker window
-	 * after clicking on View Bill button and
-	 * new window is opened to check the Bill of the visitor 
-	 * that the EntryWorker can check.
-	 * @param event
-	 */
-	
+	/**
+	* This method is responsible for hiding the EntryWorker window
+	* after clicking on the Create Reservations button and
+	* opening a new window to enter visitor information.
+    * @param event The action event triggered by clicking the button.
+	*/
 	public void createReservations(ActionEvent event) {
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/EnterVisitorsFrame.fxml");
 	}
 	
+	
+	/**
+	 * This method is responsible for opening the Monitoring Frame
+	 * window when the Monitoring button is clicked.
+	 * @param event The action event triggered by clicking the button.
+	 */
 	public void monitoring(ActionEvent event) {
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/entry_worker/MonitoringFrame.fxml");
 	}
-
 }

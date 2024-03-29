@@ -13,7 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.controllers.UserRequestController;
 
-
+/**
+ * Controller class for the registration of instructors that is made by the service agent
+ * This class manages the registration process by validating input field
+ */
 public class RegisterInstructorFrameController{
 	public static String regist;
 	  	@FXML
@@ -23,6 +26,13 @@ public class RegisterInstructorFrameController{
 	    @FXML
 	    private Label label;
 	
+	
+	/**
+	* Registers an instructor when the register button is clicked.
+	* Checks if input is valid and if the instructor is not already registered in the database.
+	* Displays appropriate messages based on the registration result.
+	* @param e The ActionEvent triggered by clicking the register button.
+	*/
 	public void register(ActionEvent e) {//we will check all the fields are not empty and not in database to add
 		if(validInput()) {
 			UserRequestController.registInstructor(idTxt.getText());
@@ -37,11 +47,20 @@ public class RegisterInstructorFrameController{
 		}
 	}
 	
+	/**
+    * Displays a label message.
+    * @param txt The text to be displayed.
+    */
 	public void displayMsg(String txt) {
 		label.setText(txt);
 		label.setVisible(true);
 	}
 	
+	 /**
+     * Validates the input fields.
+     * Checks if the ID field is not empty, not equal to zero, and contains a valid number.
+     * @return true if input is valid, false otherwise.
+     */
 	public boolean validInput() {
 		if (idTxt.getText() == null || idTxt.getText().length() < 9|| idTxt.getText().equals("0")) {
 			displayMsg("Enter a new value to update");
