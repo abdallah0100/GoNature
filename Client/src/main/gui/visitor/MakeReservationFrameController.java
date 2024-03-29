@@ -212,7 +212,7 @@ public class MakeReservationFrameController implements Initializable{
 		else {
 			o.setInvitedInAdvance(true);
 			o.setVisitorID(ClientController.connectedVisitor.getId());
-		}//WHAT ABOUT IF THE ENTRY WORKER DID THE RESERVATION WHAT ID SHOULD I ENTER ?? (make another gui to enter id before switching to make reservation)
+		}
 		o.setIsConfirmed(false);
 	}
 	

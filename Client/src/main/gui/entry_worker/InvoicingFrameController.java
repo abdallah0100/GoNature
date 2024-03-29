@@ -34,7 +34,6 @@ public class InvoicingFrameController implements Initializable {
 			displayMSG(MonitoringFrameControlleroring.price + "");
 		}
 		else {//if null
-				System.out.println("[BillCakFrameController] - did no bill");
 				displayMSG("reservation Not Found");
 			 }
 		}

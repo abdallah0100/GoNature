@@ -67,12 +67,8 @@ public class EnterVisitorsFrameController implements Initializable{
 		
 	}
 	 
-	 public void enter(ActionEvent event) {
-		// System.out.println("15265");
-	 }
 	 @FXML
-	 public void enter1(ActionEvent event) {
-		 System.out.println("15265");
+	 public void enter1(ActionEvent event) {	
 		 o=new Order();
 		 if(isValid()) {
 			 if(checkIfHasPlace()) {
@@ -95,7 +91,6 @@ public class EnterVisitorsFrameController implements Initializable{
 						Alert infoAlert = new Alert(AlertType.INFORMATION);
 				        infoAlert.setTitle("OrderID");
 				        infoAlert.setHeaderText(null);
-				        //infoAlert.setContentText("This is an information message. Order ID: " + ClientController.reservationMade.getOrderID());
 				        infoAlert.setContentText("This is an information message. Order ID: " + orderID);					        
 				        infoAlert.showAndWait();
 						SceneController scene = new SceneController();

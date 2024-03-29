@@ -63,7 +63,6 @@ public class MonitoringFrameControlleroring {
 		try {
 			Integer.parseInt(visitorIdTxt.getText());
 			return true;
-		//	displayMSG("reservationId has to be Number");
 		}catch(Exception ex) {
 			displayMSG("Invalid id was inputted");
 			return false;
