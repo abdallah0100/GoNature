@@ -12,6 +12,12 @@ import requests.Message;
 import requests.RequestType;
 import utilities.SceneController;
 
+
+/**
+* The ClientStartUpController class is responsible for controlling the initial startup interface
+* for the GoNature client application. It handles user input for server IP address and port number,
+* and initiates the connection to the server upon clicking the start button.
+*/
 public class ClientStartUpController extends Application{
 	
 	@FXML
@@ -25,11 +31,11 @@ public class ClientStartUpController extends Application{
 	@FXML
 	private Button exitBtn;
 	
-	
 	/**
-	* @param primaryStage the primary stage for the application
-	* @throws Exception if an error occurs during initialization
-	*/
+     * Initializes and launches the JavaFX application.
+     * @param primaryStage The primary stage of the JavaFX application.
+     * @throws Exception If an error occurs during initialization.
+     */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneController sceneController = new SceneController();
@@ -37,12 +43,22 @@ public class ClientStartUpController extends Application{
 							               "/main/gui/ClientStartUpFrame.fxml");
 	}
 	
-	
+	/**
+    * Handles the action event when the exit button is clicked.
+    * Exits the client application.
+    * @param e The action event triggered by clicking the exit button.
+    */
 	public void exitClient(ActionEvent e) {
 		System.out.println("[ClientStartUpController]Exiting startup frame");
 		System.exit(0);
 	}
 	
+	
+	/**
+    * Handles the action event when the start button is clicked.
+    * Initiates the connection to the server based on user input for server IP and port.
+    * @param event The action event triggered by clicking the start button.
+    */
 	public void startClient(ActionEvent event) {
 		String ip = serverIpTxt.getText();
 		String portString = portTxt.getText();
@@ -73,5 +89,4 @@ public class ClientStartUpController extends Application{
 			errorMsg.setVisible(true);
 		}
 	}
-
 }

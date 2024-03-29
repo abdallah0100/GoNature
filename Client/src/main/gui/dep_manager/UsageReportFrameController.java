@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import main.controllers.UsageReportRequestController;
 
 /**
- * Controller class for managing the Usage Report Frame.
+ * Controller class for managing the Usage Report Frame (not full report).
  */
 public class UsageReportFrameController implements Initializable {
 
@@ -47,6 +47,11 @@ public class UsageReportFrameController implements Initializable {
     private UsageReport selectedReport;
     
 
+    /**
+     * Initializes the table with the details of not full times at a park.
+     * @param location The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colPark.setCellValueFactory(new PropertyValueFactory<>("Park"));
@@ -68,6 +73,9 @@ public class UsageReportFrameController implements Initializable {
         handleTable();
     }
     
+    /**
+    * Handles selection in the table to display statistics.
+    */
     private void handleTable() {
     	tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 	        if (newSelection != null) {
@@ -85,10 +93,9 @@ public class UsageReportFrameController implements Initializable {
     }
 
     /**
-     * Sets the list of usage reports.
-     *
-     * @param newArrayList the array of usage reports
-     */
+    * Sets the list of usage reports.
+    * @param newArrayList the array of usage reports
+    */
     public static void setList(UsageReport[] newArrayList) {
         usageReportArray =  newArrayList;
     }

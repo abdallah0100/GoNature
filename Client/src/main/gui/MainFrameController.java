@@ -17,6 +17,11 @@ import main.ClientUI;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
 
+/**
+* The MainFrameController class controls the main user interface of the GoNature application.
+* It manages user logout, closing the application, and initializes the interface based on
+* the role of the connected user or visitor.
+*/
 public class MainFrameController extends Application implements Initializable{
 	
 	@FXML
@@ -28,6 +33,12 @@ public class MainFrameController extends Application implements Initializable{
 	@FXML
 	private ImageView closeIcon;
 	
+	 
+	/**
+    * Initializes and launches the JavaFX application.
+    * @param primaryStage The primary stage of the JavaFX application.
+    * @throws Exception If an error occurs during initialization.
+    */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		SceneController.stage = primaryStage;
@@ -37,6 +48,13 @@ public class MainFrameController extends Application implements Initializable{
 							               "/main/gui/MainFrame.fxml");
 	}
 	
+	
+	/**
+    * Handles the action event when the logout button is clicked.
+    * Initiates the logout process by sending a logout request to the server.
+    * Clears the connected user or visitor data and switches to the login option frame.
+    * @param event The action event triggered by clicking the logout button.
+    */
 	@FXML
 	public void logout(ActionEvent event) {
 		String toLogout;
@@ -52,12 +70,23 @@ public class MainFrameController extends Application implements Initializable{
 		SceneController.switchFrame("GoNature", event, landingFrame);
 	}
 	
+	/**
+    * Closes the application when the close icon is clicked.
+    * @param event The mouse event triggered by clicking the close icon.
+    */
 	@FXML
 	public void closeApp(MouseEvent event) {
 		ClientController.getController().getClient().quit();
 		System.exit(0);
 	}
 
+	
+	/**
+    * Initializes the controller after its root element has been completely processed.
+    * It sets up the UI components based on the connected user role or if its a visitor.
+    * @param location The location used to resolve relative paths for the root object.
+    * @param resources The resources used to localize the root object.
+    */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
