@@ -12,7 +12,10 @@ import main.ClientController;
 import main.ClientUI;
 import utilities.SceneController;
 
-
+/**
+ * This class represents the controller for the side pane of the visitor interface.
+ * It handles the visitor actions that he can do in the system.
+ */
 public class VisitorSidePaneController implements Initializable{
 	
 	@FXML
@@ -27,6 +30,13 @@ public class VisitorSidePaneController implements Initializable{
 	private Button waitingList;
 	String id;
 	
+	
+	
+	 /**
+     * Sets up initial state of UI elements based on visitor connection status.
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (ClientController.connectedVisitor != null) {
@@ -39,26 +49,45 @@ public class VisitorSidePaneController implements Initializable{
 	
 	}
 	
-	//function to makeReservation
+	/**
+     * Handles the action event for making a reservation  
+     * after clicking on Make Reservation Button.
+     * @param e The action event.
+     */
 	public void makeReservation(ActionEvent e) {
 		MakeReservationFrameController.o=null;
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/MakeReservationFrame.fxml");
 	}
 	
-	//function to showReservation
+	 /**
+     * Handles the action event for showing reservations
+     * after clicking on Show Reservation Button.
+     * @param e The action event.
+     */
 	public void showReservation(ActionEvent e) {
 		MakeReservationFrameController.o=null;
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/ShowReservationFrame.fxml");
 	}
-	//function to show waiting list
+	
+	
+	/**
+     * Handles the action event for showing the waiting list
+     * after clicking on Waiting List Button
+     * @param e The action event.
+     */
 	public void waitingList(ActionEvent e) {
 		MakeReservationFrameController.o=null;
 		SceneController scene = new SceneController();
 		scene.setPane(ClientUI.contentPane, "/main/gui/visitor/WaitingListFrame.fxml");
 	}
 	
+	/**
+     * Handles the mouse click event for navigating to the home page
+     * after clicking on the Black House icon.
+     * @param event The mouse event.
+     */
 	@FXML
 	public void homePage(MouseEvent event) {
 		SceneController scene = new SceneController();

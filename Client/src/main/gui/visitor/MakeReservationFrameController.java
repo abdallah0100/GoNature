@@ -25,6 +25,11 @@ import main.controllers.VisitorRequestController;
 import main.gui.MainFrameController;
 import utilities.SceneController;
 
+
+/**
+ * This class represents the controller for the frame where visitors can make reservations.
+ * It allows visitors to input reservation details and submit them for processing.
+ */
 public class MakeReservationFrameController implements Initializable{
  
 	@FXML
@@ -57,6 +62,12 @@ public class MakeReservationFrameController implements Initializable{
 	LocalDate today = LocalDate.now();
 	public static boolean hasSpace = false;
 	
+	
+	 /**
+	 * 
+     * @param arg0 The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param arg1 The resources used to localize the root object, or null if the root object was not localized.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setOrderTypeComboBox();
@@ -88,7 +99,14 @@ public class MakeReservationFrameController implements Initializable{
 		
 	}
 	
-	//function makes reservation 
+	
+	
+	 /**
+     * Handles the action of making a reservation after
+     * clicking on Make Reservation.
+     * @param e The action event.
+     * @throws Exception if an error occurs during reservation making.
+     */
 	public void makeReservation(ActionEvent e) throws Exception{
 		if(isValid()){
 			loadData();
@@ -112,6 +130,11 @@ public class MakeReservationFrameController implements Initializable{
 		hasSpace = false;
 	}
 
+	
+	 /**
+     * Validates the input fields for making a reservation.
+     * @return true if all input fields are valid, otherwise false.
+     */
 	private boolean isValid() {
 		//null input
 		if(orderType.getValue()==null || numOfVisitorsField.getText().length() <= 0 || dateField.getValue()==null || hourField.getText().length() <= 0 || minuteField.getText().length()<= 0 || phoneField.getText().length() <= 0 || emailField.getText().length() <= 0 || parkNameField.getValue()==null) {
@@ -164,6 +187,11 @@ public class MakeReservationFrameController implements Initializable{
 		return true;
     
 	}
+	
+	
+	/**
+    * Loads the data from the input fields into the Order Object.
+    */
 	private void loadData() {
 
 		o.setOrderType(orderType.getValue());
@@ -187,6 +215,11 @@ public class MakeReservationFrameController implements Initializable{
 		}//WHAT ABOUT IF THE ENTRY WORKER DID THE RESERVATION WHAT ID SHOULD I ENTER ?? (make another gui to enter id before switching to make reservation)
 		o.setIsConfirmed(false);
 	}
+	
+	
+	/**
+    * Sets up the options for the park name field combo box.
+    */
 	private void setParkNameFieldComboBox() {
 		ArrayList<String> al = new ArrayList<String>();	
 
@@ -197,6 +230,10 @@ public class MakeReservationFrameController implements Initializable{
 		parkNameField.setItems(list);
 	}
 	
+	
+	/**
+    * Sets up the options for the order type combo box.
+    */
 	private void setOrderTypeComboBox() {
 	    ArrayList<String> al = new ArrayList<String>();	
 		al.add("Private");
@@ -206,6 +243,11 @@ public class MakeReservationFrameController implements Initializable{
 		orderType.setItems(list);
 	}
 
+
+	/**
+    * Displays an error message.
+    * @param txt The error message to display.
+    */
 	public void displayError(String txt) {
 		msgLabel.setText(txt);
 		msgLabel.setVisible(true);

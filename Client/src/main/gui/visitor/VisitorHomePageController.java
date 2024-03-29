@@ -25,6 +25,11 @@ import main.controllers.ReservationController;
 import main.entities.ConfirmationMessage;
 import main.threads.VisitorReminder;
 
+
+/**
+* This class represents the controller for the home page of the visitor interface.
+* Displaying inbox messages,and managing reservations for the visitor.
+*/
 public class VisitorHomePageController implements Initializable{
 	@FXML
 	private ImageView inboxImg;
@@ -45,6 +50,13 @@ public class VisitorHomePageController implements Initializable{
 	int selectedRowIndex;
 	private Order selectedOrder;
 	private InboxMessage selectedMsg;
+	
+	
+	/**
+     * Sets up initial state of UI elements and handles displaying inbox messages.
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		MakeReservationFrameController.o=null;
@@ -57,6 +69,10 @@ public class VisitorHomePageController implements Initializable{
 		handleTableSelection();
 	}
 	
+	/**
+    * Handles selection of items in the message table.
+    * Displays appropriate alerts based on the type of selected message.
+    */
 	private void handleTableSelection() {
 		messageTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 	        if (newSelection != null) {
@@ -109,6 +125,12 @@ public class VisitorHomePageController implements Initializable{
             }
         });
 	}
+	
+	 /**
+     * Handles click event on the inbox icon, and shows
+     * the message table after clicking.
+     * @param event The mouse event.
+     */
 	@FXML
 	public void clickInboxIcon(MouseEvent event) {
 		messageTable.setVisible(!messageTable.isVisible());
@@ -117,6 +139,10 @@ public class VisitorHomePageController implements Initializable{
 		}
 
 	}
+	
+	/**
+     * Handles the action event for confirming a reservation.
+     */
 	public void admit() {
 		if (selectedOrder != null) {
 				ReservationController.sendConfirmReservation(selectedOrder);
@@ -133,6 +159,9 @@ public class VisitorHomePageController implements Initializable{
 				System.out.println("[VisitorHomePageController] - Order was null");
 	}
 
+	/**
+     * Handles the action event for cancelling a reservation.
+     */
 	public void cancel() {
 		if (selectedOrder != null) {
 			selectedOrder.setCancelRequest(true);
