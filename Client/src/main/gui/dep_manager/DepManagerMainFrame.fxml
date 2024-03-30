@@ -12,19 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
    <children>
-      <Button fx:id="confirmChangeRequestBtn" layoutX="5.0" layoutY="231.0" mnemonicParsing="false" onAction="#confirmChange" prefHeight="30.0" prefWidth="147.0" text="Confirm Change Request" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="11.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Button>
-      <Button fx:id="generateReportBtn" layoutX="15.0" layoutY="293.0" mnemonicParsing="false" onAction="#showExportReportWindow" prefHeight="30.0" prefWidth="130.0" text="Export Report" textFill="WHITE">
+      <Button fx:id="confirmChangeRequestBtn" layoutX="4.0" layoutY="233.0" mnemonicParsing="false" onAction="#confirmChange" prefHeight="30.0" prefWidth="147.0" text="Confirm Request" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
@@ -36,7 +24,19 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="viewReportsBtn" layoutX="19.0" layoutY="173.0" mnemonicParsing="false" onAction="#showviewReportsWindow" prefHeight="30.0" prefWidth="122.0" text="View Reports" textFill="WHITE">
+      <Button fx:id="generateReportBtn" layoutX="4.0" layoutY="293.0" mnemonicParsing="false" onAction="#showExportReportWindow" prefHeight="30.0" prefWidth="147.0" text="Export Report" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.364705890417099" green="0.3960784375667572" blue="0.3686274588108063" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="viewReportsBtn" layoutX="4.0" layoutY="173.0" mnemonicParsing="false" onAction="#showviewReportsWindow" prefHeight="30.0" prefWidth="147.0" text="View Reports" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
