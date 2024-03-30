@@ -116,11 +116,14 @@
       <TextField fx:id="hourField" layoutX="182.0" layoutY="198.0" prefHeight="25.0" prefWidth="33.0" />
       <TextField fx:id="minuteField" layoutX="218.0" layoutY="198.0" prefHeight="25.0" prefWidth="33.0" />
       <Label layoutX="215.0" layoutY="202.0" text=":" textFill="WHITE" />
-      <Label fx:id="msgLabel" layoutX="348.0" layoutY="298.0" prefHeight="17.0" prefWidth="238.0" textFill="#9a3838" />
+      <Label fx:id="msgLabel" alignment="CENTER" layoutX="348.0" layoutY="298.0" prefHeight="17.0" prefWidth="238.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <CheckBox fx:id="payedCheckBox" layoutX="190.0" layoutY="362.0" mnemonicParsing="false" />
       <Label fx:id="payLabel" layoutX="36.0" layoutY="362.0" text="Pay now:" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
    </children>

@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,7 +19,21 @@
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="createReservations" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" onAction="#createReservations" text="Create Reservations" />
-      <Button layoutX="26.0" layoutY="290.0" mnemonicParsing="false" onAction="#monitoring" prefHeight="25.0" prefWidth="104.0" text="Monitoring" />
+      <Button fx:id="createReservations" layoutX="4.0" layoutY="157.0" mnemonicParsing="false" onAction="#createReservations" prefHeight="29.0" prefWidth="148.0" text="Create Reservations" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+      <Button layoutX="4.0" layoutY="221.0" mnemonicParsing="false" onAction="#monitoring" prefHeight="27.0" prefWidth="148.0" text="Monitoring Visitors" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+      <ImageView fitHeight="72.0" fitWidth="82.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+         </effect>
+      </ImageView>
    </children>
 </Pane>

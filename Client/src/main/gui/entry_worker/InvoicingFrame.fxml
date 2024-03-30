@@ -1,44 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@InvoicingFrameCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.InvoicingFrameController">
    <children>
-      <Label layoutX="189.0" layoutY="30.0" prefHeight="55.0" prefWidth="328.0" text="Invoicing" textFill="WHITE">
+      <Label alignment="BASELINE_CENTER" layoutX="176.0" layoutY="14.0" prefHeight="43.0" prefWidth="164.0" text="Invoicing" textFill="WHITE" underline="true">
          <font>
-            <Font name="Arial Bold" size="48.0" />
-         </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Label>
-      <Label layoutX="48.0" layoutY="172.0" text="Reservation ID :" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="27.0" />
+            <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Separator layoutY="85.0" prefHeight="2.0" prefWidth="600.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Separator>
-      <ImageView fitHeight="84.0" fitWidth="56.0" layoutX="451.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="52.0" layoutY="132.0" text="Reservation ID :" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="55.0" fitWidth="48.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/payment.png" />
          </image>
@@ -46,14 +27,19 @@
             <ColorAdjust brightness="1.0" />
          </effect>
       </ImageView>
-      <Label fx:id="msgLabel" layoutX="273.0" layoutY="224.0" text="Label" textFill="RED" visible="false">
+      <Label fx:id="msgLabel" contentDisplay="CENTER" layoutX="200.0" layoutY="181.0" prefHeight="37.0" prefWidth="80.0" text="Label" textFill="WHITE" visible="false">
          <font>
-            <Font size="14.0" />
+            <Font name="System Italic" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="reservationId" layoutX="289.0" layoutY="172.0" prefHeight="34.0" prefWidth="73.0" text="Label" textFill="RED" visible="false">
+      <Label fx:id="reservationId" layoutX="198.0" layoutY="122.0" prefHeight="37.0" prefWidth="80.0" text="Label" textFill="WHITE" visible="false">
          <font>
-            <Font size="23.0" />
+            <Font name="System Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="52.0" layoutY="187.0" prefHeight="27.0" prefWidth="154.0" text="Reservation Bill :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
    </children>

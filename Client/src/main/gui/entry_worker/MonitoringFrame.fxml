@@ -4,13 +4,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.MonitoringFrameControlleroring">
    <children>
-      <Label layoutX="179.0" layoutY="93.0" text="ID:" />
-      <Button layoutX="194.0" layoutY="243.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
-      <Button layoutX="300.0" layoutY="243.0" mnemonicParsing="false" onAction="#enter" text="Enter" />
-      <TextField fx:id="visitorIdTxt" layoutX="211.0" layoutY="89.0" />
-      <Label fx:id="msgLabel" layoutX="246.0" layoutY="192.0" text="Label" textFill="RED" visible="false" />
+      <Label layoutX="45.0" layoutY="109.0" prefHeight="30.0" prefWidth="171.0" text="Reservation ID:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Button layoutX="437.0" layoutY="229.0" mnemonicParsing="false" onAction="#exit" prefHeight="29.0" prefWidth="68.0" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <Button layoutX="315.0" layoutY="229.0" mnemonicParsing="false" onAction="#enter" prefHeight="29.0" prefWidth="68.0" text="Enter" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Button>
+      <TextField fx:id="visitorIdTxt" layoutX="216.0" layoutY="112.0" />
+      <Label fx:id="msgLabel" contentDisplay="CENTER" layoutX="315.0" layoutY="189.0" prefHeight="30.0" prefWidth="197.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
    </children>
 </Pane>

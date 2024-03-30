@@ -119,6 +119,7 @@ public class MainFrameController extends Application implements Initializable{
 	            	scene.setPane(leftNavPane,"/main/gui/park_manager/parkManagerSidePane.fxml");	
 	                break;     
 	            case "serviceAgent":
+	            	scene.setPane(leftNavPane,"/main/gui/service_agent/ServiceAgentSidePane.fxml");
 	            	scene.setPane(contentPane,"/main/gui/service_agent/RegisterInstructorFrame.fxml");		
 	                break;
 	            default:

@@ -11,19 +11,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.park_manager.EditParkVariablesController">
    <children>
-      <Label layoutX="31.0" layoutY="31.0" prefHeight="21.0" prefWidth="219.0" text="Update Park Variabales" textFill="WHITE" underline="true">
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="219.0" text="Update Park Variabales" textFill="WHITE" underline="true">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-               </color>
-            </DropShadow>
-         </effect>
       </Label>
-      <Button fx:id="editEstimatedTimeBtn" layoutX="34.0" layoutY="175.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="EstimatedTime" textFill="WHITE">
+      <Button fx:id="editEstimatedTimeBtn" layoutX="26.0" layoutY="159.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="25.0" prefWidth="146.0" text="EstimatedTime" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -32,10 +25,10 @@
             </DropShadow>
          </effect>
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="editVisitorBtn" layoutX="57.0" layoutY="255.0" mnemonicParsing="false" onAction="#selectVariableToEdit" text="capacity" textFill="WHITE">
+      <Button fx:id="editVisitorBtn" layoutX="26.0" layoutY="235.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="26.0" prefWidth="146.0" text="capacity" textFill="WHITE">
          <effect>
             <DropShadow>
                <color>
@@ -44,12 +37,12 @@
             </DropShadow>
          </effect>
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="editGapBtn" layoutX="49.0" layoutY="105.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="25.0" prefWidth="92.0" text="gap" textFill="WHITE">
+      <Button fx:id="editGapBtn" layoutX="26.0" layoutY="89.0" mnemonicParsing="false" onAction="#selectVariableToEdit" prefHeight="26.0" prefWidth="146.0" text="gap" textFill="WHITE">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font>
          <effect>
             <DropShadow>
@@ -59,7 +52,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Pane fx:id="rightPane" layoutX="220.0" layoutY="1.0" prefHeight="431.0" prefWidth="395.0" style="-fx-border-color: white; -fx-border-width: 0 0 0 2;" visible="false">
+      <Pane fx:id="rightPane" layoutX="220.0" layoutY="1.0" prefHeight="431.0" prefWidth="395.0" style="-fx-border-color: black; -fx-border-width: 0 0 0 2;" visible="false">
          <children>
             <Label layoutX="25.0" layoutY="120.0" text="Editing:" textFill="WHITE">
                <font>

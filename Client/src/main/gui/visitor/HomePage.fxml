@@ -6,12 +6,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="615.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.VisitorHomePageController">
    <children>
-      <Pane fx:id="newMsgPane" layoutX="316.0" layoutY="41.0" prefHeight="26.0" prefWidth="199.0" style="-fx-border-color: black;" visible="false">
+      <Pane fx:id="newMsgPane" layoutX="299.0" layoutY="41.0" prefHeight="26.0" prefWidth="216.0" style="-fx-border-color: black;" visible="false">
          <children>
-            <Label alignment="CENTER" layoutX="8.0" layoutY="5.0" text="You have received a new message!" textFill="#ee0a0a" />
+            <Label alignment="CENTER" layoutX="-2.0" layoutY="5.0" prefHeight="17.0" prefWidth="216.0" text="You have received a new message!" textFill="#ff0606">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
          </children>
       </Pane>
       <ImageView fx:id="inboxImg" fitHeight="50.0" fitWidth="68.0" layoutX="501.0" layoutY="45.0" onMouseClicked="#clickInboxIcon" pickOnBounds="true" preserveRatio="true">
@@ -19,7 +23,7 @@
             <Image url="@../images/inbox.png" />
          </image></ImageView>
       <Label layoutX="511.0" layoutY="87.0" text="inbox" textFill="WHITE" />
-      <TableView fx:id="messageTable" layoutX="60.0" layoutY="57.0" prefHeight="333.0" prefWidth="250.0" visible="false">
+      <TableView fx:id="messageTable" layoutX="35.0" layoutY="57.0" prefHeight="333.0" prefWidth="241.0" visible="false">
         <columns>
           <TableColumn fx:id="message" prefWidth="248.66666793823242" text="Messages" />
         </columns>
