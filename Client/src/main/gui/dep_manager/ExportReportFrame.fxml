@@ -8,7 +8,7 @@
 
 <Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.ExportReportFrameController">
    <children>
-      <Button fx:id="visitsReportsBtn" layoutX="100.0" layoutY="185.0" mnemonicParsing="false" onAction="#showvisitsReportWindow" prefHeight="31.0" prefWidth="149.0" text="Visits Report" textFill="WHITE">
+      <Button fx:id="visitsReportsBtn" layoutX="188.0" layoutY="107.0" mnemonicParsing="false" onAction="#showvisitsReportWindow" prefHeight="34.0" prefWidth="216.0" text="Visits Report" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
@@ -20,7 +20,7 @@
             </DropShadow>
          </effect>
       </Button>
-      <Button fx:id="cancellationsReportsBtn" layoutX="309.0" layoutY="185.0" mnemonicParsing="false" onAction="#showcancellationsReportsWindow" prefHeight="33.0" prefWidth="216.0" text="Cancellations Report" textFill="WHITE">
+      <Button fx:id="cancellationsReportsBtn" layoutX="188.0" layoutY="242.0" mnemonicParsing="false" onAction="#showcancellationsReportsWindow" prefHeight="34.0" prefWidth="216.0" text="Cancellations Report" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
