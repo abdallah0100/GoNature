@@ -99,15 +99,11 @@ public class Bill implements Serializable {
 		// Reservation type is private 
 		if(getType().equals("Private")) 
 		{
-			if(getinvited() && getPayed()) {
+			if(getinvited()) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
 				double x =  (double) (numberOfVisitors* 0.85*Park.DEFAULT_PRICE);
 				return x;
 			}
-			if(getinvited() && !(getPayed())) {
-				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				return (numberOfVisitors*Park.DEFAULT_PRICE);
-				}
 			if(!(getinvited())) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
 				return (numberOfVisitors*Park.DEFAULT_PRICE);
