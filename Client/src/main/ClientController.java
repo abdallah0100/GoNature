@@ -53,7 +53,7 @@ public class ClientController {
 	
 	 /**
      * Sends a message to the client's message handler from Client UI.
-     * @param message The message to be handled by the client.
+     * @param str The message to be handled by the client.
      */
 	 public void accept(Message str) 
 	 {

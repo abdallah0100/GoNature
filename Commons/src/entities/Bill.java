@@ -24,10 +24,10 @@ public class Bill implements Serializable {
 	 * @param invited Indicates if the visit reserved before hand.
 	 * @param payed Indicates if the bill has been paid.
 	 */
-	public Bill(String type1,String numberOfVisitor,boolean invisted,boolean payed) {
+	public Bill(String type1,String numberOfVisitor,boolean invited,boolean payed) {
 		this.numberOfVisitor=numberOfVisitor;
 		this.type1=type1;
-		this.invited=invisted;
+		this.invited=invited;
 		this.payed=payed;
 	} 
 	

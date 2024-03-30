@@ -60,6 +60,8 @@ public class VisitorReminder implements Runnable{
 	/**
 	 * Checks if the received order's time is going to be tomorrow.
 	 * @param o the Order to be checked.
+	 * @return True if the time has arrived, false otherwise.
+	 * 
 	 * */
 	public static boolean timeArrived(Order o) {
 		
@@ -82,6 +84,7 @@ public class VisitorReminder implements Runnable{
 	/**
 	 * Checks if the received order's time has passed.
 	 * @param o the Order to be checked
+	 * @return True if the time has of the order has passe, False otherwise.
 	 * */
 	public static boolean timePassed(Order o) {
 		Calendar rightNow = Calendar.getInstance();
@@ -100,7 +103,7 @@ public class VisitorReminder implements Runnable{
 	
 	
 	/**
-	 * @returns the amount of messages the visitor has (for the inbox).
+	 * @return the amount of messages the visitor has (for the inbox).
 	 * */
 	public static int getMsgcount() {
 		return messageCnt;
@@ -179,7 +182,7 @@ public class VisitorReminder implements Runnable{
 	 * Checks if the message that was sent for the received order has timed out 
 	 * (2 hours passed since sending).
 	 * @param o the Order we are performing the function on.
-	 * @returns True if the message time is out false otherwise.
+	 * @return True if the message time is out false otherwise.
 	 * */
 	public static boolean checkForMsgTimeOut(Order o) {
 		if (!o.isSentMsg())
@@ -197,7 +200,7 @@ public class VisitorReminder implements Runnable{
 	}
 	
 	/**
-	 * @return ArrayList<InboxMessage> the combined array of the server messages and the confirmable orders.
+	 * @return ArrayList containing InboxMessages the combined array of the server messages and the confirmable orders.
 	 * */
 	public static ArrayList<InboxMessage> updateAndGetMessages(){
 		addConfirmableOrders();
