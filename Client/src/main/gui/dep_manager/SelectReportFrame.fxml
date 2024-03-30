@@ -8,7 +8,7 @@
 
 <Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.SelectReportFrameController">
    <children>
-      <Button layoutX="70.0" layoutY="175.0" mnemonicParsing="false" onAction="#showUsageWindow" prefHeight="38.0" prefWidth="229.0" text="Not Full report" textFill="WHITE">
+      <Button layoutX="182.0" layoutY="108.0" mnemonicParsing="false" onAction="#showUsageWindow" prefHeight="38.0" prefWidth="229.0" text="Not Full report" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
@@ -19,7 +19,7 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Button layoutX="339.0" layoutY="175.0" mnemonicParsing="false" onAction="#showNumOfVisitorsWindow" prefHeight="38.0" prefWidth="229.0" text="Reservation Types" textFill="WHITE">
+      <Button layoutX="182.0" layoutY="229.0" mnemonicParsing="false" onAction="#showNumOfVisitorsWindow" prefHeight="38.0" prefWidth="229.0" text="Reservation Types" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
