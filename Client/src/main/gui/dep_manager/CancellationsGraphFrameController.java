@@ -51,7 +51,7 @@ public class CancellationsGraphFrameController implements Initializable {
 
         PieChart.Data cancelledSlice = new PieChart.Data(cancelledReservationsStr, cancellationsPercentage);
         PieChart.Data notActivatedSlice = new PieChart.Data(notActivatedReservationStr, notActivatedPercentage);
-        PieChart.Data totalReservationsSlice = new PieChart.Data("Total Reservations = " + numOfReservations, averagePercentage);
+        PieChart.Data totalReservationsSlice = new PieChart.Data("Total Reservations for This Day = " + numOfReservations, averagePercentage);
 
         pieChart.getData().add(cancelledSlice);
         pieChart.getData().add(notActivatedSlice);
