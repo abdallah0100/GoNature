@@ -11,12 +11,21 @@
    <children>
       <Label layoutX="36.0" layoutY="30.0" text="The park has no place at the entered time" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="waitingBtn" layoutX="79.0" layoutY="105.0" mnemonicParsing="false" onAction="#enterWaitingList" text="Enter waiting list" />
-      <Button layoutX="240.0" layoutY="105.0" mnemonicParsing="false" onAction="#showAvailableTimes" text="Show alternative times" />
-      <Button fx:id="cancelBtn" layoutX="418.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="79.0" text="Cancel" />
+      <Button fx:id="waitingBtn" layoutX="79.0" layoutY="105.0" mnemonicParsing="false" onAction="#enterWaitingList" text="Enter waiting list" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button layoutX="240.0" layoutY="105.0" mnemonicParsing="false" onAction="#showAvailableTimes" text="Show alternative times" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="cancelBtn" layoutX="441.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="79.0" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
       <Label fx:id="msg" layoutX="96.0" layoutY="138.0" text="Label" textFill="RED" visible="false" />
       <TableView fx:id="availablePlaces" layoutX="250.0" layoutY="177.0" prefHeight="220.0" prefWidth="282.0" visible="false">
         <columns>
@@ -29,8 +38,17 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" onAction="#editReservation" text="Edit Reservation" />
-      <Label layoutX="14.0" layoutY="177.0" text="Park Max capacity:" textFill="WHITE" />
-      <Label fx:id="maxCapacity" layoutX="141.0" layoutY="177.0" text="Label" textFill="WHITE" />
+      <Button fx:id="editReservation" layoutX="22.0" layoutY="371.0" mnemonicParsing="false" onAction="#editReservation" text="Edit Reservation" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Label layoutX="34.0" layoutY="177.0" text="Park Max capacity:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="maxCapacity" layoutX="173.0" layoutY="177.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>
