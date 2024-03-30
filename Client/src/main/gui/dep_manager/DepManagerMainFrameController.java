@@ -24,7 +24,6 @@ public class DepManagerMainFrameController implements Initializable{
 	@FXML
 	private Label username;
 	
-	
 	@FXML
 	 private Button confirmChangeRequestBtn;
 	
@@ -69,7 +68,6 @@ public class DepManagerMainFrameController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		username.setText(ClientController.connectedUser.getFirstName());
-		
 	}
 
 }
