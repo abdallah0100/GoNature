@@ -66,9 +66,9 @@
             <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
          </effect>
       </ImageView>
-      <Label fx:id="username" layoutX="14.0" layoutY="130.0" text="Label" textFill="WHITE">
+      <Label fx:id="username" layoutX="7.0" layoutY="123.0" prefHeight="30.0" prefWidth="72.0" text="Label" textFill="WHITE">
          <font>
-            <Font name="Arial" size="14.0" />
+            <Font name="Arial Bold" size="15.5" />
          </font>
       </Label>
    </children>
