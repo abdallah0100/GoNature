@@ -41,13 +41,7 @@ public class CancellationsGraphFrameController implements Initializable {
         // Set values for numOfCancellations, numOfNotActivated, numOfReservations
         DataForAnalyingController.getNumOfCancellations(listToSend);
 
-        // Prevent dividing by 0
-        if (numOfReservations == 0) {
-            PieChart.Data emptyPie = new PieChart.Data("No Reservations", 1);
-            pieChart.getData().add(emptyPie);
-            return;
-        }
-
+       
         double cancellationsPercentage = ((double) numOfCancellations / numOfReservations) * 100;
         double notActivatedPercentage = ((double) numOfNotActivated / numOfReservations) * 100;
         double averagePercentage = 100 - cancellationsPercentage - notActivatedPercentage;
