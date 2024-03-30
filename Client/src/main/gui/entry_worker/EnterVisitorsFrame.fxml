@@ -12,9 +12,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.entry_worker.EnterVisitorsFrameController">
    <children>
-      <Button fx:id="enterBtn" layoutX="463.0" layoutY="339.0" mnemonicParsing="false" onAction="#enter1" prefHeight="32.0" prefWidth="82.0" text="Enter">
+      <Button fx:id="enterBtn" layoutX="463.0" layoutY="339.0" mnemonicParsing="false" onAction="#enter1" prefHeight="32.0" prefWidth="82.0" text="Enter" textFill="WHITE">
          <font>
-            <Font name="Arial Black" size="18.0" />
+            <Font name="Arial Black" size="16.0" />
          </font>
          <effect>
             <DropShadow>
@@ -60,32 +60,32 @@
             </DropShadow>
          </effect>
       </TextField>
-      <Label layoutX="38.0" layoutY="113.0" prefHeight="20.0" prefWidth="134.0" text="Visitors Number :" textFill="RED">
+      <Label layoutX="38.0" layoutY="113.0" prefHeight="20.0" prefWidth="134.0" text="Visitors Number :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="154.0" prefHeight="18.0" prefWidth="63.0" text="Date :" textFill="RED">
+      <Label layoutX="38.0" layoutY="154.0" prefHeight="18.0" prefWidth="63.0" text="Date :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="200.0" prefHeight="18.0" prefWidth="63.0" text="Time :" textFill="RED">
+      <Label layoutX="38.0" layoutY="200.0" prefHeight="18.0" prefWidth="63.0" text="Time :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="245.0" prefHeight="20.0" prefWidth="88.0" text="Park Site :" textFill="RED">
+      <Label layoutX="38.0" layoutY="245.0" prefHeight="20.0" prefWidth="88.0" text="Park Site :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="288.0" prefHeight="18.0" prefWidth="63.0" text="Phone :" textFill="RED">
+      <Label layoutX="38.0" layoutY="288.0" prefHeight="18.0" prefWidth="63.0" text="Phone :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="329.0" prefHeight="18.0" prefWidth="63.0" text="Email :" textFill="RED">
+      <Label layoutX="38.0" layoutY="329.0" prefHeight="18.0" prefWidth="63.0" text="Email :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -103,17 +103,20 @@
       <TextField fx:id="minuteField" layoutX="218.0" layoutY="198.0" prefHeight="25.0" prefWidth="33.0" />
       <Label layoutX="215.0" layoutY="202.0" text=":" />
       <TextField fx:id="InstructoIdField" layoutX="182.0" layoutY="79.0" />
-      <Label layoutX="38.0" layoutY="43.0" prefHeight="18.0" prefWidth="63.0" text="Type :" textFill="RED">
+      <Label layoutX="38.0" layoutY="43.0" prefHeight="18.0" prefWidth="63.0" text="Type :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="81.0" prefHeight="20.0" prefWidth="124.0" text="ID" textFill="RED">
+      <Label layoutX="38.0" layoutY="81.0" prefHeight="20.0" prefWidth="124.0" text="ID" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
       <TextField fx:id="parkNameField" layoutX="182.0" layoutY="243.0" />
-      <Label fx:id="msgLabel" layoutX="476.0" layoutY="247.0" prefHeight="17.0" prefWidth="63.0" text="Label" textFill="RED" visible="false" />
+      <Label fx:id="msgLabel" contentDisplay="CENTER" layoutX="381.0" layoutY="247.0" prefHeight="17.0" prefWidth="186.0" text="Label" textFill="RED" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
    </children>
 </Pane>
