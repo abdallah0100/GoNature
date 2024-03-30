@@ -90,7 +90,7 @@ public class EditParkVariablesController implements Initializable{
      * Get the current value of a variable for the park that the set work in
      */
 	public void setValues() {
-	    if (editingVariable.getText().contains("Gap"))
+	    if (editingVariable.getText().contains("gap"))
 	    	currentValue.setText(ClientController.connectedUser.getPark().getGap() + "");
 	    else if (editingVariable.getText().contains("Estimated"))
 	    	currentValue.setText(ClientController.connectedUser.getPark().getEstimatedTime() + "");
