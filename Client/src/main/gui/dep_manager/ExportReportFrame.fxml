@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.ExportReportFrameController">
+<Pane prefHeight="400.0" prefWidth="592.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.ExportReportFrameController">
    <children>
       <Button fx:id="visitsReportsBtn" layoutX="188.0" layoutY="107.0" mnemonicParsing="false" onAction="#showvisitsReportWindow" prefHeight="34.0" prefWidth="216.0" text="Visits Report" textFill="WHITE">
          <font>
