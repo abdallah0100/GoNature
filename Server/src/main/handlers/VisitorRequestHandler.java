@@ -136,9 +136,7 @@ public class VisitorRequestHandler {
 		    ResultSet rs = null;
 		    // Fetch reservations from the database and populate the orders list.
 		    try {           
-		        String query = "SELECT Type, NumberOfVisitors, ReservationDate, Hour, Minute, Park, Telephone, Email, ReservationID, isConfirmed, InvitedInAdvance, payed " +
-		                       "FROM reservations " +
-		                       "WHERE visitorID = ?";
+		        String query = "SELECT * FROM reservations WHERE visitorID = ?";
 		        PreparedStatement ps = MainServer.dbConnection.prepareStatement(query);
 		        ps.setString(1, id);
 		        rs = ps.executeQuery();
@@ -152,10 +150,11 @@ public class VisitorRequestHandler {
 		            String telephone = rs.getString(7);
 		            String email = rs.getString(8);
 		            int reservationID = rs.getInt(9);
-		            boolean isConfirmed = rs.getBoolean(10);
-		            boolean invitedInAdvance = rs.getBoolean(11);
-		            boolean payed = rs.getBoolean(12);
-		            orders.add(new Order(type, numberOfVisitors, date, hour, minute, park, telephone, email, reservationID, isConfirmed, invitedInAdvance, payed));  
+		            boolean isConfirmed = rs.getBoolean(11);
+		            boolean invitedInAdvance = rs.getBoolean(12);
+		            boolean payed = rs.getBoolean(13);
+		            String processed = rs.getString(14);
+		            orders.add(new Order(type, numberOfVisitors, date, hour, minute, park, telephone, email, reservationID, id, isConfirmed, invitedInAdvance, payed, processed));  
 		        }
 		        rs.close();
 		    } catch (SQLException e) {
