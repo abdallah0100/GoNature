@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="156.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.DepManagerMainFrameController">
    <children>
       <Button fx:id="confirmChangeRequestBtn" layoutX="4.0" layoutY="233.0" mnemonicParsing="false" onAction="#confirmChange" prefHeight="30.0" prefWidth="147.0" text="Confirm Request" textFill="WHITE">
          <font>

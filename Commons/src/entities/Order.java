@@ -209,7 +209,7 @@ public class Order implements Serializable{
 	}
 	
 	/**
-	 * @return The full time of the reservation hours & minutes.
+	 * @return String The full time of the reservation hours and minutes.
 	 */
 	public String getTime() {
 		return time;

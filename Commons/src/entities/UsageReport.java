@@ -107,7 +107,7 @@ public class UsageReport implements Serializable {
 
     /**
      * Sets the name of the park manager who generated the report.
-     * @param madeBy
+     * @param madeBy string to update who the report is being made by
      */
     public void setMadeBy(String madeBy) {
         this.madeBy = madeBy;

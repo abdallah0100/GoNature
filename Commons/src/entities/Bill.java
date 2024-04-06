@@ -24,10 +24,10 @@ public class Bill implements Serializable {
 	 * @param invited Indicates if the visit reserved before hand.
 	 * @param payed Indicates if the bill has been paid.
 	 */
-	public Bill(String type1,String numberOfVisitor,boolean invisted,boolean payed) {
+	public Bill(String type1,String numberOfVisitor,boolean invited,boolean payed) {
 		this.numberOfVisitor=numberOfVisitor;
 		this.type1=type1;
-		this.invited=invisted;
+		this.invited=invited;
 		this.payed=payed;
 	} 
 	
@@ -99,40 +99,31 @@ public class Bill implements Serializable {
 		// Reservation type is private 
 		if(getType().equals("Private")) 
 		{
-			if(getinvited() && getPayed()) {
+			if(getinvited()) {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
 				double x =  (double) (numberOfVisitors* 0.85*Park.DEFAULT_PRICE);
 				return x;
-			}
-			if(getinvited() && !(getPayed())) {
-				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				return (numberOfVisitors*Park.DEFAULT_PRICE);
-				}
-			if(!(getinvited())) {
+			}else {
 				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
 				return (numberOfVisitors*Park.DEFAULT_PRICE);
 				}
 		}
 		//Reservation type is organized group 
 		else {
-			if(getinvited() && getPayed()) {
-				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				numberOfVisitors--;
-				double x =  (double) (numberOfVisitors* 0.75*Park.DEFAULT_PRICE);
-				x=(double) (x*0.88);
-				return x;
+			double price = 0.00;
+			int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
+			
+			if (getinvited()) {
+				price = (double)((numberOfVisitors - 1) * Park.DEFAULT_PRICE);
+				price *= 0.75;
+				if (getPayed())
+					price *= 0.88;
+			}else {
+				price = (double)((numberOfVisitors) * Park.DEFAULT_PRICE);
+				price *= 0.9;
 			}
-			if(getinvited() && !(getPayed())) {
-				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				double x =  (double) (numberOfVisitors* 0.75*Park.DEFAULT_PRICE);
-				return x;
-			} 
-			if(!(getinvited())) {
-				int numberOfVisitors = Integer.parseInt(getNumberOfVisitor());
-				double x =  (double) (numberOfVisitors* 0.90*Park.DEFAULT_PRICE);
-				return x;
-			}
+			return price;
+	
 		}
-		return 0;	
 	}
 }

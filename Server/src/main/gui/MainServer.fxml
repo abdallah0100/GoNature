@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@MainServerCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@MainServerCss.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.MainServerFrameController">
    <children>
       <Pane fx:id="headerPane" layoutY="-2.0" prefHeight="55.0" prefWidth="638.0" style="-fx-border-color: black; -fx-border-width: 0 0 2;" stylesheets="@MainServerCss.css">
          <children>
