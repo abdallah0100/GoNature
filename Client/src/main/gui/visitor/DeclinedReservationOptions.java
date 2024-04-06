@@ -66,7 +66,7 @@ public class DeclinedReservationOptions implements Initializable{
 		if(inserted) {
 			MakeReservationFrameController.o=null;
 			waitingBtn.setDisable(true);
-			msg.setText("inserted to waitng list");
+			msg.setText("inserted to waiting list");
 			msg.setVisible(true);
 			editReservation.setDisable(true);
 			inserted=false;

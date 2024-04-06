@@ -144,63 +144,63 @@ public class MakeReservationFrameController implements Initializable{
 	private boolean isValid() {
 		//null input
 		if(orderType.getValue()==null || numOfVisitorsField.getText().length() <= 0 || dateField.getValue()==null || hourField.getText().length() <= 0 || minuteField.getText().length()<= 0 || phoneField.getText().length() <= 0 || emailField.getText().length() <= 0 || parkNameField.getValue()==null) {
-        	displayError("Please enter all fields");
+        	displayError("Please enter all fields.");
 			return false;}
 		
 		//test to check if the organized group reservation is done by an instructor
 		if("Organized Group".equals(orderType.getValue()) && !(ClientController.connectedVisitor.isInstructor())){
-			displayError("Please enter legal type");
+			displayError("The type is not legal.");
 			return false;
 		}
 		//illegal input
 		try {
 			int numVisitors = Integer.parseInt(numOfVisitorsField.getText());
 			if(15 < numVisitors || numVisitors <= 0  || ("Organized Group".equals(orderType.getValue()) && numVisitors == 1)) {
-			displayError("Please enter a valid number of visitors");
+			displayError("The number of visitors is not legal.");
 			return false;}
 		}catch(Exception e) {
-			displayError("Please enter a valid number of visitors");
+			displayError("The number of visitors is not legal.");
 		    return false;
 		}
 		date = dateField.getValue();
 		if(date != null && date.isBefore(today)) {
-			displayError("Please enter a legal date");
+			displayError("The date is not legal.");
 			return false;}
 		String hourPattern = "^([01]?[0-9]|2[0-3])$";
 	    String text1 = hourField.getText();
 	    // Check if the text matches the hour pattern
 	    if(!(Pattern.matches(hourPattern, text1))) {
-	    	displayError("Please enter a legal hour");
+	    	displayError("The hour is not legal.");
 			return false;}
 	    String minutesPattern = "^[0-5][0-9]$";
         String text2 = minuteField.getText();
         // Check if the text matches the minutes pattern
         if(!(Pattern.matches(minutesPattern, text2))) {
-        	displayError("Please enter a legal minutes");
+        	displayError("The minutes are not legal.");
 			return false;}
         // The park working hours are 8:00 - 22:00
         try {
 	        int hour = Integer.parseInt(hourField.getText());
 	        int minute = Integer.parseInt(minuteField.getText());
 	        if (hour < 8 || hour > 22 || (hour == 22 && minute > 0)) {
-	            displayError("Please enter a time between 8:00 and 22:00");
+	            displayError("The park working hours: 8:00-22:00.");
 	            return false;
 	        }
 	    } catch (NumberFormatException e) {
-	        displayError("Please enter valid hour and minute values");
+	        displayError("The houe and minute are not legal.");
 	        return false;
 	    }
         String phonePattern = "^05\\d{8}$";
         String text3 = phoneField.getText();
         // Check if the text matches the phone number pattern
         if(!(Pattern.matches(phonePattern, text3))) {
-        	displayError("Please enter a legal phone number");
+        	displayError("The phone number in not legal.");
 			return false;}
         String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String text4 = emailField.getText();
         // Check if the text matches the email address pattern
         if(!(Pattern.matches(emailPattern, text4))) {
-        	displayError("Please enter a legal email");
+        	displayError("The email is not legal.");
 			return false;}
 		return true;
     
