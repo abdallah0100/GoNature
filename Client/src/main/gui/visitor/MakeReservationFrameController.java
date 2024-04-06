@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import entities.Bill;
 import entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,6 @@ import javafx.scene.control.TextField;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.VisitorRequestController;
-import main.gui.MainFrameController;
 import utilities.SceneController;
 
 
@@ -117,9 +117,11 @@ public class MakeReservationFrameController implements Initializable{
 			VisitorRequestController.sendReservation(o);
 			if (VisitorRequestController.finishedMakingReservation) {
 				if (hasSpace) {
-					o=null;
 					ClientController.connectedVisitor.setFoundInDB(true);
-					SceneController.switchFrame("GoNature",e,new MainFrameController());
+					SceneController sc = new SceneController();
+					BookConfirmationController.bill = new Bill(o.getOrderType(), o.getNumOfVisitors() + "", o.getInvitedInAdvance(), o.getIsPayed());
+					o=null;
+					sc.setPane(ClientUI.contentPane, "/main/gui/visitor/BookConfirmationFrame.fxml");
 				}else {
 					DeclinedReservationOptions.setOrder(o);
 					SceneController scene = new SceneController();
