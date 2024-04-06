@@ -7,12 +7,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.BookConfirmationController">
    <children>
-      <Label layoutX="232.0" layoutY="23.0" text="Order Confirmation" textFill="WHITE">
+      <Label layoutX="145.0" layoutY="24.0" text="Order Confirmation" textFill="WHITE">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
       <ImageView fitHeight="247.0" fitWidth="224.0" layoutX="362.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
@@ -20,22 +19,25 @@
             <Image url="@../images/payment.png" />
          </image>
       </ImageView>
-      <Label layoutX="37.0" layoutY="87.0" text="Your order's total cost is:" textFill="WHITE">
+      <Label layoutX="37.0" layoutY="87.0" prefHeight="25.0" prefWidth="204.0" text="Your order's total cost is:" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="cost" layoutX="199.0" layoutY="87.0" text="Label" textFill="WHITE">
+      <Label fx:id="cost" layoutX="237.0" layoutY="87.0" text="Label" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="confirm" layoutX="37.0" layoutY="144.0" mnemonicParsing="false" onAction="#confirmOrder" text="Confirm Order" textFill="WHITE">
+      <Button fx:id="confirm" layoutX="47.0" layoutY="144.0" mnemonicParsing="false" onAction="#confirmOrder" text="Confirm Order" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="cancelBtn" layoutX="156.0" layoutY="144.0" mnemonicParsing="false" onAction="#cancel" text="Cancel Order" textFill="WHITE" />
+      <Button fx:id="cancelBtn" layoutX="180.0" layoutY="144.0" mnemonicParsing="false" onAction="#cancel" prefHeight="29.0" prefWidth="114.0" text="Cancel Order" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
       <Label fx:id="resultLabel" layoutX="129.0" layoutY="192.0" text="Label" textFill="WHITE" visible="false">
          <font>
             <Font size="14.0" />
