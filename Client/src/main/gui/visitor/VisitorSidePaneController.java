@@ -41,10 +41,6 @@ public class VisitorSidePaneController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		if (ClientController.connectedVisitor != null) {
 			visitorIdLabel.setText(ClientController.connectedVisitor.getId());
-			if(!(ClientController.connectedVisitor.isFoundInDB())) {
-				showReservation.setDisable(true);
-				//makeReservation.setDisable(true);
-			}
 		}
 	
 	}

@@ -49,7 +49,7 @@ public class AvailablePlace implements Serializable{
 	}
 	
 	/**
-	 * @returns A string representation of this AvailablePlace.
+	 * @return A string representation of this AvailablePlace.
 	 */
 	@Override
 	public String toString() {

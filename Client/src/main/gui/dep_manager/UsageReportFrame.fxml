@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="400.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.UsageReportFrameController">
+<Pane prefHeight="400.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.UsageReportFrameController">
    <children>
       <TableView fx:id="tableView" layoutX="28.0" layoutY="75.0" prefHeight="189.0" prefWidth="471.0">
         <columns>
@@ -19,7 +19,7 @@
             <TableColumn fx:id="colMadeBy" prefWidth="142.4000244140625" text="Made By" />
         </columns>
       </TableView>
-      <Label layoutX="66.0" layoutY="29.0" text="Not Full Park Reports" textFill="WHITE">
+      <Label layoutX="28.0" layoutY="29.0" text="Not Full Park Reports" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -31,13 +31,28 @@
             </DropShadow>
          </effect>
       </Label>
-      <Pane fx:id="statisticsPane" layoutX="14.0" layoutY="273.0" prefHeight="104.0" prefWidth="331.0" visible="false">
+      <Pane fx:id="statisticsPane" layoutX="14.0" layoutY="273.0" prefHeight="104.0" prefWidth="368.0" visible="false">
          <children>
-            <Label layoutX="10.0" layoutY="17.0" text="Park was not full" textFill="WHITE" />
-            <Label fx:id="percentage" layoutX="103.0" layoutY="17.0" text="\%" textFill="WHITE" />
-            <Label layoutX="10.0" layoutY="44.0" text="Not full hours:" textFill="WHITE" />
-            <Label layoutX="137.0" layoutY="17.0" text="of the working hours" textFill="WHITE" />
-            <Label fx:id="amountLabel" layoutX="99.0" layoutY="44.0" text="Label" textFill="WHITE" />
+            <Label layoutX="10.0" layoutY="19.0" text="Park was not full" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font></Label>
+            <Label fx:id="percentage" layoutX="144.0" layoutY="17.0" text="\%" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="10.0" layoutY="54.0" text="Not full hours:" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font></Label>
+            <Label layoutX="195.0" layoutY="20.0" text="of the working hours" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font></Label>
+            <Label fx:id="amountLabel" layoutX="135.0" layoutY="54.0" prefHeight="17.0" prefWidth="76.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font></Label>
          </children>
       </Pane>
    </children>

@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="400.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.CancellationsReportFrameController">
+<Pane prefHeight="400.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.CancellationsReportFrameController">
    <children>
       <TableView fx:id="leftTableView" layoutX="14.0" layoutY="47.0" prefHeight="208.0" prefWidth="262.0">
         <columns>

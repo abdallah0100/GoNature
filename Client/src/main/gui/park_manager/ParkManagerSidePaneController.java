@@ -20,6 +20,8 @@ public class ParkManagerSidePaneController implements Initializable{
 	
 	@FXML
 	private Label name;
+	@FXML
+	private Label park;
 	
 	
 	/**
@@ -50,6 +52,7 @@ public class ParkManagerSidePaneController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		name.setText(ClientController.connectedUser.getFirstName());
-		
+		park.setText(ClientController.connectedUser.getParkName());
+
 	}
 }

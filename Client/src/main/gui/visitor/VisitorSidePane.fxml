@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="146.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.VisitorSidePaneController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="146.0" stylesheets="@../CommonStyles.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.visitor.VisitorSidePaneController">
    <children>
       <Button fx:id="makeReservation" layoutX="4.0" layoutY="167.0" mnemonicParsing="false" onAction="#makeReservation" prefHeight="26.0" prefWidth="136.0" text="Make Reservation" textFill="WHITE">
          <font>

@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 import main.ClientController;
 import main.ClientUI;
 import main.controllers.UserRequestController;
+import main.gui.visitor.MakeReservationFrameController;
 import utilities.SceneController;
 
 /**
@@ -66,6 +67,7 @@ public class MainFrameController extends Application implements Initializable{
 		ClientController.connectedVisitor = null;
 		ClientController.connectedUser=null;
 		UserRequestController.LogedIn = false;
+		MakeReservationFrameController.o = null;
 		LoginOptionController landingFrame = new LoginOptionController();
 		SceneController.switchFrame("GoNature", event, landingFrame);
 	}

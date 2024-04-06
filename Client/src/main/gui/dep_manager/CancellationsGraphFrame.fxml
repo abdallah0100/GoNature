@@ -4,7 +4,7 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.CancellationsGraphFrameController">
+<Pane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.dep_manager.CancellationsGraphFrameController">
    <children>
       <PieChart fx:id="pieChart" layoutX="120.0" layoutY="20.0" prefHeight="400.0" prefWidth="400.0" title="Cancellations Distribution" />
    </children>
