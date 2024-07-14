@@ -3,67 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CommonStyles.css" xmlns="http://javafx.com/javafx/8.0.221" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.LogInFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="309.0" prefWidth="408.0" stylesheets="@CommonStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.gui.LogInFrameController">
    <children>
-      <Pane fx:id="headerPane" prefHeight="61.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="243.0" layoutY="17.0" prefHeight="27.0" prefWidth="115.0" text="GoNature" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Label>
-            <ImageView fitHeight="29.0" fitWidth="32.0" layoutX="556.0" layoutY="16.0" onMouseClicked="#closeApp" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/close_icon.png" />
-               </image>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="1.0" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </ImageView>
-            <Separator layoutY="58.0" prefHeight="6.0" prefWidth="600.0">
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.2980392277240753" green="0.7686274647712708" blue="0.2980392277240753" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Separator>
-         </children>
-      </Pane>
-      <ImageView fitHeight="48.0" fitWidth="50.0" layoutX="14.0" layoutY="69.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/left-arrow.png" />
-         </image>
-         <effect>
-            <DropShadow blurType="GAUSSIAN" spread="0.65">
-               <color>
-                  <Color red="1.0" green="1.0" blue="1.0" />
-               </color>
-            </DropShadow>
-         </effect>
-      </ImageView>
-      <TextField fx:id="userNameTxt" layoutX="285.0" layoutY="156.0" prefHeight="25.0" prefWidth="156.0">
+      <TextField fx:id="userNameTxt" layoutX="238.0" layoutY="94.0" prefHeight="25.0" prefWidth="156.0">
          <effect>
             <DropShadow>
                <color>
@@ -71,7 +19,7 @@
                </color>
             </DropShadow>
          </effect></TextField>
-      <Label layoutX="269.0" layoutY="93.0" text="LogIn" textFill="WHITE">
+      <Label layoutX="177.0" layoutY="31.0" text="LogIn" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -83,7 +31,7 @@
             </DropShadow>
          </effect>
       </Label>
-      <Button fx:id="loginBtn" layoutX="309.0" layoutY="297.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="42.0" prefWidth="121.0" text="LogIn" textFill="WHITE">
+      <Button fx:id="loginBtn" layoutX="144.0" layoutY="181.0" mnemonicParsing="false" onAction="#userLogIn" prefHeight="42.0" prefWidth="121.0" text="LogIn" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
@@ -94,17 +42,17 @@
                </color>
             </DropShadow>
          </effect></Button>
-      <Label layoutX="135.0" layoutY="155.0" text="UserName :" textFill="WHITE">
+      <Label layoutX="80.0" layoutY="90.0" text="UserName :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="135.0" layoutY="214.0" text="Password :" textFill="WHITE">
+      <Label layoutX="80.0" layoutY="128.0" text="Password  :" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="msgLabel" layoutX="270.0" layoutY="268.0" text="msgLabel" textFill="RED" visible="false" />
-      <PasswordField fx:id="passwordTxt" layoutX="285.0" layoutY="215.0" prefHeight="25.0" prefWidth="156.0" />
+      <Label fx:id="msgLabel" layoutX="167.0" layoutY="242.0" text="msgLabel" textFill="RED" visible="false" />
+      <PasswordField fx:id="passwordTxt" layoutX="238.0" layoutY="129.0" prefHeight="25.0" prefWidth="156.0" />
    </children>
 </Pane>

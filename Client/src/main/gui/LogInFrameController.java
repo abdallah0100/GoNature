@@ -1,21 +1,11 @@
 package main.gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import main.ClientController;
 import main.controllers.ParkRequestHandler;
 import main.controllers.UserRequestController;
 import utilities.SceneController;
@@ -27,7 +17,7 @@ import utilities.SceneController;
 * by communicating with the server. It also provides functionality to display error messages,
 * navigate back to the previous frame, and close the application.
 */
-public class LogInFrameController extends Application implements Initializable{
+public class LogInFrameController {
 	
 	@FXML
 	private TextField userNameTxt;
@@ -37,26 +27,10 @@ public class LogInFrameController extends Application implements Initializable{
 	private Button loginBtn;
 	@FXML
 	private Label msgLabel;
-	@FXML
-	private Pane headerPane;
 
 	public static boolean alreadyIn = false;
 	
 	
-	
-	/**
-    * Initializes and launches the JavaFX application.
-    * @param primaryStage The primary stage of the JavaFX application.
-    * @throws Exception If an error occurs during initialization.
-    */
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		SceneController.stage = primaryStage;
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		SceneController sceneController = new SceneController();
-		sceneController.changeScene("GoNature - User", primaryStage,
-									   "/main/gui/LogInFrame.fxml");
-	}
 	
 	/**
     * Handles the action event when the login button is clicked.
@@ -100,38 +74,5 @@ public class LogInFrameController extends Application implements Initializable{
 		msgLabel.setVisible(true);
 	}
 	
-	
-	/**
-    * Navigates back to the previous frame when the arrow icon is clicked.
-    * @param event The mouse event triggered by clicking the header pane.
-    */
-	@FXML
-	public void goBack(MouseEvent event) {
-		SceneController.switchFrame("GoNature - Client", event, new LoginOptionController());
-	}
-	
-	
-	/**
-    * Closes the application when the close button is clicked.
-    * @param event The mouse event triggered by clicking the close button.
-    */
-	@FXML
-	public void closeApp(MouseEvent event) {
-		ClientController.getController().getClient().quit();
-		System.exit(0);
-	}
 
-	/**
-    * Initializes the controller after its root element
-    * has been completely processed,and let the header
-    * be able to touch to move the GUI window.
-    * @param location The location used to resolve relative paths for the root object.
-    * @param resources The resources used to localize the root object.
-    */
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		SceneController.headerPane = headerPane;
-		SceneController.setUpHeaderDrag();
-		
-	}
 }

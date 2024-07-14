@@ -8,6 +8,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/OCSF_Server"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Commons"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/LibericaJDK-11-Full"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
