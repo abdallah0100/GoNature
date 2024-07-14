@@ -1,19 +1,21 @@
 package main.gui;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.ClientController;
-import main.gui.visitor.ValidationFrameController;
 import utilities.SceneController;
 
 /**
@@ -25,6 +27,12 @@ public class LoginOptionController extends Application implements Initializable{
 	
 	@FXML
 	private Pane headerPane;
+	
+	@FXML
+	private AnchorPane visitorPane;
+	@FXML
+	private AnchorPane userPane;
+	
 
 	
 	/**
@@ -39,28 +47,6 @@ public class LoginOptionController extends Application implements Initializable{
 		SceneController sceneController = new SceneController();
 		sceneController.changeScene("GoNature Client", primaryStage,
 							               "/main/gui/LoginOptionFrame.fxml");
-	}
-	
-	
-	/**
-    * Switches to the user login frame when the user login button is clicked.
-    * @param e The action event triggered by clicking the user login button.
-    */
-	public void userLogin(ActionEvent e) {
-		String s="LogInFrameController";
-		LogInFrameController LogInFrame = new LogInFrameController();
-		SceneController.switchFrame(s, e, LogInFrame);
-	}
-	
-	
-	/**
-    * Switches to the visitor login frame when the visitor login button is clicked.
-    * @param e The action event triggered by clicking the visitor login button.
-    */
-	public void visitorLogin(ActionEvent e) {
-		String s="ValidationFrameController";
-		ValidationFrameController ValidationFrame = new ValidationFrameController();
-		SceneController.switchFrame(s, e, ValidationFrame);
 	}
 	
 	/**
@@ -84,6 +70,26 @@ public class LoginOptionController extends Application implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		SceneController.headerPane = headerPane;
 		SceneController.setUpHeaderDrag();
+		
+		try {
+			Parent visitorPane2 = FXMLLoader.load(getClass().getResource("/main/gui/visitor/ValidationFrame.fxml"));
+			visitorPane.getChildren().clear();
+			visitorPane.getChildren().setAll(visitorPane2);
+		} catch (IOException e) {
+			System.out.println("[LoginOptionController] - Error loading visitor pane.");
+			e.printStackTrace();
+		}
+		
+		try {
+			Parent visitorPane3 = FXMLLoader.load(getClass().getResource("/main/gui/LogInFrame.fxml"));
+			userPane.getChildren().clear();
+			userPane.getChildren().setAll(visitorPane3);
+		} catch (IOException e) {
+			System.out.println("[LoginOptionController] - Error loading user login pane.");
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 	
