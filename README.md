@@ -34,7 +34,7 @@ serving the purpose of managing parks, offering a user-friendly interface for vi
 <img src="https://gyazo.com/dd4fae18b643b299db1e63b153d05996.png" alt="Unavailable reservation" width="400" height="300">
 
 #### Automatic message
-- Show casing an automatic message that is sent to a user that has a reservation in his waiting list, and the park now can handle his reservation.
+- Show casing an automatic message that is sent to a user that has a reservation in his waiting list, and the park can handle his reservation now.
 <br><br>
 <img src="https://gyazo.com/72433c0598f8d805abd1a957bfbd97ad.gif" alt="Instant message" width="400" height="300">
 <img src="https://gyazo.com/1d71289acbe5ca2b831d30d2ffed1596.png" alt="outcome" width="400" height="300">
